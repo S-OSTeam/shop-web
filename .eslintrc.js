@@ -24,6 +24,7 @@ module.exports = {
         'jsx-a11y/no-noninteractive-element-interactions': 0,
         'react/function-component-definition': [2, {namedComponents: 'arrow-function'}],
         "react/require-default-props": "warn",
+        "react/jsx-curly-brace-presence" : 0,
         'import/order': [
             'error',
             {
