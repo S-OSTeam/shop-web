@@ -1,0 +1,50 @@
+html, body{
+  width: 100%;
+  height: 100%;
+}
+
+.root{
+  width: 100%;
+  height: auto;
+}
+
+.page-faq-main{
+  padding: 50px 0;
+  width: 740px;
+  margin: 0 auto;
+  background-color: aliceblue;
+
+  &{
+    h1, h2, h3{
+      text-align: center;
+    }
+    h1{
+      padding: 20px 0;
+      font-size: 28px;
+    }
+    h2{
+      padding: 10px 0;
+      font-size: 24px;
+    }
+    h3{
+      padding: 10px 0;
+      font-size: 18px;
+    }
+
+  }
+/*
+  .faq-btn{
+    font-size: 16px;
+    font-weight: 500;
+    align-items: center;
+    width: 30%;
+    background-color: #009aff;
+    color: #fff;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }*/
+}
+
+
+
