@@ -1,0 +1,16 @@
+.ItemPriceWrapper {
+  display: flex;
+  height: max-content;
+  width: max-content;
+  //background: #80A1D4;
+  align-items: baseline;
+
+
+  & > #number {
+    font-size: 20px;
+  }
+
+  & > #unit {
+    font-size: 12px;
+  }
+}
