@@ -1,6 +1,34 @@
 .Box {
   display: flex;
+  width: 180px;
+  height: 345.58px;
   flex-direction: column;
   margin-bottom: 15px;
   cursor: pointer;
+  overflow: hidden;
+}
+
+.ImageBox {
+  & > img {
+    width: 168.75px;
+    height: 167.63px;
+    margin-left: 5px;
+    object-fit: cover;
+  }
+}
+
+.BottomBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  & > #Info {
+    display: flex;
+    flex-direction: row;
+  }
+
+  & > #AddOn {
+    display: flex;
+    flex-direction: row;
+  }
 }

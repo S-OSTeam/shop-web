@@ -1,4 +1,9 @@
 .ItemDescriptionWrapper {
   width: 168.54px;
   height: 74.5px;
+  font-size: 5px;
+
+  & > p {
+    color: black;
+  }
 }

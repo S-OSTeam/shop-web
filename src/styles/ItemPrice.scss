@@ -8,9 +8,15 @@
 
   & > #number {
     font-size: 20px;
+    margin-right: 0;
   }
 
   & > #unit {
     font-size: 12px;
+    margin-left: 0;
+  }
+
+  & > p {
+    color: black;
   }
 }
