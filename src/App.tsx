@@ -3,16 +3,13 @@ import { RecoilRoot } from 'recoil';
 import './App.css';
 // import { ThemeProvider } from '@mui/material';
 import { AppRouter } from './routes/AppRouter';
-// import { theme } from './pages/FAQ/FaqPage';
-const App = () => {
-
+// import { theme } from './pages/FAQ/Atoms';
+export const App = () => {
     return (
         // <ThemeProvider theme={theme}>
-            <RecoilRoot>
-                <AppRouter />
-            </RecoilRoot>
+        <RecoilRoot>
+            <AppRouter />
+        </RecoilRoot>
         // </ThemeProvider>
     );
 };
-
-export default App;
