@@ -6,11 +6,13 @@ import { ApolloProvider } from '@apollo/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { client } from './api/apollo/client';
+import Header from './components/commons/Header';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     <ApolloProvider client={client}>
         <BrowserRouter>
+            <Header />
             <App />
         </BrowserRouter>
     </ApolloProvider>,
