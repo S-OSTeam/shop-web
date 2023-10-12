@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { PageFaq } from '../pages/FAQ/PageFaq';
 // import { FaqForm } from '../components/molecules/FAQ/FaqForm';
-import { Atoms } from '../pages/FAQ/atoms';
+
 
 export const AppRouter = () => {
     return (
         <Routes>
-            <Route path={'/'} element={<Atoms />} />
+            <Route path={'/'} element={<PageFaq />} />
         </Routes>
     );
 };

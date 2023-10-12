@@ -10,6 +10,6 @@ import '../../styles/scss/FaqStyles.scss';
  *
  * */
 
-export const Atoms = () => {
+export const PageFaq = () => {
     return <FaqComponentOff />;
 };

@@ -1,9 +1,9 @@
 /* eslint-disable */
-import React, { ChangeEvent, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
     Box,
-    Button,
+    Button, ButtonBaseActions, ButtonTypeMap,
     Checkbox,
     FormControl,
     FormControlLabel,
@@ -15,12 +15,13 @@ import {
     Typography,
 } from '@mui/material';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
-import { FaqItem, faqListState } from '../../../recoil/atoms/FaqItemList';
+import { atomFaqItem, faqListState } from '../../../recoil/atoms/FaqItemList';
 import '../../../styles/scss/FaqCreatorStyles.scss';
 
 interface myProps {
     isActive: boolean;
 }
+
 export const FaqItemCreator = ({ ...props }: myProps) => {
     /*상태*/
     // faq atom
@@ -37,6 +38,8 @@ export const FaqItemCreator = ({ ...props }: myProps) => {
     // textField input 내용
     const [inputContext, setInputContext] = useState<string>('');
 
+    /* setRecoil */
+    const [faqItems,setFaqItem] = useRecoilState<atomFaqItem[]>(faqListState);
     /*
      * 위에 받고
      * 리코일로 저장하고 초기화
@@ -47,7 +50,6 @@ export const FaqItemCreator = ({ ...props }: myProps) => {
      * 리코일 상태관리
      * 컴포넌트 값 변경시 리랜더링됨
      */
-    const setFaqList = useSetRecoilState(faqListState);
 
     /*서버 다운되었으니 useRef 넘버랑 스트링 합치기*/
     const renderNum = useRef(1);
@@ -58,11 +60,11 @@ export const FaqItemCreator = ({ ...props }: myProps) => {
 
     /* 메서드 */
 
-    /* setRecoil */
-    const setFaqItem = useSetRecoilState(faqListState);
 
     // onSubmit
-    const addItem = () => {
+    const addItem = (e: React.MouseEvent<HTMLElement>) => {
+        console.log(`stop on Submit!`);
+        e.preventDefault();
         if (!inputTitle) {
             alert('제목을 입력해 주세요');
             return;
@@ -71,64 +73,73 @@ export const FaqItemCreator = ({ ...props }: myProps) => {
             alert('내용을 입력해 주세요');
             return;
         }
-        setFaqList((preventList) => [
-            ...preventList,
-            {
-                faq_id: renderNum + 'userid',
-                fgr_id: '',
-                faq_title: '',
-                faq_content: '',
-                faq_datetime: '',
-                faq_ip: '',
-            },
-        ]);
+        if (inputTitle) {
+            if (inputContext) {
+                const item: atomFaqItem = {
+                    faq_id:'',
+                    fgr_id: '',
+                    faq_title: inputTitle,
+                    faq_content: inputContext,
+                    faq_datetime: '',
+                    faq_ip: '',
+                    faq_alert_mail: false,
+                    faq_alert_sns: false,
+                    faq_is_private: false
+                };
+                setFaqItem([...faqItems, item])
+            }
+        }
     };
     return (
-        <Box className={`faq-creator render-${isRender.toString()}`} id="faqCreator">
+        <Box className={`faq-creator render-${isRender.toString()}`} id='faqCreator'>
             {props.isActive && (
                 <form>
-                    <Typography component="h2" variant="h5" gutterBottom>
+                    <Typography component='h2' variant='h5' gutterBottom>
                         궁금하신 사항이 있나요?
                     </Typography>
-                    <Typography component="h3" variant="h6" gutterBottom>
+                    <Typography component='h3' variant='h6' gutterBottom>
                         빠르게 답변해 드리겠습니다.
                     </Typography>
-                    <FormControl className="faq-area title">
-                        <InputLabel htmlFor="inputTitle" />
+                    <FormControl className='faq-area title'>
+                        <InputLabel htmlFor='inputTitle' />
                         <TextField
-                            id="inputTitle"
-                            className="mui-faq-input title"
-                            label="제목"
+                            id='inputTitle'
+                            className='mui-faq-input title'
+                            label='제목'
                             value={inputTitle}
                             onChange={(e) => {
                                 setInputTitle(e.target.value);
                             }}
-                            placeholder="제목 기입란"
+                            placeholder='제목 기입란'
                             required
                         />
                     </FormControl>
-                    <FormControl className="faq-area context">
-                        <InputLabel htmlFor="inputContext" />
+                    <FormControl className='faq-area context'>
+                        <InputLabel htmlFor='inputContext' />
                         <TextField
-                            id="inputContext"
-                            className="mui-faq-input context"
-                            label="내용"
+                            id='inputContext'
+                            className='mui-faq-input context'
+                            label='내용'
                             value={inputContext}
                             onChange={(e) => {
                                 setInputContext(e.target.value);
                             }}
                             multiline
-                            placeholder="내용 기입란"
+                            placeholder='내용 기입란'
                             required
                             rows={6}
                         />
                     </FormControl>
-                    <FormGroup className="faq-area form-group-check">
-                        <FormControlLabel control={<Checkbox />} label="답변 완료시 SNS 수신 동의" />
-                        <FormControlLabel control={<Checkbox />} label="답변 완료시 메일 수신 동의" />
-                        <FormControlLabel control={<Checkbox />} label="익명으로 문의하기" />
+                    <FormGroup className='faq-area form-group-check'>
+                        <FormControlLabel control={<Checkbox />} label='답변 완료시 SNS 수신 동의' />
+                        <FormControlLabel control={<Checkbox />} label='답변 완료시 메일 수신 동의' />
+                        <FormControlLabel control={<Checkbox />} label='익명으로 문의하기' />
                     </FormGroup>
-                    <Button variant="text" id="submit-btn">
+                    <Button
+                        variant='text'
+                        id='submit-btn'
+                        onClick={addItem}
+                    >
                         문의하기
                     </Button>
                 </form>
