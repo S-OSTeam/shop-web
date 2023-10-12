@@ -46,12 +46,10 @@ const FaqComponent = () => {
                 <Button>문의하기</Button>
             </div>
             <div>
-                <Typography variant={'h3'}>문의내역</Typography>
                 {
                     loading ?
                         (<p>조회중입니다...</p>)
-                        :
-                        <FaqGroup data={data}/>
+                        : ""
                 }
             </div>
         </>

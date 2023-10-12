@@ -1,0 +1,43 @@
+.faq-area-list-parent{
+  display: block;
+  text-align: center;
+}
+
+.faq-area-list{
+  position: relative;
+  border-radius: 5px;
+  background-color: #80A1D4;
+
+  &::before{
+    position: absolute;
+    content: '';
+    width: 90%;
+    height: 1px;
+    left: 0 + calc(100% - 90%) / 2;
+    bottom: -5px;
+    background-color: #282c34;
+
+  }
+  svg{
+    color: white;
+  }
+  .title{
+    .icon{
+      svg{
+
+      }
+
+    }
+    .text span{
+      font-size: 18px;
+      color: white;
+      font-weight: 600;
+    }
+  }
+  .context{
+    .text span{
+      font-size: 18px;
+      color: white;
+    }
+  }
+}
