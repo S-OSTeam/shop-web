@@ -1,0 +1,78 @@
+.header {
+  background: #80A1D4;
+  height: 65px;
+  width: auto;
+}
+.menu{
+  display: flex;
+  margin: auto;
+  width: 890px;
+  height: 65px;
+  text-align: center;
+  li {
+    list-style: none;
+    float: left;
+    line-height: 65px;
+    text-align: center;
+    a{
+      text-decoration: none;
+      color: white;
+      display: block;
+      font-family: Michroma;
+    }
+  }
+
+}
+.home{
+  width:206px;
+  font-size: 24px;
+}
+.character{
+  padding: 0px 10px;
+  width:64px;
+  font-size: 16px;
+}
+.animation{
+  padding: 0px 10px;
+  width:51px;
+  font-size: 16px;
+}
+.game{
+  padding: 0px 10px;
+  width:50px;
+  font-size: 16px;
+}
+.private_custom{
+  padding: 0px 10px;
+  width:98px;
+  font-size: 16px;
+}
+.qna{
+  padding: 0px 10px;
+  width:50px;
+  font-size: 16px;
+}
+.icons{
+  margin-top: 2px;
+  margin-left: 29px;
+  float:left;
+  line-height: 65px;
+  text-align: center;
+}
+.line{
+  margin-bottom:3px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.login{
+  text-decoration: none;
+  font-size: 16px;
+  margin:auto;
+  color: #80A1D4;
+  background: white;
+  line-height: 29px;
+  border: 1px;
+  border-radius: 3px;
+  width: 80px;
+  height: 30px;
+}
