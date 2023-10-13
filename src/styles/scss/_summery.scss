@@ -1,0 +1,61 @@
+.productSummery{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 344px;
+  height: 268px;
+  .review{
+    width: 344px;
+    height: 26px;
+    .starReview{
+      margin: auto 0 auto 10px;
+      font-size: 14px;
+    }
+  }
+  .pCode{
+    width: 344px;
+    height: 15px;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .pSharNBookMark{
+    width: 344px;
+    height: 36px;
+    font-size: 24px;
+    .pName{
+      width: 276px;
+      height: fit-content;
+      margin: auto 0;
+    }
+    .pShare{
+      width: 30px;
+      height: 30px;
+      margin: auto 0;
+      .iconBtn{
+        width: 30px;
+        height: 30px;
+        margin: auto;
+        color: #5981BE;
+        border-width: 1px;
+        border-radius: 15px;
+        border-color: #5981BE;
+        border: solid;
+      }
+    }
+    .pBookMark{
+      width: 30px;
+      height: 30px;
+      margin: auto 0 auto 5px;
+      .iconBtn{
+        width: 30px;
+        height: 30px;
+        margin: auto;
+        color: #5981BE;
+        border-width: 1px;
+        border-radius: 15px;
+        border-color: #5981BE;
+        border: solid;
+      }
+    }
+  }
+}

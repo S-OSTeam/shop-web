@@ -1,30 +1,79 @@
 .productMain {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   .productInfo {
     width: 760px;
-    height: 705px;
+    height: 735px;
+    position: relative;
     margin: auto;
 
     .depth{
-      margin-top: 36px;
+      margin-top: 22px;
       border-bottom: solid;
       border-bottom-color: #D9D9D9;
+      position: relative;
       .textButton{
         font-size: 16px;
         color: #000000;
       }
     }
     .info{
+      position: relative;
+      width: 760px;
+      height: 640px;
+      margin-top: 10px;
 
+      .productImage{
+        position: absolute;
+        width: 380px;
+        height: 440px;
+        top: 0;
+        left: 0;
+
+        .smallBanner{
+          width: fit-content;
+          height: 49.52px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+
+      .productSubInfo{
+        position: absolute;
+        width: 344px;
+        height: 640px;
+        top: 0;
+        right: 0;
+
+      }
+
+      .purchaseRelate{
+        position: absolute;
+        width: fit-content;
+        height: 45px;
+        bottom: 0;
+        right: 0;
+        .customIconButton{
+          text-align: center;
+          font-size: 16px;
+          width: 112px;
+          height: 45px;
+          border: solid;
+          border-radius: 5px;
+          border-color: #B6B6B6;
+        }
+      }
     }
   }
 
   .productDetail{
     width: 760px;
-    min-height: 210px;
+    min-height: 1210px;
     height: fit-content;
+    position: relative;
+    margin: auto;
   }
 
   .productReview{
@@ -32,16 +81,43 @@
     min-height: 390px;
     max-height: 1340px;
     height: fit-content;
+    position: relative;
+    margin: auto;
   }
 
   .productFAQ{
     width: 760px;
     min-height: 390px;
+    position: relative;
+    margin: auto;
   }
 
   .productDelivery{
     width: 760px;
     min-height: 984px;
+    position: relative;
+    margin: auto;
+  }
+
+  .tabText{
+    display: flex;
+    flex-direction: column;
+    width: 760px;
+    height: 70px;
+    justify-content: center;
+    font-size: 16px;
+    position: relative;
+    margin: auto;
+    padding-left: 3px;
+    &:after{
+      position: absolute;
+      content: '';
+      width: 760px;
+      height: 3px;
+      background: #D9D9D9;
+      left: 0;
+      bottom: 10px;
+    }
   }
 
   .tabContent{
@@ -54,6 +130,7 @@
     justify-content: center;
     text-align: center;
     font-size: 16px;
+
     .isTab{
       width: 152px;
       height: 40px;
@@ -76,5 +153,10 @@
         bottom: -7px;
       }
     }
+  }
+  .fixed{
+    position: sticky;
+    top: 0;
+    left: 0;
   }
 }
