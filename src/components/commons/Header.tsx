@@ -6,7 +6,7 @@ const Header = () => {
         display: flex;
         flex-direction: column;
         position: sticky;
-        top: 0px;
+        top: 0;
         width: 100%;
         box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
     `;

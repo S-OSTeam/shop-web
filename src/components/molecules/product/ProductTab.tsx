@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import TabButton from '../../atoms/Button/TabButton';
+import TabButton from '../../atoms/button/TabButton';
 
 interface ProductTabProps {
     tabId: number;
