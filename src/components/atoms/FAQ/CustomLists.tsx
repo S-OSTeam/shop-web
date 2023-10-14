@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, {
     Children,
     ComponentType,
@@ -20,39 +21,6 @@ import {
 import { ExpandLess, ExpandMore, QuestionMark } from '@mui/icons-material';
 import { IconTypeMap } from '@mui/material/Icon/Icon';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
-
-/*
-{
-                faqItem.map((item:atomFaqItem)=>{
-                    const {...props} = item;
-                    return(
-                        <List
-                            component='li'
-                            className='faq-area-list'
-                        >
-                            <ListItemButton
-                                onClick={handleClick}
-                                key={item.faq_id}
-                                className='title'>
-                                <ListItemIcon className='icon'>
-                                    <QuestionMark fontSize={'small'}/>
-                                </ListItemIcon>
-                                <ListItemText primary={item.faq_title} className='text' />
-                                {open ? <ExpandLess />: <ExpandMore/>}
-                            </ListItemButton>
-                            <Collapse in={open} timeout='auto' unmountOnExit className='context'>
-                                <ListItemButton sx={{pl: 4}}>
-                                    <ListItemText primary={item.faq_content} className='text' />
-                                </ListItemButton>
-                            </Collapse>
-                        </List>
-                    );
-                })
-            }
-
-*/
-interface MyCustomListItemBtnProps extends React.ColHTMLAttributes<HTMLElement>{}
-
 
 export const ItemComponent_Li = (
     {...props} : ListProps,
@@ -77,12 +45,17 @@ interface MyCustomBtnProps {
 
 export const CustomListItemBtn = (
     {...props}:React.LiHTMLAttributes<HTMLButtonElement>, { onClick }:MyCustomBtnProps) => {
+    const isOpen =false;
     return (
         <ListItemButton
             onClick={onClick}
             className={props.className}>
             <CustomListItemIcon className='icon'>
-                <QuestionMark fontSize='small'/>
+                {
+                    /*
+                    ReactNode 로 인식하여 렌더
+                    */
+                }
             </CustomListItemIcon>
             {isOpen ? <ExpandLess/> : <ExpandMore/>}
         </ListItemButton>

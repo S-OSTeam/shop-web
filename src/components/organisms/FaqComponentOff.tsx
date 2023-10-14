@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import { FaqItemCreator } from '../molecules/FAQ/FaqItemCreator';
+import { FaqItemCreator } from '../molecules/FAQ/trash/FaqItemCreator';
 import { useSetRecoilState } from 'recoil';
 import { atomFaqItem, faqListState } from '../../recoil/atoms/FaqItemList';
 import { NestedList } from '../atoms/FAQ/NestedList';

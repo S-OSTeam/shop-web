@@ -38,11 +38,14 @@ export const NestedList = () => {
                             component='li'
                             className='faq-area-list'
                         >
+                            {/* mocule */}
                             <ListItemButton
                                 onClick={handleClick}
                                 key={item.faq_id}
                                 className='title'>
+
                                 <ListItemIcon className='icon'>
+                                    {/*atom*/}
                                     <QuestionMark fontSize={'small'}/>
                                 </ListItemIcon>
                                 <ListItemText primary={item.faq_title} className='text' />

@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { ReactNode, useState } from 'react';
 import {
     CustomCollapse,
@@ -5,10 +6,10 @@ import {
     CustomListItemIcon,
     CustomListItemText,
     ItemComponent_Li,
-} from '../../atoms/FAQ/CustomLists';
+} from '../../../atoms/FAQ/CustomLists';
 import { QuestionMark } from '@mui/icons-material';
 import { useRecoilValue } from 'recoil';
-import { atomFaqItem, faqListState } from '../../../recoil/atoms/FaqItemList';
+import { atomFaqItem, faqListState } from '../../../../recoil/atoms/FaqItemList';
 
 interface MyBtnProps {
     title: string;
@@ -32,7 +33,7 @@ export const FaqItemListComponent = () => {
                     >
                     </ItemComponent_Li>
                     <CustomListItemBtn className='title' />
-                    <CustomCollapse in={}>
+                    <CustomCollapse >
 
                     </CustomCollapse>
                 </>

@@ -15,8 +15,8 @@ import {
     Typography,
 } from '@mui/material';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
-import { atomFaqItem, faqListState } from '../../../recoil/atoms/FaqItemList';
-import '../../../styles/scss/FaqCreatorStyles.scss';
+import { atomFaqItem, faqListState } from '../../../../recoil/atoms/FaqItemList';
+import '../../../../styles/scss/FaqCreatorStyles.scss';
 
 interface myProps {
     isActive: boolean;
