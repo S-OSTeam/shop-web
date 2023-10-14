@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import TextButton from '../../atoms/button/TextButton';
-import { addressData } from '../../../pages/product/ProductInfo';
+import { testAddressData } from '../../../pages/product/ProductInfo';
 
 interface DetailCategoryProps {
-    address: addressData[];
+    address: testAddressData[];
 }
 
 const DetailDepth = ({ address }: DetailCategoryProps) => {

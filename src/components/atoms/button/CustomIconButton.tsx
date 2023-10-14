@@ -1,19 +1,29 @@
 import React, { ReactNode, MouseEvent } from 'react';
 import { IconButton } from '@mui/material';
+import classNames from 'classnames';
 
-interface PurchaseRelateButtonProps {
+interface CustomIconButtonProps {
     icon?: ReactNode;
-    content: string;
+    content?: string;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+    onMouseOver?: (event: MouseEvent<HTMLButtonElement>) => void;
+    className?: string;
 }
 
-const CustomIconButton = ({ icon, content, onClick }: PurchaseRelateButtonProps) => {
+const CustomIconButton = ({ icon, content, onClick, onMouseOver, className }: CustomIconButtonProps) => {
     return (
-        <IconButton className="customIconButton" onClick={onClick}>
+        <IconButton className={classNames(className)} onClick={onClick} onMouseOver={onMouseOver}>
             {icon}
             {content}
         </IconButton>
     );
+};
+CustomIconButton.defaultProps = {
+    icon: undefined,
+    className: undefined,
+    content: undefined,
+    onClick: undefined,
+    onMouseOver: undefined,
 };
 
 export default CustomIconButton;
