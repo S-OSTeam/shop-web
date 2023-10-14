@@ -1,9 +1,9 @@
 .productSummery{
   display: flex;
   flex-direction: column;
-  position: relative;
   width: 344px;
   height: 268px;
+
   .review{
     width: 344px;
     height: 26px;
@@ -11,51 +11,103 @@
       margin: auto 0 auto 10px;
       font-size: 14px;
     }
+    .starIcon{
+      font-size: 16px;
+      color: #FFCB45;
+      margin: auto 0;
+    }
   }
+
   .pCode{
     width: 344px;
     height: 15px;
     font-size: 12px;
     margin-top: 5px;
   }
-  .pSharNBookMark{
+
+  .pTitle{
     width: 344px;
-    height: 36px;
-    font-size: 24px;
+    height: fit-content;
+    padding: 2.1px 0;
     .pName{
       width: 276px;
+      font-size: 24px;
       height: fit-content;
-      margin: auto 0;
     }
     .pShare{
       width: 30px;
       height: 30px;
-      margin: auto 0;
-      .iconBtn{
-        width: 30px;
-        height: 30px;
-        margin: auto;
-        color: #5981BE;
-        border-width: 1px;
-        border-radius: 15px;
-        border-color: #5981BE;
-        border: solid;
-      }
     }
     .pBookMark{
       width: 30px;
       height: 30px;
-      margin: auto 0 auto 5px;
-      .iconBtn{
-        width: 30px;
-        height: 30px;
-        margin: auto;
-        color: #5981BE;
-        border-width: 1px;
-        border-radius: 15px;
-        border-color: #5981BE;
-        border: solid;
-      }
+      margin-left: 5px;
+    }
+    .iconBtn{
+      width: 30px;
+      height: 30px;
+      color: #5981BE;
+      font-size: 16px;
+      border-width: 1px;
+      border-radius: 15px;
+      border-color: #5981BE;
+      border: solid;
+    }
+  }
+
+  .pPrice{
+    width: fit-content;
+    height: fit-content;
+    font-size: 24px;
+  }
+  .pWon{
+    font-size: 15px;
+    display: flex;
+    flex-direction: column; /* 세로로 정렬 */
+    justify-content: flex-end; /* 아래로 정렬 */
+    margin-left: 1px;
+  }
+  .pDeadline{
+    font-size: 13px;
+    display: flex;
+    flex-direction: column; /* 세로로 정렬 */
+    justify-content: flex-end; /* 아래로 정렬 */
+    margin-left: 10px;
+    color: #A11616;
+  }
+
+  .pOrigin{
+    font-size: 16px;
+    margin-top: 10px;
+    font-family: Anaheim;
+  }
+  .pProduct{
+    font-size: 16px;
+    margin-top: 7px;
+    font-family: Anaheim;
+  }
+
+  .pDelivery{
+    width: 344px;
+    height: 30px;
+    border-bottom: solid;
+    border-top: solid;
+    border-width: 1px;
+    border-color: #B6B6B6;
+    margin-top: 16px;
+    .iconBtn{
+      font-size: 24px;
+      color: #000000;
+      margin: auto 0;
+    }
+    .deliveryTxt{
+      width: 114px;
+      font-size: 16px;
+      margin: auto 0 auto 2px;
+    }
+    .deliveryHelp{
+      font-size: 12px;
+      margin: auto 0;
     }
   }
 }

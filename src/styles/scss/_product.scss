@@ -1,36 +1,30 @@
 .productMain {
   display: flex;
   flex-direction: column;
-  position: relative;
 
   .productInfo {
     width: 760px;
     height: 735px;
-    position: relative;
     margin: auto;
 
     .depth{
       margin-top: 22px;
       border-bottom: solid;
       border-bottom-color: #D9D9D9;
-      position: relative;
       .textButton{
         font-size: 16px;
         color: #000000;
       }
     }
+
     .info{
-      position: relative;
       width: 760px;
       height: 640px;
-      margin-top: 10px;
 
       .productImage{
-        position: absolute;
+        margin-top: 10px;
         width: 380px;
         height: 440px;
-        top: 0;
-        left: 0;
 
         .smallBanner{
           width: fit-content;
@@ -41,28 +35,23 @@
       }
 
       .productSubInfo{
-        position: absolute;
+        margin-top: 10px;
         width: 344px;
         height: 640px;
-        top: 0;
-        right: 0;
-
-      }
-
-      .purchaseRelate{
-        position: absolute;
-        width: fit-content;
-        height: 45px;
-        bottom: 0;
-        right: 0;
-        .customIconButton{
-          text-align: center;
-          font-size: 16px;
-          width: 112px;
+        margin-left: 36px;
+        .purchaseRelate{
+          width: fit-content;
           height: 45px;
-          border: solid;
-          border-radius: 5px;
-          border-color: #B6B6B6;
+          display: flex;
+          .customIconButton{
+            text-align: center;
+            font-size: 16px;
+            width: 112px;
+            height: 45px;
+            border: solid;
+            border-radius: 5px;
+            border-color: #B6B6B6;
+          }
         }
       }
     }
@@ -130,6 +119,7 @@
     justify-content: center;
     text-align: center;
     font-size: 16px;
+    z-index: 999;
 
     .isTab{
       width: 152px;

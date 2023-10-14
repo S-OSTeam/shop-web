@@ -16,4 +16,8 @@ const SmallBanner = ({ src, onMouseOver }: SmallBannerProps) => {
     );
 };
 
+SmallBanner.default = {
+    onMouseOver: undefined,
+};
+
 export default SmallBanner;

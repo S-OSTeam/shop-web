@@ -16,5 +16,8 @@ const SmallImageBanner = ({ img, size, onMouseOver }: SmallImageBannerProps) => 
         </Button>
     );
 };
-SmallImageBanner.defaultProps = { size: undefined };
+SmallImageBanner.defaultProps = {
+    size: undefined,
+    onMouseOver: undefined,
+};
 export default SmallImageBanner;
