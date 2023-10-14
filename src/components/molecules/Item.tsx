@@ -6,26 +6,32 @@ import ItemPrice from '../atoms/ItemPrice';
 import AddOnButton from '../atoms/AddOnButton';
 import MiniInfo from '../atoms/MiniInfo';
 
-interface ItemProps {
+export interface ItemProps {
+    id: number;
     price: string;
     name: string;
     des: string;
+    img: string;
 }
 
-const Item = ({ price, name, des }: ItemProps) => {
+/* 아이템 요소 하나 보여주는 컴포넌트 */
+const Item = ({ id, price, name, des, img }: ItemProps) => {
     const onClickBookMark = () => {
-        console.log('북마크');
+        console.log(`${id} 활용해서 북마크 추가`);
     };
-    const onClickShoppingBaske = () => {
-        console.log('장바구니');
+    const onClickShoppingBasket = () => {
+        console.log(`${id} 활용해서 북마크 추가`);
+    };
+    const onClickItem = () => {
+        console.log(`${id} 활용해서 아이템 선택처리`);
     };
     return (
-        <div className="Box">
+        <div className="ItemBox">
             <div className="ImageBox">
-                <img src={require('../../asset/images/pme.png')} alt="더미이미지" />
+                <AddOnButton imgPath={img} onClick={onClickItem} alt="더미이미지" size="large" />
             </div>
-            <ItemName name={name} />
-            <ItemDescription des={des} />
+            <ItemName href="/" name={name} />
+            <ItemDescription href="/" des={des} />
             <ItemPrice price={price} />
             <div className="BottomBox">
                 <div id="Info">
@@ -33,7 +39,7 @@ const Item = ({ price, name, des }: ItemProps) => {
                     <MiniInfo info="특가" />
                 </div>
                 <div id="AddOn">
-                    <AddOnButton imgPath="shopping_basket.svg" onClick={onClickShoppingBaske} alt="장바구니" />
+                    <AddOnButton imgPath="shopping_basket.svg" onClick={onClickShoppingBasket} alt="장바구니" />
                     <AddOnButton imgPath="book_mark.svg" onClick={onClickBookMark} alt="북마크" />
                 </div>
             </div>

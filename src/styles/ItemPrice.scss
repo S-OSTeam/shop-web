@@ -1,19 +1,19 @@
 .ItemPriceWrapper {
   display: flex;
-  height: max-content;
-  width: max-content;
-  //background: #80A1D4;
+  width: 89.71px;
+  height: 30.06px;
   align-items: baseline;
+  margin-bottom: 10px;
 
 
   & > #number {
-    font-size: 20px;
-    margin-right: 0;
+    font-size: 30px;
+    margin: 0;
   }
 
   & > #unit {
     font-size: 12px;
-    margin-left: 0;
+    margin: 0;
   }
 
   & > p {

@@ -1,25 +1,32 @@
-.Box {
+.ItemBox {
   display: flex;
   width: 180px;
   height: 345.58px;
   flex-direction: column;
-  margin-bottom: 15px;
-  cursor: pointer;
   overflow: hidden;
+  margin: 0;
+}
+
+.ItemClick {
+  cursor: pointer;
 }
 
 .ImageBox {
+  display: flex;
+  justify-content: center;
+
   & > img {
     width: 168.75px;
     height: 167.63px;
-    margin-left: 5px;
     object-fit: cover;
   }
 }
 
 .BottomBox {
   display: flex;
+  height: fit-content;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 
   & > #Info {

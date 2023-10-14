@@ -1,0 +1,22 @@
+.ItemBundle-grid {
+  width: 790px;
+  height: 360.58px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 15.42px;
+
+  &::after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: black;
+
+  }
+
+}
+

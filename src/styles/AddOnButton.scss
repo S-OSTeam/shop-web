@@ -1,4 +1,4 @@
-img {
+.addOn {
   width: 18.73px;
   height: 18.63px;
   object-fit: cover;
@@ -10,4 +10,19 @@ img {
   & + & {
     margin-left: 2px;
   }
+}
+
+.medium {
+  width: 25px;
+  height: 25px;
+
+  & + & {
+    margin-left: 4px;
+  }
+}
+
+.large {
+  width: 168.75px;
+  height: 167.63px;
+  object-fit: cover;
 }

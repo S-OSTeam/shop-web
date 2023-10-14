@@ -3,12 +3,13 @@ import '../../styles/ItemDescription.scss';
 
 interface ItemDescriptionProps {
     des: string;
+    href: string;
 }
 
-const ItemDescription = ({ des }: ItemDescriptionProps) => {
+const ItemDescription = ({ des, href }: ItemDescriptionProps) => {
     return (
         <div className="ItemDescriptionWrapper">
-            <p>{des}</p>
+            <a href={href}>{des}</a>
         </div>
     );
 };
