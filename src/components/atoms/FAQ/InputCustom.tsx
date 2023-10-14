@@ -13,23 +13,18 @@ interface myDefaultInputProps {
 
 export const InputElement = ({ ...props }: myDefaultInputProps) => {
     return (
-        <Box
-            sx={{
-                padding: '20px',
-            }}
-        >
-            <TextField
-                required
-                id={props.id}
-                variant={props.variant}
-                placeholder={props.ph}
-                className={props.className}
-                value={props.value}
-                onChange={props.onChange}
-            />
-        </Box>
+        <TextField
+            required
+            id={props.id}
+            variant={props.variant}
+            placeholder={props.ph}
+            className={props.className}
+            value={props.value}
+            onChange={props.onChange}
+        />
     );
 };
+
 interface MyFormProps {
     thisClassName: string;
     thisHtmlFor: string;

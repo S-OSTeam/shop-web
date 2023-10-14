@@ -2,7 +2,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Button, Typography } from '@mui/material';
-import { FaqGroup } from '../molecules/FAQ/FaqGroup';
+import { FaqGroup } from '../molecules/FAQ/trash/FaqGroup';
 import { getCookie } from '../../util/Storage/Cookies';
 import { GET_USER } from '../../api/apollo/gql/FaqUsers.gql';
 

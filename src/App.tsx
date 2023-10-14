@@ -1,15 +1,18 @@
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import './App.css';
-// import { ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import theme from './themes';
 import { AppRouter } from './routes/AppRouter';
-// import { theme } from './pages/FAQ/Page_Faq';
+// import { ThemeProvider } from '@mui/material';
+import './App.css';
+
 export const App = () => {
     return (
-        // <ThemeProvider theme={theme}>
-        <RecoilRoot>
-            <AppRouter />
-        </RecoilRoot>
-        // </ThemeProvider>
+        <ThemeProvider theme={theme}>
+            <CssBaseline/>
+            <RecoilRoot>
+                <AppRouter />
+            </RecoilRoot>
+        </ThemeProvider>
     );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, FormControl, InputLabel, Typography} from "@mui/material";
-import {InputElement} from "../../atoms/FAQ/InputCustom";
+import {InputElement} from "../../../atoms/FAQ/InputCustom";
 
 export const FaqForm = () => {
     return (

@@ -1,6 +1,8 @@
+/*eslint-disable*/
 import React from 'react';
-import { FaqComponentOff } from '../../components/organisms/FaqComponentOff';
+// import { FaqComponentOff } from '../../components/organisms/FaqComponentOff';
 import '../../styles/scss/FaqStyles.scss';
+import { FrameFaqUser } from '../../components/templates/FAQ/FrameFaqUser';
 
 /*
  * responsiveFontSizes
@@ -11,5 +13,9 @@ import '../../styles/scss/FaqStyles.scss';
  * */
 
 export const PageFaq = () => {
-    return <FaqComponentOff />;
+    // return <FaqComponentOff />;
+    return (
+        <FrameFaqUser />
+
+    )
 };

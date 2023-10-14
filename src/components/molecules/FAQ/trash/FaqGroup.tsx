@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { atomFaqItem, faqListState } from '../../../recoil/atoms/FaqItemList';
+import { atomFaqItem, faqListState } from '../../../../recoil/atoms/FaqItemList';
 import { FaqItem } from './FaqItem';
 
 interface FaqGroupProps {

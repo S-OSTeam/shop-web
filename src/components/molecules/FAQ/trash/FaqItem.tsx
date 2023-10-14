@@ -1,5 +1,5 @@
 import React from 'react';
-import { atomFaqItem } from '../../../recoil/atoms/FaqItemList';
+import { atomFaqItem } from '../../../../recoil/atoms/FaqItemList';
 // import {useMutation} from '@apollo/client';
 // import {getCookie} from '../../../util/Storage/Cookies';
 
