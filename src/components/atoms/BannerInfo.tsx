@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import '../../styles/BannerInfo.scss';
 
-interface BannerInfoProps {
+export interface BannerInfoProps {
     des: string;
     name: string;
 }

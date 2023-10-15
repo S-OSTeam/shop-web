@@ -4,8 +4,20 @@ import classNames from 'classnames';
 import Banner from '../molecules/Banner';
 import DetailDepth from '../atoms/DetailDepth';
 import Items from '../organisms/Items';
+import { BannerInfoProps } from '../atoms/BannerInfo';
 
 const CategoryAndItems = () => {
+    const imgPath: string[] = ['sasuke.svg', 'sasuke.svg', 'sasuke.svg', 'sasuke.svg', 'sasuke.svg', 'sasuke.svg'];
+
+    const bannerInfos: BannerInfoProps[] = [
+        { des: '월간 인기 항목', name: '차크라 공중 회전' },
+        { des: '월간 인기 항목', name: '차크라 공중 회전' },
+        { des: '월간 인기 항목', name: '차크라 공중 회전' },
+        { des: '월간 인기 항목', name: '차크라 공중 회전' },
+        { des: '월간 인기 항목', name: '차크라 공중 회전' },
+        { des: '월간 인기 항목', name: '차크라 공중 회전' },
+    ];
+
     return (
         <div className={classNames('banner-itemsWrapper')}>
             <DetailDepth
@@ -21,7 +33,7 @@ const CategoryAndItems = () => {
                     { id: 5, address: '리스트' },
                 ]}
             />
-            <Banner des="월간 인기 항목" name="차크라 공중회전" imgPath="sasuke.svg" />
+            <Banner imgPath={imgPath} infoList={bannerInfos} />
             <Items />
         </div>
     );

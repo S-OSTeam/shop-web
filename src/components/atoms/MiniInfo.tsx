@@ -18,6 +18,6 @@ const MiniInfo = ({ info, size }: MiniInfoProps) => {
 };
 
 MiniInfo.defaultProps = {
-    size: 'small',
+    size: undefined,
 };
 export default MiniInfo;

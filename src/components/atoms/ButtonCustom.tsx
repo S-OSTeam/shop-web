@@ -29,7 +29,7 @@ const ButtonCustom = ({ id, text, width, height, fontSize, onClick, pr, pl, acti
         <Button
             variant="outlined"
             id={`${id}`}
-            sx={{ ...buttonStyle, '&': { ml: 1 }, '&:hover': { color: 'blue' } }}
+            sx={{ ...buttonStyle, '&': { ml: 1 }, ease: 0, '&:hover': { color: 'blue' } }}
             onClick={onClick}
         >
             {text}

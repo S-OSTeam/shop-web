@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../styles/Banner.scss';
 import classNames from 'classnames';
-import BannerInfo from '../atoms/BannerInfo';
+import SwiperCore from 'swiper';
+import BannerInfo, { BannerInfoProps } from '../atoms/BannerInfo';
 import SwiperCustom from '../atoms/SwiperCustom';
 
 interface BannerProps {
-    des: string;
-    name: string;
-    imgPath: string;
+    imgPath: string[];
+    infoList: BannerInfoProps[];
 }
 
-const Banner = ({ des, name, imgPath }: BannerProps) => {
+const Banner = ({ imgPath, infoList }: BannerProps) => {
+    const [info, setInfo] = useState(infoList[0]);
+    const onChange = (swiper: SwiperCore) => {
+        setInfo(infoList[swiper.realIndex]);
+    };
+
     return (
         <div className={classNames('BannerWrapper')}>
-            <BannerInfo des={des} name={name} />
-            <SwiperCustom imgPath={imgPath} />
+            <BannerInfo des={info.des} name={info.name} />
+            <SwiperCustom imgPath={imgPath} onChange={onChange} />
         </div>
     );
 };

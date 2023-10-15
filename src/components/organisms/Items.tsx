@@ -5,11 +5,17 @@ import classNames from 'classnames';
 import { Pagination } from '@mui/material';
 import ButtonCustom from '../atoms/ButtonCustom';
 import AddOnButton from '../atoms/AddOnButton';
-import Item, { ItemProps } from '../molecules/Item';
 import MiniInfo from '../atoms/MiniInfo';
+import Item from '../molecules/Item';
 
 // 아이템 목록의 타입
-type ItemArrayType = Array<ItemProps>;
+type ItemArrayType = Array<{
+    id: number;
+    price: string;
+    name: string;
+    des: string;
+    img: string;
+}>;
 
 // 아이템 목록이 담긴 배열을 위한 리듀서 함수의 action 타입
 interface ActionType {
@@ -17,6 +23,7 @@ interface ActionType {
 }
 
 const Items = () => {
+    // 필터링 버튼 reducer 함수
     const reducer = (state: ItemArrayType, action: ActionType): ItemArrayType => {
         switch (action.type) {
             case 'SortByPopularity':
@@ -31,9 +38,11 @@ const Items = () => {
                 return state;
         }
     };
+
+    // 실제로 사용할 아이템들의 목록이 들어있는 state
     const [itemArray, itemDispatch] = useReducer(reducer, [
         {
-            name: '고죠사토루 피규어',
+            name: '귀여운 포메라니안',
             id: 0,
             price: '20,000',
             des: '스쿠나한테 더위사냥 엔딩 맞은 이 시대 최강의 범부',
@@ -41,14 +50,20 @@ const Items = () => {
         },
     ]);
 
+    // pagination에서 몇 페이지 인지 받는 state
     const [page, setPage] = useState(1);
 
+    // 필터 버튼 활성화 state
     const [btnActive, setBtnActive] = useState([
         { active: false },
         { active: false },
         { active: false },
         { active: false },
     ]);
+
+    // grid 모드 인지 list 모드인지를 보여주는 state
+    // default는 gird로
+    const [mode, setMode] = useState('grid');
     console.log(itemArray);
     const dummyOnClick = (id: number, sort: string) => {
         setBtnActive(
@@ -56,8 +71,15 @@ const Items = () => {
         );
         itemDispatch({ type: sort });
     };
-    const addOnClick = () => {
-        console.log('addOn');
+
+    // grid 모드로 아이템들 보여주는 버튼 눌렀을 시
+    const gridBtnClick = () => {
+        setMode('grid');
+    };
+
+    // list 모드로 아이템들 보여주는 버튼 눌렀을 시
+    const listBtnClick = () => {
+        setMode('list');
     };
 
     const onChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -110,20 +132,21 @@ const Items = () => {
                         />
                     </div>
                     <div id="AddOn">
-                        <AddOnButton imgPath="grid.svg" onClick={addOnClick} alt="grid" size="medium" />
-                        <AddOnButton imgPath="list.svg" onClick={addOnClick} alt="list" size="medium" />
+                        <AddOnButton imgPath="grid.svg" onClick={gridBtnClick} alt="grid" size="AddOnMedium" />
+                        <AddOnButton imgPath="list.svg" onClick={listBtnClick} alt="list" size="AddOnMedium" />
                     </div>
                 </div>
                 <div className={classNames('ItemQuantity')}>
-                    <MiniInfo info={itemQuantityInfo} size="big" />
+                    <MiniInfo info={itemQuantityInfo} size="MiniInfoBig" />
                 </div>
-                <div className={classNames('ItemBundle-grid')}>
+                <div className={classNames(mode === 'list' ? '' : 'ItemBundle-grid')}>
                     <Item
                         id={itemArray[0].id}
                         name={itemArray[0].name}
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                     <Item
                         id={itemArray[0].id}
@@ -131,6 +154,7 @@ const Items = () => {
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                     <Item
                         id={itemArray[0].id}
@@ -138,6 +162,7 @@ const Items = () => {
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                     <Item
                         id={itemArray[0].id}
@@ -145,45 +170,18 @@ const Items = () => {
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
-                    />
-                </div>
-                <div className={classNames('ItemBundle-grid')}>
-                    <Item
-                        id={itemArray[0].id}
-                        name={itemArray[0].name}
-                        des={itemArray[0].des}
-                        price={itemArray[0].price}
-                        img={itemArray[0].img}
-                    />
-                    <Item
-                        id={itemArray[0].id}
-                        name={itemArray[0].name}
-                        des={itemArray[0].des}
-                        price={itemArray[0].price}
-                        img={itemArray[0].img}
-                    />
-                    <Item
-                        id={itemArray[0].id}
-                        name={itemArray[0].name}
-                        des={itemArray[0].des}
-                        price={itemArray[0].price}
-                        img={itemArray[0].img}
-                    />
-                    <Item
-                        id={itemArray[0].id}
-                        name={itemArray[0].name}
-                        des={itemArray[0].des}
-                        price={itemArray[0].price}
-                        img={itemArray[0].img}
+                        mode={mode}
                     />
                 </div>
-                <div className={classNames('ItemBundle-grid')}>
+
+                <div className={classNames(mode === 'list' ? '' : 'ItemBundle-grid')}>
                     <Item
                         id={itemArray[0].id}
                         name={itemArray[0].name}
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                     <Item
                         id={itemArray[0].id}
@@ -191,6 +189,7 @@ const Items = () => {
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                     <Item
                         id={itemArray[0].id}
@@ -198,6 +197,7 @@ const Items = () => {
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                     <Item
                         id={itemArray[0].id}
@@ -205,15 +205,17 @@ const Items = () => {
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                 </div>
-                <div className={classNames('ItemBundle-grid')}>
+                <div className={classNames(mode === 'list' ? '' : 'ItemBundle-grid')}>
                     <Item
                         id={itemArray[0].id}
                         name={itemArray[0].name}
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                     <Item
                         id={itemArray[0].id}
@@ -221,6 +223,7 @@ const Items = () => {
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                     <Item
                         id={itemArray[0].id}
@@ -228,6 +231,7 @@ const Items = () => {
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
                     />
                     <Item
                         id={itemArray[0].id}
@@ -235,6 +239,41 @@ const Items = () => {
                         des={itemArray[0].des}
                         price={itemArray[0].price}
                         img={itemArray[0].img}
+                        mode={mode}
+                    />
+                </div>
+                <div className={classNames(mode === 'list' ? '' : 'ItemBundle-grid')}>
+                    <Item
+                        id={itemArray[0].id}
+                        name={itemArray[0].name}
+                        des={itemArray[0].des}
+                        price={itemArray[0].price}
+                        img={itemArray[0].img}
+                        mode={mode}
+                    />
+                    <Item
+                        id={itemArray[0].id}
+                        name={itemArray[0].name}
+                        des={itemArray[0].des}
+                        price={itemArray[0].price}
+                        img={itemArray[0].img}
+                        mode={mode}
+                    />
+                    <Item
+                        id={itemArray[0].id}
+                        name={itemArray[0].name}
+                        des={itemArray[0].des}
+                        price={itemArray[0].price}
+                        img={itemArray[0].img}
+                        mode={mode}
+                    />
+                    <Item
+                        id={itemArray[0].id}
+                        name={itemArray[0].name}
+                        des={itemArray[0].des}
+                        price={itemArray[0].price}
+                        img={itemArray[0].img}
+                        mode={mode}
                     />
                 </div>
                 <div className={classNames('PagenationBox')}>
