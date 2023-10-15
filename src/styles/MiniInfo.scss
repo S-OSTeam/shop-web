@@ -1,0 +1,38 @@
+$skyBlue: #80A1D4;
+
+.MiniInfoWrapper {
+  display: flex;
+  height: 16.03px;
+  background: skyBlue;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  font-size: 10px;
+  padding-right: 4px;
+  padding-left: 4px;
+  color: white;
+  text-align: center;
+  border-radius: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+
+  & + & {
+    margin-left: 2px;
+  }
+}
+
+/* size */
+.MiniInfoMiddle {
+  height: 25px;
+  font-size: 16px;
+}
+
+.MiniInfoBig {
+  width: 176px;
+  height: 25px;
+  font-size: 16px;
+}
+
+.MiniInfoInList {
+  font-size: 12px;
+}

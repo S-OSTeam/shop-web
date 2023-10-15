@@ -1,0 +1,22 @@
+.ItemPriceWrapper {
+  display: flex;
+  width: 89.71px;
+  height: 30.06px;
+  align-items: baseline;
+  margin-bottom: 10px;
+
+
+  & > #number {
+    font-size: 30px;
+    margin: 0;
+  }
+
+  & > #unit {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  & > p {
+    color: black;
+  }
+}
