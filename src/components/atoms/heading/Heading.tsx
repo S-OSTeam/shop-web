@@ -2,9 +2,6 @@ import React from 'react';
 import {Typography, TypographyProps} from '@mui/material';
 import PropTypes from 'prop-types';
 
-export interface MyHeadingProps{
-
-}
 // h1 컴포넌트
 const HeadingComponent = ({ ...props }:TypographyProps)=>{
     return(
@@ -13,13 +10,12 @@ const HeadingComponent = ({ ...props }:TypographyProps)=>{
             className={props.className}
             title={props.title}
         >
-            {props.title}
+            {props.children}
         </Typography>
     );
 };
 // 프로토타입 지정
 HeadingComponent.prototype={
-    title: PropTypes.string,
     size: PropTypes.string,
 }
 

@@ -5,6 +5,7 @@ import theme from './themes';
 import { AppRouter } from './routes/AppRouter';
 // import { ThemeProvider } from '@mui/material';
 import './App.css';
+import './styles/scss/Default.scss';
 
 export const App = () => {
     return (

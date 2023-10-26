@@ -16,6 +16,5 @@ export const PageFaq = () => {
     // return <FaqComponentOff />;
     return (
         <FrameFaqUser />
-
-    )
+    );
 };

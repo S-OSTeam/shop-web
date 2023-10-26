@@ -1,14 +1,7 @@
 module.exports = {
     parser: '@typescript-eslint/parser',
     plugins: ['@typescript-eslint', 'prettier', 'import', 'unused-imports'],
-    extends: [
-        'airbnb',
-        'plugin:import/errors',
-        'plugin:import/warnings',
-        'prettier',
-        'plugin:prettier/recommended',
-        'plugin:@typescript-eslint/recommended',
-    ],
+    extends: ['airbnb', 'plugin:import/errors', 'plugin:import/warnings', 'prettier', 'plugin:prettier/recommended', 'plugin:@typescript-eslint/recommended', 'plugin:storybook/recommended'],
     rules: {
         camelcase: 'off',
         'linebreak-style': 0,

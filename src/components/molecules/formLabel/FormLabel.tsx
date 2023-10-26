@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 
 const MyFormLabel = ({...props}:FormLabelProps) => {
     return(
-      <FormLabel
-        component={'legend'}
-        children={props.children}
-      />
+      <FormLabel>
+          {props.children}
+      </FormLabel>
     );
 };
 MyFormLabel.prototype = {

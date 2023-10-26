@@ -39,3 +39,81 @@ export const faqSelector = selector({
     get: ({ get }) => get(faqListState),
     set: ({ set }, newObj) => set(faqListState, newObj),
 });
+export interface atomFaqOrgProps {
+    isOpen: boolean,
+}
+export const faqOrgState = atom<boolean>({
+    key: 'faqOrgState',
+    default : false,
+})
+export const booleanFaqState = selector({
+    key: 'booleanFaqState',
+    get: ({get}) => {
+        const result = get(faqOrgState);
+        return result;
+    },
+})
+
+// 인터페이스 정의
+export type rq = '답변완료' | '답변예정';
+export interface qnaTableItems {
+    qna_done: rq;
+    qna_done_date: string;
+    qna_title: string;
+    qna_context: string;
+    user_id: string;
+    qna_date: string;
+    qna_rq_context: string;
+}
+// 리코일 상태 선언
+export const faqTableState = atom<qnaTableItems[]>({
+    key: 'faqTableState',
+    default:[
+        {
+            qna_done: '답변완료',
+            qna_title: '스태츄 빛에 닿아도 문제 없을까요',
+            qna_context: '창문에 두려고 하는데 변색될까봐 불안하네요',
+            user_id: 'user001',
+            qna_date: '23.10.24',
+            qna_rq_context: '안녕하세요 완료되었습니다.',
+            qna_done_date: '23.10.25',
+        },
+        {
+            qna_done: '답변완료',
+            qna_title: '스태츄 빛에 닿아도 문제 없을까요',
+            qna_context: '창문에 두려고 하는데 변색될까봐 불안하네요',
+            user_id: 'user001',
+            qna_date: '23.10.24',
+            qna_rq_context: '안녕하세요 완료되었습니다.',
+            qna_done_date: '23.10.25',
+        },
+        {
+            qna_done: '답변완료',
+            qna_title: '스태츄 빛에 닿아도 문제 없을까요',
+            qna_context: '창문에 두려고 하는데 변색될까봐 불안하네요',
+            user_id: 'user001',
+            qna_date: '23.10.24',
+            qna_rq_context: '',
+            qna_done_date: '',
+        },
+        {
+            qna_done: '답변완료',
+            qna_title: '스태츄 빛에 닿아도 문제 없을까요',
+            qna_context: '창문에 두려고 하는데 변색될까봐 불안하네요',
+            user_id: 'user001',
+            qna_date: '23.10.24',
+            qna_rq_context: '안녕하세요 완료되었습니다.',
+            qna_done_date: '23.10.25',
+        },
+        {
+            qna_done: '답변완료',
+            qna_title: '스태츄 빛에 닿아도 문제 없을까요',
+            qna_context: '창문에 두려고 하는데 변색될까봐 불안하네요',
+            user_id: 'user001',
+            qna_date: '23.10.24',
+            qna_rq_context: '',
+            qna_done_date: '',
+        },
+    ]
+})
+// 함수

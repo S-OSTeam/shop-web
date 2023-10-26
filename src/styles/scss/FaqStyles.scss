@@ -1,159 +1,185 @@
+$primary-color: #80A1D4;
+$active-color: #62bdff;
+$input-form-margin-bottom: 30px;
+$input-form-after-w: 99%;
+
 html, body {
   width: 100%;
   height: 100%;
+  background-color: #eeeeee;
 }
-
-.root {
-  width: 100%;
-  height: auto;
-}
-
-.page-faq-main {
+body{
+  overflow-y: scroll;
   position: relative;
-  padding: 0;
-  width: 790px;
-  margin: 0 auto;
+}
 
-  &:after {
-    position: absolute;
-    left: 0;
-    top: 0;
-    content: '';
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+#root {
+  background-color: transparent;
+}
+
+#faqMainWrapper {
+  display: block;
+  height: 100%;
+  background-color: #eeeeee;
+}
+
+.styled-wrapper {
+  // faq 컴포넌트 스타일
+  width: 750px;
+  margin: 0 auto;
+  padding: 30px 90px;
+  background-color: #ffffff;
+
+}
+
+// 인풋의 부모에 접근해야됨
+
+#titleBtn {
+  display: block;
+  margin: 15px auto;
+  text-align: center;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: #fff;
+  padding: 5px 20px;
+}
+
+.faq-sub-title-wrapper {
+  position: relative;
+  margin-bottom: 30px;
+
+  h2 {
+    padding: 20px 0;
+    font-size: 28px;
   }
 
-  & {
-    h1, h2, h3 {
-      text-align: center;
-    }
+  .subtitle2 {
+    padding-top: 2.5px;
+    padding-bottom: 5px;
+  }
+}
 
-    h1 {
-      padding-top: 40px;
-      font-size: 32px;
+form {
+  // 인풋
+  fieldset {
+    display: block;
+    position: relative;
+    margin-bottom: 10px;
+    // 라벨과 인풋음 감쌈
+    .faq-input-wrapper {
+      margin-bottom: $input-form-margin-bottom;
 
-    }
-
-    h2 {
-      padding: 20px 0;
-      font-size: 24px;
-    }
-
-    h3 {
-      padding: 10px 0;
-      font-size: 18px;
-    }
-
-    .faq-page-main {
-
-      .faq-btn {
-        width: 200px;
-        background-color: #80A1D4;
-        color: #fff;
-        border: 1px solid #80A1D4;
-        &.faq-btn-active {
-          background-color: #fff;
-          color: #80A1D4;
-        }
-        &.faq-btn-inactive {
-          background-color: #80A1D4;
-        }
-        &:hover {
-          border: 1px solid #80A1D4;
-          color: #80A1D4;
-          background-color: white;
-        }
-        .faq-btn {
-
-          &:active {
-            background-color: #2c99e3;
-            color: #fff;
-          }
-
-        }
-
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
-
-  .listWrapper {
-    padding: 0 10px;
-  }
-
 }
 
-#faqCreator {
-
-  //  FromControl
-  .faq-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .mui-faq-input {
-      width: 80%;
-      margin-bottom: 15px;
-    }
-
-    //  inner
-    #inputTitle, #inputContext {
-    }
-  }
-
-  .form-group-check {
-    align-items: start;
-    width: 80%;
-    margin: 0 auto;
-
-    label {
+form {
+  // 셀랙트박스
+  .faq-fc-select-wrapper {
+    position: relative;
+    margin-bottom: $input-form-margin-bottom;
+    // 의 에프터
+    &::after {
+      position: absolute;
+      content: '';
       display: block;
+      bottom: -15px;
+      width: $input-form-after-w;
+      left: calc((100% - $input-form-after-w) / 2);
+      height: 1px;
+      border-radius: 50%;
+      background-color: #a2a2a2;
+    }
+
+    //라벨
+    label {
+      padding-right: 10px;
+      // 라벨 내부 span
+      .label-title {
+        position: relative;
+        // 가상속성
+        &::after {
+          display: inline-block;
+          content: '(필수)';
+          color: $primary-color;
+          background-color: #fff;
+          font-size: 80%;
+          padding-left: 3px;
+          padding-right: 8px;
+        }
+      }
+
+    }
+  }
+
+  // 인풋 클래스
+  .faq-input-wrapper {
+    // 의 에프터
+    &::after {
+      position: absolute;
+      content: '';
+      display: block;
+      bottom: -15px;
+      width: $input-form-after-w;
+      left: calc((100% - $input-form-after-w) / 2);
+      height: 1px;
+      background-color: #a2a2a2;
+    }
+  }
+
+  // 체크박스 클래스
+  .faq-form-check {
+    margin-top: 25px;
+    display: block;
+    padding: 10px 20px;
+    background-color: #f6f6f6;
+    border-radius: 10px;
+    &>label{
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      position: relative;
+      &::after{
+        position: relative;
+        display: inline-block;
+        content: '(선택)';
+        font-size: 14px;
+        color: $primary-color;
+        font-weight: 500;
+        padding-left: 5px;
+      }
+    }
+    .faq-group-check{
       width: 100%;
+      padding-top: 10px;
+      label{
+        position: relative;
+        height: 35px;
+      }
     }
   }
 }
 
-.render-true {
-  margin: 10px 0 30px 0;
-  padding: 15px 0;
-  visibility: visible;
-  display: block;
-  height: auto;
+// onsubmit 버튼 클래스
+.faq-onSubmit-btn{
+
 }
 
-.render-false {
-  visibility: hidden;
-  margin: 0;
-}
-
-#submit-btn {
-  display: block;
-  margin: 0 auto;
-  background-color: #80A1D4;
-  color: white;
-  width: 30%;
-  font-size: 14px;
-  font-weight: 600;
-  border: 1px solid #80A1D4;
-
-  &:hover {
-    background-color: white;
-    border: 1px solid #80A1D4;
-    color: #80A1D4;
-  }
-}
-
-
+// 스크롤바 영역
 /*
-  .faq-btn{
-    font-size: 16px;
-    font-weight: 500;
-    align-items: center;
-    width: 30%;
-    background-color: #009aff;
-    color: #fff;
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-  }*/
+::-webkit-scrollbar : 스크롤바 전체
+::-webkit-scrollbar-thumb : 스크롤 막대
+::-webkit-scrollbar-track : 스크롤 막대 외부
+*/
+body::-webkit-scrollbar{
 
+}
+body::-webkit-scrollbar-thumb{
+
+}
+body::-webkit-scrollbar-track{
+
+}

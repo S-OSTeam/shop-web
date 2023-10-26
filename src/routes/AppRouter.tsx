@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { PageFaq } from '../pages/FAQ/PageFaq';
-// import { FaqForm } from '../components/molecules/FAQ/FaqForm';
+import { PageQna } from '../pages/FAQ/PageQna';
 
 
 export const AppRouter = () => {
     return (
         <Routes>
-            <Route path={'/'} element={<PageFaq />} />
+            <Route path='/' element={<PageQna />} />
+            <Route path='/pagegaq' element={<PageFaq />} />
         </Routes>
     );
 };

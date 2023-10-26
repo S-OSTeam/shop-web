@@ -1,13 +1,11 @@
 import React from 'react';
-import { CheckboxProps } from '@mui/material';
+import { Checkbox ,CheckboxProps } from '@mui/material';
 import PropTypes from 'prop-types';
 
 const CheckBoxComponent = ({...props}: CheckboxProps) => {
-
     return(
-        <CheckBoxComponent
-            checked={props.checked}
-            onChange={props.onChange}
+        <Checkbox
+
             name={props.name}
         />
     );
@@ -15,13 +13,12 @@ const CheckBoxComponent = ({...props}: CheckboxProps) => {
 
 // 프로토타입 지정
 CheckBoxComponent.prototype={
-    checked: PropTypes.bool,
-    onChange: PropTypes.func,
-    name: PropTypes.object,
+    name: PropTypes.string,
+    defaultChecked: PropTypes.bool,
 }
 // default
 CheckBoxComponent.defaultProps={
-    checked: false,
+    defaultChecked: false,
 }
 export default CheckBoxComponent;
 
