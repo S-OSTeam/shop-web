@@ -1,14 +1,16 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import classNames from 'classnames';
 
 interface TextButtonProps {
     content: string;
+    className: string;
     onclick?: () => void;
 }
 
-const TextButton = ({ content, onclick }: TextButtonProps) => {
+const TextButton = ({ content, className, onclick }: TextButtonProps) => {
     return (
-        <Button className="textButton" onClick={onclick}>
+        <Button className={classNames(className)} onClick={onclick}>
             {content}
         </Button>
     );

@@ -8,17 +8,23 @@ import { TestProduct } from '../../templates/product/SubInfo';
 import StarReview from '../../molecules/product/StarReview';
 import CustomIconButton from '../../atoms/button/CustomIconButton';
 import '../../../styles/scss/_summery.scss';
-import StarInput from '../../atoms/icon/StarInput';
+import CustomIcon from '../../atoms/icon/CustomIcon';
+import CustomText from '../../atoms/text/CustomText';
 
 interface SummeryProps {
     product: TestProduct;
+    onClick?: (num: number) => void;
 }
 
-const Summery = ({ product }: SummeryProps) => {
+const Summery = ({ product, onClick }: SummeryProps) => {
     return (
         <div className="productSummery">
             <StarReview product={product} />
-            <Box className="pCode">상품 번호 : {product.pCode}</Box>
+            <CustomText
+                className={onClick ? 'pCode cursor' : 'pCode'}
+                content="상품 번호"
+                onclick={() => onClick && onClick(1)}
+            />
             <Stack className="pTitle" direction="row" spacing={0}>
                 <div className="pName">{product.pName}</div>
                 <div className="pShare">
@@ -40,7 +46,7 @@ const Summery = ({ product }: SummeryProps) => {
             </Box>
             <Box className="pProduct">무게:{product.pWeight}kg</Box>
             <Stack className="pDelivery" direction="row" spacing={0}>
-                <StarInput icon={<LocalShippingIcon fontSize="inherit" />} size="iconBtn" />
+                <CustomIcon icon={<LocalShippingIcon fontSize="inherit" />} size="iconBtn" />
                 <div className="deliveryTxt">배송비3,000원</div>
                 <div className="deliveryHelp">
                     <CustomIconButton
@@ -52,6 +58,10 @@ const Summery = ({ product }: SummeryProps) => {
             </Stack>
         </div>
     );
+};
+
+Summery.defaultProps = {
+    onClick: undefined,
 };
 
 export default Summery;

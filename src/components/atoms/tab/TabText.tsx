@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 interface TabTextProps {
     content: string;
@@ -9,7 +9,7 @@ interface TabTextProps {
 const TabText = ({ content, dataRef }: TabTextProps) => {
     return (
         <Box className="tabText" ref={dataRef}>
-            {content}
+            <Typography>{content}</Typography>
         </Box>
     );
 };

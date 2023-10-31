@@ -10,11 +10,11 @@ interface DetailCategoryProps {
 const DetailDepth = ({ address }: DetailCategoryProps) => {
     return (
         <Box className="depth">
-            <TextButton content="Home" />
+            <TextButton className="textButton" content="Home" />
             {address.map((detail) => (
                 <React.Fragment key={detail.id}>
                     {'>'}
-                    <TextButton content={detail.address} />
+                    <TextButton className="textButton" content={detail.address} />
                 </React.Fragment>
             ))}
         </Box>

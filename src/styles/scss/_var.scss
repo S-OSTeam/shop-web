@@ -1,0 +1,69 @@
+$primary-color: #80A1D4;
+$active-color: #62bdff;
+$input-form-margin-bottom: 30px;
+$input-form-after-w: 99%;
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee;
+}
+body{
+  overflow-y: scroll;
+  position: relative;
+}
+
+#root {
+  background-color: transparent;
+}
+
+.qna-wrapper {
+  width: 750px;
+  margin: 0 auto;
+}
+
+// 테이블 영역
+.MuiTable-root{
+  thead, tbody{
+    tr{
+      td, th{
+        &:first-child, &:last-child, &:nth-last-child(2){
+          width: 15%;
+          text-align: center;
+        }
+      }
+    }
+  }
+  thead{
+    tr{
+      td{
+        &:first-child, &:last-child, &:nth-last-child(2){
+
+        }
+      }
+    }
+  }
+  tbody{
+    tr{
+      td{
+
+      }
+    }
+  }
+}
+
+// 스크롤바 영역
+/*
+::-webkit-scrollbar : 스크롤바 전체
+::-webkit-scrollbar-thumb : 스크롤 막대
+::-webkit-scrollbar-track : 스크롤 막대 외부
+*/
+body::-webkit-scrollbar{
+
+}
+body::-webkit-scrollbar-thumb{
+
+}
+body::-webkit-scrollbar-track{
+
+}
