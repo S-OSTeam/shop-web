@@ -19,6 +19,15 @@ $skyBlue: #80A1D4;
   & + & {
     margin-left: 2px;
   }
+
+  .miniInfoGrid {
+    font-size: 10px;
+    height: 16.03px;
+    color: white;
+    width: fit-content;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 /* size */
@@ -31,6 +40,13 @@ $skyBlue: #80A1D4;
   width: 176px;
   height: 25px;
   font-size: 16px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+
+  & > p {
+    width: fit-content;
+  }
 }
 
 .MiniInfoInList {

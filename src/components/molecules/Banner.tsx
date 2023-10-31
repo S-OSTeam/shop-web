@@ -3,7 +3,7 @@ import '../../styles/Banner.scss';
 import classNames from 'classnames';
 import SwiperCore from 'swiper';
 import BannerInfo, { BannerInfoProps } from '../atoms/BannerInfo';
-import SwiperCustom from '../atoms/SwiperCustom';
+import SwiperCustom from '../atoms/swiper/SwiperCustom';
 
 interface BannerProps {
     imgPath: string[];

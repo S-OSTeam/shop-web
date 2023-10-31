@@ -2,11 +2,11 @@ import React, { useReducer, useState } from 'react';
 import '../../styles/Items.scss';
 import '../../styles/ItemBundle.scss';
 import classNames from 'classnames';
-import { Pagination } from '@mui/material';
-import ButtonCustom from '../atoms/ButtonCustom';
-import AddOnButton from '../atoms/AddOnButton';
-import MiniInfo from '../atoms/MiniInfo';
+import ImageButton from '../atoms/button/ImageButton';
+import MiniInfo from '../molecules/MiniInfo';
 import Item from '../molecules/Item';
+import TextButton from '../atoms/button/TextButton';
+import PaginationCustom from '../atoms/pagination/PaginationCustom';
 
 // 아이템 목록의 타입
 type ItemArrayType = Array<{
@@ -93,47 +93,33 @@ const Items = () => {
         <div className={classNames('Items')}>
             <div className={classNames('Content')}>
                 <div className={classNames('ItemFilter')}>
-                    <div id="Info">
-                        <ButtonCustom
-                            id={0}
-                            height="25px"
-                            width="fit-content"
-                            text="인기순"
-                            fontSize="16px"
+                    <div className={classNames('Info')}>
+                        <TextButton
+                            content="인기순"
                             onClick={() => dummyOnClick(0, 'SortByPopularity')}
-                            active={btnActive[0].active}
+                            className={btnActive[0].active ? 'itemFilterButton isTabActive' : 'itemFilterButton'}
                         />
-                        <ButtonCustom
-                            id={1}
-                            height="25px"
-                            width="fit-content"
-                            text="신상품품순"
-                            fontSize="16px"
+
+                        <TextButton
+                            content="신상품순"
                             onClick={() => dummyOnClick(1, 'SortByNewProducts')}
-                            active={btnActive[1].active}
+                            className={btnActive[1].active ? 'itemFilterButton isTabActive' : 'itemFilterButton'}
                         />
-                        <ButtonCustom
-                            id={2}
-                            height="25px"
-                            width="fit-content"
-                            text="높은가격격순"
-                            fontSize="16px"
+
+                        <TextButton
+                            content="높은가격순"
+                            className={btnActive[2].active ? 'itemFilterButton isTabActive' : 'itemFilterButton'}
                             onClick={() => dummyOnClick(2, 'SortByHighPrice')}
-                            active={btnActive[2].active}
                         />
-                        <ButtonCustom
-                            id={3}
-                            height="25px"
-                            width="fit-content"
-                            text="낮은가격순"
-                            fontSize="16px"
+                        <TextButton
+                            content="낮은가격순"
+                            className={btnActive[3].active ? 'itemFilterButton isTabActive' : 'itemFilterButton'}
                             onClick={() => dummyOnClick(3, 'SortByLowPrice')}
-                            active={btnActive[3].active}
                         />
                     </div>
-                    <div id="AddOn">
-                        <AddOnButton imgPath="grid.svg" onClick={gridBtnClick} alt="grid" size="AddOnMedium" />
-                        <AddOnButton imgPath="list.svg" onClick={listBtnClick} alt="list" size="AddOnMedium" />
+                    <div className={classNames('AddOn')}>
+                        <ImageButton imgPath="grid.svg" onClick={gridBtnClick} alt="grid" size="AddOnMedium" />
+                        <ImageButton imgPath="list.svg" onClick={listBtnClick} alt="list" size="AddOnMedium" />
                     </div>
                 </div>
                 <div className={classNames('ItemQuantity')}>
@@ -277,7 +263,7 @@ const Items = () => {
                     />
                 </div>
                 <div className={classNames('PagenationBox')}>
-                    <Pagination count={10} showFirstButton showLastButton page={page} onChange={onChangePage} />
+                    <PaginationCustom count={10} showOpt page={page} onChange={onChangePage} />
                 </div>
             </div>
         </div>

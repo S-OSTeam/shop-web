@@ -1,11 +1,10 @@
 import React from 'react';
 import '../../styles/Item.scss';
 import classNames from 'classnames';
-import ItemName from '../atoms/ItemName';
-import ItemDescription from '../atoms/ItemDescription';
-import ItemPrice from '../atoms/ItemPrice';
-import AddOnButton from '../atoms/AddOnButton';
-import MiniInfo from '../atoms/MiniInfo';
+import CustomButton from '../atoms/button/CustomButton';
+import CustomText from '../atoms/text/CustomText';
+import MiniInfo from './MiniInfo';
+import ItemPrice from './ItemPrice';
 
 export interface ItemProps {
     id: number;
@@ -31,33 +30,43 @@ const Item = ({ id, price, name, des, img, mode }: ItemProps) => {
         return (
             <div className={classNames('ListItemBox')}>
                 <div className={classNames('imageBox')}>
-                    <AddOnButton imgPath={img} onClick={onClickItem} alt="더미이미지" size="AddOnLarge" />
+                    <CustomButton className={classNames('itemImgBtn')} onClick={onClickItem}>
+                        <img
+                            className={classNames('AddOnLarge')}
+                            src={require(`../../asset/images/${img}`)}
+                            alt="더미이미지"
+                        />
+                    </CustomButton>
                 </div>
                 <div className={classNames('infoBox')}>
                     <div className={classNames('name-addOn')}>
-                        <ItemName href="/" name={name} size="itemNameBig" />
-                        <div id="AddOn">
-                            <AddOnButton
-                                imgPath="shopping_basket.svg"
-                                onClick={onClickShoppingBasket}
-                                alt="장바구니"
-                                size="AddOnMedium"
-                            />
-                            <AddOnButton
-                                imgPath="book_mark.svg"
-                                onClick={onClickBookMark}
-                                alt="북마크"
-                                size="AddOnMedium"
-                            />
+                        <CustomText content={name} className={classNames('itemNameBig')} />
+                        <div className={classNames('AddOn')}>
+                            <CustomButton className={classNames('itemAddOnBtn')} onClick={onClickShoppingBasket}>
+                                <img
+                                    className={classNames('AddOnMedium')}
+                                    src={require('../../asset/images/shopping_basket.svg').default}
+                                    alt="장바구니"
+                                />
+                            </CustomButton>
+                            <CustomButton className={classNames('itemAddOnBtn')} onClick={onClickBookMark}>
+                                <img
+                                    className={classNames('AddOnMedium')}
+                                    src={require('../../asset/images/book_mark.svg').default}
+                                    alt="북마크"
+                                />
+                            </CustomButton>
                         </div>
                     </div>
                     <div className={classNames('priceWrapper')}>
                         <ItemPrice price={price} />
                     </div>
-                    <ItemDescription href="/" des={des} isList="ItemDesListWrapper" />
+                    <div className={classNames('ItemDesListWrapper')}>
+                        <CustomText content={des} className="itemDescriptionNormal" onClick={onClickItem} />
+                    </div>
 
                     <div className={classNames('miniInfoBox')}>
-                        <div id="Info">
+                        <div className={classNames('Info')}>
                             <MiniInfo info="무료배송" size="MiniInfoInList" />
                             <MiniInfo info="특가" size="MiniInfoInList" />
                         </div>
@@ -68,19 +77,39 @@ const Item = ({ id, price, name, des, img, mode }: ItemProps) => {
     return (
         <div className="GridItemBox">
             <div className="ImageBox">
-                <AddOnButton imgPath={img} onClick={onClickItem} alt="더미이미지" size="AddOnLarge" />
+                <CustomButton className={classNames('itemImageBtn')} onClick={onClickItem}>
+                    <img
+                        className={classNames('itemImage')}
+                        src={require(`../../asset/images/${img}`)}
+                        alt="더미이미지"
+                    />
+                </CustomButton>
             </div>
-            <ItemName href="/" name={name} />
-            <ItemDescription href="/" des={des} />
+            <CustomText content={name} className={classNames('gridItemName')} />
+            <div className={classNames('ItemDescriptionWrapper')}>
+                <CustomText content={des} className={classNames('itemDescriptionNormal')} />
+            </div>
             <ItemPrice price={price} />
             <div className="BottomBox">
-                <div id="Info">
-                    <MiniInfo info="무료배송" />
-                    <MiniInfo info="특가" />
+                <div className={classNames('Info')}>
+                    <MiniInfo info="무료배송" size="miniInfoGrid" />
+                    <MiniInfo info="특가" size="miniInfoGrid" />
                 </div>
-                <div id="AddOn">
-                    <AddOnButton imgPath="shopping_basket.svg" onClick={onClickShoppingBasket} alt="장바구니" />
-                    <AddOnButton imgPath="book_mark.svg" onClick={onClickBookMark} alt="북마크" />
+                <div className={classNames('AddOn')}>
+                    <CustomButton className={classNames('gridAddOnBtn')} onClick={onClickShoppingBasket}>
+                        <img
+                            className={classNames('gridAddOnImg')}
+                            src={require('../../asset/images/shopping_basket.svg').default}
+                            alt="장바구니"
+                        />
+                    </CustomButton>
+                    <CustomButton className={classNames('gridAddOnBtn')} onClick={onClickBookMark}>
+                        <img
+                            className={classNames('gridAddOnImg')}
+                            src={require('../../asset/images/book_mark.svg').default}
+                            alt="북마크"
+                        />
+                    </CustomButton>
                 </div>
             </div>
         </div>

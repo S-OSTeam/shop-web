@@ -4,7 +4,7 @@ import 'swiper/scss';
 import 'swiper/scss/free-mode';
 import 'swiper/scss/navigation';
 import 'swiper/scss/thumbs';
-import '../../styles/SwiperCustom.scss';
+import '../../../styles/SwiperCustom.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import classNames from 'classnames';
 

@@ -7,15 +7,24 @@
   overflow: hidden;
   margin: 0;
 
+  .gridItemName {
+    font-size: 18px;
+    color: skyblue;
+    cursor: pointer;
+  }
+
   & > .imageBox {
     display: flex;
+    width: 168.75px;
+    height: 167.63px;
+    object-fit: cover;
     justify-content: center;
 
-    & > img {
-      width: 168.75px;
-      height: 167.63px;
-      object-fit: cover;
-    }
+
+  }
+
+  .itemImageBtn {
+    padding: 0;
   }
 
   & > .BottomBox {
@@ -25,21 +34,36 @@
     align-items: center;
     justify-content: space-between;
 
-    & > #Info {
+    & > .Info {
       display: flex;
       flex-direction: row;
     }
 
-    & > #AddOn {
+    & > .AddOn {
       display: flex;
       flex-direction: row;
+
+      .gridAddOnBtn {
+        min-width: 10px;
+        width: 18.73px;
+        height: 18.63px;
+        padding: 0;
+      }
     }
   }
 }
 
-//.ItemClick {
-//  cursor: pointer;
-//}
+
+.ItemDescriptionWrapper {
+  width: 168.54px;
+  height: 86.5px;
+
+  .itemDescriptionNormal {
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+}
 
 
 //* list 형태 아이템 style *//
@@ -83,12 +107,25 @@
       justify-content: space-between;
 
 
-      & > #AddOn {
+      & > .AddOn {
         display: flex;
         align-content: center;
         flex-direction: row;
+
       }
 
+      .itemAddOnBtn {
+        padding: 0;
+        min-width: 10px;
+        width: 25px;
+        height: 25px;
+        object-fit: cover;
+      }
+
+      .itemNameBig {
+        font-size: 32px;
+        color: skyblue;
+      }
     }
 
     & > .priceWrapper {
@@ -101,13 +138,56 @@
       display: flex;
       position: relative;
 
-      & > #Info {
+      & > .Info {
         position: absolute;
         bottom: 0;
         display: flex;
         flex-direction: row;
       }
     }
-
   }
+}
+
+
+.ItemDesListWrapper {
+  width: 506px;
+  height: 80px;
+
+}
+
+
+/* 이미지 */
+.itemImage {
+  width: 168.75px;
+  height: 167.63px;
+  object-fit: cover;
+}
+
+//* size *//
+.AddOnLarge {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  padding: 0;
+
+}
+
+
+.AddOnMedium {
+  width: 25px;
+  height: 25px;
+
+  & + & {
+    margin-left: 4px;
+  }
+}
+
+.itemImgBtn {
+  width: 220px;
+  height: 220px;
+}
+
+.gridAddOnImg {
+  width: 18.73px;
+  height: 18.63px;
 }

@@ -30,19 +30,41 @@
   flex-direction: row;
   justify-content: space-between;
 
-  & > #Info {
+
+  & > .Info {
     display: flex;
     flex-direction: row;
+    width: 330px;
+    justify-content: space-between;
+
+    & > .isTabActive {
+      background-color: #80A1D4;
+      color: white;
+    }
   }
 
-  & > #AddOn {
+  & > .AddOn {
     display: flex;
     flex-direction: row;
     width: 54px;
     height: 25px;
     align-items: center;
   }
+
+  .itemFilterButton {
+    width: fit-content;
+    height: 25px;
+    background-color: white;
+    font-size: 16px;
+    color: #80A1D4;
+    border: 1px solid #80A1D4;
+
+    & + & {
+      margin-left: 10px;
+    }
+  }
 }
+
 
 .ItemQuantity {
   width: 790px;
@@ -51,9 +73,10 @@
   justify-content: center;
   margin-top: 30px;
   margin-bottom: 30px;
-  
+
 }
 
 .PagenationBox {
   margin-top: 30px;
 }
+

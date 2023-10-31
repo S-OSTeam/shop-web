@@ -1,12 +1,17 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import MiniInfo from '../components/atoms/MiniInfo';
+import MiniInfo from '../components/molecules/MiniInfo';
 import Item from '../components/molecules/Item';
 import BannerInfo from '../components/atoms/BannerInfo';
-import DetailDepth from '../components/atoms/DetailDepth';
+import DetailDepth from '../components/molecules/DetailDepth';
 import CategoryAndItems from '../components/templates/CategoryAndItems';
+import CustomText from '../components/atoms/text/CustomText';
+import '../styles/CustomText.scss';
 
 export const AppRouter = () => {
+    const onClickText = () => {
+        console.log('hi');
+    };
     return (
         <Routes>
             <Route path="/" element={<CategoryAndItems />} />
@@ -30,6 +35,12 @@ export const AppRouter = () => {
                     />
                 }
             />
+
+            <Route
+                path="/text"
+                element={<CustomText variant="body1" content="시발" className="pointer" onClick={onClickText} />}
+            />
+            <Route path="/miniInfo" element={<MiniInfo info="무료배송" />} />
         </Routes>
     );
 };
