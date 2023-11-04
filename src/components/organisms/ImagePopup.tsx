@@ -4,8 +4,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import { Link } from 'react-router-dom';
-import ButtonAtom from '../atoms/Button';
-import CheckboxAtom from '../atoms/Checkbox'; // 추가된 부분
+import CheckboxMolecule from '../molecules/CheckboxMolecules';
+import CustomButton from '../atoms/ButtonCustom';
+import ImageCustom from '../atoms/ImageCustom';
+import "../../styles/PopupImage.scss"
 
 interface ImagePopupProps {
     imageUrl: string;
@@ -13,7 +15,7 @@ interface ImagePopupProps {
     onClose: () => void;
 }
 
-const ImagePopupMolecule: React.FC<ImagePopupProps> = ({ imageUrl, open, onClose }) => {
+const ImagePopup: React.FC<ImagePopupProps> = ({ imageUrl, open, onClose }) => {
     const [hideForToday, setHideForToday] = useState(false);
     const [isCheckboxChecked, setCheckboxChecked] = useState(false);
 
@@ -35,16 +37,19 @@ const ImagePopupMolecule: React.FC<ImagePopupProps> = ({ imageUrl, open, onClose
         const timestamp = Date.now();
         localStorage.setItem('hideForToday', timestamp.toString());
         setHideForToday(true);
+        console.log("hide");
     };
 
     const handleCheckboxChange = () => {
         setCheckboxChecked(!isCheckboxChecked);
+        console.log("check");
     };
 
     const handleClose = () => {
         if (isCheckboxChecked) {
             handleHideForToday();
         }
+        console.log("close");
         onClose();
     };
 
@@ -55,21 +60,22 @@ const ImagePopupMolecule: React.FC<ImagePopupProps> = ({ imageUrl, open, onClose
     return (
         <Dialog open={open && !hideForToday} onClose={handleClose}>
             <DialogTitle>이미지</DialogTitle>
-            <DialogContent>
+            <DialogContent className="popimage">
                 <Link to="/image-details">
-                    <img src={imageUrl} alt="광고" style={{ maxWidth: '100%' }} />
+                    <ImageCustom img={imageUrl} size="popup" alt="광고"  />
                 </Link>
             </DialogContent>
             <DialogActions>
-                <CheckboxAtom
+                <CheckboxMolecule
+                    name="today is not"
                     checked={isCheckboxChecked}
                     onChange={handleCheckboxChange}
                     label="오늘 하루 동안 보지 않기"
                 />
-                <ButtonAtom type="button" onClick={handleClose}>닫기</ButtonAtom>
+                <CustomButton className="PopupClose" onClick={handleClose}>닫기</CustomButton>
             </DialogActions>
         </Dialog>
     );
 };
 
-export default ImagePopupMolecule;
+export default ImagePopup;

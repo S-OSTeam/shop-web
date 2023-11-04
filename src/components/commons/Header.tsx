@@ -1,9 +1,9 @@
 import React from 'react';
 import "../../styles/header.scss"
-import Heart from '../../asset/image/\uD83E\uDD86 icon _heart_.svg'
-import Rectangle from '../../asset/image/Group 12.svg'
-import Cart from '../../asset/image/\uD83E\uDD86 icon _cart_.svg'
-import Line from '../../asset/image/Rectangle 11.svg'
+import Heart from '../../asset/images/icon _heart_.svg'
+import Rectangle from '../../asset/images/Group 12.svg'
+import Cart from '../../asset/images/icon _cart_.svg'
+import Line from '../../asset/images/Rectangle 11.svg'
 
 const Header: React.FC = () => {
     return (
