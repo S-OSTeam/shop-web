@@ -1,0 +1,243 @@
+.productSummary {
+  margin-top: 10px;
+  width: 344px;
+  height: 640px;
+  margin-left: 36px;
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    width: 344px;
+    height: 30px;
+
+    .tag {
+      width: fit-content;
+      height: 14px;
+      border-radius: 23px;
+      background: #80A1D4;
+      color: #ffffff;
+      font-size: 12px;
+      margin: auto 5px auto 0;
+      padding: 1px 4px;
+      text-align: center;
+    }
+  }
+
+  .starReview {
+    width: 344px;
+    height: 26px;
+    padding: 0;
+
+    .star {
+      font-size: 16px;
+      color: #FFCB45;
+      margin: auto 0;
+    }
+
+    & p {
+      font-size: 14px;
+      margin: auto 0;
+    }
+  }
+
+  .pCode {
+    width: 344px;
+    height: 15px;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .productTitle {
+    width: 344px;
+    height: 36px;
+    padding: 2.1px 0;
+
+    .pName {
+      width: 276px;
+      font-size: 24px;
+      height: 36px;
+    }
+
+    .pIconBtn {
+      display: flex;
+      flex-direction: row;
+      min-width: 30px;
+      width: 30px;
+      height: 30px;
+      margin-left: 5px;
+      border-width: 1px;
+      border-radius: 15px;
+      border-color: #5981BE;
+      align-items: center;
+      border: solid;
+
+      .pIcon {
+        margin-top: 5px;
+        height: fit-content;
+        color: #5981BE;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .textPrice {
+    width: fit-content;
+    height: 26px;
+
+    .price {
+      width: fit-content;
+      height: fit-content;
+      font-size: 24px;
+    }
+
+    .money {
+      font-size: 15px;
+      margin-top: 7px;
+      margin-left: 1px;
+    }
+
+    .deadline {
+      width: fit-content;
+      font-size: 13px;
+      margin-top: 9px;
+      margin-left: 10px;
+      color: #A11616;
+    }
+  }
+
+  .pInfo {
+    font-size: 14px;
+    margin-top: 6px;
+    font-family: Anaheim;
+  }
+
+  .deliveryPrice {
+    width: 344px;
+    height: 30px;
+    border-bottom: solid;
+    border-top: solid;
+    border-width: 1px;
+    border-color: #B6B6B6;
+    margin-top: 16px;
+
+    .deliveryIcon {
+      font-size: 24px;
+      color: #000000;
+      margin: auto 0;
+    }
+
+    .deliveryTxt {
+      width: 114px;
+      font-size: 16px;
+      margin: auto 0 auto 2px;
+    }
+
+    .deliveryHelp {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .helpIcon {
+        width: fit-content;
+        height: fit-content;
+        margin-top: 2px;
+        font-size: 12px;
+      }
+
+      & p {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .productOption {
+    width: 344px;
+    height: 235px;
+    margin-top: 15px;
+
+    .optionBtn {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      min-height: 20px;
+      height: 20px;
+      min-width: fit-content;
+      padding: 0;
+
+      .optionIcon {
+        width: fit-content;
+        height: fit-content;
+        margin-top: 5px;
+        font-size: 16px;
+        color: #000000;
+      }
+
+      & p {
+        color: #000000;
+        font-size: 14px;
+      }
+    }
+
+    .selectOption {
+      width: 344px;
+      height: 25px;
+      margin-top: 4px;
+    }
+  }
+
+  .totalPrice {
+    width: 344px;
+    height: 26px;
+    margin-top: 20px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #B6B6B6;
+
+    .totalTxt {
+      width: 276px;
+      height: fit-content;
+      font-size: 12px;
+    }
+
+    .totalPriceTxt {
+      width: fit-content;
+      height: fit-content;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .totalWonTxt {
+      font-size: 12px;
+      margin-top: 3px;
+      margin-left: 1px;
+    }
+
+    .totalDeadline {
+      width: 0px;
+      visibility: hidden;
+    }
+  }
+
+  .purchaseRelateButton {
+    width: fit-content;
+    height: 45px;
+    display: flex;
+    margin-top: 5px;
+
+    .relateButton {
+      text-align: center;
+      width: 112px;
+      height: 45px;
+      border: solid;
+      border-radius: 5px;
+      border-color: #B6B6B6;
+
+      .relateIcon{
+        margin-top: 5px;
+        height: fit-content;
+        font-size: 16px;
+      }
+    }
+
+  }
+}

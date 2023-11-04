@@ -1,9 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
-import '../../styles/scss/_product.scss';
-import TabText from '../../components/atoms/tab/TabText';
-import ProductTab from '../../components/molecules/product/ProductTab';
+import TextCustom from '../../components/atoms/text/TextCustom';
+import ProductTab from '../../components/molecules/product/tab/ProductTab';
 import ProductInfo from './ProductInfo';
+import '../../styles/scss/product/_product.scss';
+import ProductDetailInfo from './ProductDetailInfo';
+import ProductFAQ from './ProductFAQ';
+import ProductReview from './ProductReview';
+import ProductDelivery from './ProductDelivery';
 
 const ProductPage = () => {
     const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
@@ -89,6 +93,7 @@ const ProductPage = () => {
             setTadId(1);
         }
     };
+
     useEffect(() => {
         function scrollListener() {
             window.addEventListener('scroll', scrollHandler);
@@ -133,30 +138,29 @@ const ProductPage = () => {
             });
         }
     }, []);
-
     return (
-        <Box className="productMain">
-            <Box className="productInfo">
-                <ProductInfo />
+        <Box className="productPage">
+            <ProductInfo />
+            <Box ref={productDetailRef}>
+                <ProductTab
+                    className={ScrollActive ? 'productTab fixed' : 'productTab'}
+                    tabId={tadId}
+                    onClick={onChangeScroll}
+                />
             </Box>
-            <Box className={ScrollActive ? 'tabContent fixed' : 'tabContent'} ref={productDetailRef}>
-                <ProductTab tabId={tadId} onclick={onChangeScroll} />
+            <ProductDetailInfo />
+            <Box ref={productReviewRef}>
+                <TextCustom className="tabText" content="구매 후기" />
             </Box>
-            <Box className="productDetail">
-                <div />
+            <ProductReview />
+            <Box ref={productFAQRef}>
+                <TextCustom className="tabText" content="상품 문의" />
             </Box>
-            <TabText content="구매후기" dataRef={productReviewRef} />
-            <Box className="productReview">
-                <div />
+            <ProductFAQ />
+            <Box ref={productDeliveryRef}>
+                <TextCustom className="tabText" content="배송 안내" />
             </Box>
-            <TabText content="상품문의" dataRef={productFAQRef} />
-            <Box className="productFAQ">
-                <div />
-            </Box>
-            <TabText content="배송안내" dataRef={productDeliveryRef} />
-            <Box className="productDelivery">
-                <div />
-            </Box>
+            <ProductDelivery />
         </Box>
     );
 };
