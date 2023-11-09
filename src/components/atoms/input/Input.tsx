@@ -1,47 +1,34 @@
 import React from 'react';
-import { TextField, TextFieldProps } from '@mui/material';
+import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-// const useStyles = makeStyles((theme:Theme) => {
-//     const x = theme.spacing(2);
-//     const y = theme.spacing(1);
-//     return {
-//         root(props: InputProps) {
-//             return{
-//
-//             }
-//         }
-//     }
-// })
-
-// export interface MyInputProps{
-//     inputBaseProps?: InputBaseProps;
-// }
-// aria-label : 요소의 라벨을 문자열로 표현한단 뜻
-
-/* multiline : 참일경우 TextareaAutosize 렌더링된다. */
-// interface MyProps {
-//     className?: string;
-//     name: string;
-//     rows?: string | number;
-//     type?: React.HTMLInputTypeAttribute | undefined;
-//     autoFocus?: boolean | undefined;
-//     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-//     placeholder?: string;
-//     multiline?: boolean | undefined;
-//     variant?: 'outlined' | 'filled' | 'standard';
-//     value: string;
-// }
-/*
-* <TextField/>는 내부적으로 Material UI의 다른 컴포넌트인 <InputLabel/>, <Input/>, <FormHelperText.tsx/> 등으로 구성되어 있는 고수준 컴포넌트입니다
-*/
-const InputComponent = ({ ...props }: TextFieldProps) => {
+interface myProps {
+    variant?: "filled" | "outlined" | "standard" | undefined;
+    label?: React.ReactNode;
+    className?: string;
+    name?: string | undefined;
+    rows?: string | number | undefined;
+    type?: React.HTMLInputTypeAttribute | undefined;
+    autoFocus?: boolean | undefined;
+    onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
+    placeholder?: string | undefined;
+    multiline?: boolean | undefined;
+    value?: unknown;
+    defaultValue?: unknown;
+    fullWidth?: boolean | undefined;
+    helperText?: React.ReactNode;
+    required?: boolean | undefined;
+    maxRows?: string | number;
+    error?: boolean;
+}
+const InputComponent = ({ ...props }: myProps) => {
 
     return (
         <TextField
             variant={props.variant}
             label={props.label}
-            className={props.className}
+            className={classNames(props.className)}
             name={props.name}
             rows={props.rows}
             type={props.type}
@@ -54,7 +41,8 @@ const InputComponent = ({ ...props }: TextFieldProps) => {
             fullWidth={props.fullWidth}
             helperText={props.helperText}
             required={props.required}
-            color='primary'
+            maxRows={props.maxRows}
+            error={props.error}
         />
     );
 };

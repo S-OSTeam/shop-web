@@ -10,12 +10,17 @@ interface MyContentProps {
     rq_context?: string;
 }
 const TableContentBox = ({...props}:MyContentProps) => {
+    const {wrapperClass, context, rq_context, rq_date} = props;
+    const rqTemp = rq_date;
         return(
-            <Box component='div' className={props.wrapperClass}>
-                <Text text={props.context} />
+            <Box component='div' className={wrapperClass}>
+                <Text text={context} />
                 {
-                    (props.rq_date !== undefined) ?
-                        <Text text={props.rq_date}/> : null
+                    rqTemp &&
+                    <>
+                        <Text text={rq_context}/>
+                        <Text text={rqTemp}/>
+                    </>
                 }
             </Box>
         );
@@ -29,6 +34,7 @@ TableContentBox.defaultProps={
     wrapperClass: '',
     rq_date: '',
     rq_context: '',
+    context: '',
 };
 
 export default TableContentBox;

@@ -13,9 +13,8 @@ export const Heading = ({...props}: molParentProps) => {
     return (
         <HeadingTag
             variant={props.type}
-            className={props.className}
         >
-            <Text text={props.text}/>
+            <Text text={props.text} className={props.className}/>
         </HeadingTag>
     );
 };

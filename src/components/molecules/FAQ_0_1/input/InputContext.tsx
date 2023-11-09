@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes, { number } from 'prop-types';
 import Input from '../../../atoms/input/Input';
 
-/*
-* 라벨 + 인풋
-*  */
-
 interface MyParentProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     htmlForOrName: string;
@@ -29,8 +25,8 @@ interface MyParentProps {
 /*
 * mui input 주의점
 * htmlfor 과 input:name 속성이 지정이 되어 있을 경우 인풋 엘리먼트 이벤트가 해당 이름으로 변함
-* 고로 htmlfor도 state와 같이 사용
-* */
+* 고로 htmlfor 도 state 와 같이 사용
+*/
 
 const InputContext = ({ ...props }: MyParentProps) => {
     return (

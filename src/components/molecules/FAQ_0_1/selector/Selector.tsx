@@ -1,11 +1,15 @@
+/* eslint-disable */
 import React from 'react';
-import { TextField, TextFieldProps } from '@mui/material';
+import { InputBaseComponentProps, TextField, TextFieldProps } from '@mui/material';
 
-
-/*
-import Option from '../../../atoms/option/Option';
-interface myProps extends SelectProps{}
-*/
+interface NatiSelectorInterface {
+    variant?: "filled" | "outlined" | "standard" | undefined;
+    value?: unknown;
+    label?: React.ReactNode;
+    onChange?: ()=> void;
+    inputProps?: InputBaseComponentProps | undefined;
+    select?: boolean | undefined;
+}
 
 // NativeSelect 모바일 최적화에 좋다고함
 export const NatiSelector = (

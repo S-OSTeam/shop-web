@@ -11,37 +11,12 @@ import { ClickEventBtn } from '../../molecules/FAQ_0_1/button/ClickEvtBtn';
 import { OrgSelector } from '../../organisms/faq/user/OrgSelector';
 
 
-export interface DefaultInputProps {
-    htmlForOrName: string,
-    ph?: string,
-    value: string,
-    labelContext: string,
-    isRow?: boolean | undefined,
-    rows?: string | number,
-    required?: boolean,
-}
-
 export const FrameFaqUser = () => {
-
     // 버튼 클릭여부 체크
     const openCheck = useRecoilValue(booleanFaqState);
-
-
     const handleOnSubmit = () => {
         // eslint-disable-next-line
         console.log('submit 이벤트 실행');
-        // 자식 상태값 체크 만들기
-        // if (title === '' || title === null) {
-        //     // eslint-disable-next-line
-        //     alert('제목을 입력해 주세요');
-        //     return;
-        // }
-        // if (context === '' || context === null) {
-        //     // eslint-disable-next-line
-        //     alert('내용을 입력해 주세요');
-        //     return;
-        // }
-
         // eslint-disable-next-line
         console.log('입력값 문제없음');
     };

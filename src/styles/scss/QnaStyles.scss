@@ -1,69 +1,275 @@
-$primary-color: #80A1D4;
-$active-color: #62bdff;
-$input-form-margin-bottom: 30px;
-$input-form-after-w: 99%;
-
+@charset "UTF-8";
 html, body {
   width: 100%;
   height: 100%;
-  background-color: #eeeeee;
-}
-body{
-  overflow-y: scroll;
-  position: relative;
 }
 
+$primary-color: #80A1D4;
+$active-color: #62bdff;
+
+// 테이블 사이즈 퍼센트 - default
+$th-per-width: 15%;
+$th-per-width-L: 55%;
+
+// 테이블 사이즈 퍼센트 - tablet
+$th-Tablet-per-width: 20%;
+$th-Tablet-per-width-L: 40%;
+
+// 모바일 사이즈 퍼센트 - tablet
+$th-Mobile-per-width: 20%;
+$th-Mobile-per-width-L: 40%;
+
+
+// 브레이크 포인트
+$mobile-breakpoint: 600px;
+$tablet-breakpoint: 960px;
+
+// 헤딩 및 제목구간 사이즈들
+$heading-size-L : 32px;
+$heading-size-M : 24px;
+$heading-size-S : 16px;
+
+
+// 공통구간
+body {
+  width: 100%;
+  height: 100vh;
+}
 #root {
+  width: 100%;
+  height: 100vh;
   background-color: transparent;
 }
-
-.qna-wrapper {
-  width: 750px;
+.qna-wrapper{
   margin: 0 auto;
 }
+.qna-wrapper {
+  tr, td, th {
+    border: none;
+
+  }
+
+  tr{
+    border: 1px solid #eeeeee;
+  }
+}
+.heading-wrapper{
+  padding-bottom: 30px;
+}
+
+
 
 // 테이블 영역
-.MuiTable-root{
-  thead, tbody{
-    tr{
-      td, th{
-        &:first-child, &:last-child, &:nth-last-child(2){
-          width: 15%;
-          text-align: center;
-        }
-      }
-    }
-  }
-  thead{
-    tr{
-      td{
-        &:first-child, &:last-child, &:nth-last-child(2){
+.qna-table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  thead {
+    tr {
+      display: table-row;
+      background-color: #fafafa;
 
-        }
+      th {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        border-color: #e1e1e1;
+        text-align: center;
+        font-size: 14px;
+        width: $th-per-width;
+      }
+      th:nth-child(2) {
+        width: $th-per-width-L;
       }
     }
   }
-  tbody{
-    tr{
-      td{
+
+  tbody {
+    .title-row {
+      position: relative;
+      white-space: nowrap;
+      td {
+        font-size: 14px;
+        text-align: center;
+        padding-top: 14px;
+        padding-bottom: 14px;
+      }
+
+      td:nth-child(2) {
+        text-align: left;
+      }
+    }
+
+    .context-row {
+      position: relative;
+      overflow: hidden;
+      td {
+        padding: 0;
+      }
+
+      .td-section-wrapper {
+        display: flex;
+        width: 100%;
+        padding: 16px 0;
+
+        .icon-wrapper {
+          flex-basis: 15%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 0;
+
+          svg {
+            width: 50px;
+            height: 50px;
+            color: #646464;
+          }
+        }
+
+        .qna-tb-context {
+          display: flex;
+          flex-basis: 84%;
+          flex-direction: column;
+          justify-content: center;
+          gap: 10px;
+
+          span {
+            padding: 0 16px;
+          }
+        }
 
       }
     }
   }
 }
 
-// 스크롤바 영역
+// 리모트 영역
+.qna-table-nav{
+  padding-bottom: 10px;
+  // 리모트 내부 리스트
+  ul{
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    li:nth-child(n+1):nth-child(-n+2){
+      flex-grow: 0;
+    }
+
+    li:nth-child(n+3):nth-child(-n+4){
+      flex-grow: 0;
+    }
+    // 버튼
+    li{
+      display: flex;
+      .btn-qna{
+        .btn-context{
+          color: #fff;
+        }
+      }
+      .type-bright{
+        background: #8bd2ee;
+        &:hover{
+          background: #bbe2ff;
+        }
+      }
+      .type-dark{
+        background: #80A1D4;
+        &:hover{
+          background: #b7d3ff;
+        }
+      }
+      .checkbox-qna{
+
+      }
+    }
+
+    li:nth-child(n+1):nth-child(-n+2){
+      width: $th-per-width;
+      margin-right: 10px;
+      .btn-qna{
+        width: 100%;
+      }
+    }
+    // 라벨영역
+    li:nth-child(3){
+      width: $th-per-width-L;
+      display: flex;
+      justify-content: end;
+    }
+
+    // select 영역
+    li:last-child{
+      display: flex;
+      align-self: center;
+      width: $th-per-width;
+      .qna-remote-select-wrapper{
+        .select-class-test{
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
+    }
+    // 라벨
+    .checkbox-qna{
+      .qna-check-label{
+        font-size: 14px;
+      }
+    }
+  }
+}
+.MuiPagination-root {
+  padding-top: 10px;
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 /*
 ::-webkit-scrollbar : 스크롤바 전체
 ::-webkit-scrollbar-thumb : 스크롤 막대
 ::-webkit-scrollbar-track : 스크롤 막대 외부
 */
-body::-webkit-scrollbar{
 
+// desktop 기준
+@media (min-width: #{$tablet-breakpoint + 1}) {
+  .qna-wrapper {
+    width: 1020px;
+  }
+  .qna-heading{
+    font-size: $heading-size-L;
+  }
+  .faq-g-heading{
+    font-size: $heading-size-M;
+  }
 }
-body::-webkit-scrollbar-thumb{
 
+// tablet
+@media (min-width: #{$mobile-breakpoint + 1}) and (max-width: $tablet-breakpoint) {
+  .qna-wrapper {
+    width: 80%;
+  }
+  .qna-table {
+    thead {
+      tr {
+        th {
+          text-align: center;
+          font-size: 14px;
+          width: $th-Tablet-per-width;
+        }
+        th:nth-child(2) {
+          width: $th-Tablet-per-width-L;
+        }
+
+      }
+    }
+  }
 }
-body::-webkit-scrollbar-track{
 
+// mobile
+@media (max-width: $mobile-breakpoint) {
+  .qna-wrapper {
+    width: $mobile-breakpoint;
+  }
 }

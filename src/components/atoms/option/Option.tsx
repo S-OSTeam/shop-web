@@ -1,25 +1,21 @@
+/* eslint-disable */
 import React from 'react';
 import { MenuItem, MenuItemProps } from '@mui/material';
 import PropTypes from 'prop-types';
 
-interface MyProps extends MenuItemProps{
-    context?: string;
+/* eslint-disable-next-line */
+interface optionInterface extends MenuItemProps{
 }
-const Option = ({...props}: MyProps) => {
+
+const Option = ({...props}: optionInterface) => {
     return(
         <MenuItem
-            value={props.value}
-            key={props.key}
-            aria-label={props['aria-label']}
-        >
-            {props.context}
-        </MenuItem>
+            {...props}
+        />
     )
 }
 Option.prototype={
-    context: PropTypes.string,
 };
 Option.defaultProps={
-    context: 'sample text',
 };
 export default Option;

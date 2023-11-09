@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, TableCell, TableRow } from '@mui/material';
+import PropTypes from 'prop-types';
+import HelpIcon from '@mui/icons-material/Help';
+import HdrAutoIcon from '@mui/icons-material/HdrAuto';
 import { TD } from '../../../../molecules/table/tableData/TD';
 import IconWrapper from '../../../../molecules/iconWrapper/IconWrapper';
 import TableContentBox
     from '../../../../molecules/table/tableContent/tableContentSection/TableContentBox/TableContentBox';
+import Collapse from '../../../../molecules/collapse/CustomCollapse';
 /*
 * TR 가 여러개일 수 있음
  */
@@ -12,18 +16,26 @@ export interface myTableRowProps {
     context: string;
     rq_context?: string;
     qna_done_date?: string;
+    onClick?: () => void;
+    currentInState: boolean;
 }
 
+// currentOpen 를 받아 사용
 export const TableRowCmp = ({ ...props }: myTableRowProps) => {
-    const {tableRowPrimary, context, rq_context, qna_done_date} = props;
-
-    const [rqState, SetRQState] = useState<boolean>(false);
-    const handleOnClick = () => {
-        SetRQState((current) => (!current));
-    };
+    const {
+        tableRowPrimary,
+        context,
+        rq_context,
+        qna_done_date,
+        onClick,
+        currentInState,
+    } = props;
     return (
         <>
-            <TableRow onClick={handleOnClick}>
+            <TableRow
+                onClick={onClick}
+                className='title-row'
+            >
                 {
                     tableRowPrimary.map((item, index) => {
                         // key 에 td 말고 다른거 생각하기
@@ -34,28 +46,60 @@ export const TableRowCmp = ({ ...props }: myTableRowProps) => {
                     })
                 }
             </TableRow>
-            {rqState &&
-                <TableRow>
-                    <TableCell>
-                        <Box component='section'>
-                            <IconWrapper icon='help' />
+            <TableRow className='context-row'>
+                <TableCell
+                    colSpan={4}>
+                    <Collapse
+                        timeout='auto'
+                        propsIn={currentInState}
+                        className='tr-collapse-wrapper'
+                    >
+                        <Box
+                            component='section'
+                            className='td-section-wrapper'
+                        >
+                            <IconWrapper
+                                className='icon-wrapper'
+                                icon={HelpIcon} size='large'/>
                             <TableContentBox
-                                wrapperClass='qna-tb-user-context'
+                                wrapperClass='qna-tb-context'
                                 context={context}
                                 rq_date={undefined}
                             />
                         </Box>
-                        <>
-                            <IconWrapper icon='A' />
-                            <TableContentBox
-                                wrapperClass='qna-tb-user-context'
-                                rq_context={rq_context}
-                                rq_date={qna_done_date}
-                            />
-                        </>
-                    </TableCell>
-                </TableRow>}
+                        {
+                            rq_context &&
+                            <Box
+                                component='section'
+                                className='td-section-wrapper'
+                            >
+                                <IconWrapper
+                                    className='icon-wrapper'
+                                    icon={HdrAutoIcon} size='large'/>
+                                <TableContentBox
+                                    wrapperClass='qna-tb-context'
+                                    rq_context={rq_context}
+                                    rq_date={qna_done_date}
+                                />
+                            </Box>
+                        }
+                    </Collapse>
+                </TableCell>
+            </TableRow>
         </>
     );
 };
 // (rq_context !== '') ?
+TableRowCmp.prototype = {
+    rq_context: PropTypes.string,
+    qna_done_date: PropTypes.string,
+    onClick: PropTypes.func,
+};
+TableRowCmp.defaultProps = {
+    rq_context: '',
+    qna_done_date: '',
+    onClick: () => {
+        /* eslint-disable-next-line */
+        console.log('onClick event ready');
+    },
+};

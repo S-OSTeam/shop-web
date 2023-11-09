@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { TableBody, TableRow } from '@mui/material';
+import { TableBody, TableCell, TableRow } from '@mui/material';
 import { faqTableState } from '../../../../../recoil/atoms/FaqItemList';
 import { TCell } from '../cell/TCell';
 import { BasicTCell } from '../../../../molecules/table/BasicTCell';
@@ -49,6 +49,7 @@ export const TBody = () => {
                                 qna_done_date={qna_done_date}
                                 qna_done={qna_done} />}
                         </TableRow>
+
 
                     </>
                 );

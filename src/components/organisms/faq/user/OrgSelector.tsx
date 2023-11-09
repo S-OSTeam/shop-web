@@ -51,7 +51,6 @@ export const OrgSelector = () => {
     })
     const contain = questionTypes;
     const handleOnClick = (e: React.ChangeEvent<HTMLInputElement>)=>{
-        // const {name, value} = e.target;
         setCurrentVal(oldVal => ({
             ...oldVal,
             [e.target.name]: e.target.value
