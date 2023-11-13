@@ -10,7 +10,6 @@ import { OrgFormGroup } from '../../organisms/faq/user/OrgFormGroup';
 import { ClickEventBtn } from '../../molecules/FAQ_0_1/button/ClickEvtBtn';
 import { OrgSelector } from '../../organisms/faq/user/OrgSelector';
 
-
 export const FrameFaqUser = () => {
     // 버튼 클릭여부 체크
     const openCheck = useRecoilValue(booleanFaqState);
@@ -25,24 +24,16 @@ export const FrameFaqUser = () => {
         e.preventDefault();
         handleOnSubmit();
     };
-
     return (
-        <Box
-            id='faqMainWrapper'
-            component='div'
-        >
-            <div className='styled-wrapper'>
-
-
+        <Box id="faqMainWrapper" component="div">
+            <Box component="header"></Box>
+            <div className="styled-wrapper">
                 <OrgTitle />
-                <OrgBtnToggle
-                    id='titleBtn'
-                />
+                <OrgBtnToggle id="titleBtn" />
                 <OrgContent isOpen={openCheck} />
-                {
-                    openCheck &&
+                {openCheck && (
                     <Box
-                        component='form'
+                        component="form"
                         onSubmit={handleOnSubmit}
                         sx={{
                             '.faq-onSubmit-btn': {
@@ -52,9 +43,9 @@ export const FrameFaqUser = () => {
                                 marginTop: '15px',
                                 color: '#fff',
                                 padding: '5px 50px',
-                                '&:hover':{
+                                '&:hover': {
                                     backgroundColor: '#62bdff',
-                                }
+                                },
                             },
                         }}
                     >
@@ -62,15 +53,14 @@ export const FrameFaqUser = () => {
                         <OrgInputForm />
                         <OrgFormGroup />
                         <ClickEventBtn
-                            id='SubmitBtn'
+                            id="SubmitBtn"
                             onClick={handleOnClick}
-                            text='문의등록'
-                            molClassName='faq-onSubmit-btn'
+                            text="문의등록"
+                            molClassName="faq-onSubmit-btn"
                         />
                     </Box>
-                }
+                )}
             </div>
         </Box>
-
     );
 };

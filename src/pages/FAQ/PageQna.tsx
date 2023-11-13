@@ -2,14 +2,14 @@
 import React, { Fragment } from 'react';
 import { FrameQnaTemplate } from '../../components/templates/FAQ/FrameQnaTemplate';
 import '../../styles/scss/QnaStyles.scss';
-import Header from '../../components/commons/Header';
+import Header from '../../components/commons/header/Header';
 import { Box } from '@mui/material';
 
 export interface myTableInterfaceProps {
     thContext: string[];
-    showOpt: boolean,
+    showOpt: boolean;
     // select remote 영역
-    menuItems: string[],
+    menuItems: string[];
 }
 
 export const PageQna = () => {
@@ -18,18 +18,12 @@ export const PageQna = () => {
     const selectMenuItems = ['답변현황', '답변완료', '답변대기'];
     return (
         <Fragment>
-            <Box component='header' className='qna-header'>
+            <Box component="header" className="qna-header">
                 <Header />
             </Box>
-            <Box component='body' className='qna-body'>
-
-                <FrameQnaTemplate
-                    thContext={th}
-                    showOpt={false}
-                    menuItems={selectMenuItems}
-                />
+            <Box component="body" className="qna-body">
+                <FrameQnaTemplate thContext={th} showOpt={false} menuItems={selectMenuItems} />
             </Box>
         </Fragment>
-
     );
 };

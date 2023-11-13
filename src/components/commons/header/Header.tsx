@@ -4,16 +4,15 @@ import classNames from 'classnames';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChecklistIcon from '@mui/icons-material/Checklist';
-import Button from '../atoms/button/ButtonCustom';
-import Text from '../atoms/text/CustomText';
-import '../../styles/scss/header/Header.scss';
-
+import Button from '../../atoms/button/ButtonCustom';
+import Text from '../../atoms/text/CustomText';
+import '../../../styles/scss/header/Header.scss';
 
 const Header = () => {
     return (
         <div className={classNames('header-box')}>
             <div className={classNames('headerNav')}>
-                <Button className='btn-logo'>
+                <Button className="btn-logo">
                     <Text text="DreamHome" />
                 </Button>
 
