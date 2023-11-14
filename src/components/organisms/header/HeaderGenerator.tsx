@@ -1,61 +1,51 @@
 /* eslint-disable */
 import React from 'react';
 import LinkBoxWrapper from '../../molecules/linkBoxWrapper/LinkBoxWrapper';
+import { myHeaderItemAry } from '../../templates/header/Header';
 import classNames from 'classnames';
+import { Box } from '@mui/material';
 
-export type secondaryList = {
-    context: string;
-    hrefLink: string;
-};
-export type headerList = {
-    // ul->li
-    primaryList: {
-        // li : title
-        primaryTitle: string;
-        // depth-1 : ul container
-        depth: secondaryList[];
-    };
-};
-export type primaryEntry = {};
-
-export interface myHeaderProps {
-    // 가져올 리스트 객체
-    title: [];
+interface myPropsType {
+    items: myHeaderItemAry[];
+    className?: string;
 }
 
-const HeaderGenerator = ({ ...props }: myHeaderProps) => {
-    const { itemData } = props;
+const HeaderGenerator = ({ items, className }: myPropsType) => {
 
     return (
-        <ul>
-            {itemData.map((item, idx) => {
-                const primaryTitle = item.primaryList.primaryTitle;
-                const secondaryTemp = item.primaryList.depth;
-                return (
-                    <li>
-                        <LinkBoxWrapper
-                            href=""
-                            linkBoxClassName={classNames('')}
-                            textClassName={classNames('')}
-                            text={primaryTitle}
-                        />
-                        <ul>
-                            {secondaryTemp.map((item) => {
-                                return (
-                                    <li>
-                                        <LinkBoxWrapper
-                                            href={item.hrefLink}
-                                            linkBoxClassName={classNames('')}
-                                            textClassName={classNames('')}
-                                            text={item.context}
-                                        />
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </li>
-                );
-            })}
+        <ul id='menu' className={classNames(className)}>
+            {
+                items.map(primary => {
+                        return (
+                            <li>
+                                <LinkBoxWrapper
+                                    text={primary.title}
+                                    href={primary.href}
+                                    linkBoxClassName='header-li'
+                                    textClassName='li-context'>
+                                    <Box component='div' className='nav-bar-wrapper'>
+                                        <ul>
+                                            {primary.depth.map(depthItem => {
+                                                const { title, href } = depthItem;
+                                                return (
+                                                    <li>
+                                                        <LinkBoxWrapper
+                                                            linkBoxClassName='depth-li'
+                                                            textClassName='depth-context'
+                                                            text={title}
+                                                            href={href}
+                                                        />
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </Box>
+                                </LinkBoxWrapper>
+                            </li>
+                        );
+                    },
+                )
+            }
         </ul>
     );
 };

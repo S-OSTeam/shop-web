@@ -26,7 +26,6 @@ export const FrameFaqUser = () => {
     };
     return (
         <Box id="faqMainWrapper" component="div">
-            <Box component="header"></Box>
             <div className="styled-wrapper">
                 <OrgTitle />
                 <OrgBtnToggle id="titleBtn" />

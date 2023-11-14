@@ -17,8 +17,8 @@ import LinkBoxWrapper from '../../molecules/linkBoxWrapper/LinkBoxWrapper';
 
 const Header = () => {
     return (
-        <Box component="header" className={classNames('header', 'wrapper')}>
-            <Box component="nav" className={classNames('header', 'nav')}>
+        <Box component="header" className={classNames('main-header', 'wrapper')}>
+            <Box component="nav" className={classNames('main-header', 'nav')}>
                 <LinkBoxWrapper
                     href=""
                     linkBoxClassName={classNames('btn', 'logo')}

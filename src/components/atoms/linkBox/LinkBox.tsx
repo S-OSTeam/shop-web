@@ -25,7 +25,7 @@ LinkBox.prototype = {
 };
 LinkBox.defaultProps = {
     href: undefined,
-    underLine: 'none',
+    underline: 'none',
     className: '',
 };
 export default LinkBox;

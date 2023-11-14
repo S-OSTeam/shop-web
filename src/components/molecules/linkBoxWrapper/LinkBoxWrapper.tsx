@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { LinkProps } from '@mui/material';
 import LinkBox from '../../atoms/linkBox/LinkBox';
 import Text from '../../atoms/contents/Text';
-import { LinkProps } from '@mui/material';
-import PropTypes from 'prop-types';
 
 interface myLinkWrapperProps {
     /* LinkBox */
@@ -12,14 +12,14 @@ interface myLinkWrapperProps {
     /* Text */
     text?: string; // Text 내부 내용
     textClassName?: string; // Text 의 클래스 네임
+    children?: React.ReactNode;
 }
 const LinkBoxWrapper = ({ ...props }: myLinkWrapperProps) => {
-    const { href, linkBoxClassName, underline, text, textClassName } = props;
+    const { href, linkBoxClassName, underline, text, textClassName, children } = props;
     return (
-        <LinkBox href={href}>
-            className={linkBoxClassName}
-            underline={underline}
+        <LinkBox href={href} className={linkBoxClassName} underline={underline} >
             <Text text={text} className={textClassName} />
+            {children}
         </LinkBox>
     );
 };
@@ -30,6 +30,7 @@ LinkBoxWrapper.prototype = {
     underline: PropTypes.oneOf(['none', 'hover', 'always']),
     text: PropTypes.string,
     textClassName: PropTypes.string,
+    children: PropTypes.node,
 };
 LinkBoxWrapper.defaultProps = {
     href: undefined,
@@ -37,5 +38,6 @@ LinkBoxWrapper.defaultProps = {
     underline: 'none',
     text: undefined,
     textClassName: undefined,
+    children: undefined,
 };
 export default LinkBoxWrapper;
