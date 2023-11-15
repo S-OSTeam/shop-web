@@ -11,41 +11,34 @@ interface myPropsType {
 }
 
 const HeaderGenerator = ({ items, className }: myPropsType) => {
+        const listContainer = items.map(primary => {
+            return(
+                <li>
+                    <LinkBoxWrapper text={primary.title} href={primary.href} linkBoxClassName='header-li' textClassName='li-context'>
+                        <Box component='div' className='nav-bar-wrapper'>
+                            <ul>
+                                {primary.depth.map(depthItem => {const { title, href } = depthItem;
+                                    return (
+                                        <li>
+                                            <LinkBoxWrapper
+                                                linkBoxClassName='depth-li'
+                                                textClassName='depth-context'
+                                                text={title}
+                                                href={href}
+                                            />
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </Box>
+                    </LinkBoxWrapper>
+                </li>
+            );
+        });
 
     return (
         <ul id='menu' className={classNames(className)}>
-            {
-                items.map(primary => {
-                        return (
-                            <li>
-                                <LinkBoxWrapper
-                                    text={primary.title}
-                                    href={primary.href}
-                                    linkBoxClassName='header-li'
-                                    textClassName='li-context'>
-                                    <Box component='div' className='nav-bar-wrapper'>
-                                        <ul>
-                                            {primary.depth.map(depthItem => {
-                                                const { title, href } = depthItem;
-                                                return (
-                                                    <li>
-                                                        <LinkBoxWrapper
-                                                            linkBoxClassName='depth-li'
-                                                            textClassName='depth-context'
-                                                            text={title}
-                                                            href={href}
-                                                        />
-                                                    </li>
-                                                );
-                                            })}
-                                        </ul>
-                                    </Box>
-                                </LinkBoxWrapper>
-                            </li>
-                        );
-                    },
-                )
-            }
+            {listContainer}
         </ul>
     );
 };
