@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { client } from './api/apollo/client';
-import Header from './components/commons/Header';
+import Header from './components/organisms/Header';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

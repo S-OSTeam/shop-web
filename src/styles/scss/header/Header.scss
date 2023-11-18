@@ -1,0 +1,147 @@
+$icon-size-max: 20px;
+$headerIcons-max: 104px;
+
+.header-box {
+  width: 100%;
+  height: 65px;
+  background-color: #80A1D4;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+
+  & ul li {
+    list-style: none;
+  }
+}
+
+.headerNav {
+  display: flex;
+  width: 790px;
+  align-items: center;
+  justify-content: space-between;
+
+  & > button {
+    color: white;
+    font-size: 24px;
+  }
+
+  .icon-nav-btn {
+    min-width: 10px;
+    padding: 0 12px 0 12px;
+    width: fit-content;
+    height: fit-content;
+    & > svg {
+      width: $icon-size-max;
+      height: auto;
+    }
+    &:after{
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 45%;
+      background: #fff;
+      border-radius: 50%;
+      right: 0;
+      top: calc((100%) - (45%)) / 2;
+    }
+    &:first-child{
+
+    }
+    &:last-child{
+      padding-right: 0;
+      &:after{
+        content: none;
+      }
+    }
+  }
+  .headerCheckListIcon{
+    & > svg {
+      width: 20px;
+    }
+  }
+
+  // 우측 아이콘 래퍼
+  .headerIcons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $headerIcons-max;
+    margin-left: 20px;
+
+    & > button {
+      color: white;
+    }
+  }
+
+  .headerLoginButton {
+    min-width: 10px;
+    width: 80px;
+    height: 30px;
+    background-color: white;
+
+
+    .loginText {
+      color: #80A1D4;
+    }
+
+    &:hover {
+      background-color: black;
+
+      .loginText {
+        color: white;
+      }
+    }
+  }
+
+}
+
+.categoryNav {
+  display: flex;
+
+  & button {
+    color: white;
+  }
+
+  & > li {
+    position: relative;
+  }
+
+  //리스트들 보여주는 부분
+  & > li > ul {
+    padding: 0;
+    background-color: black;
+    display: none;
+  }
+
+  & > li > button:hover {
+    background-color: #61dafb;
+  }
+
+  & > li:hover > ul {
+    display: block;
+  }
+}
+
+.depth-1 {
+  white-space: nowrap;
+  position: absolute;
+
+  & > li {
+    display: flex;
+    //justify-content: center;
+    padding-left: 5px;
+  }
+
+  & > li:hover {
+    background-color: #61dafb;
+  }
+}
+
+
+
+

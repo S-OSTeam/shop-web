@@ -56,19 +56,19 @@ const ProductPage = () => {
 
     // 스크롤을 내릴때 실시간으로 변경 되는지 확인하여 Tab active 적용해주기 위한 함수
     const scrollHandler = () => {
-        if (ScrollY > detailPosition.top) {
+        if (ScrollY >= detailPosition.top) {
             setScrollY(window.pageYOffset);
             setScrollActive(true);
             setTadId(1);
-            if (ScrollY > reviewPosition.top) {
+            if (ScrollY >= reviewPosition.top) {
                 setScrollY(window.pageYOffset);
                 setScrollActive(true);
                 setTadId(2);
-                if (ScrollY > FAQPosition.top) {
+                if (ScrollY >= FAQPosition.top) {
                     setScrollY(window.pageYOffset);
                     setScrollActive(true);
                     setTadId(3);
-                    if (ScrollY > deliveryPosition.top) {
+                    if (ScrollY >= deliveryPosition.top) {
                         setScrollY(window.pageYOffset);
                         setScrollActive(true);
                         setTadId(4);
@@ -141,24 +141,20 @@ const ProductPage = () => {
     return (
         <Box className="productPage">
             <ProductInfo />
-            <Box ref={productDetailRef}>
-                <ProductTab
-                    className={ScrollActive ? 'productTab fixed' : 'productTab'}
-                    tabId={tadId}
-                    onClick={onChangeScroll}
-                />
+            <Box className={ScrollActive ? 'productTab fixed' : 'productTab'} ref={productDetailRef}>
+                <ProductTab tabId={tadId} onClick={onChangeScroll} />
             </Box>
             <ProductDetailInfo />
-            <Box ref={productReviewRef}>
-                <TextCustom className="tabText" content="구매 후기" />
+            <Box className="tabText" ref={productReviewRef}>
+                <TextCustom content="구매 후기" />
             </Box>
             <ProductReview />
-            <Box ref={productFAQRef}>
-                <TextCustom className="tabText" content="상품 문의" />
+            <Box className="tabText" ref={productFAQRef}>
+                <TextCustom content="상품 문의" />
             </Box>
             <ProductFAQ />
-            <Box ref={productDeliveryRef}>
-                <TextCustom className="tabText" content="배송 안내" />
+            <Box className="tabText" ref={productDeliveryRef}>
+                <TextCustom content="배송 안내" />
             </Box>
             <ProductDelivery />
         </Box>

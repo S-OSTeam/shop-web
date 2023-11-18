@@ -21,10 +21,10 @@ export const TestProduct = {
     pSize: 123,
     pWeight: 1.23,
     pReviewOne: 0,
-    pReviewTwo: 3,
-    pReviewThree: 350,
-    pReviewFour: 20,
-    pReviewFive: 55,
+    pReviewTwo: 30,
+    pReviewThree: 100,
+    pReviewFour: 170,
+    pReviewFive: 255,
     pPurchase: 1253,
 };
 
@@ -51,6 +51,13 @@ export const Reviews = {
     recommendation: '123',
     image: 'choco1.jpg',
     option: '없음',
+};
+
+export const FAQ = {
+    status: false,
+    faqTitle: '자주 묻는 질문 및 답변',
+    writer: '냄정수',
+    registerDate: '2023-01-15',
 };
 
 export interface DepthAddress {
@@ -95,4 +102,11 @@ export interface ReviewData {
     reviewDetail: string;
     recommendation: string;
     image: string;
+}
+
+export interface FAQData {
+    status: boolean;
+    faqTitle: string;
+    writer: string;
+    registerDate: string;
 }

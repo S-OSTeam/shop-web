@@ -1,0 +1,57 @@
+.productFAQ{
+  width: 760px;
+  min-height: 390px;
+  height: fit-content;
+  margin: 0 auto;
+
+  .faqTitle{
+    width: fit-content;
+    font-size: 24px;
+    margin: 100px auto 0 auto;
+  }
+  .faqList{
+    margin-top: 20px;
+    width: 100%;
+    min-height: 540px;
+    .ListData {
+      border: solid;
+      border-color: #F1F1F1;
+      .faqHeader {
+        background: #FAFAFA;
+        padding: 15px 0;
+
+        .statusTitle {
+          width: 14.2%;
+        }
+
+        .faqTitle {
+          width: 57.1%;
+        }
+
+        .writeTitle {
+          width: 12.9%;
+        }
+
+        .registerTitle {
+          width: 15.5%;
+        }
+
+        & p {
+          font-size: 14px;
+          margin: 0;
+        }
+      }
+
+      .faqDetail {
+        background: none;
+        border-bottom: solid;
+        border-bottom-color: #F1F1F1;
+      }
+    }
+  }
+  .faqPagination{
+    width: fit-content;
+    height: fit-content;
+    margin: 11px auto 15px auto;
+  }
+}

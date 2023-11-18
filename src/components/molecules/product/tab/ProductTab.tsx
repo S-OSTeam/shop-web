@@ -5,7 +5,7 @@ import ButtonCustom from '../../../atoms/button/ButtonCustom';
 import TextCustom from '../../../atoms/text/TextCustom';
 
 interface ProductTabProps {
-    className: string;
+    className?: string;
     tabId: number;
     onClick?: (id: number) => void;
 }
@@ -36,6 +36,7 @@ const ProductTab = ({ className, tabId, onClick }: ProductTabProps) => {
 };
 
 ProductTab.defaultProps = {
+    className: undefined,
     onClick: undefined,
 };
 

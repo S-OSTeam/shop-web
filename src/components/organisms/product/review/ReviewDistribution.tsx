@@ -11,11 +11,11 @@ interface ReviewDistributionProps {
 
 const ReviewDistribution = ({ item }: ReviewDistributionProps) => {
     const chartData = [
-        { label: 'One', value: item.pReviewOne },
-        { label: 'Two', value: item.pReviewTwo },
-        { label: 'Three', value: item.pReviewThree },
-        { label: 'Four', value: item.pReviewFour },
-        { label: 'Five', value: item.pReviewFive },
+        { label: '1점', value: item.pReviewOne },
+        { label: '2점', value: item.pReviewTwo },
+        { label: '3점', value: item.pReviewThree },
+        { label: '4점', value: item.pReviewFour },
+        { label: '5점', value: item.pReviewFive },
     ];
 
     return (
