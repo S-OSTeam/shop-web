@@ -34,6 +34,25 @@ export const TestOption = [
     { id: 3, price: 5000, option: 'second option' },
 ];
 
+export const Reviews = {
+    writer: '냄정수',
+    registerDate: '2023-01-15',
+    review: '4.0',
+    reviewTitle: '빠른 배송 좋아요.',
+    reviewDetail:
+        '나도 어디서 꿀리진 않어 아직 쓸만한 걸 죽지 않았어\n' +
+        '너하나 때문에 망가진 몸 사라진 꿈 불타는 맘\n' +
+        '널 위해서라면 이 한 몸 날려 니가 있는 곳이면 달려\n' +
+        '하지만 그댄 내게 안녕 또 안녕\n' +
+        '넌 내가 싫다고 이유가 뭐냐고\n' +
+        '짜증난 니 표정이 모든 걸 말해줘 슬프게 해\n' +
+        '그래도 좋다고 기회를 달래도\n' +
+        '한 번 돌아선 니 모습 차가운 그 눈빛이 싫어요',
+    recommendation: '123',
+    image: 'choco1.jpg',
+    option: '없음',
+};
+
 export interface DepthAddress {
     id: number;
     address: string;
@@ -65,4 +84,15 @@ export interface ProductItem {
 export interface PieChartData {
     label: string;
     value: number;
+}
+
+export interface ReviewData {
+    writer: string;
+    registerDate: string;
+    review: string;
+    option: string;
+    reviewTitle: string;
+    reviewDetail: string;
+    recommendation: string;
+    image: string;
 }

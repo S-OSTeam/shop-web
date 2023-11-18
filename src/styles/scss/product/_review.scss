@@ -1,23 +1,26 @@
-.productReview{
+.productReview {
   width: 760px;
   min-height: 390px;
   max-height: 1340px;
   height: fit-content;
   margin: 0 auto;
 
-  .reviewDistribution{
+  .reviewDistribution {
     width: 609.26px;
     height: 277px;
     margin: 50px auto 0 auto;
-    .pieChartReview{
+
+    .pieChartReview {
       width: fit-content;
       margin: 30px auto 0 auto;
     }
-    .reviewTitle{
+
+    .reviewTitle {
       height: 28px;
       font-size: 24px;
     }
-    .reviewPercentage{
+
+    .reviewPercentage {
       display: flex;
       flex-direction: row;
       width: 610px;
@@ -25,70 +28,86 @@
       justify-content: center;
       align-items: center;
       margin-top: 15px;
-      .review{
+
+      .reviewScore {
         padding-top: 2px;
         width: 101px;
         height: 23px;
         font-size: 14px;
         color: #ffffff;
       }
-      .five{
+
+      .five {
         background: #254D8B;
         border-radius: 50px;
       }
-      .four{
+
+      .four {
         background: #468FFF;
         border-radius: 50px;
       }
-      .three{
+
+      .three {
         background: #80A1D4;
         border-radius: 50px;
       }
-      .two{
+
+      .two {
         background: #909090;
         border-radius: 50px;
       }
-      .one{
+
+      .one {
         background: #4E4E4E;
         border-radius: 50px;
       }
     }
   }
-  .reviewList{
+
+  .reviewList {
     width: 760px;
-    height: 950px;
+    height: 900px;
     margin: 63px auto 0 auto;
     border-top: solid;
+    border-bottom: solid;
     border-width: 1px;
-    border-top-color: #909090;
-    .reviewPriorityButton{
+    border-top-color: #5981BE;
+    border-bottom-color: #C4C4C4;
+
+    .reviewPriorityButton {
       width: 760px;
       height: 25px;
       margin-top: 17px;
-      .Popularity{
+      margin-bottom: 30px;
+
+      .Popularity {
         width: 80px;
         height: 25px;
         background: #5981BE;
         color: #ffffff;
         border-radius: 50px;
-        & p{
+
+        & p {
           font-size: 14px;
         }
       }
-      .latest{
+
+      .latest {
         width: 80px;
         height: 25px;
         background: #717171;
         color: #ffffff;
         margin-left: 10px;
         border-radius: 50px;
-        & p{
+
+        & p {
           font-size: 14px;
         }
       }
-      .reviewCount{
+
+      .reviewCount {
         width: 139px;
-        height: 25px;
+        height: fit-content;
         background: #5981BE;
         color: #ffffff;
         margin-left: 451px;
@@ -96,5 +115,126 @@
         font-size: 14px;
       }
     }
+
+    .detailReview {
+      width: 760px;
+      height: 171px;
+      border-top: solid;
+      border-top-color: #909090;
+      margin-bottom: 38px;
+
+      .reviewData {
+        margin-top: 15px;
+
+        .reviewImage {
+          width: 156px;
+          height: 156px;
+          object-fit: cover;
+        }
+
+        .reviewRecommendation {
+          margin-left: 8px;
+          width: 142px;
+          height: 156px;
+
+          .recommendationBtn {
+            padding: 0;
+            width: 62px;
+            height: 18px;
+            border: solid;
+            border-color: #5981BE;
+
+            .recommendationCnt {
+              text-align: center;
+              font-size: 10px;
+              background: #80A1D4;
+              border-radius: 2px;
+              width: 26px;
+              height: 12px;
+              margin: auto 0 auto 2px;
+              color: #ffffff;
+              padding-bottom: 1px;
+            }
+
+            .recommendationTxt {
+              font-size: 12px;
+              margin: auto 0;
+            }
+          }
+
+          .reviewReport {
+            margin-left: 8px;
+            width: 47px;
+            height: 18px;
+            padding: 0;
+            border: solid;
+            border-color: #3F3F3F;
+            text-align: center;
+            border-radius: 5px;
+
+            .reportIcon {
+              margin-top: 5px;
+              height: fit-content;
+              font-size: 16px;
+              color: #4E4E4E;
+            }
+
+            & p {
+              margin-top: 8px;
+              margin-left: 5px;
+              color: #4E4E4E;
+              font-size: 12px;
+            }
+          }
+
+          .ReviewInfo{
+            width: 142px;
+            height: 117.73px;
+            margin-top: 5px;
+
+            .info{
+              width: 66px;
+              height: fit-content;
+              margin-right: 8px;
+              border-radius: 2px;
+              border:solid;
+              border-color: #80A1D4;
+              background: #80A1D4;
+              color: #ffffff;
+              border-width: 0px;
+            }
+
+            & p{
+              font-size: 12px;
+              margin-top: 15px;
+              text-align: center;
+            }
+          }
+        }
+
+        .review{
+          width: 430px;
+          margin-left: 24px;
+          height: fit-content;
+          max-height: 156px;
+
+          .reviewTxt{
+            font-size: 12px;
+            margin-top: 10px;
+            color: #7A7A7A;
+          }
+
+          & p{
+            font-size: 18px;
+            color: #5981BE;
+          }
+        }
+      }
+    }
+  }
+  .reviewPagination{
+    width: fit-content;
+    height: fit-content;
+    margin: 11px auto 15px auto;
   }
 }
