@@ -1,0 +1,72 @@
+/* 기본적인 스타일값 정의 */
+
+// 헤딩 : 헤딩 곱한만큼 연산
+$hd: 1px;
+
+// 본문 폰트 크기
+$font-size-context-s: 14 * $hd;
+$font-size-context-m: 16 * $hd;
+$font-size-context-l: 18 * $hd;
+$font-size-context-xl: 22 * $hd;
+
+// 로고 및 헤딩 폰트 크기
+$font-size-heading-s: 18 * $hd;
+$font-size-heading-m: 24 * $hd;
+$font-size-heading-l: 28 * $hd;
+
+// 아이콘 크기
+$icon-size-s: 14 * $hd;
+$icon-size-m: 16 * $hd;
+$icon-size-l: 18 * $hd;
+$icon-size-xl: 20 * $hd;
+
+// 곡선 형태 옵션
+$border-radius-normal: 3 * $hd;
+$border-radius-large: 6 * $hd;
+$border-radius-max: 100 * $hd;
+
+// 폰트
+
+// 색상
+$color-fill-deep-weight: #002B53; // hover
+$color-fill-deep: #10406B; // hover
+$color-fill-normal: #395E8D; // hover
+$color-fill-shallow: #5D7FB0; // hover
+$color-fill-shallow-middle: #80A1D4; // hover
+$color-fill-shallow-low: #E6F4F1; // hover
+
+// hover 색상
+// nav
+$color-fill-hover-nav-deep: #2f2f2f;
+$color-fill-hover-nav-etc: #343434;
+$color-fill-hover-nav-normal: #4d4d4d;
+
+// 폰트 색상
+
+$color-text-hint: #999;
+$color-text-title-context: #ffffff;
+$color-text-default-context: #000000;
+$color-text-link-context: #{$color-fill-shallow-middle};
+
+// z 인덱스
+$modalIndex: 999;
+
+// 애니메이션
+
+// $ease-in-quad: cubic-bezier(0.550, 0.085, ...);
+// 디스플레이별 브레이크 포인트
+
+//데스크탑
+$breakpoint-desktop: 1200px;
+// 노트북
+$breakpoint-laptop: 1024px;
+// 테블릿
+$breakpoint-tablet: 768px;
+// 모바일
+$breakpoint-mobile: 480px;
+
+// 색상
+$primary-color: #80A1D4;
+// 아이콘 사이즈
+$icon-size-max: 20px;
+$headerIcons-max: 104px;

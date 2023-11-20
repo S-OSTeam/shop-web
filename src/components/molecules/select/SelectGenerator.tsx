@@ -4,7 +4,7 @@ import CustomFormControl from '../formControl/FormControl';
 import PropTypes from 'prop-types';
 import Selector from '../../atoms/select/SelectCustom';
 import Option from '../../atoms/option/Option';
-import Text from '../../atoms/contents/Text';
+import Text from '../../atoms/text/Text';
 import { insertSelectTypes } from '../../organisms/qna/tableRemote/TableRemote';
 import classNames from 'classnames';
 

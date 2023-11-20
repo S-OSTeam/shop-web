@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import Text from '../../atoms/contents/Text';
+import Text from '../../atoms/text/Text';
 /* eslint-disable-next-line */
 type rq = '답변완료' | '답변예정';
 

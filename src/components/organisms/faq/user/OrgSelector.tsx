@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormControl, MenuItem } from '@mui/material';
 import { NatiSelector } from '../../../molecules/FAQ_0_1/selector/Selector';
-import Text from '../../../atoms/contents/Text';
+import Text from '../../../atoms/text/Text';
 // import Label from '../../../molecules/label/Label';
 // import { Option } from '../../../molecules/FAQ_0_1/option/Option';
 // import OutLinedIpt from '../../../atoms/outLinedInput/OutLinedInput';

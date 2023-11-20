@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import HelpIcon from '@mui/icons-material/Help';
 import HdrAutoIcon from '@mui/icons-material/HdrAuto';
 import { TD } from '../../../../molecules/table/tableData/TD';
-import IconWrapper from '../../../../molecules/iconWrapper/IconWrapper';
+import IconBox from '../../../../molecules/iconBox/IconBox';
 import TableContentBox
     from '../../../../molecules/table/tableContent/tableContentSection/TableContentBox/TableContentBox';
 import Collapse from '../../../../molecules/collapse/CustomCollapse';
@@ -58,7 +58,7 @@ export const TableRowCmp = ({ ...props }: myTableRowProps) => {
                             component='section'
                             className='td-section-wrapper'
                         >
-                            <IconWrapper
+                            <IconBox
                                 className='icon-wrapper'
                                 icon={HelpIcon} size='large'/>
                             <TableContentBox
@@ -73,7 +73,7 @@ export const TableRowCmp = ({ ...props }: myTableRowProps) => {
                                 component='section'
                                 className='td-section-wrapper'
                             >
-                                <IconWrapper
+                                <IconBox
                                     className='icon-wrapper'
                                     icon={HdrAutoIcon} size='large'/>
                                 <TableContentBox

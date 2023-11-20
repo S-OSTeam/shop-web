@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
-import Text from '../../../../../atoms/contents/Text';
+import Text from '../../../../../atoms/text/Text';
 
 interface MyContentProps {
     wrapperClass?: string;

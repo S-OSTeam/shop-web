@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableCell } from '@mui/material';
-import Text from '../../../atoms/contents/Text';
+import Text from '../../../atoms/text/Text';
 
 
 // mui TableCell 은 부모의 속성에 따라 자동으로 th, td 로 변환됨

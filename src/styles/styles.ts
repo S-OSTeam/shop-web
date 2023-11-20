@@ -17,10 +17,10 @@ declare module '@mui/material/styles' {
 export const theme = createTheme({
     breakpoints:{
         values:{
-            mobile: 0,
-            tablet: 768,
-            laptop: 1024,
-            desktop: 1200,
+            mobile: 768,
+            tablet: 1024,
+            laptop:  1200,
+            desktop: 1400,
         },
     },
 });

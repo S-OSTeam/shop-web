@@ -1,0 +1,246 @@
+@import '../../../../styles/moduleTemplate/index';
+
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// 마진 0 auto 쓰 지 마
+
+// default
+
+header{
+  position: fixed;
+  display: block;
+  width: 100%;
+  background: $color-fill-shallow-middle;
+  z-index: 30;
+}
+// 헤더 네비 래퍼
+.navWrapper {
+  box-sizing: border-box;
+  max-width: 1024px;
+  background-color: $color-fill-shallow-middle;
+  margin: 0 auto;
+  * {
+    list-style-type: none;
+  }
+}
+
+// 네비 태그
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+// 로고
+.logoLink {
+  display: flex;
+  align-items: center;
+}
+
+.logoTitle {
+  font-size: $font-size-heading-l;
+  font-weight: bold;
+  color: $color-text-title-context;
+}
+
+
+// 네비게이션 아이콘
+.navIcon {
+  margin: 0;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding: 0;
+  li {
+    position: relative;
+    padding: 0 10px;
+
+    &:after {
+      display: block;
+      position: absolute;
+      content: '';
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 40%;
+      background: #fff;
+    }
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+
+      &::after {
+        display: none
+      }
+    }
+
+    //a
+    a {
+      position: relative;
+      &:after{
+        transition: ease-in-out 0.1s ;
+        content: '';
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0%;
+        transform: translate(-50%, -50%);
+        border-radius: 100px;
+        background-color: rgba(256,256,256,0.5);
+      }
+      &:hover {
+        &:after {
+          width: 100%;
+          height: 100%;
+          padding: 5px;
+        }
+      }
+      svg {
+        display: block;
+        color: $color-text-title-context;
+        position: relative;
+      }
+    }
+
+  }
+}
+
+
+
+.loginWrapper{
+  display: flex;
+  padding-left: 30px;
+  .LoginBtn {
+    padding: 0;
+    .loginText{
+      white-space: nowrap;
+      background: #fff;
+      padding: 5px 20px;
+      font-size: $font-size-context-m;
+      border-radius: 5px;
+    }
+  }
+}
+.mobMenu{
+  display: none;
+}
+
+// 데스크탑 1200px 이상
+@include desktop{
+  // header > div.래퍼
+  .navWrapper{
+    min-width: 860px;
+    max-width: 994px;
+    width: 90%;
+  }
+  .nav{
+    height: 60px;
+  }
+}
+
+// 랩탑 1199px ~ 1024px
+@include laptop {
+  // header > div.래퍼
+  .navWrapper{
+    max-width: 970px;
+    width: 80%;
+  }
+  .nav {
+    height: 60px;
+  }
+  .logoTitle {
+    font-size: 32px;
+  }
+  .loginWrapper{
+    padding-left: 10px;
+  }
+
+}
+
+// 테블릿 1023px ~ 768px
+@include tablet {
+  // header > div.래퍼
+  .navWrapper{
+    max-width: 768px;
+    width: 90%;
+  }
+  .logoTitle {
+    font-size: $font-size-context-xl;
+  }
+  .nav {
+    max-width: 1024px;
+    min-width: 409px;
+    height: 50px;
+  }
+  .loginWrapper{
+    padding-left: 15px;
+    .LoginBtn {
+      .loginText{
+        height: 25px;
+        line-height: 25px;
+        font-size: $font-size-context-s;
+        padding: 0 20px;
+        border-radius: 5px;
+      }
+    }
+  }
+  .navIcon {
+    li{
+      a{
+        svg{
+          font-size: $font-size-context-l;
+        }
+      }
+    }
+  }
+}
+
+// 모바일 767px ~ 480px
+@include mobile {
+  // header > div.래퍼
+
+  .logoTitle {
+    font-size: $font-size-context-l;
+  }
+  .nav {
+    width: 408px;
+    height: 40px;
+  }
+
+  // 메뉴 토글
+  .mobMenu{
+    display: block;
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    &::before{
+      position: absolute;
+      display: block;
+      content: '';
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background: $color-fill-shallow-middle;
+      border-radius: 100px;
+    }
+    svg{
+      color: #fff;
+      font-size: $font-size-context-xl;
+      font-weight: bold;
+    }
+  }
+
+}
+

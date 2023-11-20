@@ -12,7 +12,7 @@ interface IconProps{
         | 'small'
         | string;
 }
-const IconWrapper = ({...props}:IconProps) => {
+const IconBox = ({...props}:IconProps) => {
     const {icon, className, size} = props;
     return(
         <Box
@@ -23,13 +23,13 @@ const IconWrapper = ({...props}:IconProps) => {
         </Box>
     );
 };
-IconWrapper.prototype={
+IconBox.prototype={
     icon: PropTypes.string.isRequired,
     className: PropTypes.string,
     size: PropTypes.string,
 }
-IconWrapper.defaultProps = {
+IconBox.defaultProps = {
     className: '',
     size: 'small',
 }
-export default IconWrapper;
+export default IconBox;

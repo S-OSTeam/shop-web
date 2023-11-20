@@ -9,7 +9,7 @@ interface MyCollapseProps {
     timeout?: 'auto' | number | { appear?: number, enter?: number, exit?: number };
     children: React.ReactNode;
 }
-
+// 콜랩스 열고닫히는 박스 {내부에 무엇이든 들어갈수 있으므로 ReactNode}
 const CustomCollapse = ({ ...props }: MyCollapseProps) => {
     const { propsIn, timeout, className, children} = props;
     return (

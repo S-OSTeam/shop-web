@@ -1,0 +1,154 @@
+@import 'src/styles/moduleTemplate/index';
+
+.posAbs{
+  display: block;
+  position: absolute;
+}
+.posRlt{
+  position: relative;
+}
+
+// 네비 링크 리스트 ul
+.listMenu {
+  display: flex;
+  list-style-type: none;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: auto;
+  .navBarWrap{
+    display: none
+  }
+  &:hover .navBarWrap{
+    display: block;
+  }
+  // li > li...~div
+}
+// li > a
+.linkBox {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+// a > span
+.linkText {
+  color: $color-text-title-context;
+}
+
+
+// depth ul
+.depthUl{
+  top: -10px;
+  padding: 5px;
+  background: $color-fill-hover-nav-deep;
+  white-space: nowrap;
+  border-top: 4px solid $color-fill-shallow;
+  li{
+    padding: 3px;
+    margin-bottom: 5px;
+    // a
+    .depthLinkBox{
+      display: block;
+    }
+    // span
+    .depthContext{
+      position: relative;
+      display: block;
+      padding: 5px 5px;
+      border-radius: 5px;
+
+      color: $color-text-title-context;
+    }
+    &:hover .depthContext{
+      background-color: #646464;
+    }
+  }
+}
+
+// 데스크탑 1200px 이상
+@include desktop{
+  // 메뉴바 링크태그 구간 li
+  .listMenu{
+    padding-left: 40px;
+  }
+  // 메뉴바 링크태그 구간 li a
+  .linkBox {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  // 메뉴바 링크태그 구간 li a span
+  .linkText {
+    font-size: $font-size-context-l;
+    font-weight: 540;
+  }
+}
+
+// 랩탑 1199px ~ 1024px
+@include laptop {
+  // 메뉴바 링크태그 구간 li
+  .listMenu{
+    padding-left: 25px;
+  }
+  // 메뉴바 링크태그 구간 li a
+  .linkBox {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  // 메뉴바 링크태그 구간 li a span
+  .linkText {
+    font-size: $font-size-context-l;
+    font-weight: 540;
+  }
+}
+
+// 테블릿 1023px ~ 768px
+@include tablet {
+  // 메뉴바 링크태그 구간 li
+  .listMenu{
+    padding-left: 15px;
+  }
+  // 메뉴바 링크태그 구간 li a
+  .linkBox {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  // 메뉴바 링크태그 구간 li a span
+  .linkText {
+    font-size: $font-size-context-m;
+    font-weight: 540;
+  }
+}
+
+// 모바일 767px ~ 480px
+@include mobile {
+  // 메뉴바 링크태그 구간 ul
+  .listMenu{
+    display: none;
+    position: fixed;
+    width: 80%;
+    top: 40px;
+    left: 0;
+    background-color: rgba(1,1,1,0.2);
+  }
+  .listMenu{
+    &.true{
+      display: block;
+    }
+  }
+
+  // 메뉴바 링크태그 구간 li a
+  .linkBox {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  // 메뉴바 링크태그 구간 li a span
+  .linkText {
+    font-size: $font-size-context-s;
+    font-weight: 540;
+  }
+  #menuToggle{
+
+  }
+}

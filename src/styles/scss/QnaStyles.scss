@@ -4,8 +4,8 @@ html, body {
   height: 100%;
 }
 
-@import '../scss/template/variables';
-@import '../scss/template/mixin';
+@import 'src/styles/scss/variables/variables';
+@import 'src/styles/scss/variables/mixin';
 
 $primary-color: #80A1D4;
 $active-color: #62bdff;

@@ -2,8 +2,8 @@
 import React, { Fragment } from 'react';
 import SelectGenerator from '../../../molecules/select/SelectGenerator';
 import { Box, FormGroup, ToggleButton } from '@mui/material';
-import Button from '../../../atoms/button/ButtonCustom';
-import Text from '../../../atoms/contents/Text';
+import Button from '../../../atoms/button/Button';
+import Text from '../../../atoms/text/Text';
 import classNames from 'classnames';
 import FormControlCheckBox from '../../../molecules/formControl/FormControlCheckBox';
 import CheckBoxComponent from '../../../atoms/checkBox/CheckBox';

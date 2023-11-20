@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormControl, FormGroup } from '@mui/material';
 import CheckBoxEle from '../../../molecules/FAQ_0_1/check/CheckBox';
 import FormLabel from '../../../molecules/formLabel/FormLabel';
-import Text from '../../../atoms/contents/Text';
+import Text from '../../../atoms/text/Text';
 
 export const OrgFormGroup = () => {
     const [checkState, setCheckState] = useState({

@@ -1,5 +1,5 @@
 import React from 'react';
-import IconWrapper from '../../../../molecules/iconWrapper/IconWrapper';
+import IconBox from '../../../../molecules/iconBox/IconBox';
 
 //
 

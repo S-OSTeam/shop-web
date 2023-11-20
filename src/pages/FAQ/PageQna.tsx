@@ -18,9 +18,7 @@ export const PageQna = () => {
     const selectMenuItems = ['답변현황', '답변완료', '답변대기'];
     return (
         <Fragment>
-            <Box component="header" className="main-header">
-                <Header/>
-            </Box>
+            <Header/>
             <Box component="main" className="qna-body">
                 <FrameQnaTemplate thContext={th} showOpt={false} menuItems={selectMenuItems} />
             </Box>

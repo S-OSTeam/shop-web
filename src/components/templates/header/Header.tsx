@@ -1,23 +1,17 @@
 /* eslint-disable */
 import React from 'react';
-import classNames from 'classnames';
-import {
-    Box,
-    Checkbox, createStyles, makeStyles, styled, Theme,
-    ThemeProvider,
-    Tooltip,
-} from '@mui/material';
-import { theme } from '../../../styles/styles';
+import clsN from 'classnames';
+import styles from './styles/Header.module.scss';
+import { Box, Checkbox, Tooltip } from '@mui/material';
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import HeaderGenerator from '../../organisms/header/HeaderGenerator';
-import LinkBox from '../../atoms/linkBox/LinkBox';
-import Text from '../../atoms/contents/Text';
-// import '../../../styles/scss/header/Header.scss';
-import Button from '../../atoms/button/ButtonCustom';
+import HeaderGenerator from './headerGen/HeaderGenerator';
+import LinkTag from '../../atoms/link/LinkTag';
+import Text from '../../atoms/text/Text';
+import Button from '../../atoms/button/Button';
 
 export type depthItem = {
     title: string,
@@ -30,21 +24,12 @@ export type myHeaderItemAry = {
     depth: depthItem[];
 }
 
-// css 인자가 무엇인지 타입 지정을 해줘야됨 : Theme
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-
-        }
-    })
-);
-const myClasses = useStyles;
-
 const Header = () => {
     const [mobChecked, setMobChecked] = React.useState<boolean>(false);
     const handleOnChange = () => {
         setMobChecked(!mobChecked);
     };
+
     const tempTitle: myHeaderItemAry[] = [
         {
             title: '만화▾',
@@ -124,34 +109,39 @@ const Header = () => {
     const navLists = headerIcons.map((current) => {
         const { href, title, currentIcon } = current;
         return (
-            <li><LinkBox href={href}><Tooltip title={title}>{currentIcon}</Tooltip></LinkBox></li>);
+            <li><LinkTag href={href}><Tooltip title={title}>{currentIcon}</Tooltip></LinkTag></li>);
     });
     const mobileMenu =
-        <p id='menuToggle'>
-            <Checkbox className='menuCheck' checked={mobChecked} icon={<MenuIcon />} checkedIcon={<CloseIcon />}
-                      onChange={handleOnChange} />
+        <p id='menuToggle' className={clsN(`${styles.mobMenu}`, { toggled: mobChecked })}>
+            <Checkbox
+                className={clsN(`${styles.menuCheck}`)}
+                checked={mobChecked} icon={<MenuIcon />}
+                checkedIcon={<CloseIcon />}
+                onChange={handleOnChange}
+            />
         </p>;
 
 
-    return (
+    // 스타일 가져오기
 
-        <ThemeProvider theme={theme}>
-            <Box component='div' className={classNames('nav-wrapper')}>
-                <nav className={classNames('nav')}>
-                    <LinkBox className={classNames('nav-logo nav-link')} href=''>
-                        <Text text='DeamHome' className={(classNames('context'))} />
-                    </LinkBox>
-                    <HeaderGenerator className={mobChecked ? 'list-menu Show' : 'list-menu Off'} items={tempTitle} />
-                    <ul className={classNames('nav-icon')}>{navLists}</ul>
-                    <Box component='div' className={classNames('login-wrapper')}>
-                        <Button className='headerLoginButton'>
-                            <Text text='로그인' className={classNames('loginText')} />
+    return (
+        <header>
+            <Box className={`${styles.navWrapper} ${styles.navContainer}`}>
+                <nav className={`${styles.nav} ${styles.container}`}>
+                    <LinkTag className={`${styles.logoLink}`} href=''>
+                        <Text text='DeamHome' className={`${styles.logoTitle} ${styles.container}`} />
+                    </LinkTag>
+                    <HeaderGenerator items={tempTitle} getState={mobChecked}/>
+                    <ul className={clsN(`${styles.navIcon}`)}>{navLists}</ul>
+                    <Box component='div' className={`${styles.loginWrapper}`}>
+                        <Button className={`${styles.LoginBtn}`}>
+                            <Text text='로그인' className={`${styles.loginText}`} />
                         </Button>
                     </Box>
                     {mobileMenu}
                 </nav>
             </Box>
-        </ThemeProvider>
+        </header>
     );
 };
 export default Header;

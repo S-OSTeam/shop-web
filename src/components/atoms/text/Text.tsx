@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, TypographyProps } from '@mui/material';
 import classNames from 'classnames';
+import styles from './styles/Text.module.scss';
 
 
 interface CustomTextProps {
@@ -53,7 +54,7 @@ CustomText.prototype = {
 
 };
 CustomText.defaultProps = {
-    className: '',
+    className: `${styles.defaultText}`,
     variant: null,
     align: 'inherit',
     onClick: () => {
