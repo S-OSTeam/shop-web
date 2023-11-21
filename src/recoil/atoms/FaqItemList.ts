@@ -1,7 +1,5 @@
 /*eslint-disable*/
-import React from 'react';
-import { atom, selector, useRecoilValue } from 'recoil';
-import { useSetRecoilState } from 'recoil';
+import { atom, selector } from 'recoil';
 // FaqListState
 
 // 리코일 인터페이스 정의

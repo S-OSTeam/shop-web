@@ -133,6 +133,7 @@ header{
 }
 .mobMenu{
   display: none;
+  z-index: 50;
 }
 
 // 데스크탑 1200px 이상
@@ -210,11 +211,12 @@ header{
   // header > div.래퍼
 
   .logoTitle {
-    font-size: $font-size-context-l;
+    font-size: $font-size-heading-l;
   }
   .nav {
-    width: 408px;
-    height: 40px;
+    max-width: 608px;
+    width: 90%;
+    height: 50px;
   }
 
   // 메뉴 토글
@@ -239,6 +241,32 @@ header{
       color: #fff;
       font-size: $font-size-context-xl;
       font-weight: bold;
+    }
+  }
+
+  .navIcon {
+    margin-left: auto;
+    li{
+      a{
+        svg{
+          font-size: $font-size-context-xl;
+        }
+      }
+    }
+  }
+
+  .loginWrapper{
+    padding: 0 0 0 20px;
+
+    .LoginBtn {
+      .loginText{
+        box-sizing: border-box;
+        height: 30px;
+        line-height: 30px;
+        font-size: $font-size-context-l;
+        padding: 0 15px;
+        border-radius: 5px;
+      }
     }
   }
 

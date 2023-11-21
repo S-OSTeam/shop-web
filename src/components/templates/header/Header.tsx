@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React from 'react';
 import clsN from 'classnames';
-import styles from './styles/Header.module.scss';
 import { Box, Checkbox, Tooltip } from '@mui/material';
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -12,6 +11,10 @@ import HeaderGenerator from './headerGen/HeaderGenerator';
 import LinkTag from '../../atoms/link/LinkTag';
 import Text from '../../atoms/text/Text';
 import Button from '../../atoms/button/Button';
+import styles from './styles/Header.module.scss';
+import './styles/HeaderMob.scss';
+import { useRecoilState } from 'recoil';
+import {menuCheckState} from '../../../recoil/atoms/MobMenuCheck';
 
 export type depthItem = {
     title: string,
@@ -25,9 +28,9 @@ export type myHeaderItemAry = {
 }
 
 const Header = () => {
-    const [mobChecked, setMobChecked] = React.useState<boolean>(false);
+    const [isToggle, setIsToggle] = useRecoilState(menuCheckState);
     const handleOnChange = () => {
-        setMobChecked(!mobChecked);
+        setIsToggle((prev)=> !prev);
     };
 
     const tempTitle: myHeaderItemAry[] = [
@@ -90,18 +93,18 @@ const Header = () => {
     ];
     const headerIcons = [
         {
-            href: '',
             title: '최근',
+            href: '',
             currentIcon: <ChecklistIcon />,
         },
         {
-            href: '',
             title: '관심',
+            href: '',
             currentIcon: <FavoriteIcon />,
         },
         {
-            href: '',
             title: '장바구니',
+            href: '',
             currentIcon: <ShoppingCartIcon />,
         },
     ];
@@ -112,10 +115,10 @@ const Header = () => {
             <li><LinkTag href={href}><Tooltip title={title}>{currentIcon}</Tooltip></LinkTag></li>);
     });
     const mobileMenu =
-        <p id='menuToggle' className={clsN(`${styles.mobMenu}`, { toggled: mobChecked })}>
+        <p id='menuToggle' className={clsN(`${styles.mobMenu}`, { toggled: isToggle }, 'mobMenu')}>
             <Checkbox
-                className={clsN(`${styles.menuCheck}`)}
-                checked={mobChecked} icon={<MenuIcon />}
+                className={clsN(`${styles.menuCheck} menuCheck`)}
+                checked={isToggle} icon={<MenuIcon />}
                 checkedIcon={<CloseIcon />}
                 onChange={handleOnChange}
             />
@@ -131,7 +134,7 @@ const Header = () => {
                     <LinkTag className={`${styles.logoLink}`} href=''>
                         <Text text='DeamHome' className={`${styles.logoTitle} ${styles.container}`} />
                     </LinkTag>
-                    <HeaderGenerator items={tempTitle} getState={mobChecked}/>
+                    <HeaderGenerator items={tempTitle}/>
                     <ul className={clsN(`${styles.navIcon}`)}>{navLists}</ul>
                     <Box component='div' className={`${styles.loginWrapper}`}>
                         <Button className={`${styles.LoginBtn}`}>

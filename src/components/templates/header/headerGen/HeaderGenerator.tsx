@@ -4,14 +4,18 @@ import { Box } from '@mui/material';
 import LinkBox from '../../../molecules/linkBox/LinkBox';
 import { myHeaderItemAry } from '../Header';
 import styles from './styles/HeaderGen.module.scss';
+import '../styles/HeaderMob.scss';
 import clsN from 'classnames';
+import { useRecoilValue } from 'recoil';
+import { menuCheckState } from '../../../../recoil/atoms/MobMenuCheck';
 
 interface myPropsType {
     items: myHeaderItemAry[];
-    getState: boolean;
 }
 
-const HeaderGenerator = ({ items, getState }: myPropsType) => {
+const HeaderGenerator = ({ items }: myPropsType) => {
+    const isToggle = useRecoilValue(menuCheckState);
+
     const listContainer = items.map(primary => {
         return (
             <li>
@@ -41,7 +45,7 @@ const HeaderGenerator = ({ items, getState }: myPropsType) => {
     });
 
     return (
-        <ul className={clsN(`${styles.listMenu}`,`${getState}`)}>
+        <ul id='menuWrapper' className={clsN(`${styles.listMenu}${isToggle}`)}>
             {listContainer}
         </ul>
     );
