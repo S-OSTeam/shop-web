@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import ReviewPriorityButton from '../../../molecules/product/button/ReviewPriorityButton';
+import ReviewPriorityButton from '../../../molecules/product/buttons/ReviewPriorityButton';
 import { ProductItem, ReviewData } from '../../../../util/GlobalTest';
 import DetailReview from '../../../organisms/product/review/DetailReview';
 

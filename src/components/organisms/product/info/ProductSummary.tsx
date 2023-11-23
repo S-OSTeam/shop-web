@@ -10,7 +10,7 @@ import TextPrice from '../../../molecules/product/price/TextPrice';
 import DeliveryPrice from '../../../molecules/product/price/DeliveryPrice';
 import ProductOption from '../../../molecules/product/option/ProductOption';
 import TotalPrice from '../../../molecules/product/price/TotalPrice';
-import PurchaseRelateButton from '../../../molecules/product/button/PurchaseRelateButton';
+import PurchaseRelateButton from '../../../molecules/product/buttons/PurchaseRelateButton';
 
 interface ProductSummaryProps {
     item: ProductItem;
