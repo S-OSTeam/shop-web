@@ -10,7 +10,7 @@ import { faqTableState } from '../../../recoil/atoms/FaqItemList';
 import PaginationCustom from '../../atoms/pagination/PaginationCustom';
 import { TableRemote } from '../../organisms/qna/tableRemote/TableRemote';
 
-export const FrameQnaTemplate = ({ ...props }: myTableInterfaceProps) => {
+export const QnaListTemplate = ({ ...props }: myTableInterfaceProps) => {
     const { thContext, showOpt, menuItems } = props;
     // 페이지네이션 관련
 

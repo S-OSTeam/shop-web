@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Fragment } from 'react';
-import { FrameQnaTemplate } from '../../components/templates/FAQ/FrameQnaTemplate';
+import { QnaListTemplate } from '../../components/templates/FAQ/QnaListTemplate';
 import { Box } from '@mui/material';
 import Header from '../../components/templates/header/Header';
 import '../../styles/scss/QnaStyles.scss';
@@ -20,7 +20,7 @@ export const PageQna = () => {
         <Fragment>
             <Header/>
             <Box component="main" className="qna-body">
-                <FrameQnaTemplate thContext={th} showOpt={false} menuItems={selectMenuItems} />
+                <QnaListTemplate thContext={th} showOpt={false} menuItems={selectMenuItems} />
             </Box>
         </Fragment>
     );

@@ -2,7 +2,7 @@
 import React from 'react';
 // import { FaqComponentOff } from '../../components/organisms/FaqComponentOff';
 import '../../styles/scss/FaqStyles.scss';
-import { FrameFaqUser } from '../../components/templates/FAQ/FrameFaqUser';
+import { QnaUserPost } from '../../components/templates/FAQ/QnaUserPost';
 
 /*
  * responsiveFontSizes
@@ -15,6 +15,6 @@ import { FrameFaqUser } from '../../components/templates/FAQ/FrameFaqUser';
 export const PageFaq = () => {
     // return <FaqComponentOff />;
     return (
-        <FrameFaqUser />
+        <QnaUserPost />
     );
 };

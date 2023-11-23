@@ -10,7 +10,7 @@ import { OrgFormGroup } from '../../organisms/faq/user/OrgFormGroup';
 import { ClickEventBtn } from '../../molecules/FAQ_0_1/button/ClickEvtBtn';
 import { OrgSelector } from '../../organisms/faq/user/OrgSelector';
 
-export const FrameFaqUser = () => {
+export const QnaUserPost = () => {
     // 버튼 클릭여부 체크
     const openCheck = useRecoilValue(booleanFaqState);
     const handleOnSubmit = () => {
