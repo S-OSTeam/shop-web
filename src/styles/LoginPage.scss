@@ -1,109 +1,400 @@
+@import "./mixin";
 $primary-color: #80A1D4;
-.Login{
-  text-align: center;
-  margin-top: 220px;
-  .LoginLogo{
-    font-weight: bold;
-    font-size: 31px;
-    width: 225px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  .LoginButton{
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 30px;
-    background: $primary-color;
-    border-radius: 20px;
-    color:floralwhite;
-    width: 586px;
-    height: 51px;
-  }
-  .LoginText{
+@include desktop {
+  .Login {
     text-align: center;
-    margin: 0 auto;
-    width: 606px;
-    height: 450px;
-  }
-  .Id {
-    width: 586px;
-    height: 51px;
-    text-align: center;
-    margin: 0 auto;
-    .LoginId {
-      border: 0;
+    margin-top: 220px;
+
+    .LoginLogo {
+      font-weight: bold;
+      font-size: 31px;
+      width: 225px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .LoginButton {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 30px;
+      background: $primary-color;
+      border-radius: 20px;
+      color: floralwhite;
       width: 586px;
       height: 51px;
-      border-bottom: 1px solid #000000;
     }
-  }
 
-  .Pwd {
-    width: 586px;
-    height: 51px;
-    text-align: center;
-    margin: 0 auto;
-    .LoginPwd {
-      margin-top: 10px;
+    .LoginText {
+      text-align: center;
+      margin: 0 auto;
+      width: 606px;
+      height: 450px;
+    }
+
+    .Id {
       width: 586px;
       height: 51px;
-      border-bottom: 1px solid #000000;
+      text-align: center;
+      margin: 0 auto;
+
+      .LoginId {
+        border: 0;
+        width: 586px;
+        height: 51px;
+        border-bottom: 1px solid #000000;
+      }
+    }
+
+    .Pwd {
+      width: 586px;
+      height: 51px;
+      text-align: center;
+      margin: 0 auto;
+
+      .LoginPwd {
+        margin-top: 10px;
+        width: 586px;
+        height: 51px;
+        border-bottom: 1px solid #000000;
+      }
+    }
+
+    .IdCheck {
+      text-align: left;
+      float: left;
+    }
+
+    .AutoLoginCheck {
+      text-align: left;
+      margin-top: 15px;
+    }
+
+    .OtherButton {
+      margin-top: 20px;
+
+      .SignUp {
+        margin-right: 5px;
+        color: #6A6A6A;
+        border: 1px solid #3F424A;
+        width: 287px;
+        height: 42px;
+        border-radius: 20px;
+
+      }
+
+      .FindIdPwd {
+        margin-left: 5px;
+        color: #6A6A6A;
+        border: 1px solid #3F424A;
+        width: 287px;
+        height: 42px;
+        border-radius: 20px;
+      }
+    }
+
+    .Naver {
+      border: 1px solid #DCD3D3;
+      border-radius: 100px;
+      padding: 10px 10px;
+      margin-top: 55px;
+
+      .NaverLogo {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    .Kakao {
+      border: 1px solid #DCD3D3;
+      border-radius: 100px;
+      padding: 10px 10px;
+      margin-top: 55px;
+      margin-left: 45px;
+
+      .KakaoLogo {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    .Google {
+      border: 1px solid #DCD3D3;
+      border-radius: 100px;
+      padding: 10px 10px;
+      margin-top: 55px;
+      margin-left: 45px;
+
+      .GoogleLogo {
+        width: 25px;
+        height: 25px;
+      }
     }
   }
-  .IdCheck{
-    margin-top: 15px;
-    text-align: left;
-  }
-  .OtherButton {
-    margin-top: 20px;
-    .SignUp {
-      margin-right: 5px;
-      color: #6A6A6A;
-      border: 1px solid  #3F424A;
-      width: 287px;
-      height: 42px;
+}
+@include tablet{
+  .Login {
+    text-align: center;
+    margin-top: 100px;
+
+    .LoginLogo {
+      font-weight: bold;
+      font-size: 27px;
+      width: 225px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .LoginButton {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 30px;
+      background: $primary-color;
       border-radius: 20px;
+      color: floralwhite;
+      width: 400px;
+      height: 51px;
+    }
+
+    .LoginText {
+      text-align: center;
+      margin: 0 auto;
+      width: 420px;
+      height: 315px;
+    }
+
+    .Id {
+      width: 400px;
+      height: 51px;
+      text-align: center;
+      margin: 0 auto;
+
+      .LoginId {
+        border: 0;
+        width: 400px;
+        height: 51px;
+        border-bottom: 1px solid #000000;
+      }
+    }
+
+    .Pwd {
+      width: 400px;
+      height: 51px;
+      text-align: center;
+      margin: 0 auto;
+
+      .LoginPwd {
+        margin-top: 10px;
+        width: 400px;
+        height: 51px;
+        border-bottom: 1px solid #000000;
+      }
+    }
+
+    .IdCheck {
+      text-align: left;
+      float: left;
+      font-size: 15px;
 
     }
-    .FindIdPwd {
-      margin-left: 5px;
-      color: #6A6A6A;
-      border: 1px solid  #3F424A;
-      width: 287px;
-      height: 42px;
+
+    .AutoLoginCheck {
+      text-align: left;
+      margin-top: 15px;
+      font-size: 15px;
+    }
+
+    .OtherButton {
+      margin-top: 20px;
+
+      .SignUp {
+        margin-right: 5px;
+        color: #6A6A6A;
+        border: 1px solid #3F424A;
+        width: 190px;
+        height: 28px;
+        border-radius: 20px;
+
+      }
+
+      .FindIdPwd {
+        margin-left: 5px;
+        color: #6A6A6A;
+        border: 1px solid #3F424A;
+        width: 190px;
+        height: 28px;
+        border-radius: 20px;
+      }
+    }
+
+    .Naver {
+      border: 1px solid #DCD3D3;
+      border-radius: 100px;
+      padding: 10px 10px;
+      margin-top: 55px;
+
+      .NaverLogo {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    .Kakao {
+      border: 1px solid #DCD3D3;
+      border-radius: 100px;
+      padding: 10px 10px;
+      margin-top: 55px;
+      margin-left: 45px;
+
+      .KakaoLogo {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    .Google {
+      border: 1px solid #DCD3D3;
+      border-radius: 100px;
+      padding: 10px 10px;
+      margin-top: 55px;
+      margin-left: 45px;
+
+      .GoogleLogo {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+}
+
+@include mobile{
+  .Login {
+    text-align: center;
+    margin-top: 100px;
+
+    .LoginLogo {
+      font-weight: bold;
+      font-size: 14px;
+      width: 113px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .LoginButton {
+      font-size: 13px;
+      font-weight: bold;
+      margin-top: 30px;
+      background: $primary-color;
       border-radius: 20px;
+      color: floralwhite;
+      width: 200px;
+      height: 30px;
     }
-  }
-  .Naver{
-    border: 1px solid  #DCD3D3;
-    border-radius: 100px;
-    padding: 10px 10px;
-    margin-top: 55px;
-    .NaverLogo{
-      width: 25px;
-      height: 25px;
+
+    .LoginText {
+      text-align: center;
+      margin: 0 auto;
+      width: 200px;
+      height: 315px;
     }
-  }
-  .Kakao {
-    border: 1px solid #DCD3D3;
-    border-radius: 100px;
-    padding: 10px 10px;
-    margin-top: 55px;
-    margin-left: 45px;
-    .KakaoLogo {
-      width: 25px;
-      height: 25px;
+
+    .Id {
+      width: 200px;
+      height: 30px;
+      text-align: center;
+      margin: 0 auto;
+
+      .LoginId {
+        border: 0;
+        width: 200px;
+        height: 30px;
+      }
     }
-  }
-  .Google {
-    border: 1px solid #DCD3D3;
-    border-radius: 100px;
-    padding: 10px 10px;
-    margin-top: 55px;
-    margin-left: 45px;
-    .GoogleLogo {
-      width: 25px;
-      height: 25px;
+
+    .Pwd {
+      width: 200px;
+      height: 30px;
+      text-align: center;
+      margin: 0 auto;
+
+      .LoginPwd {
+        margin-top: 30px;
+        width: 200px;
+        height: 30px;
+      }
+    }
+
+    .IdCheck {
+      text-align: left;
+      float: left;
+      font-size: 15px;
+
+    }
+
+    .AutoLoginCheck {
+      text-align: left;
+      margin-top: 15px;
+      font-size: 15px;
+    }
+
+    .OtherButton {
+      margin-top: 20px;
+
+      .SignUp {
+        margin-right: 5px;
+        color: #6A6A6A;
+        border: 1px solid #3F424A;
+        width: 190px;
+        height: 28px;
+        border-radius: 20px;
+
+      }
+
+      .FindIdPwd {
+        margin-left: 5px;
+        color: #6A6A6A;
+        border: 1px solid #3F424A;
+        width: 190px;
+        height: 28px;
+        border-radius: 20px;
+      }
+    }
+
+    .Naver {
+      border: 1px solid #DCD3D3;
+      border-radius: 100px;
+      padding: 10px 10px;
+      margin-top: 55px;
+
+      .NaverLogo {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    .Kakao {
+      border: 1px solid #DCD3D3;
+      border-radius: 100px;
+      padding: 10px 10px;
+      margin-top: 55px;
+      margin-left: 45px;
+
+      .KakaoLogo {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    .Google {
+      border: 1px solid #DCD3D3;
+      border-radius: 100px;
+      padding: 10px 10px;
+      margin-top: 55px;
+      margin-left: 45px;
+
+      .GoogleLogo {
+        width: 25px;
+        height: 25px;
+      }
     }
   }
 }

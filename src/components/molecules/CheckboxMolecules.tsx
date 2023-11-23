@@ -1,6 +1,8 @@
 import React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import classNames from 'classnames';
+import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 interface CheckboxMoleculeProps {
     name: string;
@@ -11,15 +13,14 @@ interface CheckboxMoleculeProps {
 
 const CheckboxMolecule: React.FC<CheckboxMoleculeProps> = ({ name, checked, onChange, label }) => {
     return (
-        <div>
-            <Checkbox
+        <Box sx={{ display: 'flex', ml: 3 }}>
+            <FormControlLabel
                 className={classNames(name)}
                 name={name}
-                checked={checked}
-                onChange={onChange}
+                label={label}
+                control={<Checkbox checked={checked} onChange={onChange} />}
             />
-            <label htmlFor={name}>{label}</label>
-        </div>
+        </Box>
     );
 };
 

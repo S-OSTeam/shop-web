@@ -1,6 +1,8 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Login from './components/organisms/LoginPage';
-import Header from './components/commons/Header';
+import SignUpPage from './pages/Signup';
+import FindPage from './pages/FindIdPw';
 
 const App: React.FC = () => {
     const handleLoginSubmit = (username: string, password: string) => {
@@ -8,11 +10,12 @@ const App: React.FC = () => {
     };
 
     return (
-        <div>
-            <Header />
-            <Login onSubmit={handleLoginSubmit} />
+        <Routes>
+            <Route path="/findidpw" element={<FindPage />}/>
+            <Route path="/signup" element={<SignUpPage />}/>
+            <Route path="/login" element={<Login onSubmit={handleLoginSubmit}/>}/>
+        </Routes>
 
-        </div>
     );
 };
 

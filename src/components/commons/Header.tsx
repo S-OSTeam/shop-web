@@ -1,40 +1,128 @@
 import React from 'react';
-import "../../styles/header.scss"
-import Heart from '../../asset/images/icon _heart_.svg'
-import Rectangle from '../../asset/images/Group 12.svg'
-import Cart from '../../asset/images/icon _cart_.svg'
-import Line from '../../asset/images/Rectangle 11.svg'
+import '../../styles/Header.scss';
+import classNames from 'classnames';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ChecklistIcon from '@mui/icons-material/Checklist';
+import ButtonCustom from '../atoms/ButtonCustom';
+import TextCustom from '../atoms/TextCustom';
 
-const Header: React.FC = () => {
+const Header = () => {
     return (
-        <header className="header">
-            <div>
-                <nav className="menu">
-                    <li><a className="home" href="www.google.com">DeamHome</a></li>
-                    <li><a className="character" href="www.google.com">캐릭터</a></li>
-                    <li><a className="animation" href="www.google.com">만화</a></li>
-                    <li><a className="game" href="www.google.com">게임</a></li>
-                    <li><a className="private_custom" href="www.google.com">개인 커스텀</a></li>
-                    <li><a className="qna" href="www.google.com">문의</a></li>
+        <div className={classNames('header-box')}>
+            <div className={classNames('headerNav')}>
+                <ButtonCustom>
+                    <TextCustom text="DreamHome" />
+                </ButtonCustom>
 
-                    <div className="icons">
-                        <a className="rectangle" href="www.google.com">
-                            <img src={Rectangle} alt="복사인가"/>
-                        </a>
-                        <img className="line" src={Line} alt="선"/>
-                        <a className="heart" href="www.google.com">
-                            <img src={Heart} alt="찜목록"/>
-                        </a>
-                        <img className="line" src={Line} alt="선"/>
-                        <a className="cart" href="www.google.com">
-                            <img src={Cart} alt="장바구니"/>
-                        </a>
-                    </div>
-                    <a className="login" href="www.google.com">로그인</a>
-                </nav>
+                <ul className={classNames('categoryNav')}>
+                    <li>
+                        <ButtonCustom>
+                            <TextCustom text="캐릭터▾" />
+                        </ButtonCustom>
+                        <ul className={classNames('depth-1')}>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="주술회전" />
+                                </ButtonCustom>
+                            </li>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="나루토질풍전풍둔나선수리검" />
+                                </ButtonCustom>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ButtonCustom>
+                            <TextCustom text="만화▾" />
+                        </ButtonCustom>
+                        <ul className={classNames('depth-1')}>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="주술회전" />
+                                </ButtonCustom>
+                            </li>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="나루토질풍전풍둔나선수리검" />
+                                </ButtonCustom>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <ButtonCustom>
+                            <TextCustom text="게임▾" />
+                        </ButtonCustom>
+                        <ul className={classNames('depth-1')}>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="주술회전" />
+                                </ButtonCustom>
+                            </li>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="나루토질풍전풍둔나선수리검" />
+                                </ButtonCustom>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ButtonCustom>
+                            <TextCustom text="개인 커스텀▾" />
+                        </ButtonCustom>
+                        <ul className={classNames('depth-1')}>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="주술회전" />
+                                </ButtonCustom>
+                            </li>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="나루토질풍전풍둔나선수리검" />
+                                </ButtonCustom>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ButtonCustom>
+                            <TextCustom text="문의" />
+                        </ButtonCustom>
+                        <ul className={classNames('depth-1')}>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="주술회전" />
+                                </ButtonCustom>
+                            </li>
+                            <li>
+                                <ButtonCustom>
+                                    <TextCustom text="나루토질풍전풍둔나선수리검" />
+                                </ButtonCustom>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div className={classNames('headerIcons')}>
+                    <ButtonCustom className={classNames('headerCheckListIcon')}>
+                        <ChecklistIcon />
+                    </ButtonCustom>
+                    <img src={require('../../asset/images/Rectangle 11.svg').default} alt="구분선" />
+                    <ButtonCustom className={classNames('headerFavoriteIcon')}>
+                        <FavoriteIcon />
+                    </ButtonCustom>
+                    <img src={require('../../asset/images/Rectangle 11.svg').default} alt="구분선" />
+                    <ButtonCustom className={classNames('headerShoppingCartIcon')}>
+                        <ShoppingCartIcon />
+                    </ButtonCustom>
+                </div>
+
+                <ButtonCustom className={classNames('headerLoginButton')}>
+                    <TextCustom text="로그인" className={classNames('loginText')}  />
+                </ButtonCustom>
             </div>
-        </header>
+        </div>
     );
 };
-
 export default Header;
