@@ -20,10 +20,17 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
     const [checked, setChecked] = React.useState([true, false]);
     const [cookies, setCookie, removeCookie] = useCookies(["rememberUserId"]);
     const [isRemember, setIsRemember] = useState(false);
+    const [, setAccessToken] = useState<string>('');
+    const navigate = useNavigate();
 
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSubmit(username, password);
+        const token = "access1";
+        setAccessToken(token);
+        localStorage.setItem('accessToken', token);
+        window.location.href = '/main';
+        console.log("token")
     };
     // 체크박스
     const AutoLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,12 +53,12 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
         }
     };
     // 페이지 이동
-    const navigate = useNavigate();
+
     const navigateToSignUp = () => {
-        navigate("/SignUp");
+        navigate("/signup");
     };
     const navigateToFindId = () => {
-        navigate("/FindIdPw");
+        navigate("/findidpw");
     };
     // 카카오
     const Rest_api_key='6709d2b0e64c612eac81a0700e05401d'

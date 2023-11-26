@@ -13,7 +13,7 @@ interface InputProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputAtom: React.FC<InputProps> = ({ className,type, value, onChange ,placeholder}) => {
+const InputAtom= ({ className,type, value, onChange ,placeholder}:InputProps) => {
     return(
             <Box
                 component="form"
