@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles/MiniInfo.scss';
 import classNames from 'classnames';
-import CustomText from '../atoms/text/CustomText';
+import TextCustom from '../atoms/text/TextCustom';
 
 interface MiniInfoProps {
     info: string;
@@ -13,7 +13,7 @@ const maxLength: number = 9;
 const MiniInfo = ({ info, size }: MiniInfoProps) => {
     return (
         <div className={classNames('MiniInfoWrapper', size)}>
-            <CustomText
+            <TextCustom
                 className={size}
                 content={info.length > maxLength ? `${info.substring(0, maxLength)}...` : info}
             />

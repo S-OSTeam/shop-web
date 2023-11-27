@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles/ItemPrice.scss';
 import classNames from 'classnames';
-import CustomText from '../atoms/text/CustomText';
+import TextCustom from '../atoms/text/TextCustom';
 
 interface ItemPriceProps {
     price: string;
@@ -12,8 +12,8 @@ interface ItemPriceProps {
 const ItemPrice = ({ price, size, unit = '원' }: ItemPriceProps) => {
     return (
         <div className={classNames('ItemPriceWrapper', size)}>
-            <CustomText content={price} className="number" />
-            <CustomText content={unit} className="unit" />
+            <TextCustom content={price} className="number" />
+            <TextCustom content={unit} className="unit" />
         </div>
     );
 };

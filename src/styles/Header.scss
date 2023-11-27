@@ -1,3 +1,7 @@
+@import '_variables';
+@import 'mixin';
+
+
 .header-box {
   width: 100%;
   height: 65px;
@@ -10,6 +14,11 @@
   left: 0;
   right: 0;
   z-index: 9999;
+  @include tablet {
+    width: 100%;
+    height: 55px;
+  }
+ 
 
   & ul li {
     list-style: none;
@@ -20,13 +29,29 @@
   display: flex;
   width: 790px;
   align-items: center;
+  justify-content: space-between;
+
+  @include tablet {
+    width: 90%;
+  }
+
 
   & > button {
     color: white;
     font-size: 24px;
+    @include tablet {
+      font-size: 16.8px;
+    }
+
   }
 
   .headerFavoriteIcon {
+    min-width: 10px;
+
+    @include tablet {
+      min-width: 7px;
+    }
+
     padding: 0;
     width: fit-content;
     height: fit-content;
@@ -35,16 +60,31 @@
     & span {
       width: 14px;
       height: 12.94px;
+      @include tablet {
+        width: 9.8px;
+        height: 9.058px;
+      }
+
     }
 
     & > svg {
       width: 14px;
       height: 12.94px;
       padding-left: 3px;
+      @include tablet {
+        width: 9.8px;
+        height: 9.058px;
+        padding-left: 2.1px;
+      }
+
     }
   }
 
   .headerShoppingCartIcon {
+    min-width: 10px;
+    @include tablet {
+      min-width: 7px;
+    }
 
     padding: 0;
     width: fit-content;
@@ -54,9 +94,74 @@
       width: 14px;
       height: 14px;
       padding-left: 3px;
+
+      @include tablet {
+        width: 9.8px;
+        height: 9.8px;
+        padding-left: 2.1px;
+      }
+
     }
   }
 
+  .headerCheckListIcon {
+    min-width: 10px;
+    padding: 0;
+    width: fit-content;
+    height: fit-content;
+    @include tablet {
+      min-width: 8px;
+    }
+
+
+    & > svg {
+      width: 14px;
+      height: 14px;
+      padding-left: 3px;
+      @include tablet {
+        width: 9.8px;
+        height: 9.8px;
+        padding-left: 2.1px;
+      }
+
+    }
+  }
+
+  .headerIcons {
+    display: flex;
+    justify-content: space-between;
+    width: 73px;
+    margin-left: 20px;
+    @include tablet {
+      width: 51.1px;
+      margin-left: 14px;
+    }
+
+
+    & > button {
+      color: white;
+    }
+  }
+
+  .headerLoginButton {
+    min-width: 10px;
+    width: 80px;
+    height: 30px;
+    background-color: white;
+
+
+    .loginText {
+      color: #80A1D4;
+    }
+
+    &:hover {
+      background-color: black;
+
+      .loginText {
+        color: white;
+      }
+    }
+  }
 
 }
 
@@ -65,7 +170,12 @@
 
   & button {
     color: white;
+    @include tablet {
+      min-width: 4px;
+    }
+
   }
+
 
   & > li {
     position: relative;
@@ -95,11 +205,14 @@
     display: flex;
     //justify-content: center;
     padding-left: 5px;
+    @include tablet {
+      padding-left: 3.5px;
+    }
+
   }
 
   & > li:hover {
     background-color: #61dafb;
   }
 }
-
 

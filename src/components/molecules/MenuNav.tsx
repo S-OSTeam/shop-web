@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../styles/MenuNav.scss';
 import classNames from 'classnames';
-import CustomButton from '../atoms/button/CustomButton';
-import CustomText from '../atoms/text/CustomText';
+import ButtonCustom from '../atoms/button/ButtonCustom';
+import TextCustom from '../atoms/text/TextCustom';
 
 // 리스트 아이템의 타입
 type liArrayType = Array<{
@@ -24,9 +24,9 @@ const MenuNav = ({ children, liArray }: MenuNavProps) => {
                 {children}
                 {liArray.map((value) => (
                     <li>
-                        <CustomButton>
-                            <CustomText content={value.text} />
-                        </CustomButton>
+                        <ButtonCustom>
+                            <TextCustom content={value.text} />
+                        </ButtonCustom>
                     </li>
                 ))}
             </ul>

@@ -1,0 +1,29 @@
+.event-box {
+  .event-text {
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 24px;
+    color: skyblue;
+  }
+
+  .event-text-description {
+    width: fit-content;
+    margin: 0 auto;
+    color: skyblue;
+    font-size: 14px;
+  }
+
+  .event-image-box {
+    width: 780px;
+    height: 345px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    justify-content: space-between;
+
+    & > img {
+      width: 193px;
+      height: 345px;
+    }
+  }
+}

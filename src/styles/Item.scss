@@ -13,13 +13,17 @@
     cursor: pointer;
   }
 
-  & > .imageBox {
+  & > .ImageBox {
     display: flex;
-    width: 168.75px;
-    height: 167.63px;
+    width: 180px;
+    height: 180px;
     object-fit: cover;
     justify-content: center;
 
+    img {
+      width: 180px;
+      height: 180px;
+    }
 
   }
 

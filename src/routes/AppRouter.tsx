@@ -1,46 +1,35 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import MiniInfo from '../components/molecules/MiniInfo';
-import Item from '../components/molecules/Item';
-import BannerInfo from '../components/atoms/BannerInfo';
-import DetailDepth from '../components/molecules/DetailDepth';
 import CategoryAndItems from '../components/templates/CategoryAndItems';
-import CustomText from '../components/atoms/text/CustomText';
-import '../styles/CustomText.scss';
+import SwiperThumbsCustom from '../components/atoms/SwiperThumbsCustom';
+import InputCustom from '../components/atoms/InputCustom';
+import WelcomeImg from '../components/molecules/WelcomeImg';
+import EventsImgs from '../components/molecules/EventsImgs';
+import MonthlyItems from '../components/molecules/MonthlyItems';
+import MainTemplate from '../components/templates/MainTemplate';
 
 export const AppRouter = () => {
-    const onClickText = () => {
-        console.log('hi');
-    };
+    const mainImages = ['sooseon1.JPG', 'sooseon2.JPG', 'sooseon3.JPG', 'sooseon4.JPG', 'sooseon4.JPG', 'sooseon6.JPG'];
+    const thumbsImages = [
+        'sooseon7.JPG',
+        'sooseon8.JPG',
+        'sooseon9.JPG',
+        'sooseon10.JPG',
+        'sooseon11.JPG',
+        'sooseon12.JPG',
+    ];
     return (
         <Routes>
             <Route path="/" element={<CategoryAndItems />} />
-            <Route path="/mini" element={<MiniInfo info="sibaㄹㄷㅈㄹ둦ㄷ절ㄷ쟈럳쟈ㅐ럳재" size="large" />} />
             <Route
-                path="/item"
-                element={
-                    <Item des="dmdkdkdkdkdkdkdk" name="고죠 사토루" id={1} img="pme.png" price="20000" mode="list" />
-                }
+                path="/swiper"
+                element={<SwiperThumbsCustom mainImages={mainImages} thumbsImages={thumbsImages} />}
             />
-            <Route path="/bannerInfo" element={<BannerInfo des="월간 인기 상품" name="차크라 공중회전" />} />
-            <Route
-                path="/detail"
-                element={
-                    <DetailDepth
-                        address={[
-                            { id: 1, address: '/' },
-                            { id: 2, address: '/swiper' },
-                        ]}
-                        key={1}
-                    />
-                }
-            />
-
-            <Route
-                path="/text"
-                element={<CustomText variant="body1" content="시발" className="pointer" onClick={onClickText} />}
-            />
-            <Route path="/miniInfo" element={<MiniInfo info="무료배송" />} />
+            <Route path="/input" element={<InputCustom id="아이디" label="아이디" variant="standard" />} />
+            <Route path="/welcome" element={<WelcomeImg />} />
+            <Route path="/event" element={<EventsImgs />} />
+            <Route path="/month" element={<MonthlyItems />} />
+            <Route path="/main" element={<MainTemplate />} />
         </Routes>
     );
 };

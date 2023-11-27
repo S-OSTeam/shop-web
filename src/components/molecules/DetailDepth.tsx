@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import CustomButton from '../atoms/button/CustomButton';
-import CustomText from '../atoms/text/CustomText';
+import ButtonCustom from '../atoms/button/ButtonCustom';
+import TextCustom from '../atoms/text/TextCustom';
 
 interface DetailCategoryProps {
     address: addressData[];
@@ -15,15 +15,15 @@ interface addressData {
 const DetailDepth = ({ address }: DetailCategoryProps) => {
     return (
         <Box className="depth">
-            <CustomButton>
-                <CustomText content="Home" />
-            </CustomButton>
+            <ButtonCustom>
+                <TextCustom content="Home" />
+            </ButtonCustom>
             {address.map((detail) => (
                 <React.Fragment key={detail.id}>
                     {'>'}
-                    <CustomButton>
-                        <CustomText content={detail.address} />
-                    </CustomButton>
+                    <ButtonCustom>
+                        <TextCustom content={detail.address} />
+                    </ButtonCustom>
                 </React.Fragment>
             ))}
         </Box>

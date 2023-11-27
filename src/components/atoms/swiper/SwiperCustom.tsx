@@ -11,25 +11,27 @@ import classNames from 'classnames';
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
 export interface SwiperCustomProps {
-    imgPath: string[];
+    className?: string;
+    imgPaths: string[];
     onChange?: (value: SwiperCore) => void;
+    navigation?: boolean;
 }
 
-const SwiperCustom = ({ imgPath, onChange }: SwiperCustomProps) => {
+const SwiperCustom = ({ navigation, className, imgPaths, onChange }: SwiperCustomProps) => {
     return (
         <Swiper
-            className={classNames('SwiperCustom')}
-            navigation
-            pagination
+            className={classNames(className)}
+            navigation={navigation}
+            pagination={{ clickable: true }}
             loop
             watchSlidesProgress
             spaceBetween={10}
-            modules={[FreeMode, Navigation, Thumbs]}
+            modules={[FreeMode, Navigation]}
             onSlideChange={onChange}
         >
-            {imgPath.map((value, index) => (
+            {imgPaths.map((value, index) => (
                 <SwiperSlide>
-                    <img src={require(`../../asset/images/${imgPath[index]}`)} alt={value} />
+                    <img src={require(`../../../asset/images/${imgPaths[index]}`)} alt={value} />
                 </SwiperSlide>
             ))}
         </Swiper>
@@ -37,5 +39,7 @@ const SwiperCustom = ({ imgPath, onChange }: SwiperCustomProps) => {
 };
 SwiperCustom.defaultProps = {
     onChange: undefined,
+    className: 'SwiperCustom',
+    navigation: true,
 };
 export default SwiperCustom;

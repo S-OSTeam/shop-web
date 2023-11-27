@@ -2,11 +2,11 @@ import React, { useReducer, useState } from 'react';
 import '../../styles/Items.scss';
 import '../../styles/ItemBundle.scss';
 import classNames from 'classnames';
-import ImageButton from '../atoms/button/ImageButton';
 import MiniInfo from '../molecules/MiniInfo';
 import Item from '../molecules/Item';
-import TextButton from '../atoms/button/TextButton';
 import PaginationCustom from '../atoms/pagination/PaginationCustom';
+import ButtonCustom from '../atoms/button/ButtonCustom';
+import TextCustom from '../atoms/text/TextCustom';
 
 // 아이템 목록의 타입
 type ItemArrayType = Array<{
@@ -94,32 +94,50 @@ const Items = () => {
             <div className={classNames('Content')}>
                 <div className={classNames('ItemFilter')}>
                     <div className={classNames('Info')}>
-                        <TextButton
-                            content="인기순"
+                        <ButtonCustom
                             onClick={() => dummyOnClick(0, 'SortByPopularity')}
                             className={btnActive[0].active ? 'itemFilterButton isTabActive' : 'itemFilterButton'}
-                        />
+                        >
+                            <TextCustom content="인기순" />
+                        </ButtonCustom>
 
-                        <TextButton
-                            content="신상품순"
+                        <ButtonCustom
                             onClick={() => dummyOnClick(1, 'SortByNewProducts')}
                             className={btnActive[1].active ? 'itemFilterButton isTabActive' : 'itemFilterButton'}
-                        />
+                        >
+                            <TextCustom content="신상품순" />
+                        </ButtonCustom>
 
-                        <TextButton
-                            content="높은가격순"
-                            className={btnActive[2].active ? 'itemFilterButton isTabActive' : 'itemFilterButton'}
+                        <ButtonCustom
                             onClick={() => dummyOnClick(2, 'SortByHighPrice')}
-                        />
-                        <TextButton
-                            content="낮은가격순"
+                            className={btnActive[2].active ? 'itemFilterButton isTabActive' : 'itemFilterButton'}
+                        >
+                            <TextCustom content="높은가격순" />
+                        </ButtonCustom>
+
+                        <ButtonCustom
                             className={btnActive[3].active ? 'itemFilterButton isTabActive' : 'itemFilterButton'}
                             onClick={() => dummyOnClick(3, 'SortByLowPrice')}
-                        />
+                        >
+                            <TextCustom content="낮은가격순" />
+                        </ButtonCustom>
                     </div>
                     <div className={classNames('AddOn')}>
-                        <ImageButton imgPath="grid.svg" onClick={gridBtnClick} alt="grid" size="AddOnMedium" />
-                        <ImageButton imgPath="list.svg" onClick={listBtnClick} alt="list" size="AddOnMedium" />
+                        <ButtonCustom onClick={gridBtnClick} className={classNames('itemArrangementButton')}>
+                            <img
+                                src={require('../../asset/images/grid.svg').default}
+                                alt="grid"
+                                className={classNames('AddOnMedium')}
+                            />
+                        </ButtonCustom>
+
+                        <ButtonCustom onClick={listBtnClick} className={classNames('itemArrangementButton')}>
+                            <img
+                                src={require('../../asset/images/list.svg').default}
+                                alt="list"
+                                className={classNames('AddOnMedium')}
+                            />
+                        </ButtonCustom>
                     </div>
                 </div>
                 <div className={classNames('ItemQuantity')}>

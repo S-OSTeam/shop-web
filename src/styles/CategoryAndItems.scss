@@ -1,7 +1,14 @@
+@import 'mixin';
+
 .banner-itemsWrapper {
   width: 790px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
+  padding-top: 20px;
+
+  @include tablet {
+    width: 100%;
+  }
 }

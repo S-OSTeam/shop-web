@@ -1,13 +1,18 @@
+@import "./_variables";
+@import 'mixin';
+
 
 .SwiperCustom {
   width: 790px;
   height: 250px;
   display: flex;
   align-items: center;
+
+  @include tablet {
+    width: 100%;
+  }
 }
 
-.swiper-wrapper {
-}
 
 .swiper-slide {
 
@@ -15,6 +20,10 @@
     width: 790px;
     height: 250px;
     object-fit: cover;
+
+    @include tablet {
+      width: 100%;
+    }
   }
 }
 
