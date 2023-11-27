@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes, { number } from 'prop-types';
-import Input from '../../../atoms/input/Input';
+import Input from '../../atoms/input/Input';
 
 interface MyParentProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;

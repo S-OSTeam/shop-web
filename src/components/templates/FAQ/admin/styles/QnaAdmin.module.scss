@@ -1,0 +1,34 @@
+@import "../../../../../styles/moduleTemplate/index";
+
+.main{
+
+}
+.simpleTable{
+  width: 50%;
+  height: 500px;
+  background-color: #62bdff;
+}
+@include mobile{
+  .main{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .sectionFirst{
+    display: block;
+  }
+}
+@include tablet{
+  .sectionFirst{
+    display: flex;
+  }
+}
+@include laptop{
+  .sectionFirst{
+    display: flex;
+  }
+}
+@include desktop{
+  .sectionFirst{
+    display: flex;
+  }
+}

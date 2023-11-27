@@ -7,7 +7,7 @@ import { OrgContent } from '../../organisms/faq/user/OrgContent';
 import { OrgBtnToggle } from '../../organisms/faq/user/OrgBtnToggle';
 import { OrgInputForm } from '../../organisms/faq/user/OrgInputForm';
 import { OrgFormGroup } from '../../organisms/faq/user/OrgFormGroup';
-import { ClickEventBtn } from '../../molecules/FAQ_0_1/button/ClickEvtBtn';
+import { ClickEventBtn } from '../../molecules/button/ClickEvtBtn';
 import { OrgSelector } from '../../organisms/faq/user/OrgSelector';
 
 export const QnaUserPost = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FormControl, FormGroup } from '@mui/material';
-import CheckBoxEle from '../../../molecules/FAQ_0_1/check/CheckBox';
+import CheckBoxEle from '../../../molecules/check/CheckBox';
 import FormLabel from '../../../molecules/formLabel/FormLabel';
 import Text from '../../../atoms/text/Text';
 

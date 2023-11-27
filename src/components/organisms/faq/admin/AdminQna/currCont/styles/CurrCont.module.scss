@@ -1,0 +1,105 @@
+@import "../../../../../../../styles/moduleTemplate/index";
+
+* {
+  box-sizing: border-box;
+  list-style-type: none;
+
+  ul {
+    padding: 0;
+
+    li {
+
+    }
+  }
+}
+
+.currOrg {
+  background-color: $color-fill-main;
+  border-radius: 10px;
+  padding: 25px;
+
+  .content {
+    padding: 20px;
+    background-color: $color-fill-shallow-low;
+    border-radius: 10px;
+
+
+  }
+
+  .artHeading {
+    font-size: 32px;
+    text-align: start;
+    font-weight: bold;
+    padding: 10px 10px 20px;
+    color: #fff;
+  }
+}
+
+.currOrgModified {
+  .content {
+      background: #5578b7;
+    .textGroup {
+      display: flex;
+      padding-bottom: 10px;
+      .textCont{
+        padding: 5px;
+        background: $color-fill-main;
+        border-radius: 20px;
+
+      }
+
+      .userId {
+
+
+      }
+
+      .date {
+
+      }
+
+      .type {
+
+      }
+
+      .productId {
+
+      }
+
+      .productName {
+
+      }
+    }
+  }
+}
+
+
+@include mobile {
+  .currOrg {
+    padding: 25px;
+
+    .content {
+      padding: 20px;
+      border-radius: 10px;
+
+
+    }
+
+    .artHeading {
+      font-size: 36px;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+}
+
+@include tablet {
+
+}
+
+@include laptop {
+
+}
+
+@include desktop {
+
+}

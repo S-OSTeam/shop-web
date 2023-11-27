@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { faqOrgState } from '../../../../recoil/atoms/FaqItemList';
-import { ClickEventBtn } from '../../../molecules/FAQ_0_1/button/ClickEvtBtn';
+import { ClickEventBtn } from '../../../molecules/button/ClickEvtBtn';
 
 interface myProps{
     id: string;

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import Text from '../../atoms/text/Text';
 import PropTypes from 'prop-types';
+import clsN from 'classnames';
+import Text from '../../atoms/text/Text';
+import styles from './styles/TextGroup.module.scss';
 
 interface textBoxListInterface {
     text: string;
@@ -10,21 +12,20 @@ interface textBoxListInterface {
 
 interface myProps {
     textList: textBoxListInterface[];
+    wrapperClsN?: string;
 }
 
-const TextGroup = ({ textList }: myProps) => {
+const TextGroup = ({ textList, wrapperClsN }: myProps) => {
 
-    const tempProvide = textList.map((item, idx) => {
+    const tempProvide = textList.map((item) => {
         const {clsName, text} = item;
         return (
-            <li key={`${idx}-${text}`}>
-                <Text text={text} className={clsName} variant='body1'/>
-            </li>
+                <Text text={text} key={`${text}`} className={clsName}/>
         );
     });
 
     return (
-        <Box component='ul'>
+        <Box component='div' className={clsN(`${styles.textGroup}`, wrapperClsN,)}>
             {tempProvide}
         </Box>
     );
@@ -37,10 +38,9 @@ TextGroup.prototype={
             clsName: PropTypes.string,
         }),
     ),
+    wrapperClsN: PropTypes.string,
 }
-
 TextGroup.defaultProps={
-    textList: undefined,
+    wrapperClsN: undefined,
 }
-
 export default TextGroup;

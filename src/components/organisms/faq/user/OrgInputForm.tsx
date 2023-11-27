@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, FormControl } from '@mui/material';
 // import Text from '../../../atoms/contents/Text';
 import HelperText from '../../../atoms/helperText/FormHelperText';
-import InputField from '../../../molecules/FAQ_0_1/input/InputContext';
+import InputField from '../../../molecules/input/InputContext';
 
 /* 상태 */
 // input 상태

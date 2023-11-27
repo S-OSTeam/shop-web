@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Table, TableBody } from '@mui/material';
 import { useRecoilValue } from 'recoil';
-import { Heading } from '../../molecules/FAQ_0_1/heading/Heading';
+import { Heading } from '../../molecules/heading/Heading';
 import { TableWrapper } from '../../organisms/qna/tableOrg/TableWrapper';
 import { TableHdr } from '../../organisms/qna/tableOrg/tableHeader/TableHdr';
 import { TableRowCmp } from '../../organisms/qna/tableOrg/tableBody/TableRowCmp';

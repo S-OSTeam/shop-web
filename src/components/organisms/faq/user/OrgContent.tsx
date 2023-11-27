@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Box } from '@mui/material';
-import { Heading } from '../../../molecules/FAQ_0_1/heading/Heading';
+import { Heading } from '../../../molecules/heading/Heading';
 
 interface MyProps {
     isOpen: boolean;

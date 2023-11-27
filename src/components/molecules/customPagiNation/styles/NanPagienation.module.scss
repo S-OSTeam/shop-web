@@ -1,0 +1,33 @@
+@import "../../../../styles/moduleTemplate/index";
+
+.paginationWrapper{
+  .nav{
+    ul{
+      display: flex;
+
+    }
+  }
+}
+// 페이지 정보
+.currPage{
+  display: flex;
+  align-items: center;
+  .currText{
+    display: block;
+    height: fit-content;
+  }
+}
+// 버튼 엘리먼트
+
+@include mobile{
+
+}
+@include tablet{
+
+}
+@include laptop{
+
+}
+@include desktop{
+
+}

@@ -16,6 +16,7 @@ interface myPropsType {
 const HeaderGenerator = ({ items }: myPropsType) => {
     const isToggle = useRecoilValue(menuCheckState);
 
+
     const listContainer = items.map(primary => {
         return (
             <li>

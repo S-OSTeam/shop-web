@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import TextGroup from '../../../../../molecules/textGroup/TextGroup';
 import { Box } from '@mui/material';
@@ -7,8 +8,8 @@ import IconBox from '../../../../../molecules/iconBox/IconBox';
 import { Photo } from '@mui/icons-material';
 import { QnaDataInterface } from '../../../../../../util/Storage/QnaData';
 import clsN from 'classnames';
-import PaginationCustom from '../../../../../atoms/pagination/PaginationCustom';
-
+import NanPagination from '../../../../../molecules/customPagiNation/NanPagination';
+import styles from './styles/CurrCont.module.scss';
 /*
 * 제목
 * 아이콘
@@ -23,7 +24,7 @@ import PaginationCustom from '../../../../../atoms/pagination/PaginationCustom';
 * 활성화버튼
 * 페이지네이션
 * */
-const CurrCont = (QnaDataInterface[]) => {
+const CurrCont = ({props}:{props:QnaDataInterface[]} ) => {
     // 초기 페이지
     const [currPage, setCurrPage] = React.useState(1);
     // 페이지당 보여줄 리스트 갯수
@@ -33,26 +34,25 @@ const CurrCont = (QnaDataInterface[]) => {
     const idxLastLists = (currPage * itemPerPage);
     const idxFirstLists = (idxLastLists - itemPerPage);
     // 인덱스 구간만큼 데이터 로드
-    const currItem = propsData.slice(idxFirstLists, idxLastLists);
+    const currItem = props.slice(idxFirstLists, idxLastLists);
 
     // 페이지네이션 클릭 이벤트
     const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => {
         // 활성화된 페이지 인덱스 업데이트
         setCurrPage(value);
     };
-    const renderItem = currItem.map((item, idx) => {
+    const renderItem = currItem.map((item) => {
         const { userId, date, type, productId, productName, inquiryText, inquiryContents, image } = item;
-
         return (
-            <Box component='article'>
-                <TextGroup textList={[
-                    { text: userId, clsName: 'userId' },
-                    { text: date, clsName: 'date'},
+            <Box component='div' className={clsN(`${styles.content}`)}>
+                <TextGroup wrapperClsN={clsN(`${styles.textGroup}`)} textList={[
+                    { text: userId, clsName: clsN(`${styles.userId}`, `${styles.textCont}`) },
+                    { text: date, clsName: clsN(`${styles.date}`, `${styles.textCont}`)},
                 ]} />
-                <TextGroup textList={[
-                    { text: type, clsName: 'type' },
-                    { text: productId, clsName: 'productId'},
-                    { text: productName, clsName: 'productName'},
+                <TextGroup wrapperClsN={clsN(`${styles.textGroup}`)} textList={[
+                    { text: type, clsName: clsN(`${styles.type}`, `${styles.textCont}`)},
+                    { text: productId, clsName: clsN(`${styles.productId}`, `${styles.textCont}`)},
+                    { text: productName, clsName: clsN(`${styles.productName}`,`${styles.textCont}`)},
                 ]} />
                 <Text text={inquiryText} variant='subtitle1' />
                 <Text text={inquiryContents} variant='body1' />
@@ -65,17 +65,10 @@ const CurrCont = (QnaDataInterface[]) => {
     });
 
     return (
-        <Box component='section'>
-            <Text text='최근 등록된 문의' variant='h1' />
-            {
-                renderItem
-            }
-            <PaginationCustom
-                onChange={handlePageChange}
-                page={currPage}
-                count={Math.ceil(propsData.length)}
-                showOpt={false}
-            />
+        <Box component='article' className={clsN(`${styles.currOrg}`, `${styles.currOrgModified}`)}>
+            <Text text='최근 등록된 문의' variant='h1' className={clsN(`${styles.artHeading}`)}/>
+            {renderItem}
+            <NanPagination count={Math.ceil(props.length)} onChange={handlePageChange}/>
         </Box>
     );
 };
