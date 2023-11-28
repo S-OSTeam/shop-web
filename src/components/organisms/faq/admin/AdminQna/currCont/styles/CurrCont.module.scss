@@ -41,15 +41,15 @@
     .textGroup {
       display: flex;
       padding-bottom: 10px;
+      // >>
       .textCont{
         padding: 5px;
         background: $color-fill-main;
         border-radius: 20px;
 
       }
-
       .userId {
-
+        color: red;
 
       }
 

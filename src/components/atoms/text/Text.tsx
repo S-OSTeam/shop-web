@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Typography, TypographyProps } from '@mui/material';
 import classNames from 'classnames';
 import styles from './styles/Text.module.scss';
-
+import clsN from 'classnames';
 
 interface CustomTextProps {
     text: string | undefined;
@@ -17,30 +17,21 @@ interface CustomTextProps {
 // 배열일때 arr.join('') 등으로 처리하도록 하기
 // 조건 색상 크기 클래스 등등
 
-const CustomText  = ({ ...props }: CustomTextProps) => {
-    const {
-        text,
-        className,
-        variant,
-        align,
-        onClick,
-    } = props;
-    return (
-
-        variant ?
-            <Typography
-                className={classNames(className)}
-                variant={variant}
-                align={align}
-                onClick={onClick}>
-                {text}
-            </Typography>
-            :
-            <span className={classNames(className)}
-                  aria-hidden='true'
-                  onClick={onClick}>
-                    {text}
-            </span>
+const CustomText = ({ ...props }: CustomTextProps) => {
+    const { text, className, variant, align, onClick } = props;
+    return variant ? (
+        <Typography
+            className={classNames(clsN(className, `${styles.defaultText}`))}
+            variant={variant}
+            align={align}
+            onClick={onClick}
+        >
+            {text}
+        </Typography>
+    ) : (
+        <span className={classNames(clsN(className, `${styles.defaultText}`))} aria-hidden="true" onClick={onClick}>
+            {text}
+        </span>
     );
 };
 
@@ -48,16 +39,28 @@ const CustomText  = ({ ...props }: CustomTextProps) => {
 CustomText.prototype = {
     text: PropTypes.string,
     className: PropTypes.string,
-    variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption', 'button', 'overline']),
+    variant: PropTypes.oneOf([
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'subtitle1',
+        'subtitle2',
+        'body1',
+        'body2',
+        'caption',
+        'button',
+        'overline',
+    ]),
     align: PropTypes.oneOf(['inherit', 'left', 'center', 'right', 'justify']),
     onClick: PropTypes.func,
-
 };
 CustomText.defaultProps = {
     className: `${styles.defaultText}`,
     variant: null,
     align: 'inherit',
-    onClick: () => {
-    },
+    onClick: () => {},
 };
 export default CustomText;
