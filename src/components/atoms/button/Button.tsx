@@ -4,43 +4,54 @@ import PropTypes from 'prop-types';
 import clsN from 'classnames';
 import styles from './styles/Button.module.scss';
 
-interface ButtonCustomProps extends MuiButtonProps {
+interface AtomBtnProps extends MuiButtonProps {
+    id?: string;
+    className?: string;
+    variant?: MuiButtonProps['variant'];
     children: React.ReactNode;
     onClick?: MuiButtonProps['onClick'];
     onMouseOver?: MuiButtonProps['onMouseOver'];
-    className?: string;
-    id?: string;
-    type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
-const ButtonCustom = ({ children, disabled, ...props }: ButtonCustomProps) => {
+const Button = (
+    {
+        id,
+        className,
+        variant,
+        children,
+        disabled,
+        onClick,
+        onMouseOver,
+    }: AtomBtnProps) => {
     return (
         <MuiButton
-            onClick={props.onClick}
-            onMouseOver={props.onMouseOver}
-            id={props.id}
-            className={clsN(props.className, `${styles.button}`)}
-            type={props.type}
+            onClick={onClick}
+            onMouseOver={onMouseOver}
+            id={id}
+            className={clsN(className, `${styles.button}`)}
             disabled={disabled}
+            variant={variant}
+
         >
             {children}
         </MuiButton>
     );
 };
-ButtonCustom.prototype = {
+Button.propTypes = {
+    id: PropTypes.string,
+    className: PropTypes.string,
+    variant: PropTypes.oneOf([ "text" , "outlined" , "contained", undefined]),
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func,
     onMouseOver: PropTypes.func,
-    className: PropTypes.string,
-    id: PropTypes.string,
-    type: PropTypes.oneOf(['button', 'submit', 'reset', undefined]),
 };
 
-ButtonCustom.defaultProps = {
-    onClick: undefined,
+Button.defaultProps = {
     id: '',
-    className: undefined,
-    onMouseOver: () => {},
-    type: 'button',
+    className: `${styles.button}`,
+    variant: 'contained',
+    onClick: ()=>{},
+    onMouseOver: ()=>{},
+
 };
-export default ButtonCustom;
+export default Button;

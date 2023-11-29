@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, TypographyProps } from '@mui/material';
-import classNames from 'classnames';
-import styles from './styles/Text.module.scss';
 import clsN from 'classnames';
+import styles from './styles/Text.module.scss';
 
 interface CustomTextProps {
     text: string | undefined;
@@ -21,7 +20,7 @@ const CustomText = ({ ...props }: CustomTextProps) => {
     const { text, className, variant, align, onClick } = props;
     return variant ? (
         <Typography
-            className={classNames(clsN(className, `${styles.defaultText}`))}
+            className={clsN(className, `${styles.defaultText}`)}
             variant={variant}
             align={align}
             onClick={onClick}
@@ -29,14 +28,14 @@ const CustomText = ({ ...props }: CustomTextProps) => {
             {text}
         </Typography>
     ) : (
-        <span className={classNames(clsN(className, `${styles.defaultText}`))} aria-hidden="true" onClick={onClick}>
+        <span className={clsN(className, `${styles.defaultText}`)} aria-hidden="true" onClick={onClick}>
             {text}
         </span>
     );
 };
 
 // 프로토타입 지정 prototype, PropType
-CustomText.prototype = {
+CustomText.propTypes = {
     text: PropTypes.string,
     className: PropTypes.string,
     variant: PropTypes.oneOf([

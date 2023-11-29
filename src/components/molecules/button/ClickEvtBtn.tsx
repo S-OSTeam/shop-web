@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Text from '../../atoms/text/Text';
-import Button from '../../atoms/button/Legausy/Button';
+import Button from '../../atoms/button/Button';
 
 interface molParentProps {
     id: string,

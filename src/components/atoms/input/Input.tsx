@@ -1,15 +1,16 @@
 import React from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsN from 'classnames';
+import styles from './styles/Input.module.scss';
 
-interface myProps {
-    variant?: "filled" | "outlined" | "standard" | undefined;
-    label?: React.ReactNode;
-    className?: string;
+interface InputProps {
     name?: string | undefined;
-    rows?: string | number | undefined;
+    className?: string;
+    label?: React.ReactNode;
     type?: React.HTMLInputTypeAttribute | undefined;
+    variant?: "filled" | "outlined" | "standard" | undefined;
+    rows?: string | number | undefined;
     autoFocus?: boolean | undefined;
     onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
     placeholder?: string | undefined;
@@ -22,51 +23,89 @@ interface myProps {
     maxRows?: string | number;
     error?: boolean;
 }
-const InputComponent = ({ ...props }: myProps) => {
-
+const Input = (
+    {
+        variant,
+        error,
+        maxRows,
+        rows,
+        required,
+        type,
+        placeholder,
+        value,
+        defaultValue,
+        autoFocus,
+        className,
+        name,
+        fullWidth,
+        onChange,
+        multiline,
+        helperText,
+        label
+    }: InputProps) => {
     return (
         <TextField
-            variant={props.variant}
-            label={props.label}
-            className={classNames(props.className)}
-            name={props.name}
-            rows={props.rows}
-            type={props.type}
-            autoFocus={props.autoFocus}
-            onChange={props.onChange}
-            placeholder={props.placeholder}
-            multiline={props.multiline}
-            value={props.value}
-            defaultValue={props.defaultValue}
-            fullWidth={props.fullWidth}
-            helperText={props.helperText}
-            required={props.required}
-            maxRows={props.maxRows}
-            error={props.error}
+            name={name}
+            className={clsN(className, `${styles.input}`)}
+            label={label}
+            type={type}
+            variant={variant}
+            rows={rows}
+            autoFocus={autoFocus}
+            onChange={onChange}
+            placeholder={placeholder}
+            multiline={multiline}
+            value={value}
+            defaultValue={defaultValue}
+            fullWidth={fullWidth}
+            helperText={helperText}
+            required={required}
+            maxRows={maxRows}
+            error={error}
         />
     );
 };
 
 
-InputComponent.prototype = {
-    className: PropTypes.string,
+Input.propTypes = {
     name: PropTypes.string,
+    className: PropTypes.string,
+    label: PropTypes.node,
+    type: PropTypes.string,
+    variant: PropTypes.oneOf(["filled", "outlined", "standard", undefined]),
     rows: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
     ]),
-    type: PropTypes.string,
     autoFocus: PropTypes.bool,
     onChange: PropTypes.func,
-    placeholder: PropTypes.string,
+    placeholder: PropTypes.oneOf([PropTypes.string, undefined]),
     multiline: PropTypes.bool,
-    fullWidth: PropTypes.bool,
+    value: PropTypes.oneOf([PropTypes.string, undefined]),
+    defaultValue: PropTypes.any,
+    fullWidth: PropTypes.oneOf([PropTypes.bool, undefined]),
+    helperText: PropTypes.node,
+    required: PropTypes.oneOf([PropTypes.bool, undefined]),
+    maxRows: PropTypes.oneOfType([PropTypes.string, PropTypes.number,]),
+    error: PropTypes.oneOf([PropTypes.bool, undefined]),
 };
-InputComponent.defaultProps = {
+Input.defaultProps = {
+    name: undefined,
+    className: `${styles.input}`,
+    label: undefined,
+    type: 'text',
+    variant: 'outlined',
     rows: 1,
     autoFocus: false,
+    onChange: ()=>{},
+    placeholder: undefined,
     multiline: false,
-    variant: 'outlined',
+    value: undefined,
+    defaultValue: undefined,
     fullWidth: true,
+    helperText: undefined,
+    required: undefined,
+    maxRows: null,
+    error: undefined,
 };
-export default InputComponent;
+export default Input;

@@ -14,7 +14,7 @@ const Option = ({...props}: optionInterface) => {
         />
     )
 }
-Option.prototype={
+Option.propTypes={
 };
 Option.defaultProps={
 };

@@ -476,7 +476,7 @@ export const Warning = {
     label: 'Delete now',
     backgroundColor: 'red',
   }
-};`}]]},Zg=hf}),mf,$g,WO=v(()=>{mf={filename:"Button.stories.ts",language:"typescript",code:[[{snippet:`import type { Meta, StoryObj } from '@storybook/react';
+};`}]]},Zg=hf}),mf,$g,WO=v(()=>{mf={filename:"Button.stories.tsx",language:"typescript",code:[[{snippet:`import type { Meta, StoryObj } from '@storybook/react';
       
       import { Button } from './Button';`}],[{snippet:`const meta: Meta<typeof Button> = {
         title: 'Example/Button',

@@ -3,6 +3,7 @@ import { Box, TableCell, TableRow } from '@mui/material';
 import PropTypes from 'prop-types';
 import HelpIcon from '@mui/icons-material/Help';
 import HdrAutoIcon from '@mui/icons-material/HdrAuto';
+import clsN from 'classnames';
 import { TD } from '../../../../molecules/table/tableData/TD';
 import IconBox from '../../../../molecules/iconBox/IconBox';
 import TableContentBox
@@ -59,8 +60,9 @@ export const TableRowCmp = ({ ...props }: myTableRowProps) => {
                             className='td-section-wrapper'
                         >
                             <IconBox
-                                className='icon-wrapper'
-                                icon={HelpIcon} size='large'/>
+                                iconClassName={clsN('iconWrapper')}
+                                svgClassName={clsN('icon')}
+                                icon={<HelpIcon/>} fontSize='large'/>
                             <TableContentBox
                                 wrapperClass='qna-tb-context'
                                 context={context}
@@ -74,8 +76,9 @@ export const TableRowCmp = ({ ...props }: myTableRowProps) => {
                                 className='td-section-wrapper'
                             >
                                 <IconBox
-                                    className='icon-wrapper'
-                                    icon={HdrAutoIcon} size='large'/>
+                                    iconClassName={clsN('iconWrapper')}
+                                    svgClassName={clsN('icon')}
+                                    icon={<HdrAutoIcon/>} fontSize='large'/>
                                 <TableContentBox
                                     wrapperClass='qna-tb-context'
                                     rq_context={rq_context}

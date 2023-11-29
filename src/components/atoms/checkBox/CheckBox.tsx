@@ -18,8 +18,8 @@ const CheckBoxComponent = ({ checkedIcon, icon, name, className }: myProps) => {
 };
 
 // 프로토타입 지정
-CheckBoxComponent.prototype = {
-    name: PropTypes.string,
+CheckBoxComponent.propTypes = {
+    name: PropTypes.string.isRequired,
     checkedIcon: PropTypes.node,
     icon: PropTypes.node,
     className: PropTypes.string,

@@ -7,9 +7,11 @@ interface MyProps {
     defaultText?: string,
 }
 
-const HelperText = ({ ...props }: MyProps) => {
+const HelperText = (
+    {
+        ...props
+    }: MyProps) => {
     const { requiredText, defaultText } = props;
-
     const { focused } = useFormControl() || {};
     const helperText = React.useMemo(() => {
         if (focused) {
@@ -20,7 +22,7 @@ const HelperText = ({ ...props }: MyProps) => {
     return <FormHelperText>{helperText}</FormHelperText>;
 };
 
-HelperText.prototype = {
+HelperText.propTypes = {
     requiredText: PropTypes.string,
     defaultText: PropTypes.string,
 };

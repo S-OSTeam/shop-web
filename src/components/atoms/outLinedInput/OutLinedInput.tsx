@@ -13,7 +13,7 @@ const OutLinedIpt = (
 
     return <OutlinedInput label={label} />
 }
-OutLinedIpt.prototype = {
+OutLinedIpt.propTypes = {
     label: PropTypes.string,
 };
 OutLinedIpt.defaultProps = {

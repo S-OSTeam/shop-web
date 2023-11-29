@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Box } from '@mui/material';
-import { Heading } from '../../../molecules/heading/Heading';
+import Text from '../../../atoms/text/Text';
 
 interface MyProps {
     isOpen: boolean;
@@ -11,8 +11,8 @@ export const OrgContent = ({ isOpen }: MyProps) => {
         <div className='faq-sub-title-wrapper'>
             {isOpen &&
             <>
-                <Heading text='궁금하신 사항이 있나요?' type='h2' className='main-title' />
-                <Heading text='빠르게 답변해 드리겠습니다.' type='subtitle2' className='subtitle2'/>
+                <Text text='궁금하신 사항이 있나요?' className='main-title' variant='h2' />
+                <Text text='빠르게 답변해 드리겠습니다.' className='subtitle2' variant='subtitle2' />
             </>}
         </div>
     );

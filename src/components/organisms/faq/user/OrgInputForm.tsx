@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, FormControl } from '@mui/material';
 // import Text from '../../../atoms/contents/Text';
-import HelperText from '../../../atoms/helperText/FormHelperText';
+import HelperText from '@atoms/helperText/HelperText';
 import InputField from '../../../molecules/input/InputContext';
 
 /* 상태 */

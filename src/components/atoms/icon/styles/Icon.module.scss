@@ -1,0 +1,10 @@
+@import "./index";
+.atomIcon{
+  overflow: visible !important;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  svg{
+    display: block;
+  }
+}

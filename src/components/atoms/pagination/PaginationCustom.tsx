@@ -27,7 +27,7 @@ const PaginationCustom = ({ count, showOpt, page, onChange, siblingCount }: Pagi
         />
     );
 };
-PaginationCustom.prototype = {
+PaginationCustom.propTypes = {
     // 총 몇 페이지 인가를 정하는 prop
     count: PropTypes.number,
     // 맨 처음으로 이동, 맨 마지막으로 이동 버튼 보이기 안보이기 옵션

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Table, TableBody } from '@mui/material';
 import { useRecoilValue } from 'recoil';
-import { Heading } from '../../molecules/heading/Heading';
 import { TableWrapper } from '../../organisms/qna/tableOrg/TableWrapper';
 import { TableHdr } from '../../organisms/qna/tableOrg/tableHeader/TableHdr';
 import { TableRowCmp } from '../../organisms/qna/tableOrg/tableBody/TableRowCmp';
@@ -9,6 +8,7 @@ import { myTableInterfaceProps } from '../../../pages/FAQ/PageQna';
 import { faqTableState } from '../../../recoil/atoms/FaqItemList';
 import PaginationCustom from '../../atoms/pagination/PaginationCustom';
 import { TableRemote } from '../../organisms/qna/tableRemote/TableRemote';
+import Text from '../../atoms/text/Text';
 
 export const QnaListTemplate = ({ ...props }: myTableInterfaceProps) => {
     const { thContext, showOpt, menuItems } = props;
@@ -81,10 +81,10 @@ export const QnaListTemplate = ({ ...props }: myTableInterfaceProps) => {
                     component='div'
                     className='heading-wrapper'
                 >
-                    <Heading text='상품문의' type='h1' className='qna-heading' />
-                    <Heading
+                    <Text text='상품문의' variant='h1' className='qna-heading' />
+                    <Text
                         text='궁금하신 점이 있으신가요?'
-                        type='subtitle1'
+                        variant='subtitle1'
                         className='faq-g-heading'
                     />
                 </Box>

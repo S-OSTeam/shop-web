@@ -1,17 +1,17 @@
 import React from 'react';
 import { SvgIcon } from '@mui/material';
-import Icon, { myIconProps } from '../../atoms/icon/IconCustom';
-import clsN from 'classnames';
 import PropTypes from 'prop-types';
+import clsN from 'classnames';
+import Icon, {IconProps} from '@atoms/icon/Icon';
 import styles from './styles/IconBox.module.scss';
 
-interface IconProps {
-    icon: React.ReactNode;
+interface IconBoxProps {
+    icon: React.ReactElement;
     svgClassName?: string;
     iconClassName?: string;
-    fontSize?: myIconProps['fontSize'];
+    fontSize?: IconProps['fontSize'];
 }
-const IconBox = ({ ...props }: IconProps) => {
+const IconBox = ({ ...props }: IconBoxProps) => {
     const { icon, svgClassName, iconClassName, fontSize } = props;
     return (
         <SvgIcon className={clsN(svgClassName, `${styles.svgIcon}`)}>
@@ -27,7 +27,8 @@ IconBox.prototype = {
     size: PropTypes.string,
 };
 IconBox.defaultProps = {
-    className: '',
-    size: 'small',
+    svgClassName: `${styles.svgIcon}`,
+    iconClassName: `${styles.icon}`,
+    fontSize: 'inherit',
 };
 export default IconBox;
