@@ -11,6 +11,7 @@ interface InputProps {
     type?: React.HTMLInputTypeAttribute | undefined;
     variant?: "filled" | "outlined" | "standard" | undefined;
     rows?: string | number | undefined;
+    maxRows?: string | number;
     autoFocus?: boolean | undefined;
     onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
     placeholder?: string | undefined;
@@ -20,28 +21,27 @@ interface InputProps {
     fullWidth?: boolean | undefined;
     helperText?: React.ReactNode;
     required?: boolean | undefined;
-    maxRows?: string | number;
     error?: boolean;
 }
 const Input = (
     {
-        variant,
-        error,
-        maxRows,
-        rows,
-        required,
+        name,
+        className,
+        label,
         type,
+        variant,
+        rows,
+        maxRows,
+        autoFocus,
+        onChange,
         placeholder,
+        multiline,
         value,
         defaultValue,
-        autoFocus,
-        className,
-        name,
         fullWidth,
-        onChange,
-        multiline,
         helperText,
-        label
+        required,
+        error,
     }: InputProps) => {
     return (
         <TextField
@@ -82,7 +82,7 @@ Input.propTypes = {
     placeholder: PropTypes.oneOf([PropTypes.string, undefined]),
     multiline: PropTypes.bool,
     value: PropTypes.oneOf([PropTypes.string, undefined]),
-    defaultValue: PropTypes.any,
+    defaultValue: PropTypes.string,
     fullWidth: PropTypes.oneOf([PropTypes.bool, undefined]),
     helperText: PropTypes.node,
     required: PropTypes.oneOf([PropTypes.bool, undefined]),

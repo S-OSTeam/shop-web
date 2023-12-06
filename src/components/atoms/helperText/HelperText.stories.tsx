@@ -7,19 +7,19 @@ storyObj: 스토리북으로 해당컴포넌트의 렌더링된 예시로 사용
 */
 
 // 스토리 타입, StoryObj 의 제너릭 컴포넌트의 타입을 넘김
-type HelperTextStories = StoryObj<typeof HelperText>;
+type Story = StoryObj<typeof HelperText>;
 
 /*
     requiredText?: string,
     defaultText?: string,
  */
-export const ErrorText:HelperTextStories = {
+export const ErrorText:Story = {
     // 컴포넌트에 필요한 요소(args)는 리액트 props와 같음
     args: {
         requiredText: 'Incorrect entry..!',
     }
 }
-export const DefaultText:HelperTextStories = {
+export const DefaultText:Story = {
     // 컴포넌트에 필요한 요소(args)는 리액트 props와 같음
     args:{
         defaultText: 'Enter Here..!',

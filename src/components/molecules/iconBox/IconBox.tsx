@@ -2,7 +2,7 @@ import React from 'react';
 import { SvgIcon } from '@mui/material';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
-import Icon, {IconProps} from '@atoms/icon/Icon';
+import Icon, {IconProps} from '../../atoms/icon/Icon';
 import styles from './styles/IconBox.module.scss';
 
 interface IconBoxProps {
@@ -21,10 +21,11 @@ const IconBox = ({ ...props }: IconBoxProps) => {
         </SvgIcon>
     );
 };
-IconBox.prototype = {
+IconBox.propTypes = {
     icon: PropTypes.string.isRequired,
-    className: PropTypes.string,
-    size: PropTypes.string,
+    svgClassName: PropTypes.string,
+    iconClassName: PropTypes.string,
+    fontSize: PropTypes.oneOf([ "small", "inherit", "medium", "large", undefined]),
 };
 IconBox.defaultProps = {
     svgClassName: `${styles.svgIcon}`,

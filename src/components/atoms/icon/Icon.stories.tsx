@@ -11,10 +11,10 @@ storyObj: 스토리북으로 해당컴포넌트의 렌더링된 예시로 사용
 */
 
 // 스토리 타입, StoryObj 의 제너릭 컴포넌트의 타입을 넘김
-type IconStories = StoryObj<typeof Icon>;
+type Story = StoryObj<typeof Icon>;
 
 // children: React.ReactNode, fontSize?: "small" | "inherit" | "large" | "medium" | undefined, className?: string,
-export const InheritIcon:IconStories = {
+export const InheritIcon:Story = {
     // 컴포넌트에 필요한 요소(args)는 리액트 ({...props}) 와 같음
     args:{
         children: <CircleSharp/>,
@@ -22,7 +22,7 @@ export const InheritIcon:IconStories = {
         className: 'iconInherit',
     },
 };
-export const SmallIcon:IconStories = {
+export const SmallIcon:Story = {
     // 컴포넌트에 필요한 요소(args)는 리액트 ({...props}) 와 같음
     args:{
         children: <CircleSharp/>,
@@ -30,7 +30,7 @@ export const SmallIcon:IconStories = {
         className: 'iconSmall',
     },
 };
-export const MediumIcon:IconStories = {
+export const MediumIcon:Story = {
     // 컴포넌트에 필요한 요소(args)는 리액트 ({...props}) 와 같음
     args:{
         children: <CircleSharp/>,
@@ -38,7 +38,7 @@ export const MediumIcon:IconStories = {
         className: 'iconMedium',
     },
 };
-export const LargeIcon:IconStories = {
+export const LargeIcon:Story = {
     // 컴포넌트에 필요한 요소(args)는 리액트 ({...props}) 와 같음
     args:{
         children: <CircleSharp/>,

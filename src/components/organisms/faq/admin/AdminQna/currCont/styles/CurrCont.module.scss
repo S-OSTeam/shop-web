@@ -14,43 +14,56 @@
 }
 
 .currOrg {
-  background-color: $color-fill-main;
-  border-radius: 10px;
+  //background: linear-gradient(135deg, #ffffff, #cfddff);
+  background: #ffffff;
+  box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
   padding: 25px;
 
   .content {
     padding: 20px;
-    background-color: $color-fill-shallow-low;
-    border-radius: 10px;
-
+    border-radius: 5px;
 
   }
 
   .artHeading {
-    font-size: 32px;
+    display: block;
+    width: 100%;
     text-align: start;
+    font-size: 32px;
     font-weight: bold;
     padding: 10px 10px 20px;
     color: #fff;
   }
+
 }
 
 .currOrgModified {
   .content {
-      background: #5578b7;
+    //background-color: #5578b7;
+    //box-shadow: 0 0 10px 0.1px rgba(0,0,0,0.4);
+
     .textGroup {
       display: flex;
-      padding-bottom: 10px;
+      margin-bottom: 10px;
       // >>
-      .textCont{
-        padding: 5px;
-        background: $color-fill-main;
-        border-radius: 20px;
-
+      .textCont {
+        font-size: 14px;
+        font-weight: 300;
+        padding: 5px 14px;
+        background: #4c8cff;
+        border-radius: 3px;
+        margin-right: 10px;
+        color: #eeeeee;
       }
-      .userId {
-        color: red;
 
+      .userId {
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: '';
+        }
       }
 
       .date {
@@ -69,26 +82,103 @@
 
       }
     }
+
+    .textGroup:first-child {
+      position: relative;
+      padding-left: 40px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        background: #80A1D4;
+        border-radius: 3px;
+        left: 0;
+        top: 0;
+        width: 29px;
+        height: 100%;
+      }
+    }
+
+    .inquiryText, .inquiryContents {
+      display: block;
+      width: 100%;
+      text-align: start;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 3px;
+      padding: 2px 12px;
+      color: #ffffff;
+    }
+
+    .inquiryText {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .inquiryContents {
+      padding-top: 10px;
+      font-size: 16px;
+    }
+  }
+
+  .clickWrapper {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+
+    .btnImg, .btnReply {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .btnImg {
+      width: fit-content;
+      margin-right: 10px;
+    }
+
+    .btnReply {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
   }
 }
 
+.paginationModified {
+
+}
 
 @include mobile {
   .currOrg {
     padding: 25px;
+    background: #2e5686;
+
+    .artHeading {
+      display: block;
+      width: 100%;
+      //text-align: center;
+      font-size: 28px;
+      font-weight: normal;
+      color: #ffffff;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      //background: $color-fill-main;
+      //border-radius: 10px;
+      //box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
+    }
 
     .content {
       padding: 20px;
-      border-radius: 10px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      //box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
+      .textGroup {
 
+      }
 
     }
 
-    .artHeading {
-      font-size: 36px;
-      font-weight: bold;
-      color: #fff;
-    }
+
   }
 }
 

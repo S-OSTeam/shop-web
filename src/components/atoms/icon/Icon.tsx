@@ -1,12 +1,12 @@
 import React from 'react';
-import { SvgIcon, IconProps as MuiIconProps,} from '@mui/material';
+import { SvgIcon, SvgIconProps} from '@mui/material';
 import clsN from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './styles/Icon.module.scss';
 
-export interface IconProps extends MuiIconProps {
-    children: React.ReactElement;
-    fontSize?: MuiIconProps['fontSize'];
+export interface IconProps extends SvgIconProps {
+    children: React.ReactNode;
+    fontSize?: SvgIconProps['fontSize'];
     className?: string;
 }
 
@@ -18,7 +18,7 @@ const Icon = ({ children, fontSize, className }: IconProps) => {
     );
 };
 Icon.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
     fontSize: PropTypes.oneOf(['inherit', 'large', 'medium', 'small', undefined]),
     className: PropTypes.string,
 };

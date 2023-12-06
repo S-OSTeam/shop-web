@@ -8,7 +8,7 @@ storyObj: 스토리북으로 해당컴포넌트의 렌더링된 예시로 사용
 // 스토리 타입, StoryObj 의 제너릭에 컴포넌트의 타입을 넘겨줌
 type Story = StoryObj<typeof CheckBox>;
 
-// 하나의 스토리, 스토리는 named export 를 한다, 스토리 이름도 사이드바 카테고리에 표시됨
+// 하나의 스토리, 스토리는 named export , 스토리 이름도 사이드바 카테고리에 표시됨
 export const CheckDefault: Story = {
     // 컴포넌트에 필요한 argument, 즉 컴포넌트에게 전달하는 Props들
     args: {
@@ -23,6 +23,7 @@ export const Checked: Story = {
         name: 'checked',
         checked: true,
         'aria-label': 'Checked',
+        defaultChecked: true,
     },
 };
 

@@ -6,7 +6,7 @@ import { TableHdr } from '../../organisms/qna/tableOrg/tableHeader/TableHdr';
 import { TableRowCmp } from '../../organisms/qna/tableOrg/tableBody/TableRowCmp';
 import { myTableInterfaceProps } from '../../../pages/FAQ/PageQna';
 import { faqTableState } from '../../../recoil/atoms/FaqItemList';
-import PaginationCustom from '../../atoms/pagination/PaginationCustom';
+import PaginationCustom from '../../molecules/pagination/PaginationCustom';
 import { TableRemote } from '../../organisms/qna/tableRemote/TableRemote';
 import Text from '../../atoms/text/Text';
 

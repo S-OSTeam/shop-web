@@ -1,33 +1,45 @@
-@import "../../../../styles/moduleTemplate/index";
+@import "./index";
 
-.paginationWrapper{
-  .nav{
-    ul{
+.paginationWrapper {
+  justify-content: center;
+  flex-direction: row;
+  .nav {
+    ul {
       display: flex;
 
     }
   }
-}
-// 페이지 정보
-.currPage{
-  display: flex;
-  align-items: center;
-  .currText{
-    display: block;
-    height: fit-content;
+  // 페이지 정보
+  .currPage {
+    display: flex;
+    align-items: center;
+
+    .currText {
+      display: block;
+      height: fit-content;
+    }
   }
 }
-// 버튼 엘리먼트
 
-@include mobile{
+// ButtonAtom
+.nanPaginationBtn{
+  .btnColor{
+    background: red;
+  }
+}
+
+@include mobile {
 
 }
-@include tablet{
+
+@include tablet {
 
 }
-@include laptop{
+
+@include laptop {
 
 }
-@include desktop{
+
+@include desktop {
 
 }

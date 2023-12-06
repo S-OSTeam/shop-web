@@ -5,9 +5,9 @@ import Button from '../../atoms/button/Button';
 import { Stack } from '@mui/material';
 import PropTypes from 'prop-types';
 import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material';
-import styles from './styles/NanPagienation.module.scss';
 import clsN from 'classnames';
 import Text from '../../atoms/text/Text';
+import styles from './styles/NanPagienation.module.scss';
 
 interface myProps {
     // totalPageNumber
@@ -36,48 +36,52 @@ const NanPagination = ({ count, onChange, contClsN, navClsN, nextIcon, prevIcon 
         let foo: any;
         foo = {
             value: page,
-        }
-        if(type=== 'previous'){
-            if((foo!.value > 0)){
+        };
+        if (type === 'previous') {
+            if ((foo!.value > 0)) {
                 children = (
                     <Button
+                        className={clsN(`${styles.btnColor}`)}
                         type='button'
                         {...items}
                     >
                         {prevIcon}
                     </Button>
                 );
-            }else{
+            } else {
                 children = (
                     <Button
+                        className={clsN(`${styles.btnColor}`)}
                         type='button'
                         {...items}
                         disabled
                     >
                         {prevIcon}
                     </Button>
-                )
+                );
             }
             return children;
         }
         if (type === 'next') {
-            if((foo!.value <= 1) || (foo!.value <= count )){
+            if ((foo!.value <= 1) || (foo!.value <= count)) {
                 children = (
                     <Button
+                        className={clsN(`${styles.btnColor}`)}
                         type='button'
                         {...items}>
                         {nextIcon}
                     </Button>);
-            }else{
+            } else {
                 children = (
                     <Button
+                        className={clsN(`${styles.btnColor}`)}
                         type='button'
                         {...items}
                         disabled
                     >
                         {nextIcon}
                     </Button>
-                )
+                );
             }
 
             return children;
@@ -102,7 +106,7 @@ const NanPagination = ({ count, onChange, contClsN, navClsN, nextIcon, prevIcon 
         </Stack>
     );
 };
-NanPagination.prototype = {
+NanPagination.propsTypes = {
     count: PropTypes.number,
     onChange: PropTypes.func,
     contClsN: PropTypes.string,
@@ -111,10 +115,10 @@ NanPagination.prototype = {
     nextIcon: PropTypes.element,
 };
 NanPagination.defaultProps = {
-    contClsN: '',
-    navClsN: '',
-    prevIcon: <ArrowBackIosNew/>,
-    nextIcon: <ArrowForwardIos/>,
+    contClsN: `${styles.paginationWrapper}`,
+    navClsN: `${styles.nav}`,
+    prevIcon: <ArrowBackIosNew />,
+    nextIcon: <ArrowForwardIos />,
 };
 
 export default NanPagination;

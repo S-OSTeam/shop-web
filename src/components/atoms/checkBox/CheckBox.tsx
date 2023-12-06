@@ -3,17 +3,24 @@ import { Checkbox, CheckboxProps } from '@mui/material';
 
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
+import { CheckBox, CheckBoxOutlineBlank, } from '@mui/icons-material';
 import styles from './styles/CheckBox.module.scss';
 
 interface myProps extends CheckboxProps {
     name: string;
-    checkedIcon?: CheckboxProps['checkedIcon'];
-    icon?: CheckboxProps['icon'];
+    checkedIcon?: React.ReactNode;
+    icon?: React.ReactNode;
     className?: string;
 }
-const CheckBoxComponent = ({ checkedIcon, icon, name, className }: myProps) => {
+const CheckBoxComponent = ({ checkedIcon, icon, name, className, defaultChecked }: myProps) => {
     return (
-        <Checkbox name={name} checkedIcon={checkedIcon} icon={icon} className={clsN(className, `${styles.checkBox}`)} />
+        <Checkbox
+            name={name}
+            checkedIcon={checkedIcon}
+            icon={icon}
+            className={clsN(className, `${styles.checkBox}`)}
+            defaultChecked={defaultChecked}
+        />
     );
 };
 
@@ -26,8 +33,8 @@ CheckBoxComponent.propTypes = {
 };
 // default
 CheckBoxComponent.defaultProps = {
-    checkedIcon: undefined,
-    icon: undefined,
+    checkedIcon: <CheckBox/>,
+    icon: <CheckBoxOutlineBlank/>,
     className: '',
 };
 export default CheckBoxComponent;

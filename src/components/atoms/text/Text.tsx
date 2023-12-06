@@ -5,7 +5,7 @@ import clsN from 'classnames';
 import styles from './styles/Text.module.scss';
 
 interface CustomTextProps {
-    text: string | undefined;
+    text?: string | undefined;
     className?: string;
     variant?: TypographyProps['variant'];
     align?: TypographyProps['align'];
@@ -57,6 +57,7 @@ CustomText.propTypes = {
     onClick: PropTypes.func,
 };
 CustomText.defaultProps = {
+    text: undefined,
     className: `${styles.defaultText}`,
     variant: null,
     align: 'inherit',

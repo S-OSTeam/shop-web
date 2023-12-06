@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import CustomFormControl from '../formControl/FormControl';
 import PropTypes from 'prop-types';
 import Selector from '../../atoms/select/SelectCustom';
-import Option from '../../atoms/option/Option';
+import MenuItemAtom from '../../atoms/menuItem/MenuItemAtom';
 import Text from '../../atoms/text/Text';
 import { insertSelectTypes } from '../../organisms/qna/tableRemote/TableRemote';
 import classNames from 'classnames';
@@ -30,13 +30,13 @@ const SelectGenerator = ({ ...props }: myPropsInterface) => {
     const tempContainer = props.getItems;
     // 속성 받아서 state 로 저장
     const [currentVal, setCurrentVal] = useState({
-        selectVar: '0'
+        selectVar: '0',
     });
 
     const handleOnClick = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentVal(prev => ({
             ...prev,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value,
         }));
     };
 
@@ -48,24 +48,22 @@ const SelectGenerator = ({ ...props }: myPropsInterface) => {
         >
             <Selector
                 className={classNames(props.selectClassName)}
-                defaultValue={1}
                 value={currentVal.selectVar}
                 onChange={handleOnClick}
-                inputProps={
+                InputProps={
+                    {
+                        name: 'selectVar',
+                        id: 'uncontrolled-native',
+                        className: 'select-class-test',
+                    }}
+                label='select' >
                 {
-                    name: 'selectVar',
-                    id: 'uncontrolled-native',
-                    className: 'select-class-test'
-                }}
-                required
-            >
-                {
-                    tempContainer.map(({title, value})=>{
-                        return(
-                            <Option key={title} value={value}>
-                                <Text text={title} className='select-option'/>
-                            </Option>
-                        )
+                    tempContainer.map(({ title, value }) => {
+                        return (
+                            <MenuItemAtom key={title} value={value}>
+                                <Text text={title} className='select-option' />
+                            </MenuItemAtom>
+                        );
                     })
                 }
             </Selector>

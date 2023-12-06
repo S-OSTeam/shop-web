@@ -1,32 +1,50 @@
 import React from 'react';
 import { TextField ,TextFieldProps } from '@mui/material';
 import PropTypes from 'prop-types';
+import clsN from 'classnames';
+import styles from './styles/SelectCustom.module.scss';
 
-const SelectCustom = ({ ...props }: TextFieldProps) => {
+interface selectProps{
+    variant?: 'filled' | 'outlined' | 'standard';
+    value?: string;
+    label: React.ReactNode;
+    onChange?: TextFieldProps['onChange'];
+    InputProps?: TextFieldProps['InputProps'];
+    className?: string;
+    children: React.ReactNode;
+}
+const SelectCustom = ({ ...props }: selectProps, required:TextFieldProps['required']) => {
+    // const ariaLabel = {'aria-label': props.inputProps};
     return (
         <TextField
             variant={props.variant}
             value={props.value}
             label={props.label}
             onChange={props.onChange}
-            inputProps={props.inputProps}
-            className={props.className}
+            InputProps={props.InputProps}
+            className={clsN(props.className, `${styles.select}`)}
             select
+            fullWidth
+            required={required}
         >
             {props.children}
         </TextField>
     );
 };
-SelectCustom.prototype = {
+SelectCustom.propTypes = {
     variant: PropTypes.oneOf([ 'filled', 'outlined', 'standard', undefined]),
-    name: PropTypes.string,
-    labelId: PropTypes.string,
-    label: PropTypes.node,
+    label: PropTypes.node.isRequired,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    InputProps: PropTypes.node,
+    className: PropTypes.string,
+    children: PropTypes.node.isRequired,
 };
 SelectCustom.defaultProps = {
     variant: 'outlined',
-    id: undefined,
-    name: undefined,
-    label: undefined,
+    value: '',
+    onChange: ()=>{},
+    className: `${styles.select}`,
+    InputProps: undefined,
 };
 export default SelectCustom;
