@@ -1,5 +1,5 @@
 import { Abc } from '@mui/icons-material';
-import IconBtn from '@molecules/button/iconBtn/IconBtn';
+import IconBtn from './IconBtn';
 import type {Meta, StoryObj} from '@storybook/react';
 
 const meta: Meta<typeof IconBtn> = {

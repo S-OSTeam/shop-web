@@ -1,3 +1,4 @@
+@import "@styles/moduleTemplate/index.scss";
 // 전역스타일 불러오기
-@import "../../../molecules/customPagiNation/styles/index";
-@import "../../../organisms/faq/admin/AdminQna/currCont/styles/index";
+@import "src/components/molecules/customPagiNation/styles/index";
+@import "src/components/organisms/faq/admin/AdminQna/currCont/styles/index";

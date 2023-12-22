@@ -6,7 +6,7 @@ import Text from '../../../../../atoms/text/Text';
 import Button from '../../../../../atoms/button/Button';
 import IconBox from '../../../../../molecules/iconBox/IconBox';
 import { Photo } from '@mui/icons-material';
-import { QnaDataInterface } from '@src/util/Storage/QnaData';
+import { QnaDataInterface } from '#util/Storage/QnaData';
 import clsN from 'classnames';
 import NanPagination from '../../../../../molecules/customPagiNation/NanPagination';
 import styles from './styles/CurrCont.module.scss';
@@ -61,12 +61,18 @@ const CurrCont = ({ props }: { props: QnaDataInterface[] }) => {
                     ]}
                 />
                 <Text text={inquiryText} variant='subtitle1' className={clsN(`${styles.inquiryText}`)} />
-                <Text text={inquiryContents} variant='body1' className={clsN(`${styles.inquiryContents}`)} />
+                <Stack className={clsN(`${styles.inquiryContentsWrapper}`)}>
+                    <Text text={inquiryContents}
+                          variant='body1'
+                          className={clsN(`${styles.inquiryContents}`)}
+                    />
 
-                <Stack className={clsN(`${styles.clickWrapper}`)}>
                     <Button className={clsN(`${styles.btnImg}`)}>
                         <IconBox icon={<Photo />} />
                     </Button>
+                </Stack>
+
+                <Stack className={clsN(`${styles.clickWrapper}`)}>
                     <Button className={clsN(`${styles.btnReply}`)}>답변</Button>
                 </Stack>
             </Box>
@@ -80,7 +86,7 @@ const CurrCont = ({ props }: { props: QnaDataInterface[] }) => {
             <NanPagination
                 count={Math.ceil(props.length)}
                 onChange={handlePageChange}
-                navClsN={clsN(`${styles.pageNav}`)}
+                navClsN={clsN(`${styles.pageModified}`)}
             />
         </Box>
     );

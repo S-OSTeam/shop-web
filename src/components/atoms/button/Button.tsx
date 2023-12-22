@@ -1,3 +1,4 @@
+/* ts-ignore */
 import React from 'react';
 import { Button as MuiButton, ButtonProps as MuiButtonProps } from '@mui/material';
 import PropTypes from 'prop-types';

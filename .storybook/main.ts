@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/react-webpack5';
 
 const TsConfigPathPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
+
 const config: StorybookConfig = {
     // storybook 이 인식하는 스토리 파일의 경로를 설정
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],

@@ -1,4 +1,4 @@
-import SelectCustom from '@atoms/select/SelectCustom';
+import SelectCustom from './SelectCustom';
 
 import type { Meta, StoryObj } from '@storybook/react';
 

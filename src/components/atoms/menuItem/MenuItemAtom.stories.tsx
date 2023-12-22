@@ -1,4 +1,4 @@
-import MenuItemAtom from '@atoms/menuItem/MenuItemAtom';
+import MenuItemAtom from './MenuItemAtom';
 // 스토리북으로 확인할 컴포넌트 불러옴
 import type {Meta, StoryObj} from '@storybook/react';
 /* 스토리북 타입 불러옴

@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from '@atoms/button/Button';
 import clsN from 'classnames';
-import Icon from '@atoms/icon/Icon';
 import PropTypes from 'prop-types';
 import styles from './styles/IconBtn.module.scss';
+import Icon from '#atoms/icon/Icon';
+import Button from '#atoms/button/Button';
 
 
 interface myProps{

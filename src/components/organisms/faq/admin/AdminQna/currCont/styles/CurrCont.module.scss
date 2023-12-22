@@ -1,4 +1,4 @@
-@import "../../../../../../../styles/moduleTemplate/index";
+@import "@styles/moduleTemplate/index.scss";
 
 * {
   box-sizing: border-box;
@@ -31,7 +31,6 @@
     width: 100%;
     text-align: start;
     font-size: 32px;
-    font-weight: bold;
     padding: 10px 10px 20px;
     color: #fff;
   }
@@ -48,13 +47,15 @@
       margin-bottom: 10px;
       // >>
       .textCont {
-        font-size: 14px;
-        font-weight: 300;
-        padding: 5px 14px;
-        background: #4c8cff;
+        padding: 5px 10px;
+        background: #5681c9;
+        box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
         border-radius: 3px;
         margin-right: 10px;
-        color: #eeeeee;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: bolder;
+
       }
 
       .userId {
@@ -100,24 +101,39 @@
       }
     }
 
-    .inquiryText, .inquiryContents {
+    .inquiryText, .inquiryContentsWrapper {
       display: block;
       width: 100%;
       text-align: start;
-      background: rgba(0, 0, 0, 0.25);
+      box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.2);
       border-radius: 3px;
-      padding: 2px 12px;
-      color: #ffffff;
+      padding: 5px 10px;
+      color: #000000;
     }
 
     .inquiryText {
       margin-bottom: 10px;
-      font-size: 16px;
+      font-size: 24px;
     }
 
-    .inquiryContents {
+    .inquiryContentsWrapper {
       padding-top: 10px;
       font-size: 16px;
+      padding-bottom: 15px;
+
+      .inquiryContents {
+        padding-bottom: 20px;
+      }
+      .btnImg {
+        padding: 16px;
+        span{
+        }
+        svg {
+          padding-left: 0;
+          padding-right: 0;
+          font-size: 26px;
+        }
+      }
     }
   }
 
@@ -127,16 +143,6 @@
     flex-direction: row;
     justify-content: right;
 
-    .btnImg, .btnReply {
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
-
-    .btnImg {
-      width: fit-content;
-      margin-right: 10px;
-    }
-
     .btnReply {
       padding-left: 40px;
       padding-right: 40px;
@@ -144,31 +150,31 @@
   }
 }
 
-.paginationModified {
 
+.pageModified {
+  .nav {
+    ul {
+      margin-bottom: 0;
+
+
+    }
+  }
 }
 
 @include mobile {
   .currOrg {
     padding: 25px;
-    background: #2e5686;
-
+    //background: #2e5686;
     .artHeading {
       display: block;
       width: 100%;
-      //text-align: center;
-      font-size: 28px;
-      font-weight: normal;
-      color: #ffffff;
+      font-size: 32px;
+      font-weight: bold;
+      color: #2a2a2a;
       padding-bottom: 10px;
-      margin-bottom: 10px;
-      //background: $color-fill-main;
-      //border-radius: 10px;
-      //box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
     }
-
     .content {
-      padding: 20px;
+      padding: 10px;
       border-radius: 5px;
       background: rgba(255, 255, 255, 0.2);
       //box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.3);
@@ -177,19 +183,53 @@
       }
 
     }
+  }
+  .clickWrapper {
+    justify-content: space-between;
+
+    .btnReply {
+
+    }
+  }
+
+}
 
 
+@include tablet {
+  .currOrg {
+
+  }
+  .pageModified {
+    .nav {
+      ul {
+        background: white;
+      }
+    }
   }
 }
 
-@include tablet {
-
-}
-
 @include laptop {
+  .currOrg {
 
+  }
+  .pageModified {
+    .nav {
+      ul {
+        background: #ababab;
+      }
+    }
+  }
 }
 
 @include desktop {
-
+  .currOrg {
+    width: 50%;
+  }
+  .pageModified {
+    .nav {
+      ul {
+        background: #818181;
+      }
+    }
+  }
 }

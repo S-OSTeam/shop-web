@@ -1,35 +1,60 @@
 @import "./index";
 
 .paginationWrapper {
-  justify-content: center;
+  display: flex;
+  justify-content: stretch;
   flex-direction: row;
+  // 네비
   .nav {
+    width: 100%;
+    // 리모트 래퍼
     ul {
       display: flex;
-
+      justify-content: center;
+      align-items: center;
     }
   }
   // 페이지 정보
   .currPage {
     display: flex;
     align-items: center;
-
+    justify-content: center;
+    height: 100%;
+    background: #1976D2;
+    margin: 0 15px;
+    border-radius: 5px;
+    box-shadow: 0.5px 0.5px 3px 1px rgba(0, 0, 0, 0.2);
     .currText {
-      display: block;
-      height: fit-content;
+      padding: 0 20px;
+      font-size: 24px;
+      color: #ffffff;
     }
   }
+  @extend .pageModified;
 }
 
 // ButtonAtom
 .nanPaginationBtn{
-  .btnColor{
-    background: red;
-  }
+
 }
 
 @include mobile {
+  .paginationWrapper{
+    ul{
+      justify-content: center;
+      height: 35px;
+    }
+    .pageRemoteBtn{
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
 
+      svg{
+        font-size: 15px;
+      }
+    }
+  }
 }
 
 @include tablet {

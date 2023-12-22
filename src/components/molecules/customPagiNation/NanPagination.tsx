@@ -41,7 +41,7 @@ const NanPagination = ({ count, onChange, contClsN, navClsN, nextIcon, prevIcon 
             if ((foo!.value > 0)) {
                 children = (
                     <Button
-                        className={clsN(`${styles.btnColor}`)}
+                        className={clsN(`${styles.pageRemoteBtn}`)}
                         type='button'
                         {...items}
                     >
@@ -51,7 +51,7 @@ const NanPagination = ({ count, onChange, contClsN, navClsN, nextIcon, prevIcon 
             } else {
                 children = (
                     <Button
-                        className={clsN(`${styles.btnColor}`)}
+                        className={clsN(`${styles.pageRemoteBtn}`)}
                         type='button'
                         {...items}
                         disabled
@@ -66,7 +66,7 @@ const NanPagination = ({ count, onChange, contClsN, navClsN, nextIcon, prevIcon 
             if ((foo!.value <= 1) || (foo!.value <= count)) {
                 children = (
                     <Button
-                        className={clsN(`${styles.btnColor}`)}
+                        className={clsN(`${styles.pageRemoteBtn}`)}
                         type='button'
                         {...items}>
                         {nextIcon}
@@ -74,7 +74,7 @@ const NanPagination = ({ count, onChange, contClsN, navClsN, nextIcon, prevIcon 
             } else {
                 children = (
                     <Button
-                        className={clsN(`${styles.btnColor}`)}
+                        className={clsN(`${styles.pageRemoteBtn}`)}
                         type='button'
                         {...items}
                         disabled

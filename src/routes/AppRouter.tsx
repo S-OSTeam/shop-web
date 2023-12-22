@@ -8,9 +8,9 @@ import { PageQnaAdmin } from '../pages/FAQ/PageQnaAdmin';
 export const AppRouter = () => {
     return (
         <Routes>
-            <Route path='/' element={<PageQna />} />
+            <Route path='/' element={<PageQnaAdmin />} />
+            <Route path='/pageadminqan' element={<PageQna />} />
             <Route path='/pagefaq' element={<PageFaq />} />
-            <Route path='/pageadminqan' element={<PageQnaAdmin />} />
         </Routes>
     );
 };

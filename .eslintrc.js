@@ -1,7 +1,28 @@
 module.exports = {
+    overrides: [
+        {
+            'files': ['*.stories.@(ts|tsx|js|jsx|mjs|cjs)'],
+            'rules': {
+                'storybook/hierarchy-separator': 'error', // example of overriding a rule
+                'storybook/default-exports': 'off'// example of disabling a rule
+            },
+        },
+    ],
     parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint', 'prettier', 'import', 'unused-imports'],
-    extends: ['airbnb', 'plugin:import/errors','plugin:import/warnings','prettier','plugin:prettier/recommended','plugin:@typescript-eslint/recommended','plugin:storybook/recommended',
+    plugins: [
+        '@typescript-eslint',
+        'prettier',
+        'import',
+        'unused-imports',
+    ],
+    extends: [
+        'airbnb',
+        'plugin:import/errors',
+        'plugin:import/warnings',
+        'prettier',
+        'plugin:prettier/recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:storybook/recommended',
     ],
     rules: {
         camelcase: 'off',
@@ -21,7 +42,6 @@ module.exports = {
         'global-require': 'off',
         '@typescript-eslint/no-var-requires': 'off',
         'import/no-dynamic-require': 'off',
-
         'import/order': [
             'error',
             {
@@ -43,16 +63,4 @@ module.exports = {
             { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
         ],
     },
-    overrides: [
-        {
-            // or whatever matches stories specified in .storybook/main.js
-            "files": ['*.stories.@(ts|tsx|js|jsx|mjs|cjs)'],
-            "rules": {
-                // example of overriding a rule
-                'storybook/hierarchy-separator': 'error',
-                // example of disabling a rule
-                'storybook/default-exports': 'off',
-            }
-        }
-    ]
 };

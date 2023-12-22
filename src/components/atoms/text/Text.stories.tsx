@@ -1,4 +1,4 @@
-import CustomText from '@atoms/text/Text';
+import CustomText from '#atoms/text/Text';
 import type {Meta, StoryObj} from '@storybook/react';
 
 const meta:Meta<typeof CustomText> = {

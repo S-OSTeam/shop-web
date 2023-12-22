@@ -1,37 +1,81 @@
-@import "../../../../../styles/moduleTemplate/index";
+@import "./index";
 
-.main{
+.main {
+  background: #f5f5f5;
+}
 
-}
-.simpleTable{
-  width: 50%;
-  height: 500px;
-  background-color: #62bdff;
-}
-@include mobile{
-  .main{
+
+@include mobile {
+  .currOrgModified {
+
+  }
+  .main {
     padding-left: 0;
     padding-right: 0;
   }
-  .sectionFirst{
+  // 최근등록된 문의와 문의현황 셀들 랩퍼
+  .sectionFirst {
     display: block;
     padding-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
+    margin-bottom: 10px;
+  }
+  .featModified {
+    // featOrg 옆에 모디파이 스타일인 featModified 스타일, 즉 featOrg 원본에 @extend...Modified 를 넣으면 됨
+  }
+  //
+  .textGroupModified{
+    position: relative;
+    border-radius: 5px;
+    margin-top: 10px;
+    height: 50px;
+    background: linear-gradient(180deg, #9FC3FA 0%, #80A1D4 62.97%, #688DC7 100%);
+    box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 35px;
+    &:hover {
+      .title, .totalTitle{
+        font-weight: bold;
+      }
+      background: linear-gradient(180deg, #ccdfff 0%, #b5d1ff 62.97%, #85a2c0 100%);
+    }
+    .title, .totalTitle {
+      font-size: 22px;
+      font-weight: lighter;
+      color: white;
+
+    }
+    .title{
+      position: relative;
+
+    }
+    .totalTitle {
+      padding-left: 9px;
+    }
+
   }
 }
-@include tablet{
-  .sectionFirst{
+
+
+@include tablet {
+  .sectionFirst {
     display: flex;
   }
 }
-@include laptop{
-  .sectionFirst{
+
+@include laptop {
+  .sectionFirst {
     display: flex;
+
   }
 }
-@include desktop{
-  .sectionFirst{
+
+@include desktop {
+  .sectionFirst {
     display: flex;
   }
 }
