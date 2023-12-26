@@ -1,0 +1,12 @@
+@import '../base/index.scss';
+
+// 돔 요소 혹은 시멘틱 태그 관련 초기화인듯
+
+// 기본 포커스 초기화
+*:focus{
+  outline: none !important;
+}
+html,
+body {
+
+}

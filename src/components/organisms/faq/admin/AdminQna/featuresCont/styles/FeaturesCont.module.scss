@@ -1,0 +1,44 @@
+@import "./index";
+
+.featOrg {
+
+  .sectionArea {
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .symbolArea {
+
+  }
+
+  .textGroup {
+    @extend .textGroupModified;
+  }
+
+  .title {
+
+  }
+
+  .totalTitle {
+
+  }
+
+  @extend .featModified;
+}
+
+@include mobile {
+
+}
+
+
+@include tablet {
+
+}
+
+@include laptop {
+
+}
+
+@include desktop {
+
+}

@@ -1,6 +1,20 @@
 module.exports = {
+    overrides: [
+        {
+            'files': ['*.stories.@(ts|tsx|js|jsx|mjs|cjs)'],
+            'rules': {
+                'storybook/hierarchy-separator': 'error', // example of overriding a rule
+                'storybook/default-exports': 'off'// example of disabling a rule
+            },
+        },
+    ],
     parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint', 'prettier', 'import', 'unused-imports'],
+    plugins: [
+        '@typescript-eslint',
+        'prettier',
+        'import',
+        'unused-imports',
+    ],
     extends: [
         'airbnb',
         'plugin:import/errors',
@@ -8,6 +22,7 @@ module.exports = {
         'prettier',
         'plugin:prettier/recommended',
         'plugin:@typescript-eslint/recommended',
+        'plugin:storybook/recommended',
     ],
     rules: {
         camelcase: 'off',

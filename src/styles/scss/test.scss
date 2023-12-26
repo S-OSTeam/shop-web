@@ -1,0 +1,39 @@
+.nav-bar{
+  list-style: none;
+  display: flex;
+  background-color: #80A1D4;
+  height: 50px;
+  align-items: center;
+  li{
+    width: 150px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    a{
+      display: block;
+      padding: 10px;
+      text-align: left;
+      }
+    }
+    li:hover{
+      .nav-bar-depth1{
+        display: block;
+        position: absolute;
+        width: fit-content;
+
+    }
+  }
+  .nav-bar-depth1{
+    display: none;
+    list-style: none;
+    background-color: #80A1D4;
+    li{
+      a{
+        display: block;
+        text-align: left;
+        padding: 10px;
+        white-space: nowrap
+      }
+    }
+  }
+}
