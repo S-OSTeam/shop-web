@@ -12,7 +12,8 @@
       "#hooks/*": ["hooks/*"],
       "#pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
-      "#util/*": ["util/*"]
+      "#util/*": ["util/*"],
+      "#recoil/*": ["recoil/*"]
     },
     "target": "es5",
     "lib": [

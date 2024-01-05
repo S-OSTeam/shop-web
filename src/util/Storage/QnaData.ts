@@ -103,3 +103,39 @@ const QnaData: QnaDataInterface[] = [
     },
 ];
 export default QnaData;
+
+export const QnaReplyData = [
+    {
+        field: 'id',
+        headerName: 'No',
+
+    },
+    {
+        field: 'cit_id',
+        headerName: '상품번호',
+    },
+    {
+        field: 'cqa_type',
+        headerName: '분류',
+    },
+    {
+        field: 'cqa_title',
+        headerName: '제목',
+    },
+    {
+        field: 'mem_id',
+        headerName: '유저 IP',
+    },
+    {
+        field: 'cqa_datetime',
+        headerName: '주문일',
+    },
+    {
+        field: 'cqa_reply_datetime',
+        headerName: '답변일',
+    },
+    {
+        field: 'cqa_is_replied',
+        headerName: '처리상태',
+    }
+];

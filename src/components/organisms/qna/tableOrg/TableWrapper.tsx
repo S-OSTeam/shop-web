@@ -16,15 +16,3 @@ export const TableWrapper = ({ ...props }: TableContainerProps) => {
         </TableContainer>
     );
 };
-// <Table>
-//     <TableHdr th={th} />
-//     <TableBody>
-//         {
-//         //    mpa 처리
-//         }
-//         <TableRowCmp
-//             tableRowPrimary={}
-//             tableRowSecondary={}
-//         />
-//     </TableBody>
-// </Table>

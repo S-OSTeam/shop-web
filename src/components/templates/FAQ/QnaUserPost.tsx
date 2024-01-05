@@ -2,13 +2,13 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { Box } from '@mui/material';
 import { booleanFaqState } from '../../../recoil/atoms/FaqItemList';
-import { OrgTitle } from '../../organisms/faq/user/OrgTitle';
-import { OrgContent } from '../../organisms/faq/user/OrgContent';
-import { OrgBtnToggle } from '../../organisms/faq/user/OrgBtnToggle';
-import { OrgInputForm } from '../../organisms/faq/user/OrgInputForm';
-import { OrgFormGroup } from '../../organisms/faq/user/OrgFormGroup';
-import { ClickEventBtn } from '../../molecules/button/ClickEvtBtn';
-import { OrgSelector } from '../../organisms/faq/user/OrgSelector';
+import { OrgTitle } from '#organisms/faq/user/OrgTitle';
+import { OrgContent } from '#organisms/faq/user/OrgContent';
+import { OrgBtnToggle } from '#organisms/faq/user/OrgBtnToggle';
+import { OrgInputForm } from '#organisms/faq/user/OrgInputForm';
+import { OrgFormGroup } from '#organisms/faq/user/OrgFormGroup';
+import { ClickEventBtn } from '#molecules/button/ClickEvtBtn';
+import { OrgSelector } from '#organisms/faq/user/OrgSelector';
 
 export const QnaUserPost = () => {
     // 버튼 클릭여부 체크
@@ -25,14 +25,14 @@ export const QnaUserPost = () => {
         handleOnSubmit();
     };
     return (
-        <Box id="faqMainWrapper" component="div">
-            <div className="styled-wrapper">
+        <Box id='faqMainWrapper' component='div'>
+            <div className='styled-wrapper'>
                 <OrgTitle />
-                <OrgBtnToggle id="titleBtn" />
+                <OrgBtnToggle id='titleBtn' />
                 <OrgContent isOpen={openCheck} />
                 {openCheck && (
                     <Box
-                        component="form"
+                        component='form'
                         onSubmit={handleOnSubmit}
                         sx={{
                             '.faq-onSubmit-btn': {
@@ -52,10 +52,10 @@ export const QnaUserPost = () => {
                         <OrgInputForm />
                         <OrgFormGroup />
                         <ClickEventBtn
-                            id="SubmitBtn"
+                            id='SubmitBtn'
                             onClick={handleOnClick}
-                            text="문의등록"
-                            molClassName="faq-onSubmit-btn"
+                            text='문의등록'
+                            molClassName='faq-onSubmit-btn'
                         />
                     </Box>
                 )}
