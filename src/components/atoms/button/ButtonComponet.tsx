@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, ButtonProps } from '@mui/material';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 interface AtomProps extends ButtonProps {
     id?: string;
@@ -16,7 +17,7 @@ const ButtonComponet = ({ id, className, variant, children, onClick, onMouseOver
         <Button
             id={id}
             aria-label="Button label"
-            className={className}
+            className={classNames(className)}
             variant={variant}
             onClick={onClick}
             onMouseOver={onMouseOver}

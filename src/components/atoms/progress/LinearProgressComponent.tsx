@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LinearProgress, LinearProgressProps } from '@mui/material';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 interface AtomProps extends LinearProgressProps {
     className?: string;
@@ -27,10 +28,10 @@ const LinearProgressComponent = ({ className, variant, color }: AtomProps) => {
         };
     }, []);
 
-    return <LinearProgress className={className} variant={variant} value={progress} color={color} />;
+    return <LinearProgress className={classNames(className)} variant={variant} value={progress} color={color} />;
 };
 
-LinearProgressComponent.PropsType = {
+LinearProgressComponent.propsType = {
     className: PropTypes.string,
     variant: PropTypes.oneOf(['indeterminate', 'determinate', 'query', 'buffer']),
     color: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),

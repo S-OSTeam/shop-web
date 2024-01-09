@@ -1,6 +1,7 @@
 import React from 'react';
 import { CircularProgress, CircularProgressProps } from '@mui/material';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 interface AtomProps extends CircularProgressProps {
     className?: string;
@@ -9,10 +10,10 @@ interface AtomProps extends CircularProgressProps {
 }
 
 const CircleProgressComponent = ({ className, variant, color }: AtomProps) => {
-    return <CircularProgress className={className} variant={variant} color={color} />;
+    return <CircularProgress className={classNames(className)} variant={variant} color={color} />;
 };
 
-CircleProgressComponent.PropsType = {
+CircleProgressComponent.propsType = {
     className: PropTypes.string,
     variant: PropTypes.oneOf(['indeterminate', 'determinate']),
     color: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),

@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 interface InputProps {
     name?: string | undefined;
@@ -44,7 +45,7 @@ const InputComponent = ({
     return (
         <TextField
             name={name}
-            className={className}
+            className={classNames(className)}
             label={label}
             type={type}
             variant={variant}

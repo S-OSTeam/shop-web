@@ -1,6 +1,7 @@
 import React from 'react';
 import { Chip, ChipProps } from '@mui/material';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 interface AtomProps extends ChipProps {
     className?: string; // scss를 적용시키기 위한 class이름
@@ -15,7 +16,7 @@ interface AtomProps extends ChipProps {
 const ChipComponent = ({ className, label, onClick, onDelete, variant, avatar, color }: AtomProps) => {
     return (
         <Chip
-            className={className}
+            className={classNames(className)}
             label={label}
             onClick={onClick}
             onDelete={onDelete}
@@ -26,7 +27,7 @@ const ChipComponent = ({ className, label, onClick, onDelete, variant, avatar, c
     );
 };
 
-ChipComponent.PropsType = {
+ChipComponent.propsType = {
     className: PropTypes.string,
     label: PropTypes.string,
     onClick: PropTypes.func,

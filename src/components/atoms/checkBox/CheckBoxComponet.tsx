@@ -2,6 +2,7 @@ import React from 'react';
 import { Checkbox, CheckboxProps } from '@mui/material';
 import { CheckBox, CheckBoxOutlineBlank } from '@mui/icons-material';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 interface AtomProps extends CheckboxProps {
     name: string;
@@ -14,7 +15,7 @@ const CheckBoxComponet = ({ name, checkedIcon, icon, className, defaultChecked }
     /* eslint-disable-next-line react/jsx-props-no-spreading */
     return (
         <Checkbox
-            className={className}
+            className={classNames(className)}
             name={name}
             checkedIcon={checkedIcon}
             icon={icon}
