@@ -1,5 +1,19 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "#/*": ["*"],
+      "#api/*": ["api/*"],
+      "#components/*": ["components/*"],
+      "#atoms/*": ["components/atoms/*"],
+      "#molecules/*": ["components/molecules/*"],
+      "#organisms/*": ["components/organisms/*"],
+      "#templates/*": ["components/templates/*"],
+      "#hooks/*": ["hooks/*"],
+      "#pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "#util/*": ["util/*"]
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -10,7 +24,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
@@ -21,6 +35,10 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "craco.config.js",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.css",
+    "src/**/*.scss"
   ]
 }
