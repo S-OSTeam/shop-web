@@ -1,32 +1,23 @@
 import React from 'react';
 import { MenuItem, MenuItemProps } from '@mui/material';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 
 interface AtomProps extends MenuItemProps {
-    content: string;
-    className?: string;
-    value: string;
-    key: string;
+    context?: string;
 }
 
-const OptionComponent = ({ key, content, className, value }: AtomProps) => {
+const OptionComponent = ({ ...props }: AtomProps) => {
     return (
-        <MenuItem key={key} className={classNames(className)} value={value}>
-            {content}
+        <MenuItem value={props.value} key={props.key} aria-label={props['aria-label']}>
+            {props.context}
         </MenuItem>
     );
 };
-
-OptionComponent.propsType = {
-    content: PropTypes.string,
-    className: PropTypes.string,
-    value: PropTypes.string,
-    key: PropTypes.string,
+OptionComponent.prototype = {
+    context: PropTypes.string,
 };
-
 OptionComponent.defaultProps = {
-    className: ``,
+    context: 'sample text',
 };
 
 export default OptionComponent;

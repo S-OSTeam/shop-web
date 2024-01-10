@@ -13,10 +13,25 @@ interface AtomProps extends SwitchProps {
 }
 
 const SwitchComponent = ({ checked, className, size, color }: AtomProps) => {
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    return <Switch {...label} checked={checked} className={classNames(className)} size={size} color={color} />;
+    const [check, setChecked] = React.useState(checked);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked(event.target.checked);
+    };
+    return (
+        <Switch
+            /* eslint-disable-next-line react/jsx-props-no-spreading */
+            {...label}
+            checked={check}
+            onChange={handleChange}
+            className={classNames(className)}
+            size={size}
+            color={color}
+        />
+    );
 };
 
+// 프로토타입 지정 prototype, PropType
 SwitchComponent.propsType = {
     checked: PropTypes.bool,
     className: PropTypes.string,
@@ -24,6 +39,7 @@ SwitchComponent.propsType = {
     color: PropTypes.oneOf(['primary', 'secondary', 'error', 'info', 'success', 'warning', 'default']),
 };
 
+// Props 초기 셋팅
 SwitchComponent.defaultProps = {
     checked: true,
     className: ``,

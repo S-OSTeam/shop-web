@@ -4,16 +4,23 @@ import { Typography, TypographyProps } from '@mui/material';
 import classNames from 'classnames';
 
 interface AtomProps extends TypographyProps {
-    text?: string | undefined;
+    text: string | undefined;
     className?: string;
-    variant?: TypographyProps['variant'];
-    align?: TypographyProps['align'];
-    onClick?: () => void;
+    variant?: TypographyProps['variant']; // PropTypes에 있는 속성들로 글자 속성 변경
+    align?: TypographyProps['align']; // 글자 정렬 속성
+    onClick?: TypographyProps['onClick'];
+    onMouseOver?: TypographyProps['onMouseOver'];
 }
 
-const TextComponent = ({ text, className, variant, align, onClick }: AtomProps) => {
+const TextComponent = ({ text, className, variant, align, onClick, onMouseOver }: AtomProps) => {
     return variant ? (
-        <Typography className={classNames(className)} variant={variant} align={align} onClick={onClick}>
+        <Typography
+            className={classNames(className)}
+            variant={variant}
+            align={align}
+            onClick={onClick}
+            onMouseOver={onMouseOver}
+        >
             {text}
         </Typography>
     ) : (
@@ -44,13 +51,15 @@ TextComponent.propTypes = {
     ]),
     align: PropTypes.oneOf(['inherit', 'left', 'center', 'right', 'justify']),
     onClick: PropTypes.func,
+    onMouseOver: PropTypes.func,
 };
 
+// Props 초기 셋팅
 TextComponent.defaultProps = {
-    text: undefined,
     className: ``,
-    variant: null,
+    variant: 'body1',
     align: 'inherit',
     onClick: () => {},
+    onMouseOver: () => {},
 };
 export default TextComponent;

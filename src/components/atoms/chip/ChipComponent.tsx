@@ -39,10 +39,10 @@ ChipComponent.propsType = {
 
 ChipComponent.defaultProps = {
     className: '',
-    onClick: () => {},
-    onDelete: () => {},
+    onClick: undefined,
+    onDelete: undefined,
     variant: 'outlined',
-    avatar: 'none',
+    avatar: 'letter',
     color: 'default',
 };
 
