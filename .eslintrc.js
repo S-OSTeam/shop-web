@@ -1,6 +1,6 @@
 module.exports = {
     parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint', 'prettier', 'import', 'unused-imports'],
+    plugins: ['@typescript-eslint', 'prettier', 'import', 'unused-imports', 'jsx-a11y'],
     extends: [
         'airbnb',
         'plugin:import/errors',
@@ -10,6 +10,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:storybook/recommended',
         'plugin:storybook/recommended',
+        'plugin:jsx-a11y/recommended',
     ],
     rules: {
         camelcase: 'off',
@@ -49,6 +50,17 @@ module.exports = {
             'warn',
             { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
         ],
+    },
+    settings: {
+        'jsx-a11y': {
+            polymorphicPropName: 'as',
+            components: {
+                CityInput: 'input',
+                CustomButton: 'button',
+                MyButton: 'button',
+                RoundButton: 'button',
+            },
+        },
     },
     overrides: [
         {
