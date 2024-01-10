@@ -59,7 +59,7 @@ TextComponent.defaultProps = {
     className: ``,
     variant: 'body1',
     align: 'inherit',
-    onClick: () => {},
-    onMouseOver: () => {},
+    onClick: undefined,
+    onMouseOver: undefined,
 };
 export default TextComponent;
