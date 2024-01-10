@@ -8,8 +8,22 @@ module.exports = {
         'prettier',
         'plugin:prettier/recommended',
         'plugin:@typescript-eslint/recommended',
+        'plugin:storybook/recommended',
+        'plugin:storybook/recommended',
     ],
     rules: {
+        overrides: [
+            {
+                // or whatever matches stories specified in .storybook/main.js
+                files: ['*.stories.@(ts|tsx|js|jsx|mjs|cjs)'],
+                rules: {
+                    // example of overriding a rule
+                    'storybook/hierarchy-separator': 'error',
+                    // example of disabling a rule
+                    'storybook/default-exports': 'off',
+                },
+            },
+        ],
         camelcase: 'off',
         'linebreak-style': 0,
         'import/prefer-default-export': 0,

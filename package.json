@@ -20,7 +20,7 @@
     "@typescript-eslint/parser": "^6.7.3",
     "axios": "^1.5.1",
     "classnames": "^2.3.2",
-    "eslint": "^8.50.0",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
@@ -43,7 +43,9 @@
     "eject": "react-scripts eject",
     "prettier": "prettier --write --config ./.prettierrc \"**/*.{ts,tsx}\"",
     "lint": "eslint './src/**/*.{ts,tsx}'",
-    "lint:fix": "eslint --fix './src/**/*.{ts,tsx}'"
+    "lint:fix": "eslint --fix './src/**/*.{ts,tsx}'",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
@@ -65,7 +67,24 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "7.6.7",
+    "@storybook/addon-interactions": "7.6.7",
+    "@storybook/addon-links": "7.6.7",
+    "@storybook/addon-mdx-gfm": "7.6.0-alpha.0",
+    "@storybook/addon-onboarding": "1.0.10",
+    "@storybook/blocks": "7.6.7",
+    "@storybook/jest": "^0.2.3",
+    "@storybook/preset-create-react-app": "7.6.7",
+    "@storybook/react": "7.6.7",
+    "@storybook/react-webpack5": "7.6.7",
+    "@storybook/test": "7.6.7",
+    "@storybook/testing-library": "^0.2.2",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-unused-imports": "^3.0.0"
+    "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "prop-types": "15.8.1",
+    "storybook": "7.6.7",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "webpack": "5.89.0"
   }
 }
