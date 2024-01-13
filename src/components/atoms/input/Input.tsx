@@ -1,7 +1,8 @@
 import React from 'react';
 import { TextField } from '@mui/material';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsN from 'classnames';
+import style from './style/Input.module.scss';
 
 interface InputProps {
     name?: string | undefined;
@@ -23,7 +24,7 @@ interface InputProps {
     error?: boolean;
 }
 
-const InputComponent = ({
+const Input = ({
     name,
     className,
     label,
@@ -45,7 +46,7 @@ const InputComponent = ({
     return (
         <TextField
             name={name}
-            className={classNames(className)}
+            className={clsN(className, `${style.input}`)}
             label={label}
             type={type}
             variant={variant}
@@ -65,7 +66,7 @@ const InputComponent = ({
     );
 };
 
-InputComponent.propTypes = {
+Input.propTypes = {
     name: PropTypes.string,
     className: PropTypes.string,
     label: PropTypes.node,
@@ -85,9 +86,9 @@ InputComponent.propTypes = {
     error: PropTypes.oneOf([PropTypes.bool, undefined]),
 };
 
-InputComponent.defaultProps = {
+Input.defaultProps = {
     name: undefined,
-    className: ``,
+    className: `${style.input}`,
     label: undefined,
     type: 'text',
     variant: 'outlined',
@@ -105,4 +106,4 @@ InputComponent.defaultProps = {
     error: undefined,
 };
 
-export default InputComponent;
+export default Input;

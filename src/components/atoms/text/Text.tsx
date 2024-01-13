@@ -12,7 +12,7 @@ interface AtomProps extends TypographyProps {
     onMouseOver?: TypographyProps['onMouseOver'];
 }
 
-const TextComponent = ({ text, className, variant, align, onClick, onMouseOver }: AtomProps) => {
+const Text = ({ text, className, variant, align, onClick, onMouseOver }: AtomProps) => {
     return variant ? (
         <Typography
             className={classNames(className)}
@@ -31,7 +31,7 @@ const TextComponent = ({ text, className, variant, align, onClick, onMouseOver }
 };
 
 // 프로토타입 지정 prototype, PropType
-TextComponent.propTypes = {
+Text.propTypes = {
     text: PropTypes.string,
     className: PropTypes.string,
     variant: PropTypes.oneOf([
@@ -55,11 +55,11 @@ TextComponent.propTypes = {
 };
 
 // Props 초기 셋팅
-TextComponent.defaultProps = {
+Text.defaultProps = {
     className: ``,
     variant: 'body1',
     align: 'inherit',
     onClick: undefined,
     onMouseOver: undefined,
 };
-export default TextComponent;
+export default Text;
