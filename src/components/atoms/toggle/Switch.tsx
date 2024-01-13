@@ -1,51 +1,66 @@
 import React from 'react';
-import { Switch as MuiSwitch, SwitchProps as MuiSwitchProps } from '@mui/material';
 import PropTypes from 'prop-types';
+import { Typography, TypographyProps } from '@mui/material';
 import clsN from 'classnames';
-import style from './style/Switcht.module.scss';
+import style from './style/text.module.scss';
 
-const label = { inputProps: { 'aria-label': 'switch atom' } };
-
-interface SwitchProps extends MuiSwitchProps {
-    checked?: boolean;
+interface AtomProps extends TypographyProps {
+    text: string;
     className?: string;
-    size?: MuiSwitchProps['size'];
-    color?: MuiSwitchProps['color'];
+    variant?: TypographyProps['variant']; // PropTypes에 있는 속성들로 글자 속성 변경
+    align?: TypographyProps['align']; // 글자 정렬 속성
+    onClick?: TypographyProps['onClick'];
+    onMouseOver?: TypographyProps['onMouseOver'];
 }
 
-const Switch = ({ checked, className, size, color }: SwitchProps) => {
-    const [check, setChecked] = React.useState(checked);
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked(event.target.checked);
-    };
-    return (
-        <MuiSwitch
-            /* eslint-disable-next-line react/jsx-props-no-spreading */
-            {...label}
-            checked={check}
-            onChange={handleChange}
-            className={clsN(className, `${style.switch}`)}
-            size={size}
-            color={color}
-        />
+const Text = ({ text, className, variant, align, onClick, onMouseOver }: AtomProps) => {
+    return variant ? (
+        <Typography
+            className={clsN(className, `${style.text}`)}
+            variant={variant}
+            align={align}
+            onClick={onClick}
+            onMouseOver={onMouseOver}
+        >
+            {text}
+        </Typography>
+    ) : (
+        <span className={clsN(className)} aria-hidden="true" onClick={onClick}>
+            {text}
+        </span>
     );
 };
 
 // 프로토타입 지정 prototype, PropType
-Switch.propTypes = {
-    checked: PropTypes.bool,
+Text.propTypes = {
+    text: PropTypes.string.isRequired,
     className: PropTypes.string,
-    size: PropTypes.oneOf(['small', 'medium']),
-    color: PropTypes.oneOf(['primary', 'secondary', 'error', 'info', 'success', 'warning', 'default']),
+    variant: PropTypes.oneOf([
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'subtitle1',
+        'subtitle2',
+        'body1',
+        'body2',
+        'caption',
+        'button',
+        'overline',
+    ]),
+    align: PropTypes.oneOf(['inherit', 'left', 'center', 'right', 'justify']),
+    onClick: PropTypes.func,
+    onMouseOver: PropTypes.func,
 };
 
 // Props 초기 셋팅
-Switch.defaultProps = {
-    checked: true,
-    className: `${style.switch}`,
-    size: 'medium',
-    color: 'default',
+Text.defaultProps = {
+    className: `${style.text}`,
+    variant: 'body1',
+    align: 'inherit',
+    onClick: undefined,
+    onMouseOver: undefined,
 };
-
-export default Switch;
+export default Text;
