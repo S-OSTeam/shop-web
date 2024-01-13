@@ -1,66 +1,48 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Typography, TypographyProps } from '@mui/material';
+import { Switch as MuiSwitch, SwitchProps as MuiSwitchProps } from '@mui/material';
 import clsN from 'classnames';
-import style from './style/text.module.scss';
+import PropTypes from 'prop-types';
 
-interface AtomProps extends TypographyProps {
-    text: string;
+interface SwitchProps extends MuiSwitchProps {
+    checked?: boolean;
     className?: string;
-    variant?: TypographyProps['variant']; // PropTypes에 있는 속성들로 글자 속성 변경
-    align?: TypographyProps['align']; // 글자 정렬 속성
-    onClick?: TypographyProps['onClick'];
-    onMouseOver?: TypographyProps['onMouseOver'];
+    size?: MuiSwitchProps['size'];
+    color?: MuiSwitchProps['color'];
 }
 
-const Text = ({ text, className, variant, align, onClick, onMouseOver }: AtomProps) => {
-    return variant ? (
-        <Typography
-            className={clsN(className, `${style.text}`)}
-            variant={variant}
-            align={align}
-            onClick={onClick}
-            onMouseOver={onMouseOver}
-        >
-            {text}
-        </Typography>
-    ) : (
-        <span className={clsN(className)} aria-hidden="true" onClick={onClick}>
-            {text}
-        </span>
+const Switch = ({ checked, className, size, color }: SwitchProps) => {
+    const [check, setChecked] = React.useState(checked);
+    const label = { inputProps: { 'aria-label': 'switch atom' } };
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked(event.target.checked);
+    };
+    return (
+        <MuiSwitch
+            {...label}
+            checked={check}
+            onChange={handleChange}
+            className={clsN(className)}
+            size={size}
+            color={color}
+        />
     );
 };
 
 // 프로토타입 지정 prototype, PropType
-Text.propTypes = {
-    text: PropTypes.string.isRequired,
+Switch.propTypes = {
+    checked: PropTypes.bool,
     className: PropTypes.string,
-    variant: PropTypes.oneOf([
-        'h1',
-        'h2',
-        'h3',
-        'h4',
-        'h5',
-        'h6',
-        'subtitle1',
-        'subtitle2',
-        'body1',
-        'body2',
-        'caption',
-        'button',
-        'overline',
-    ]),
-    align: PropTypes.oneOf(['inherit', 'left', 'center', 'right', 'justify']),
-    onClick: PropTypes.func,
-    onMouseOver: PropTypes.func,
+    size: PropTypes.oneOf(['small', 'medium']),
+    color: PropTypes.oneOf(['primary', 'secondary', 'error', 'info', 'success', 'warning', 'default']),
 };
 
 // Props 초기 셋팅
-Text.defaultProps = {
-    className: `${style.text}`,
-    variant: 'body1',
-    align: 'inherit',
-    onClick: undefined,
-    onMouseOver: undefined,
+Switch.defaultProps = {
+    checked: true,
+    className: ``,
+    size: 'medium',
+    color: 'default',
 };
-export default Text;
+
+export default Switch;
