@@ -15,9 +15,32 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
+        "baseUrl": "./src",
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./src/*"],
+            "@types/*": ["./types/*"],
+            "@asset/*": ["./asset/*"],
+            "@components/*": ["./components/*"],
+            "@atoms/*": ["./components/atoms/*"],
+            "@commons/*": ["./components/commons/*"],
+            "@molecules/*": ["./components/molecules/*"],
+            "@organisms/*": ["./components/organisms/*"],
+            "@templates/*": ["./components/templates/*"],
+            "@hooks/*": ["./hooks/*"],
+            "@models/*": ["./models/*"],
+            "@pages/*": ["./pages/*"],
+            "@recoil/*": ["./recoil/*"],
+            "@routes/*": ["./routes/*"],
+            "@styles/*": ["./styles/*"],
+            "@util/*": ["./util/*"]
         }
     },
-    "include": ["src"]
+    "include": [
+        "craco.config.js",
+        "src",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.css",
+        "src/**/*.scss"
+    ]
 }

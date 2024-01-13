@@ -1,7 +1,8 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
 
-const TsConfigPathPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
+const TsConfigPathPlugin = require('tsconfig-paths-webpack-plugin');
+
 const config: StorybookConfig = {
     // storybook 이 인식하는 스토리 파일의 경로를 설정
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -27,12 +28,17 @@ const config: StorybookConfig = {
         autodocs: 'tag',
     },
     // Storybook 웹팩 설정을 수정(커스텀)
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     webpackFinal: (config) => {
         // config.resolve 해당 객체가 존재하면 사용 아닌경우 빈 객체 할당
+        // eslint-disable-next-line no-param-reassign
         config.resolve = config.resolve || {};
         // 모듈을 검색할 경로를 설정(node_modules, styles)
+        // eslint-disable-next-line no-param-reassign
         config.resolve.modules = [path.resolve(__dirname, '..'), 'node_modules', 'styles'];
         // 별칭설정 이로인해 import 가 더 수월해짐
+        // eslint-disable-next-line no-param-reassign
         config.resolve.alias = {
             ...config.resolve.alias,
             '@components': path.resolve(__dirname, '../src/components'),
@@ -40,6 +46,7 @@ const config: StorybookConfig = {
         };
         // tsconfig-paths-webpack-plugin 설정 추가를 위해 배열로 초기화함
         // 웹팩 모듈을 해석하는 방식을 확장해줌, tsconfig-paths-webpack-plugin 을 사용
+        // eslint-disable-next-line no-param-reassign
         config.resolve.plugins = [...(config.resolve.plugins || []), new TsConfigPathPlugin()];
         return config;
     },
