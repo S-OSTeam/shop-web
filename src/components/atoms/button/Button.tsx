@@ -2,7 +2,7 @@ import React from 'react';
 import { Button as MuiButton, ButtonProps as MuiButtonProps } from '@mui/material';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
-import style from './style/Button.module.scss';
+import style from '@atoms/button/style/Button.module.scss';
 
 export interface ButtonProps extends MuiButtonProps {
     id?: string;
@@ -38,7 +38,7 @@ Button.propTypes = {
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func,
     onMouseOver: PropTypes.func,
-    size: PropTypes.oneOf([ 'small', 'medium', 'large', undefined]),
+    size: PropTypes.oneOf(['small', 'medium', 'large', undefined]),
 };
 
 Button.defaultProps = {

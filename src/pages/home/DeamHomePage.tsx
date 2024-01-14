@@ -1,13 +1,11 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import Button from '@atoms/button/Button';
+import LinearProgress from '@atoms/progress/LinesrProgress/LinearProgress';
 
 const DeamHomePage = () => {
-    return(
-        <Box component='div'>
-            <Button>
-                hi
-            </Button>
+    return (
+        <Box component="div">
+            <LinearProgress />
         </Box>
     );
 };
