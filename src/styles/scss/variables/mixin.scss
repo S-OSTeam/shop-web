@@ -1,0 +1,26 @@
+@import 'src/styles/scss/variables/variables';
+
+/*
+  mixin 은 함수처럼 다른곳에서 사용할 수 있음
+  재사용성이 좋고 모듈화가 가능
+*/
+
+@mixin mobile {
+  @media all and (min-width: #{$breakpoint-mobile})
+  and (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media all and (min-width: #{$breakpoint-tablet})
+  and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media all and (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
