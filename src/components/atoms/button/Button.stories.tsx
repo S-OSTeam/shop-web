@@ -11,7 +11,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 // 스토리 타입, StoryObj 의 제너릭 컴포넌트의 타입을 넘김
 type Story = StoryObj<typeof Button>;
 
-//  variant : "text" | "outlined" | "contained" | undefined
 export const Basic: Story = {
     // 컴포넌트에 필요한 요소(args)는 리액트 props와 같음
     args: {

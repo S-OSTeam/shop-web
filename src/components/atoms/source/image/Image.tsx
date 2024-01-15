@@ -4,20 +4,13 @@ import clsN from 'classnames';
 import style from './style/Image.module.scss';
 
 export interface ImgProps {
-    imgPath: string;
+    imgPath: string; // Prop 가 `@asset/image...` 경로를 전달
     className?: string;
     alt?: string;
 }
 
 const Image = ({ imgPath, className, alt }: ImgProps) => {
-    return (
-        <img
-            className={clsN(className, `${style.img}`)}
-            src={require(`${imgPath}`)}
-            // src={require(`../../../../asset/image/${imgPath}`)} // imgPath Prop 가 `@asset/image...` 경로를 전달
-            alt={alt}
-        />
-    );
+    return <img className={clsN(className, `${style.img}`)} src={require(`${imgPath}`)} alt={alt} />;
 };
 
 Image.propTypes = {
