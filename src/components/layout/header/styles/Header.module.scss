@@ -1,0 +1,92 @@
+@import 'src/components/layout/header/styles/index.scss';
+
+header{
+  position: fixed;
+  display: block;
+  width: 100%;
+  background: $primary-color;
+  z-index: 30;
+}
+
+.navWrapper {
+  box-sizing: border-box;
+  max-width: 1024px;
+  margin: 0 auto;
+  * {
+    list-style-type: none;
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mobileMenu{
+  display: none;
+
+  svg{
+    color: $white-color;
+  }
+}
+
+.logo{
+  cursor: default;
+  color: $white-color;
+  height: fit-content;
+  width: fit-content;
+  font-size: 24px;
+}
+
+.login{
+  display: flex;
+  background: $white-color;
+
+  span{
+    color: $primary-color;
+  }
+}
+
+.test{
+  height: 3000px;
+}
+
+@include desktop {
+  .container{
+    height: 60px;
+  }
+}
+
+@include tablet{
+  .container{
+    height: 60px;
+  }
+
+  .mobileMenu{
+    display: flex;
+  }
+
+  .login{
+    display: none;
+  }
+}
+
+@include mobile{
+  .container{
+    height: 50px;
+  }
+  .mobileMenu{
+    display: flex;
+  }
+
+  .login{
+    display: none;
+  }
+}

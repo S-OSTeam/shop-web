@@ -1,0 +1,39 @@
+@import 'src/components/layout/header/styles/index.scss';
+
+.parentCategory{
+  cursor: default;
+  width: fit-content;
+  height: fit-content;
+  padding: 4px;
+
+  span{
+    color: $white-color;
+  }
+}
+
+.categoryTitle{
+  font-size: 16px;
+}
+
+.categoryArrow{
+  margin: 0 0 7px 0;
+  font-size: 16px;
+}
+
+@include desktop{
+  .category{
+    display: block;
+  }
+}
+
+@include mobile{
+  .category{
+    display: none;
+  }
+}
+
+@include tablet{
+  .category{
+    display: none;
+  }
+}

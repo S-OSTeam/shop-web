@@ -12,36 +12,22 @@ export interface IconBtnProps {
     fontSize?: IconProps['fontSize'];
 }
 
-
-const IconButton = (
-    {
-        className,
-        iconClsN,
-        icon,
-        fontSize
-    }:IconBtnProps) => {
-    return(
-
-        <Button
-            className={clsN(className, `${style.btnIcon}`)}
-        >
-            <Icon
-                icon={icon}
-                fontSize={fontSize}
-                className={clsN(iconClsN, `${style.icon}`)}
-            />
+const IconButton = ({ className, iconClsN, icon, fontSize }: IconBtnProps) => {
+    return (
+        <Button className={clsN(className, `${style.btnIcon}`)} variant="text">
+            <Icon icon={icon} fontSize={fontSize} className={clsN(iconClsN, `${style.icon}`)} />
         </Button>
-    )
+    );
 };
 IconButton.propTypes = {
     className: PropTypes.string,
     iconClsN: PropTypes.string,
     icon: PropTypes.node.isRequired,
-    fontSize: PropTypes.oneOf(['small', 'inherit', 'large', 'medium', undefined])
+    fontSize: PropTypes.oneOf(['small', 'inherit', 'large', 'medium', undefined]),
 };
 IconButton.defaultProps = {
     className: `${style.btnIcon}`,
     iconClsN: `${style.icon}`,
-    fontSize: 'inherit'
-}
+    fontSize: 'inherit',
+};
 export default IconButton;

@@ -1,0 +1,64 @@
+@import "../../moduleTemplate/base/base";
+
+// css 박스 스타일 속성
+
+@mixin round($radius: 3px) {
+  border-radius: $radius;
+}
+@mixin size($width, $height){
+  width: $width;
+  height: $height;
+}
+@mixin center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 모바일 767px ~ 480px
+@mixin mobile {
+  .navContainer{
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  @media all and (min-width: #{$breakpoint-mobile})
+  and (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+// 테블릿 1023px ~ 768px
+@mixin tablet {
+  .navContainer{
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  @media all and (min-width: #{$breakpoint-tablet})
+  and (max-width: #{$breakpoint-laptop - 1px}) {
+    @content;
+  }
+}
+
+// 랩탑 1199px ~ 1024px
+@mixin laptop {
+  .navContainer{
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  @media all and (min-width: #{$breakpoint-laptop})
+  and (max-width: #{$breakpoint-desktop - 1px}){
+    @content;
+  }
+}
+
+// 데스크탑 1200px 이상
+@mixin desktop {
+  .navContainer{
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  @media all and (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
