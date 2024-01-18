@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { number, string } from 'prop-types';
 import { Typography, TypographyProps } from '@mui/material';
 import clsN from 'classnames';
 import style from './style/text.module.scss';
 
 export interface TextProps extends TypographyProps {
-    text: string;
+    text: string|number;
     className?: string;
     variant?: TypographyProps['variant']; // PropTypes에 있는 속성들로 글자 속성 변경
     align?: TypographyProps['align']; // 글자 정렬 속성
@@ -25,13 +25,13 @@ const Text = ({ text, className, variant, align, onClick, onMouseOver }: TextPro
             {text}
         </Typography>
     ) : (
-        { text }
+        <span className={clsN(className, `${style.text}`)}>{text}</span>
     );
 };
 
 // 프로토타입 지정 prototype, PropType
 Text.propTypes = {
-    text: PropTypes.string.isRequired,
+    text: PropTypes.oneOfType([string, number]).isRequired,
     className: PropTypes.string,
     variant: PropTypes.oneOf([
         'h1',
@@ -56,7 +56,7 @@ Text.propTypes = {
 // Props 초기 셋팅
 Text.defaultProps = {
     className: `${style.text}`,
-    variant: 'body1',
+    variant: undefined,
     align: 'inherit',
     onClick: undefined,
     onMouseOver: undefined,

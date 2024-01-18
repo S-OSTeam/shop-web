@@ -85,7 +85,7 @@ export const Body1: Story = {
         // @ts-ignore
         text: 'Body1',
         align: 'center',
-        variant: 'Body1',
+        variant: 'body1',
         className: `${styles.text}`,
     },
 };

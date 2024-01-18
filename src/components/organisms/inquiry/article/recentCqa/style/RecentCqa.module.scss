@@ -1,0 +1,64 @@
+@import "index";
+//color: #80A1D4;
+// body: 1260px
+
+// organisms
+.recentCqa{
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  box-sizing: border-box;
+  padding: 28px 20px;
+  background: #80A1D4;
+  border-radius: 8px;
+  max-width: 600px;
+  .heading{
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: bold;
+    padding-bottom: 12px;
+  }
+}
+
+// stack 감싸는 영역
+.articleWrapper{
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  flex: 1 0 auto;
+}
+.stack{
+  .context{
+    background: #ffffff;
+    border-color: #80A1D4;
+    color: #385779;
+    font-weight: bolder;
+    font-size: 12px;
+    height: 24px;
+  }
+  .user_Id{
+
+  }
+
+  // 제목, 내용 영역
+  .content_Title, .content_Context{
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+  .content_Title{
+    font-size: 18px;
+  }
+  .content_Context{
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 24px;
+    height: 200px;
+    overflow: auto;
+    overflow-y: scroll;
+  }
+}
+
+@include mobile{
+
+}
