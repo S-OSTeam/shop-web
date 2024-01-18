@@ -6,23 +6,24 @@ import Text from '@atoms/text/Text';
 import Icon from '@atoms/source/icon/Icon';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-interface CategoryHeaderProps {
-    onClick: (title: string) => void;
-}
+const CategoryHeader = () => {
+    const onClick = (title: string) => {
+        console.log(title);
+    };
 
-const CategoryHeader = ({ onClick }: CategoryHeaderProps) => {
     return (
         <ul className={clsN(styles.category)}>
             {category.map((item) => (
-                // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-                <li
-                    className={clsN(`${styles.parentCategory}`)}
-                    key={undefined}
-                    onClick={() => onClick && onClick(item.title)}
-                >
-                    <Text text={item.title} />
-                    <Icon icon={<ExpandMoreIcon fontSize="inherit" />} fontSize="inherit" />
-                </li>
+                <React.Fragment key={item.publicId}>
+                    <li
+                        className={clsN(`${styles.parentCategory}`)}
+                        onClick={() => onClick && onClick(item.title)}
+                        onKeyDown={undefined}
+                    >
+                        <Text text={item.title} />
+                        <Icon icon={<ExpandMoreIcon fontSize="inherit" />} fontSize="inherit" />
+                    </li>
+                </React.Fragment>
             ))}
         </ul>
     );

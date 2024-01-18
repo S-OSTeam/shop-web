@@ -7,6 +7,8 @@ import Text from '@atoms/text/Text';
 import { useNavigate } from 'react-router-dom';
 import styles from '@components/layout/header/styles/Header.module.scss';
 import CategoryHeader from '@components/layout/header/category/CategoryHeader';
+import HeaderMenu from '@components/layout/header/menu/HeaderMenu';
+import Button from '@atoms/button/Button';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -31,10 +33,6 @@ const Header = () => {
         console.log('-------------moving home-------------');
     };
 
-    const categoryClick = (title: string) => {
-        console.log(title);
-    };
-
     return (
         <header>
             <Box className={clsN(`${styles.navWrapper} ${styles.navContainer}`)}>
@@ -42,7 +40,11 @@ const Header = () => {
                     {categoryToggle}
                     <Text className={styles.logo} text="DeamHome" onClick={homeHandler} />
                     {userToggle}
-                    <CategoryHeader onClick={categoryClick} />
+                    <CategoryHeader />
+                    <HeaderMenu />
+                    <Button className={styles.login} variant="text">
+                        <Text className={styles.loginTitle} text="로그인" />
+                    </Button>
                 </nav>
             </Box>
         </header>

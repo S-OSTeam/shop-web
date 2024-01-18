@@ -7,4 +7,5 @@ export interface ItemCategoryResponse {
 export interface ItemCategoryTreeResponse {
     title: string;
     children: ItemCategoryTreeResponse[];
+    publicId: number;
 }

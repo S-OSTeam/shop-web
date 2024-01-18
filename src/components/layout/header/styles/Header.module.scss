@@ -24,7 +24,6 @@ header{
 }
 
 .container {
-  width: 760px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -38,7 +37,7 @@ header{
 }
 
 .logo{
-  cursor: default;
+  cursor: pointer;
   color: $white-color;
   height: fit-content;
   width: fit-content;
@@ -50,14 +49,49 @@ header{
 }
 
 @include desktop {
+
+  .navWrapper{
+    min-width: 860px;
+    max-width: 760px;
+    width: 90%;
+  }
+
+  .navContainer{
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
   .container{
     height: 60px;
+
+    .login{
+      display: flex;
+      min-width: 80px;
+      background: $white-color;
+
+      .loginTitle{
+        color: $primary-color;
+        font-size: 16px;
+      }
+    }
   }
 }
 
 @include tablet{
+
+  .navWrapper{
+    max-width: 768px;
+    width: 90%;
+  }
+  .navContainer{
+    padding-right: 15px;
+    padding-left: 15px;
+  }
   .container{
     height: 60px;
+    .login{
+      display: none;
+    }
   }
 
   .mobileMenu{
@@ -66,8 +100,15 @@ header{
 }
 
 @include mobile{
+  .navContainer{
+    padding-right: 10px;
+    padding-left: 10px;
+  }
   .container{
     height: 50px;
+    .login{
+      display: none;
+    }
   }
   .mobileMenu{
     display: flex;
