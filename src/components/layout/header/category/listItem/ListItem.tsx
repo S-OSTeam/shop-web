@@ -14,18 +14,16 @@ interface ListItemProps {
 const ListItem = ({ className, items, onClick }: ListItemProps) => {
     return (
         <ul className={clsN(className, `${styles.listItem}`)}>
-            {items.map((item) => {
-                return (
-                    <li
-                        className={styles.parentCategory}
-                        key={item.publicId}
-                        onClick={() => onClick && onClick(item.title)}
-                        onKeyDown={undefined}
-                    >
-                        <Text text={item.title} />
-                    </li>
-                );
-            })}
+            {items.map((item) => (
+                <li
+                    className={styles.subItem}
+                    key={item.publicId}
+                    onClick={() => onClick && onClick(item.title)}
+                    onKeyDown={undefined}
+                >
+                    <Text text={item.title} />
+                </li>
+            ))}
         </ul>
     );
 };

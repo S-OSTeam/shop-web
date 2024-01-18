@@ -3,6 +3,34 @@
 @include desktop{
   .category{
     display: flex;
+
+    //리스트들 보여주는 부분
+    .modalItem {
+      padding: 23px 0;
+      background-color: #F5F5F5;
+      display: none;
+
+      li:hover > span{
+        color: coral;
+      }
+    }
+
+    li:hover {
+      .modalItem {
+        display: block;
+      }
+    }
+
+    & > li {
+      position: relative;
+    }
+
+    .listItemsWrapper {
+      white-space: nowrap;
+      position: absolute;
+      top: 100%; /* 위치를 조절해 필요에 맞게 설정하세요 */
+      left: 0px;
+    }
   }
 
   .parentCategory{

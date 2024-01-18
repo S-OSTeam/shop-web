@@ -5,6 +5,7 @@ import { category } from '@util/test/data/CategoryResponse';
 import Text from '@atoms/text/Text';
 import Icon from '@atoms/source/icon/Icon';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ListItem from '@components/layout/header/category/listItem/ListItem';
 
 const CategoryHeader = () => {
     const onClick = (title: string) => {
@@ -22,6 +23,7 @@ const CategoryHeader = () => {
                     >
                         <Text text={item.title} />
                         <Icon icon={<ExpandMoreIcon fontSize="inherit" />} fontSize="inherit" />
+                        <ListItem className={`${styles.modalItem} ${styles.listItemsWrapper}`} items={item.children} />
                     </li>
                 </React.Fragment>
             ))}

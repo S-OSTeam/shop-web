@@ -2,3 +2,12 @@
 
 .listItem{
 }
+
+.subItem{
+  padding: 3px 23px;
+
+  span{
+    font-size: 14px;
+    color:$black-color;
+  }
+}
