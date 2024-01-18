@@ -1,4 +1,4 @@
-@import 'src/components/layout/header/styles/index.scss';
+@import 'index.scss';
 
 header{
   position: fixed;
@@ -45,15 +45,6 @@ header{
   font-size: 24px;
 }
 
-.login{
-  display: flex;
-  background: $white-color;
-
-  span{
-    color: $primary-color;
-  }
-}
-
 .test{
   height: 3000px;
 }
@@ -72,10 +63,6 @@ header{
   .mobileMenu{
     display: flex;
   }
-
-  .login{
-    display: none;
-  }
 }
 
 @include mobile{
@@ -84,9 +71,5 @@ header{
   }
   .mobileMenu{
     display: flex;
-  }
-
-  .login{
-    display: none;
   }
 }

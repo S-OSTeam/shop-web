@@ -5,10 +5,8 @@ import { Box, IconButton } from '@mui/material';
 import clsN from 'classnames';
 import Text from '@atoms/text/Text';
 import { useNavigate } from 'react-router-dom';
-import CategoryHeader from '@components/layout/header/category/CategoryHeader';
 import styles from '@components/layout/header/styles/Header.module.scss';
-import HeaderMenu from '@components/layout/header/menu/HeaderMenu';
-import Button from '@atoms/button/Button';
+import CategoryHeader from '@components/layout/header/category/CategoryHeader';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -33,7 +31,7 @@ const Header = () => {
         console.log('-------------moving home-------------');
     };
 
-    const categoryMouseOver = (title: string) => {
+    const categoryClick = (title: string) => {
         console.log(title);
     };
 
@@ -44,11 +42,7 @@ const Header = () => {
                     {categoryToggle}
                     <Text className={styles.logo} text="DeamHome" onClick={homeHandler} />
                     {userToggle}
-                    <CategoryHeader onMouseOver={categoryMouseOver} />
-                    <HeaderMenu />
-                    <Button className={styles.login} variant="outlined">
-                        <Text text="로그인" />
-                    </Button>
+                    <CategoryHeader onClick={categoryClick} />
                 </nav>
             </Box>
         </header>

@@ -1,37 +1,30 @@
 import React from 'react';
+import styles from '@components/layout/header/category/styles/CategoryHeader.module.scss';
+import clsN from 'classnames';
 import { category } from '@util/test/data/CategoryResponse';
 import Text from '@atoms/text/Text';
-import styles from '@components/layout/header/category/styles/CategoryHeader.module.scss';
-import { Box } from '@mui/material';
-import clsN from 'classnames';
-import Button from '@atoms/button/Button';
 import Icon from '@atoms/source/icon/Icon';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface CategoryHeaderProps {
-    onMouseOver: (title: string) => void;
+    onClick: (title: string) => void;
 }
 
-const CategoryHeader = ({ onMouseOver }: CategoryHeaderProps) => {
+const CategoryHeader = ({ onClick }: CategoryHeaderProps) => {
     return (
-        <Box className={clsN(styles.category)}>
+        <ul className={clsN(styles.category)}>
             {category.map((item) => (
-                <React.Fragment key={undefined}>
-                    <Button
-                        className={styles.parentCategory}
-                        variant="text"
-                        onMouseOver={() => onMouseOver && onMouseOver(item.title)}
-                    >
-                        <Text className={styles.categoryTitle} text={`${item.title}`} />
-                        <Icon
-                            className={styles.categoryArrow}
-                            icon={<ExpandMoreIcon fontSize="inherit" />}
-                            fontSize="inherit"
-                        />
-                    </Button>
-                </React.Fragment>
+                // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+                <li
+                    className={clsN(`${styles.parentCategory}`)}
+                    key={undefined}
+                    onClick={() => onClick && onClick(item.title)}
+                >
+                    <Text text={item.title} />
+                    <Icon icon={<ExpandMoreIcon fontSize="inherit" />} fontSize="inherit" />
+                </li>
             ))}
-        </Box>
+        </ul>
     );
 };
 

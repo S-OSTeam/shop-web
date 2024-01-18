@@ -4,34 +4,13 @@
   display: flex;
 }
 
-.iconBtn{
-  min-width: 23px;
-  width: fit-content;
-  height: fit-content;
-  padding: 0;
-}
-
-.icon{
-  width: fit-content;
-  height: fit-content;
-  font-size: 14px;
-  color: $white-color;
-}
-
-span{
-  color: $white-color;
-}
-
 @include desktop{
-
 }
-
 @include tablet{
   .menu{
     display: none;
   }
 }
-
 @include mobile{
   .menu{
     display: none;
