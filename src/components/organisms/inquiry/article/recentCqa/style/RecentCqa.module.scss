@@ -2,39 +2,380 @@
 //color: #80A1D4;
 // body: 1260px
 
-// organisms
 .recentCqa{
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  box-sizing: border-box;
-  padding: 28px 20px;
-  background: #80A1D4;
-  border-radius: 8px;
-  max-width: 600px;
+  transition: ease-in-out 0.2s;
+  background-color: $primary-color;
   .heading{
-    font-size: 24px;
-    color: #ffffff;
-    font-weight: bold;
-    padding-bottom: 12px;
+    color: white;
+  }
+}
+// stack 감싸는 영역
+.articleWrapper{
+  background-color: rgba(255, 255, 255, 0.3);
+}
+// ItemWrapper : Stack
+.stack {
+  .context {
+    // mui chip
+    width: fit-content;
+    height: fit-content;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border-color: #80A1D4;
+    background-color: #ffffff;
+    span {
+    }
+  }
+  .user_Id{
+    border-color: #254d83;
+    background-color: #254d83;
+    color: white;
+    font-weight: bolder;
+  }
+}
+.stack_last{
+  box-sizing: border-box;
+  // 제목, 내용 영역
+  .content_Title, .content_Context{
+    background: rgba(255,255,255,0.6);
+  }
+  .content_Title{
+  }
+  .content_Context{
+    overflow-y: scroll;
+  }
+}
+// page nav
+.nav{
+  ul{
+    display: flex;
+    justify-content: center;
+  }
+}
+.current_cont{
+  display: flex;
+  .nav_value{
+  }
+}
+
+/* 모바일 */
+@include mobile{
+  .recentCqa{
+    width: 100%;
+    max-width: 480px;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 8px;
+    .heading{
+      font-size: 16pt;
+      padding-bottom: 4px;
+    }
+  }
+
+  // stack 감싸는 영역
+  .articleWrapper{
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px;
+  }
+  // ItemWrapper : Stack
+  .stack{
+    .context{
+    // mui chip
+      padding: 2px 0;
+      font-size: 10pt;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border-width: 2px;
+      span{
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+    }
+    .user_Id{
+    }
+
+  }
+  .stack_last{
+    box-sizing: border-box;
+    border-radius: 4px;
+    // 제목, 내용 영역
+    .content_Title, .content_Context{
+      border-radius: 4px;
+      padding: 4px;
+    }
+    .content_Title{
+      font-size: 14pt;
+    }
+    .content_Context{
+      font-size: 12pt;
+      height: 200px;
+      overflow-y: scroll;
+      line-height: 20pt;
+    }
+  }
+  // page nav
+  .nav{
+    ul{
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .current_cont{
+    display: flex;
+    align-items: center;
+    .nav_value{
+      padding: 0 8px;
+    }
+  }
+
+}
+@include tablet{
+  .recentCqa{
+    width: 100%;
+    //max-width: 480px;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 8px;
+    .heading{
+      font-size: 20pt;
+      padding-bottom: 4px;
+    }
+  }
+
+  // stack 감싸는 영역
+  .articleWrapper{
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px;
+  }
+  // ItemWrapper : Stack
+  .stack{
+    .context{
+      // mui chip
+      padding: 2px 0;
+      font-size: 10pt;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border-width: 2px;
+      span{
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+    }
+    .user_Id{
+    }
+
+  }
+  .stack_last{
+    box-sizing: border-box;
+    border-radius: 4px;
+    // 제목, 내용 영역
+    .content_Title, .content_Context{
+      border-radius: 4px;
+      padding: 4px;
+    }
+    .content_Title{
+      font-size: 14pt;
+    }
+    .content_Context{
+      font-size: 12pt;
+      height: 200px;
+      overflow-y: scroll;
+      line-height: 20pt;
+    }
+  }
+  // page nav
+  .nav{
+    ul{
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .current_cont{
+    display: flex;
+    align-items: center;
+    .nav_value{
+      padding: 0 8px;
+    }
+  }
+}
+@include laptop{
+  .recentCqa{
+    width: calc(60% - 4px);
+    height: 360px;
+    //max-width: 480px;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 8px;
+    .heading{
+      font-size: 20px;
+      padding-bottom: 4px;
+    }
+  }
+
+  // stack 감싸는 영역
+  .articleWrapper{
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px;
+  }
+  // ItemWrapper : Stack
+  .stack{
+    .context{
+      // mui chip
+      padding: 2px 0;
+      font-size: 10pt;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border-width: 2px;
+      span{
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+    }
+    .user_Id{
+    }
+
+  }
+  .stack_last{
+    box-sizing: border-box;
+    border-radius: 4px;
+    // 제목, 내용 영역
+    .content_Title, .content_Context{
+      border-radius: 4px;
+      padding: 4px;
+    }
+    .content_Title{
+      font-size: 14px;
+    }
+    .content_Context{
+      font-size: 12px;
+      height: 144px;
+      overflow-y: scroll;
+      line-height: 20pt;
+    }
+  }
+  // page nav
+  .nav{
+    ul{
+      padding: 0;
+      display: flex;
+      justify-content: center;
+
+    }
+  }
+  .current_cont{
+    display: flex;
+    align-items: center;
+    .nav_value{
+      padding: 0 8px;
+    }
+  }
+  .btn_cls {
+    width: 12px;
+    height: 24px;
+    svg{
+      font-size: 18px;
+
+    }
+  }
+}
+@include desktop{
+  .recentCqa{
+    width: calc(50% - 4px);
+    height: 360px;
+    //max-width: 480px;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 8px;
+    .heading{
+      font-size: 20px;
+      padding-bottom: 4px;
+    }
+  }
+
+  // stack 감싸는 영역
+  .articleWrapper{
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px;
+  }
+  // ItemWrapper : Stack
+  .stack{
+    .context{
+      // mui chip
+      padding: 2px 0;
+      font-size: 10pt;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border-width: 2px;
+      span{
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+    }
+    .user_Id{
+    }
+
+  }
+  .stack_last{
+    box-sizing: border-box;
+    border-radius: 4px;
+    // 제목, 내용 영역
+    .content_Title, .content_Context{
+      border-radius: 4px;
+      padding: 4px;
+    }
+    .content_Title{
+      font-size: 14px;
+    }
+    .content_Context{
+      font-size: 12px;
+      height: 144px;
+      overflow-y: scroll;
+      line-height: 20pt;
+    }
+  }
+  // page nav
+  .nav{
+    ul{
+      padding: 0;
+      display: flex;
+      justify-content: center;
+
+    }
+  }
+  .current_cont{
+    display: flex;
+    align-items: center;
+    .nav_value{
+      padding: 0 8px;
+    }
+  }
+  .btn_cls {
+    width: 12px;
+    height: 24px;
+    svg{
+      font-size: 18px;
+
+    }
+  }
+}
+/*
+.recentCqa{
+  .heading{
   }
 }
 
 // stack 감싸는 영역
 .articleWrapper{
-  padding: 12px;
-  background-color: rgba(255, 255, 255, 0.28);
-  border-radius: 8px;
-  flex: 1 0 auto;
 }
+// ItemWrapper : Stack
 .stack{
   .context{
-    background: #ffffff;
-    border-color: #80A1D4;
-    color: #385779;
-    font-weight: bolder;
-    font-size: 12px;
-    height: 24px;
   }
   .user_Id{
 
@@ -42,23 +383,19 @@
 
   // 제목, 내용 영역
   .content_Title, .content_Context{
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 4px 8px;
   }
   .content_Title{
-    font-size: 18px;
   }
   .content_Context{
-    box-sizing: border-box;
-    font-size: 16px;
-    line-height: 24px;
-    height: 200px;
-    overflow: auto;
-    overflow-y: scroll;
   }
 }
-
-@include mobile{
-
+// page nav
+.nav{
+  ul{
+  }
 }
+.current_cont{
+  .nav_value{
+  }
+}
+*/

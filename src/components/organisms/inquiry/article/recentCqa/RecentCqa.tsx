@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, useMediaQuery } from '@mui/material';
 import Text from '@atoms/text/Text';
 import { useRecoilValue } from 'recoil';
 import { UserInquiryState } from '@recoil/atoms/inquiry/user/userInquiry/UserInquiryState';
@@ -9,6 +9,8 @@ import clsN from 'classnames';
 import style from './style/RecentCqa.module.scss';
 import Chip from '@atoms/chip/Chip';
 import Pagination from '@molecules/pagination/paginationCustom/Pagination';
+import Button from '@atoms/button/Button';
+import ButtonlessPagination from '@molecules/pagination/buttonlessPagination/ButtonlessPagination';
 
 // 리코일을 통해 불러오기
 
@@ -44,7 +46,8 @@ const RecentCqa = (
     // 페이지네이션에 쓰일 변수 페이지 크기
     const pageLength = Math.ceil(cqaData.length);
 
-
+    // 미디어쿼리 변수
+    const spacingSet = useMediaQuery(`()`)
 
     // 페이지네이션 클릭 이벤트
     const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => {
@@ -72,7 +75,7 @@ const RecentCqa = (
                     <Chip label={(cqa_item).toString()} className={clsN(`${style.context}`)} />
                     <Chip label={cqa_item_full_name} className={clsN(`${style.context}`)} />
                 </Stack>
-                <Stack className={clsN(`${style.stack}`)} spacing={1}>
+                <Stack className={clsN(`${style.stack} ${style.stack_last}`)} spacing={1}>
                     <Text text={cqa_title} className={clsN(`${style.content_Title}`)} />
                     <Text text={cqa_content} className={clsN(`${style.content_Context}`)} />
                 </Stack>
@@ -84,7 +87,7 @@ const RecentCqa = (
 
 
     return (
-        <Box
+        <Stack
             component='section'
             className={clsN(className, `${style.recentCqa}`)}
         >
@@ -94,8 +97,15 @@ const RecentCqa = (
                 className={clsN(`${style.heading}`)}
             />
             {renderItem}
-            
-        </Box>
+            <ButtonlessPagination
+                onChange={handlePageChange}
+                count={pageLength}
+                navClsN={clsN(`${style.nav}`)}
+                contextClsN={clsN(`${style.nav_value}`)}
+                currPageClsN={clsN(`${style.current_cont}`)}
+                btnCls={clsN(`${style.btn_cls}`)}
+            />
+        </Stack>
     );
 };
 export default RecentCqa;

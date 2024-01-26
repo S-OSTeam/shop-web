@@ -1,0 +1,122 @@
+{
+  "gridRow": [
+    {
+      "id": 1,
+      "caq_item_code": 50315,
+      "caq_inquiry_type": "배송",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user153",
+      "caq_datetime": "24.01.11",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    },
+    {
+      "id": 2,
+      "caq_item_code": 66315,
+      "caq_inquiry_type": "질문",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user136",
+      "caq_datetime": "24.01.12",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    },
+    {
+      "id": 3,
+      "caq_item_code": 32215,
+      "caq_inquiry_type": "반품",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user251",
+      "caq_datetime": "24.01.13",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    }
+  ,
+    {
+      "id": 4,
+      "caq_item_code": 11115,
+      "caq_inquiry_type": "교환",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user512",
+      "caq_datetime": "24.01.14",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    }
+  ,
+    {
+      "id": 5,
+      "caq_item_code": 21315,
+      "caq_inquiry_type": "취소",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user676",
+      "caq_datetime": "24.01.15",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    }
+  ,
+    {
+      "id": 6,
+      "caq_item_code": 56715,
+      "caq_inquiry_type": "배송",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user617",
+      "caq_datetime": "24.01.16",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    }
+  ,
+    {
+      "id": 7,
+      "caq_item_code": 31215,
+      "caq_inquiry_type": "교환",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user641",
+      "caq_datetime": "24.01.17",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    }
+  ,
+    {
+      "id": 8,
+      "caq_item_code": 51335,
+      "caq_inquiry_type": "질문",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user686",
+      "caq_datetime": "24.01.18",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    }
+  ,
+    {
+      "id": 9,
+      "caq_item_code": 52315,
+      "caq_inquiry_type": "반품",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user131",
+      "caq_datetime": "24.01.19",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    }
+  ,
+    {
+      "id": 10,
+      "caq_item_code": 40315,
+      "caq_inquiry_type": "교환",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user126",
+      "caq_datetime": "24.01.20",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    }
+  ,
+    {
+      "id": 11,
+      "caq_item_code": 54315,
+      "caq_inquiry_type": "배송",
+      "caq_title": "안녕하세요 질문이 있어요",
+      "caq_user_name": "user901",
+      "caq_datetime": "24.01.21",
+      "caq_datetime_inquiry": "",
+      "caq_inquiry_state": false
+    }
+  ]
+}

@@ -3,15 +3,20 @@
 
 // 디스플레이별 브레이크 포인트
 
-// 데스크탑
-$breakpoint-desktop: 1024px;
-// 테블릿
-$breakpoint-tablet: 758px;
-// 모바일
-$breakpoint-mobile: 335px;
+// 모바일(수직 minimum)
+$breakpoint-mobile-mini: 320px;
+// 모바일(수직)
+$breakpoint-mobile: 480px;
+// 모바일(수평), 테블릿(수직)
+$breakpoint-tablet: 768px;
+// 테블릿(수평), 노트북
+$breakpoint-laptop: 1024px;
+// 테블릿(수평), 노트북 추가
+$breakpoint-desktop: 1280px;
 
 // 색상
 $primary-color: #80A1D4;
+$secondary-color: #b0c4f3;
 $black-color: #000000;
 $white-color: #FFFFFF;
 $gray-color: #D9D9D9;
@@ -21,21 +26,16 @@ $floaral-color: #F7F4EA;
 $icon-size-max: 20px;
 $headerIcons-max: 104px;
 
-// 폰트사이즈
-$basic-font-color: #fff;
-$title-font-size-L: 32px;
-$title-font-size-M: 28px;
-$title-font-size-S: 24px;
+// 헤더 폰트사이즈
+$font-h-size-S: 1rem;
+$font-h-size-M: 2rem;
+$font-h-size-L: 3rem;
 
 // 헤더 높이
 $header-h-desk: 50px;
 $header-h-tablet: 45px;
 $header-h-mob: 32px;
 
-// 헤더 컨텐츠 폰트 크기
-$header-body-font-L: 18px;
-$header-body-font-M: 16px;
-$header-body-font-S: 14px;
 
 // 네비게이션 링크 호버 색상
 $nav-li-hover: #61dafb;
@@ -55,18 +55,10 @@ $nav-li-depth-hover: #707070;
   --icon-size-max: #{$icon-size-max};
   --headerIcons-max: #{$headerIcons-max};
 
-  --basic-font-color: #{$basic-font-color};
-  --title-font-size-L: #{$title-font-size-L};
-  --title-font-size-M: #{$title-font-size-M};
-  --title-font-size-S: #{$title-font-size-S};
 
   --header-h-desk: #{$header-h-desk};
   --header-h-tablet: #{$header-h-tablet};
   --header-h-mob: #{$header-h-mob};
-
-  --header-body-font-L: #{$header-body-font-L};
-  --header-body-font-M: #{$header-body-font-M};
-  --header-body-font-S: #{$header-body-font-S};
 
   --nav-li-hover: #{$nav-li-hover};
   --nav-li-depth-hover: #{$nav-li-depth-hover};

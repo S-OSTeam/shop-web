@@ -1,2 +1,76 @@
 @import "index";
 
+.main_wrapper{
+  display: block;
+  margin: 0 auto;
+  .dir_stack{
+    display: block;
+  }
+
+  .table_section_heading{
+    font-size: 16pt;
+    padding: 4px 0;
+  }
+  .header_cell_width{
+  }
+}
+@include mobile{
+  /*start*/
+  .main_wrapper{
+    padding: 0 8px;
+    width: 100%;
+    .dir_stack{
+      display: block;
+    }
+    .table_section_heading{
+
+    }
+  }
+  /*end*/
+}
+@include tablet{
+  /*start*/
+  .main_wrapper{
+    padding: 0 24px;
+    .dir_stack{
+      display: block;
+    }
+    .table_section_heading{
+      font-size: 28px;
+      padding: 12px 0;
+    }
+  }
+  /*end*/
+}
+@include laptop{
+  /*start*/
+  .main_wrapper{
+    padding: 0 48px;
+    .dir_stack{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .table_section_heading{
+      font-size: 24px;
+      padding: 20px 0 8px;
+    }
+  }
+  /*end*/
+}
+@include desktop{
+  /*start*/
+  .main_wrapper{
+    max-width: 1200px;
+    padding: 0 64px;
+    .dir_stack{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .table_section_heading{
+
+    }
+  }
+  /*end*/
+}

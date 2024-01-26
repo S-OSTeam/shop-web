@@ -5,22 +5,27 @@
   재사용성이 좋고 모듈화가 가능
 */
 
+// 모바일 세로 320px~480px
 @mixin mobile {
-  @media all and (min-width: #{$breakpoint-mobile})
-  and (max-width: #{$breakpoint-tablet - 1px}) {
+  @media all and (min-width: $breakpoint-mobile-mini) and (max-width: #{$breakpoint-mobile}){
     @content;
   }
 }
-
+// 모바일 가로, 테블릿 세로 768px
 @mixin tablet {
-  @media all and (min-width: #{$breakpoint-tablet})
-  and (max-width: #{$breakpoint-desktop - 1px}) {
+  @media all and (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet}){
     @content;
   }
 }
-
+// 테블릿 가로, 랩탑 1024px
+@mixin laptop {
+  @media all and (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-laptop}){
+    @content;
+  }
+}
+// 데스크탑 1280px
 @mixin desktop {
-  @media all and (min-width: #{$breakpoint-desktop}) {
+  @media all and (min-width: #{$breakpoint-laptop}) and (max-width: #{$breakpoint-desktop}){
     @content;
   }
 }
