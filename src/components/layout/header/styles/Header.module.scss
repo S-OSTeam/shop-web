@@ -1,116 +1,215 @@
 @import 'index.scss';
 
-header{
+.header {
+
+}
+
+// 네비 자체를 감싸는 래퍼
+.app_bar_nav {
+  background-color: $primary-color !important;
+  padding: 0 !important;
   position: fixed;
   display: block;
   width: 100%;
-  background: $primary-color;
   z-index: 30;
-}
-
-.navWrapper {
   box-sizing: border-box;
-  max-width: 1024px;
-  margin: 0 auto;
   * {
     list-style-type: none;
   }
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+// 헤더 내부 컨텐츠 정렬하는 컨테이너
 .container {
-  margin-left: auto;
-  margin-right: auto;
+  padding: 0;
+  height: 100%;
 }
 
-.mobileMenu{
-  display: none;
+// ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+.tool_bar {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+}
+// 로그인 버튼
+.login{
+  color: gray !important;
+  background-color: white !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  &:hover{
+    background-color: white;
+  }
+}
+.loginTitle{
 
-  svg{
-    color: $white-color;
+}
+// 메뉴 버튼
+.drawer_icon_btn{
+  box-sizing: border-box;
+  .drawer_icon{
+    color: white;
+  }
+}
+.drawer_icon_btn{
+}
+// 모바일 메뉴 : default 비활성화
+.mobileMenu {
+  display: none;
+  // 아이콘 색상
+  svg {
+    //color: white;
   }
 }
 
-.logo{
+// 모바일 메뉴 감싸는 부모
+.drawer {
+  display: block;
+}
+
+// example 모바일 메뉴
+.drawer_wrapper {
+  text-align: center;
+  .mobile_header {
+    font-size: $title-s;
+    height: 56px;
+    line-height: 56px;
+  }
+  & .MuiDrawer-paper {
+    box-sizing: border-box;
+  }
+}
+
+
+// logo <span>
+.logo {
+  width: calc(100% / 3);
   cursor: pointer;
   color: $white-color;
   height: fit-content;
-  width: fit-content;
   font-size: 24px;
 }
 
-.test{
-  height: 3000px;
-}
+@include mobile {
+  .header {
 
-@include desktop {
-
-  .navWrapper{
-    min-width: 860px;
-    max-width: 760px;
-    width: 90%;
   }
 
-  .navContainer{
-    padding-right: 20px;
-    padding-left: 20px;
+  .app_bar_nav {
+    height: 56px;
+    padding: 0 16px;
+    display: flex;
   }
-
-  .container{
-    height: 60px;
-
-    .login{
-      display: flex;
-      min-width: 80px;
-      background: $white-color;
-
-      .loginTitle{
-        color: $primary-color;
-        font-size: 16px;
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar{
+    height: 100%;
+    justify-content: right;
+    margin-left: auto;
+    & > *:first-child{
+      margin-right: auto;
+    }
+    & > *:nth-child(2){
+      margin-right: 8px;
+    }
+    .drawer_icon_btn{
+      color: white;
+      box-sizing: border-box;
+      .drawer_icon{
+        font-size: 28px;
       }
     }
   }
-}
+  // 헤더 내부 컨텐츠 정렬하는 컨테이너
+  .container {
 
-@include tablet{
+  }
+  .drawer {
 
-  .navWrapper{
-    max-width: 768px;
-    width: 90%;
   }
-  .navContainer{
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-  .container{
-    height: 60px;
-    .login{
-      display: none;
-    }
-  }
+  .drawer_wrapper {
 
-  .mobileMenu{
-    display: flex;
+
   }
 }
 
-@include mobile{
-  .navContainer{
-    padding-right: 10px;
-    padding-left: 10px;
+// 46..~768 px
+@include tablet {
+  .app_bar_nav {
+    height: 64px;
+    padding: 0;
   }
-  .container{
-    height: 50px;
-    .login{
-      display: none;
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar{
+    margin: 0 auto;
+    max-width: 752px;
+    height: 100%;
+    justify-content: right;
+    & > *:first-child{
+      margin-right: auto;
+    }
+    & > *:nth-child(2){
+      margin-right: 16px;
+    }
+    .drawer_icon_btn{
+      color: white;
+      box-sizing: border-box;
+      .drawer_icon{
+        font-size: 28px;
+      }
     }
   }
-  .mobileMenu{
+
+}
+
+@include laptop {
+  .app_bar_nav {
+    height: 64px;
+  }
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar {
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
     display: flex;
+    justify-content: space-between;
+    & > *:first-child{
+      width: fit-content;
+    }
+    & > *:nth-child(2){
+    }
+    & > *:nth-child(3){
+      width: 15%;
+    }
+    & > *:last-child{
+      width: 10%
+    }
+  }
+}
+
+@include desktop {
+  .app_bar_nav {
+    height: 64px;
+  }
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar {
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@include desktop-large {
+  .app_bar_nav {
+    height: 64px;
+  }
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar {
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 }

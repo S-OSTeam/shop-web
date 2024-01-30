@@ -1,7 +1,7 @@
 import React from 'react';
 import { AvatarProps, CardHeader as MuiCardHeader } from '@mui/material';
 import PropTypes from 'prop-types';
-import { IconBtnProps } from '@molecules/button/iconButton/IconButton';
+import { IconBtnProps } from '@molecules/button/iconButton/IconButtonComponent';
 
 interface ActionProps {
     IconBtn: React.ReactElement<IconBtnProps>

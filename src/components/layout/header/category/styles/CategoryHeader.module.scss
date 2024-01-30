@@ -1,56 +1,192 @@
 @import 'src/components/layout/header/styles/index.scss';
+.category{
+  //리스트들 보여주는 부분
+  .modalItem {
+    li:hover > span{
+    }
+  }
 
-@include desktop{
+  li:hover {
+    .modalItem {
+    }
+  }
+
+  & > li {
+  }
+
+}
+.list_wrapper{
+
+}
+.list_items_wrapper {
+}
+.list_item_btn{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+.list_item_title{
+  width: 80%;
+}
+.list_item_icon{
+  width: 20%;
+}
+.collapse{
+}
+.parentCategory{
+  span{
+  }
+}
+@include mobile{
   .category{
-    display: flex;
-
     //리스트들 보여주는 부분
     .modalItem {
-      padding: 23px 0;
-      background-color: #F5F5F5;
-      display: none;
-
       li:hover > span{
-        color: coral;
       }
     }
 
     li:hover {
       .modalItem {
-        display: block;
       }
     }
 
     & > li {
-      position: relative;
     }
 
-    .listItemsWrapper {
-      white-space: nowrap;
-      position: absolute;
-      top: 100%; /* 위치를 조절해 필요에 맞게 설정하세요 */
-      left: 0px;
-    }
   }
-
   .parentCategory{
-    cursor: pointer;
-    padding: 4px;
-    span{
-      font-size: 16px;
-      color: $white-color;
-    }
   }
-}
+  // 2 depth 감싸는 부모
+  .list_wrapper{
+    padding-right: 0;
+  }
+  // 2차 아이템 카테고리 리스트
+  .list_items_wrapper {
 
-@include mobile{
-  .category{
-    display: none;
+  }
+  .list_item_btn{
+
+  }
+  .list_item_title{
+  }
+  .list_item_icon{
+  }
+  .collapse{
+    width: 96%;
+  }
+  .parentCategory{
+    span{
+    }
   }
 }
 
 @include tablet{
   .category{
-    display: none;
+    //리스트들 보여주는 부분
+    .modalItem {
+      li:hover > span{
+      }
+    }
+
+    li:hover {
+      .modalItem {
+      }
+    }
+
+    & > li {
+    }
+
+    .list_items_wrapper {
+    }
+  }
+
+  .parentCategory{
+    span{
+    }
+  }
+  .collapse{
+    width: 96%;
+  }
+  .parentCategory{
+    span{
+    }
+  }
+}
+
+@include laptop{
+  .category{
+    //리스트들 보여주는 부분
+    .modalItem {
+      li:hover > span{
+      }
+    }
+
+    li:hover {
+      .modalItem {
+      }
+    }
+
+    & > li {
+    }
+
+    .list_items_wrapper {
+    }
+  }
+
+  .parentCategory{
+    span{
+    }
+  }
+}
+
+@include desktop{
+  .category{
+    //리스트들 보여주는 부분
+    .modalItem {
+      li:hover > span{
+      }
+    }
+
+    li:hover {
+      .modalItem {
+      }
+    }
+
+    & > li {
+    }
+
+    .list_items_wrapper {
+    }
+  }
+
+  .parentCategory{
+    span{
+    }
+  }
+}
+@include desktop-large{
+  .category{
+    //리스트들 보여주는 부분
+    .modalItem {
+      li:hover > span{
+      }
+    }
+
+    li:hover {
+      .modalItem {
+      }
+    }
+
+    & > li {
+    }
+
+    .list_items_wrapper {
+    }
+  }
+
+  .parentCategory{
+    span{
+    }
   }
 }

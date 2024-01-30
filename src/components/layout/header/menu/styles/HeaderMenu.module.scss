@@ -1,27 +1,72 @@
 @import "src/components/layout/header/styles/index.scss";
 
-@include desktop{
-  .menu{
-    display: flex;
+.menu_stack{
+  .iconBtn{
+    color: white;
+    & > span{
+    }
+  }
+  .icon{
+  }
+}
+@include mobile{
+  .menu_stack{
+    max-width: 112px;
+
     .iconBtn{
-      min-width: 30px;
-      padding: 4px;
-      height: fit-content;
+      & > span{
+      }
     }
     .icon{
-      color: $white-color;
-      font-size:16px;
-      height: fit-content;
+        font-size: 20px;
     }
   }
 }
 @include tablet{
-  .menu{
-    display: none;
+  .menu_stack{
+    max-width: 124px;
+    .iconBtn{
+
+      & > span{
+      }
+    }
+    .icon{
+    }
   }
 }
-@include mobile{
-  .menu{
-    display: none;
+@include laptop{
+  .menu_stack{
+
+    .iconBtn{
+
+      & > span{
+      }
+    }
+    .icon{
+    }
+  }
+}
+@include desktop{
+  .menu_stack{
+
+    .iconBtn{
+
+      & > span{
+      }
+    }
+    .icon{
+    }
+  }
+}
+@include desktop-large{
+  .menu_stack{
+
+    .iconBtn{
+
+      & > span{
+      }
+    }
+    .icon{
+    }
   }
 }
