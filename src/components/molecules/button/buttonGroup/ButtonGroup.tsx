@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
 import { ButtonProps } from '@atoms/button/Button';
-import {IconBtnProps} from '@molecules/button/iconButton/IconButtonComponent';
+import {IconBtnProps} from '@molecules/button/iconButton/IconButton';
 import { ImageBtnProps } from '@molecules/button/imageButton/ImageButton';
 import style from './style/ButtonGroup.module.scss';
 

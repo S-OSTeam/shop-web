@@ -1,8 +1,9 @@
 @import 'src/components/layout/header/styles/index.scss';
-.category{
+
+.category {
   //리스트들 보여주는 부분
   .modalItem {
-    li:hover > span{
+    li:hover > span {
     }
   }
 
@@ -15,34 +16,40 @@
   }
 
 }
-.list_wrapper{
+
+.list_wrapper {
 
 }
+
 .list_items_wrapper {
 }
-.list_item_btn{
+
+.list_item_btn {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 
 }
-.list_item_title{
+
+.list_item_title {
   width: 80%;
 }
-.list_item_icon{
-  width: 20%;
+
+.list_item_icon {
+
 }
-.collapse{
+
+.collapse {
 }
-.parentCategory{
-  span{
-  }
+
+.parentCategory {
 }
-@include mobile{
-  .category{
+
+@include mobile {
+  .category {
     //리스트들 보여주는 부분
     .modalItem {
-      li:hover > span{
+      li:hover > span {
       }
     }
 
@@ -55,70 +62,63 @@
     }
 
   }
-  .parentCategory{
+  .parentCategory {
   }
   // 2 depth 감싸는 부모
-  .list_wrapper{
+  .list_wrapper {
     padding-right: 0;
   }
   // 2차 아이템 카테고리 리스트
   .list_items_wrapper {
 
   }
-  .list_item_btn{
+  .list_item_btn {
 
   }
-  .list_item_title{
+  .list_item_title {
   }
-  .list_item_icon{
+  .list_item_icon {
+    width: 20%;
   }
-  .collapse{
+  .collapse {
     width: 96%;
   }
-  .parentCategory{
-    span{
-    }
+  .list_wrapper {
+
+  }
+  .parentCategory {
   }
 }
 
-@include tablet{
-  .category{
+// 모바일 가로, 테블릿 세로: 480px ~ 768px
+@include tablet {
+  .category {
     //리스트들 보여주는 부분
     .modalItem {
-      li:hover > span{
-      }
-    }
 
-    li:hover {
-      .modalItem {
-      }
     }
-
-    & > li {
-    }
-
     .list_items_wrapper {
     }
   }
 
-  .parentCategory{
-    span{
-    }
+  .parentCategory {
   }
-  .collapse{
+  .collapse {
     width: 96%;
   }
-  .parentCategory{
-    span{
-    }
+  .parentCategory {
+  }
+  .list_item_icon {
+    width: 20%;
   }
 }
 
-@include laptop{
-  .category{
+// 테블릿 가로, 랩탑: 768px ~ 1024px
+@include laptop {
+  .category {
     //리스트들 보여주는 부분
     .modalItem {
-      li:hover > span{
+      li:hover > span {
       }
     }
 
@@ -134,17 +134,75 @@
     }
   }
 
-  .parentCategory{
-    span{
-    }
+  .parentCategory {
+  }
+  .list_item_icon {
+    width: 20%;
   }
 }
 
-@include desktop{
-  .category{
+// 데스크탑: 1024px ~ 1280px
+@include desktop {
+  .category {
     //리스트들 보여주는 부분
     .modalItem {
-      li:hover > span{
+    }
+
+    .list_items_wrapper {
+    }
+  }
+  .list_wrapper {
+    display: flex;
+    height: 100%;
+    padding: 0;
+    .parentCategory {
+      padding: 0;
+      height: 100%;
+      white-space: nowrap;
+      // li > btn
+      .list_item_btn{
+        position: relative;
+        flex-wrap: nowrap;
+        height: 100%;
+        width: 100%;
+        // title
+        .list_item_title{
+
+        }
+        // collapse icons on/off
+        .list_item_icon{
+          font-size: 24px;
+        }
+        // 2depth wrapper
+        .collapse{
+          background-color: #80A1D4;
+          position: absolute;
+          left: 0;
+          top: 100%;
+          margin-top: 12px;
+          width: fit-content;
+          border-radius: 4px;
+
+          // 2depth title
+          .list_items_wrapper{
+          }
+        }
+      }
+      // hover event
+      &:hover{
+
+      }
+    }
+  }
+
+}
+
+// 데스크탑 이상 1279px~
+@include desktop-large {
+  .category {
+    //리스트들 보여주는 부분
+    .modalItem {
+      li:hover > span {
       }
     }
 
@@ -160,33 +218,7 @@
     }
   }
 
-  .parentCategory{
-    span{
-    }
-  }
-}
-@include desktop-large{
-  .category{
-    //리스트들 보여주는 부분
-    .modalItem {
-      li:hover > span{
-      }
-    }
+  .parentCategory {
 
-    li:hover {
-      .modalItem {
-      }
-    }
-
-    & > li {
-    }
-
-    .list_items_wrapper {
-    }
-  }
-
-  .parentCategory{
-    span{
-    }
   }
 }

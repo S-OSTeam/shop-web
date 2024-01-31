@@ -1,65 +1,48 @@
 /* eslint-disable */
 import React from 'react';
-import ListIcon from '@mui/icons-material/List';
 import LoginIcon from '@mui/icons-material/Login';
 import {
     AppBar,
     Box,
-    Container,
     IconButton,
-    List,
-    Toolbar,
     Drawer as MuiDrawer,
-    Divider,
-    ListSubheader, useMediaQuery,
+    useMediaQuery,
 } from '@mui/material';
 import clsN from 'classnames';
-import Text from '@atoms/text/Text';
 import { useNavigate } from 'react-router-dom';
 import styles from '@components/layout/header/styles/Header.module.scss';
-import CategoryHeader from '@components/layout/header/category/CategoryHeader';
-import MenuIcon from '@mui/icons-material/Menu';
-import { ItemCategoryTreeResponse } from '@util/test/interface/Category';
-import HeaderMenu from '@components/layout/header/menu/HeaderMenu';
-import Button from '@atoms/button/Button';
-import { Breakpoint } from '@mui/system/createTheme/createBreakpoints';
+import Drawer from '@components/layout/header/gnb/listItem/drawer/Drawer';
+import GnbMain from '@components/layout/header/gnb/gnbMain/GnbMain';
+import { StyledEngineProvider } from '@mui/styled-engine-sc';
 
-interface Props {
+interface HeaderProps {
     /*
     * iframe 이 작동중인 도큐먼트를 통해 주입됨
     * 필요없으면 빼도됨
     * */
     window?: () => Window;
 }
+const Header = (props: HeaderProps) => {
+    /* variable */
+    const drawerWidth = 320; // 사이드 메뉴 너비 px 기준
+    const { window } = props; // 윈도우 DOM을 props 를 통해 받아옴
+    const [mobileOpen, setMobileOpen] = React.useState<boolean>(false); // 모바일 상태
+    // useMediaQuery 로 일정수치 이내에만 true 아닐경우 false
+    const isInTablet = useMediaQuery('(max-width: 1024px)');
+    // 윈도우 사이즈 감지될 경우 dom.body 의 사이즈 가져옴
+    const container = window !== undefined ? () => window().document.body : undefined;
 
-// type myBreakPoint = ['xs' | 'sm' | 'md' | 'lg' | 'xl'];
-
-const Header = (props: Props) => {
-    // 사이드 메뉴 너비 px 기준
-    const drawerWidth = 320;
-    // 윈도우 DOM을 props 를 통해 받아옴
-    const { window } = props;
-    // 모바일 상태
-    const [mobileOpen, setMobileOpen] = React.useState<boolean>(false);
+    /* methods */
     // 사이드 메뉴 토글 이벤트
     const handleDrawerToggle = () => {
         setMobileOpen((prev) => !prev);
     };
-    const isInTablet = useMediaQuery('(max-width: 1024px)');
-    // 실질적인 사이드 메뉴 컴포넌트
-    const Drawer = (
-        <Box
-            className={clsN(`${styles.drawer_wrapper}`)}
-        >
-            <Text text='Menu' onClick={handleDrawerToggle} variant='h1' className={styles.mobile_header} />
-            <Divider />
-            <CategoryHeader />
-        </Box>);
-    // 윈도우 사이즈 감지될 경우 dom.body 의 사이즈 가져옴
-    const container = window !== undefined ? () => window().document.body : undefined;
-
     const navigate = useNavigate();
-
+    const homeHandler = () => {
+        navigate('/');
+        console.log('-------------moving home-------------');
+    };
+    /* jsxElements */
     const userToggle = (
         <Box className={clsN(`${styles.mobileMenu}`)}>
             <IconButton>
@@ -68,62 +51,30 @@ const Header = (props: Props) => {
         </Box>
     );
 
-    const homeHandler = () => {
-        navigate('/');
-        console.log('-------------moving home-------------');
-    };
-    // 메뉴 컴포넌트
-    const menuComponent = (
-        <IconButton
-            aria-label='open drawer'
-            edge='start' onClick={handleDrawerToggle}
-            className={styles.drawer_icon_btn}
-        >
-            <MenuIcon className={styles.drawer_icon}/>
-        </IconButton>
-    );
-    // 모바일 JSX 메뉴
-    const MobComponent = (
-        <Toolbar className={`${styles.tool_bar}`}>
-            <>
-                {menuComponent}
-                <HeaderMenu />
-                <Button className={clsN(styles.login, styles.loginTitle)} variant='text'>로그인</Button>
-            </>
-        </Toolbar>
-    );
-    // 데스크탑 JSX 메뉴
-    const DeskComponent = (
-        <Toolbar className={`${styles.tool_bar}`}>
-            <Text text='DeamHome' className={styles.logo} onClick={homeHandler} />
-            <CategoryHeader />
-            <HeaderMenu />
-            <Button className={clsN(styles.login, styles.loginTitle)} variant='text'>로그인</Button>
-        </Toolbar>
-    );
+    // result
     return (
         <Box className={styles.header} component='header'>
-            <AppBar
-                className={clsN(`${styles.app_bar_nav}`)}
-                component='nav'
-            >
-                {isInTablet ? (MobComponent) : (DeskComponent)}
+            <AppBar className={clsN(`${styles.app_bar_nav}`)} component='nav'>
+                <GnbMain
+                    toolClsN={`${styles.tool_bar}`}
+                    logoTitle='DeamHome'
+                    logoClsN={`${styles.logo}`}
+                    onClick={handleDrawerToggle}
+                    variant='contained'
+                    menuBtnClsN={clsN(`${styles.menu_icon_btn}`)}
+                    menuIconClsN={clsN(`${styles.menu_icon}`)}
+                    loginClsN={clsN(`${styles.login}`, `${styles.loginTitle}`)}
+                    gnb_R_ClsN={styles.right_gnb_area}
+                    gnb_R_Btn_ClsN={clsN(`${styles.right_gnb_area_btn}`)}
+                    gnb_R_Icon_ClsN={styles.right_gnb_area_icon}
+                />
             </AppBar>
             {isInTablet && <nav>
-                <MuiDrawer
-                    className={styles.drawer}
-                    container={container}
-                    variant='temporary'
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // 모바일에 성능 효율 좋다함
-                    }}
-                    sx={{
-                        '& .MuiDrawer-paper': { width: drawerWidth },
-                    }}
+                <MuiDrawer className={styles.drawer} container={container} variant='temporary' open={mobileOpen} onClose={handleDrawerToggle}
+                    ModalProps={{ /* 모바일에 성능 효율 좋다함 */ keepMounted: true }}
+                    sx={{ '& .MuiDrawer-paper': { width: drawerWidth } }}
                 >
-                    {Drawer}
+                    <Drawer wrapperClsN={`${styles.drawer_wrapper}`} mobHeaderClsN={`${styles.mobile_header}`} menuTitle='menu' onClick={handleDrawerToggle} variant='h1' />
                 </MuiDrawer>
             </nav>}
         </Box>
@@ -131,11 +82,3 @@ const Header = (props: Props) => {
 };
 
 export default Header;
-// <nav className={clsN(`${styles.nav} ${styles.container}`)}>
-//     {categoryToggle}
-//     <Text className={styles.logo} text='DeamHome' onClick={homeHandler} />
-//     {userToggle}
-//     <CategoryHeader />
-//     <HeaderMenu />
-//     <Button className={clsN(styles.login, styles.loginTitle)} variant='text'>로그인</Button>
-// </nav>

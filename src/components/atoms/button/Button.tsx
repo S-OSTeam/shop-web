@@ -44,7 +44,7 @@ Button.propTypes = {
 Button.defaultProps = {
     id: undefined,
     className: `${style.button}`,
-    variant: 'contained',
+    variant: undefined,
     onClick: undefined,
     onMouseOver: undefined,
     size: 'medium',
