@@ -9,8 +9,11 @@ import clsN from 'classnames';
 import styles from '@components/layout/header/gnb/listItem/rightMenu/styles/RightMenu.module.scss';
 
 interface HeaderMenuProps {
+    // 네비게이션 우측 래퍼 클래스명
     gnb_r_ClsN?: string;
+    // 아이콘버튼 클래스명
     icnBtnClsN?: string;
+    // 아이콘버튼 내에 있는 클래스명
     iconClsN?: string;
 }
 

@@ -13,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from '@components/layout/header/styles/Header.module.scss';
 import Drawer from '@components/layout/header/gnb/listItem/drawer/Drawer';
 import GnbMain from '@components/layout/header/gnb/gnbMain/GnbMain';
-import { StyledEngineProvider } from '@mui/styled-engine-sc';
 
 interface HeaderProps {
     /*

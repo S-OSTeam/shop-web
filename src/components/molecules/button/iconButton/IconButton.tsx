@@ -4,7 +4,6 @@ import clsN from 'classnames';
 import {IconButton as MuiIconButton, IconButtonProps as MuiIconButtonProps} from '@mui/material';
 import Icon, { IconProps } from '@components/atoms/source/icon/Icon';
 import style from './style/IconButton.module.scss';
-import './style/defaultStyle.scss';
 
 export interface IconBtnProps extends MuiIconButtonProps{
     className?: string;

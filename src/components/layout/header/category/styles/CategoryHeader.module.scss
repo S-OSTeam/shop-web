@@ -1,5 +1,61 @@
 @import 'src/components/layout/header/styles/index.scss';
 
+@mixin set-desk($bg-color) {
+  .list_wrapper {
+    display: flex;
+    height: 100%;
+    padding: 0 16px;
+    .parentCategory {
+      padding: 0;
+      height: 100%;
+      white-space: nowrap;
+      // li > btn
+      .list_item_btn{
+        position: relative;
+        flex-wrap: nowrap;
+        height: 100%;
+        width: 100%;
+        // title
+        .list_item_title{
+
+        }
+        // collapse icons on/off
+        .list_item_icon{
+          font-size: 24px;
+        }
+        // 2depth wrapper
+        .collapse{
+          box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.12);
+          background-color: $bg-color;
+          position: absolute;
+          left: 0;
+          top: 100%;
+          width: fit-content;
+          border-radius: 4px;
+          margin-top: 8px;
+          &::before{
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 8px;
+            left: 0;
+            top: -8px;
+            visibility: hidden;
+          }
+          // 2depth title
+          .list_items_wrapper{
+          }
+        }
+      }
+      // hover event
+      &:hover{
+
+      }
+    }
+  }
+}
+
 .category {
   //리스트들 보여주는 부분
   .modalItem {
@@ -151,54 +207,13 @@
     .list_items_wrapper {
     }
   }
-  .list_wrapper {
-    display: flex;
-    height: 100%;
-    padding: 0;
-    .parentCategory {
-      padding: 0;
-      height: 100%;
-      white-space: nowrap;
-      // li > btn
-      .list_item_btn{
-        position: relative;
-        flex-wrap: nowrap;
-        height: 100%;
-        width: 100%;
-        // title
-        .list_item_title{
-
-        }
-        // collapse icons on/off
-        .list_item_icon{
-          font-size: 24px;
-        }
-        // 2depth wrapper
-        .collapse{
-          background-color: #80A1D4;
-          position: absolute;
-          left: 0;
-          top: 100%;
-          margin-top: 12px;
-          width: fit-content;
-          border-radius: 4px;
-
-          // 2depth title
-          .list_items_wrapper{
-          }
-        }
-      }
-      // hover event
-      &:hover{
-
-      }
-    }
-  }
+  @include set-desk(#{$primary-color});
 
 }
 
 // 데스크탑 이상 1279px~
 @include desktop-large {
+
   .category {
     //리스트들 보여주는 부분
     .modalItem {
@@ -221,4 +236,5 @@
   .parentCategory {
 
   }
+  @include set-desk(#{$primary-color});
 }

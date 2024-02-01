@@ -1,5 +1,6 @@
 @import 'index.scss';
 
+// 헤더
 .header {
 
 }
@@ -14,6 +15,7 @@
   width: 100%;
   z-index: 30;
   box-sizing: border-box;
+
   * {
     list-style-type: none;
   }
@@ -32,14 +34,17 @@
   height: 100%;
   display: flex;
 }
+
 // 우측 좋아요, 찜, 장바구니 메뉴
-.right_gnb_area{
+.right_gnb_area {
   justify-content: right;
   white-space: nowrap;
   margin-left: auto;
+
   & > * {
     position: relative;
-    &:after{
+
+    &:after {
       position: absolute;
       display: block;
       content: '';
@@ -50,40 +55,49 @@
       border-radius: 1px;
       background-color: white;
     }
-    &:last-child:after{
+
+    &:last-child:after {
       width: 0;
     }
   }
 }
+
 // 버튼
-.right_gnb_area_btn{
+.right_gnb_area_btn {
 
 }
-// 위 아이콘
-.right_gnb_area_icon{
+
+// 위 버튼의 아이콘
+.right_gnb_area_icon {
 
 }
 
 // 로그인 버튼
-.login{
+.login {
   color: gray;
   background-color: white;
-  &:hover{
+
+  &:hover {
     background-color: white;
   }
 }
-.loginTitle{
+
+.loginTitle {
 
 }
+
 // 메뉴 버튼
-.drawer_icon_btn{
+.drawer_icon_btn {
   box-sizing: border-box;
-  .drawer_icon{
+
+  .drawer_icon {
     color: white;
   }
 }
-.drawer_icon_btn{
+
+.drawer_icon_btn {
 }
+
 // 모바일 메뉴 : default 비활성화
 .mobileMenu {
   display: none;
@@ -101,24 +115,28 @@
 // example 모바일 메뉴
 .drawer_wrapper {
   text-align: center;
+
   .mobile_header {
     font-size: $title-s;
     height: 56px;
     line-height: 56px;
   }
+
   & .MuiDrawer-paper {
     box-sizing: border-box;
   }
 }
 
 // 모바일 좌측 메뉴 버튼
-.menu_icon_btn{
+.menu_icon_btn {
   transition: 0.3s ease-in-out;
   color: white;
   padding: 0;
-  span{
+
+  span {
     position: relative;
-    svg{
+
+    svg {
       position: absolute;
       display: block;
       top: 50%;
@@ -127,7 +145,8 @@
     }
   }
 }
-.menu_icon{
+
+.menu_icon {
 
 }
 
@@ -145,16 +164,17 @@
 
   }
   // 모바일 좌측 메뉴 버튼
-  .menu_icon_btn{
+  .menu_icon_btn {
     margin-right: 4px;
     padding-left: 0;
-    svg{
+
+    svg {
       font-size: 28px;
     }
   }
-  .menu_icon{
+  .menu_icon {
   }
-  .logo{
+  .logo {
     font-size: 16px;
   }
   //
@@ -164,10 +184,11 @@
     display: flex;
   }
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-  .tool_bar{
+  .tool_bar {
     justify-content: space-between;
-    .drawer_icon_btn{
-      .drawer_icon{
+
+    .drawer_icon_btn {
+      .drawer_icon {
 
       }
     }
@@ -184,44 +205,48 @@
 
   }
   // 우측 좋아요, 찜, 장바구니 메뉴
-  .right_gnb_area{
+  .right_gnb_area {
     min-width: 60px;
     max-width: 110px;
+
     & > * {
-      &:after{
+      &:after {
         height: 12px;
       }
-      &:last-child:after{
+
+      &:last-child:after {
       }
     }
   }
-  .right_gnb_area_btn{
+  .right_gnb_area_btn {
     width: calc(110px / 3);
     padding-left: 4px;
     padding-right: 4px;
   }
   // 위 아이콘
-  .right_gnb_area_icon{
+  .right_gnb_area_icon {
 
   }
   // 로그인 영역
-  .login{
+  .login {
     margin-left: 4px;
     box-sizing: border-box;
     padding: 2px 0;
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
 // 480.~768 px
 @include tablet {
   // 모바일 좌측 메뉴 버튼
-  .menu_icon_btn{
+  .menu_icon_btn {
     margin-right: 16px;
     padding: 0;
-    span{
+
+    span {
       position: relative;
-      svg{
+
+      svg {
         font-size: 36px;
       }
     }
@@ -231,31 +256,34 @@
     padding: 0;
   }
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-  .tool_bar{
-    .drawer_icon_btn{
-      .drawer_icon{
+  .tool_bar {
+    .drawer_icon_btn {
+      .drawer_icon {
       }
     }
   }
-  .right_gnb_area{
+  .right_gnb_area {
     min-width: 110px;
     max-width: 140px;
+
     & > * {
-      &:after{
+      &:after {
         height: 12px;
       }
-      &:last-child:after{
+
+      &:last-child:after {
       }
     }
   }
   // 로그인 영역
-  .login{
+  .login {
     margin-left: 8px;
-    padding: 2px 12px;
+    padding: 2px 0;
     font-size: 16px;
   }
 
 }
+
 // 테블릿 가로, 랩탑: 768px ~ 1024px
 @include laptop {
   .app_bar_nav {
@@ -263,8 +291,7 @@
   }
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
   .tool_bar {
-    max-width: 768px;
-
+    width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
     height: 100%;
@@ -272,27 +299,37 @@
     justify-content: space-between;
   }
   // 우측 북마크 좋아요 장바구니
-  .right_gnb_area{
+  .right_gnb_area {
     min-width: 110px;
     max-width: 140px;
+
     & > * {
-      &:after{
+      &:after {
         height: 12px;
       }
-      &:last-child:after{
+
+      &:last-child:after {
       }
     }
   }
   // 모바일 좌측 메뉴 버튼
-  .menu_icon_btn{
+  .menu_icon_btn {
     margin-right: 16px;
     padding: 0;
-    span{
+
+    span {
       position: relative;
-      svg{
+
+      svg {
         font-size: 36px;
       }
     }
+  }
+  // 로그인 영역
+  .login {
+    margin-left: 8px;
+    padding: 2px 0;
+    font-size: 16px;
   }
 }
 
@@ -305,27 +342,41 @@
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
   .tool_bar {
     /* min-width: 768px ~ max-width: 1080px */
-    max-width: 1080px;
 
+    width: max(14.25%, 1080px);
     margin: 0 auto;
     box-sizing: border-box;
     height: 100%;
     display: flex;
     justify-content: space-between;
   }
+  // 로고
+  .logo {
+  }
   // 우측 북마크 좋아요 장바구니
-  .right_gnb_area{
+  .right_gnb_area {
     min-width: 110px;
     max-width: 140px;
+    box-sizing: border-box;
+    padding-right: 12px;
+
     & > * {
-      &:after{
+      &:after {
         height: 12px;
       }
-      &:last-child:after{
+
+      &:last-child:after {
       }
     }
   }
+  // 로그인 영역
+  .login {
+    margin-left: 8px;
+    padding: 2px 0;
+    font-size: 16px;
+  }
 }
+
 // 1280px over
 @include desktop-large {
   .app_bar_nav {
@@ -333,7 +384,7 @@
   }
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
   .tool_bar {
-    width: 1080px;
+    width: 1240px;
     margin: 0 auto;
     box-sizing: border-box;
     height: 100%;
@@ -341,15 +392,23 @@
     justify-content: space-between;
   }
   // 우측 북마크 좋아요 장바구니
-  .right_gnb_area{
+  .right_gnb_area {
     min-width: 110px;
     max-width: 140px;
+
     & > * {
-      &:after{
+      &:after {
         height: 12px;
       }
-      &:last-child:after{
+
+      &:last-child:after {
       }
     }
+  }
+  // 로그인 영역
+  .login {
+    margin-left: 8px;
+    padding: 2px 12px;
+    font-size: 16px;
   }
 }
