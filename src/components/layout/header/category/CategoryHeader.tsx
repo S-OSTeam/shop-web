@@ -12,8 +12,12 @@ const CategoryHeader = () => {
         console.log(title);
     };
 
+    const subClick = (title: string) => {
+        console.log(title);
+    };
+
     return (
-        <ul className={clsN(styles.category)}>
+        <ul className={clsN(`${styles.category}`)}>
             {category.map((item) => (
                 <React.Fragment key={item.publicId}>
                     <li
@@ -21,9 +25,17 @@ const CategoryHeader = () => {
                         onClick={() => onClick && onClick(item.title)}
                         onKeyDown={undefined}
                     >
-                        <Text text={item.title} />
-                        <Icon icon={<ExpandMoreIcon fontSize="inherit" />} fontSize="inherit" />
-                        <ListItem className={`${styles.modalItem} ${styles.listItemsWrapper}`} items={item.children} />
+                        <Text className={styles.categoryTitle} text={item.title} />
+                        <Icon
+                            className={styles.categoryIcon}
+                            icon={<ExpandMoreIcon fontSize="inherit" />}
+                            fontSize="inherit"
+                        />
+                        <ListItem
+                            onClick={subClick}
+                            className={`${styles.modalItem} ${styles.listItemsWrapper}`}
+                            items={item.children}
+                        />
                     </li>
                 </React.Fragment>
             ))}

@@ -7,13 +7,19 @@ export const SIGN_UP = gql`
 `;
 
 export const Login = gql`
-    mutation Login($request: loginRequest!) {
-        login(request: $request)
+    mutation LOGIN($request: LoginRequest!) {
+        login(request: $request) {
+            accessToken
+            refreshToken
+        }
     }
 `;
 
-export const ReIssue = gql`
-    mutation Reissue($request: tokenResponse) {
-        reIssue(request: $request)
-    }
-`;
+// export const ReIssue = gql`
+//     mutation Reissue() {
+//         reIssue(){
+//             accessToken
+//             refreshToken
+//         }
+//     }
+// `;

@@ -1,3 +1,28 @@
+export const signUp = {
+    userId: 'dmltn888',
+    pwd: '12345678@@',
+    confirmPwd: '12345678@@',
+    sex: true,
+    birthday: new Date('1999-08-15 00:00:00'),
+    zipcode: '07027',
+    address1: '서울특별시 동작구 상도동 사당로 50',
+    address2: '',
+    address3: '',
+    address4: '',
+    email: 'dmltn888@gmail.com',
+    phone: '01071678301',
+    receiveMain: true,
+    snsId: 'dmltn888@gmail.com',
+    sns: 'NORMAL',
+    userName: 'test50',
+};
+
+export const login = {
+    userId: 'test123',
+    pwd: 'abcabcabc',
+    sns: 'NORMAL',
+};
+
 export const categoryParent = [
     { title: '캐릭터', publicId: 1, parentPublicId: 0 },
     { title: '나루토', publicId: 2, parentPublicId: 1 },

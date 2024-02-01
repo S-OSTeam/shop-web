@@ -1,6 +1,6 @@
 @import 'index.scss';
 
-header{
+header {
   position: fixed;
   display: block;
   width: 100%;
@@ -12,6 +12,7 @@ header{
   box-sizing: border-box;
   max-width: 1024px;
   margin: 0 auto;
+
   * {
     list-style-type: none;
   }
@@ -28,15 +29,15 @@ header{
   margin-right: auto;
 }
 
-.mobileMenu{
+.mobileMenu {
   display: none;
 
-  svg{
+  svg {
     color: $white-color;
   }
 }
 
-.logo{
+.logo {
   cursor: pointer;
   color: $white-color;
   height: fit-content;
@@ -44,32 +45,32 @@ header{
   font-size: 24px;
 }
 
-.test{
+.test {
   height: 3000px;
 }
 
 @include desktop {
 
-  .navWrapper{
+  .navWrapper {
     min-width: 860px;
     max-width: 760px;
     width: 90%;
   }
 
-  .navContainer{
+  .navContainer {
     padding-right: 20px;
     padding-left: 20px;
   }
 
-  .container{
+  .container {
     height: 60px;
 
-    .login{
+    .login {
       display: flex;
       min-width: 80px;
       background: $white-color;
 
-      .loginTitle{
+      .loginTitle {
         color: $primary-color;
         font-size: 16px;
       }
@@ -77,40 +78,62 @@ header{
   }
 }
 
-@include tablet{
+@include tablet {
 
-  .navWrapper{
+  .navWrapper {
     max-width: 768px;
     width: 90%;
   }
-  .navContainer{
+  .navContainer {
     padding-right: 15px;
     padding-left: 15px;
   }
-  .container{
+  .container {
     height: 60px;
-    .login{
+
+    .login {
+      display: none;
+    }
+
+    .desktopCategory {
       display: none;
     }
   }
 
-  .mobileMenu{
+  .mobileMenu {
+    display: flex;
+  }
+  .mobileCategory {
+    display: none;
+  }
+  .isCheck {
     display: flex;
   }
 }
 
-@include mobile{
-  .navContainer{
+@include mobile {
+  .navContainer {
     padding-right: 10px;
     padding-left: 10px;
   }
-  .container{
+  .container {
     height: 50px;
-    .login{
+
+    .login {
+      display: none;
+    }
+
+    .desktopCategory {
       display: none;
     }
   }
-  .mobileMenu{
+  .mobileMenu {
+    display: flex;
+  }
+  .mobileCategory {
+    display: none;
+  }
+  .isCheck {
     display: flex;
   }
 }

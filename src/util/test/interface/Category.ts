@@ -9,3 +9,10 @@ export interface ItemCategoryTreeResponse {
     children: ItemCategoryTreeResponse[];
     publicId: number;
 }
+
+export interface tokenResponse {
+    accessToken: string;
+    refreshToken: string;
+    userId: string;
+    issuedAt: Date;
+}

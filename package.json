@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.8.4",
+    "@apollo/react-hooks": "^4.0.0",
     "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -27,6 +28,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "graphql": "^16.8.1",
+    "node-macaddress": "^0.2.4",
     "node-sass": "^9.0.0",
     "prettier": "^3.0.3",
     "react": "^18.2.0",
