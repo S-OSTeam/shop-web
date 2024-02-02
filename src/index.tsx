@@ -5,19 +5,22 @@ import './index.css';
 import { ApolloProvider } from '@apollo/client';
 import { RecoilRoot } from 'recoil';
 import { StyledEngineProvider } from '@mui/material';
+import { client } from '@api/apollo/client';
+import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { client } from './api/apollo/client';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     <StyledEngineProvider injectFirst>
         <ApolloProvider client={client}>
-            <BrowserRouter>
-                <RecoilRoot>
-                    <App />
-                </RecoilRoot>
-            </BrowserRouter>
+            <CookiesProvider>
+                <BrowserRouter>
+                    <RecoilRoot>
+                        <App />
+                    </RecoilRoot>
+                </BrowserRouter>
+            </CookiesProvider>
         </ApolloProvider>
         ,
     </StyledEngineProvider>,

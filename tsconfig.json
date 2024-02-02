@@ -19,6 +19,7 @@
         "paths": {
             "@/*": ["./src/*"],
             "@types/*": ["./types/*"],
+            "@api/*": ["./api/*"],
             "@asset/*": ["./asset/*"],
             "@components/*": ["./components/*"],
             "@atoms/*": ["./components/atoms/*"],
@@ -27,6 +28,7 @@
             "@organisms/*": ["./components/organisms/*"],
             "@templates/*": ["./components/templates/*"],
             "@hooks/*": ["./hooks/*"],
+            "@interface/*": ["./interface/*"],
             "@models/*": ["./models/*"],
             "@pages/*": ["./pages/*"],
             "@recoil/*": ["./recoil/*"],

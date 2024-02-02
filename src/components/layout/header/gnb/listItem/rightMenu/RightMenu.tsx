@@ -17,19 +17,15 @@ interface HeaderMenuProps {
     iconClsN?: string;
 }
 
-const RightMenu = (
-    {
-        gnb_r_ClsN,
-        icnBtnClsN,
-        iconClsN
-    }:HeaderMenuProps) => {
+const RightMenu = ({ gnb_r_ClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) => {
     const title = ['즐겨찾기', '관심상품', '장바구니'];
     const iconProvider = [
-        <BookmarksIcon className={clsN(styles.icon, iconClsN)}/>,
-        <FavoriteBorderIcon className={clsN(styles.icon, iconClsN)}/>,
-        <ShoppingCartIcon className={clsN(styles.icon, iconClsN)}/>]
+        <BookmarksIcon className={clsN(styles.icon, iconClsN)} />,
+        <FavoriteBorderIcon className={clsN(styles.icon, iconClsN)} />,
+        <ShoppingCartIcon className={clsN(styles.icon, iconClsN)} />,
+    ];
     const gridItemProvider = title.map((item, idx) => {
-        return(
+        return (
             <Grid item>
                 <Tooltip title={item}>
                     {/* div 를 감싸야 ToolTip hover 기능 작동 */}
@@ -38,14 +34,14 @@ const RightMenu = (
                     </div>
                 </Tooltip>
             </Grid>
-        )
-    })
+        );
+    });
     return (
         <Grid
             container
-            justifyContent='space-between'
+            justifyContent="space-between"
             className={clsN(`${styles.menu_stack}`, gnb_r_ClsN)}
-            direction='row'
+            direction="row"
         >
             {gridItemProvider}
         </Grid>
@@ -55,10 +51,10 @@ RightMenu.propTypes = {
     gnb_r_ClsN: PropTypes.string,
     icnBtnClsN: PropTypes.string,
     iconClsN: PropTypes.string,
-}
+};
 RightMenu.defaultProps = {
     gnb_r_ClsN: `${styles.menu_stack}`,
     icnBtnClsN: `${styles.iconBtn}`,
     iconClsN: `${styles.icon}`,
-}
+};
 export default RightMenu;

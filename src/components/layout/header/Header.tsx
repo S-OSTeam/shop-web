@@ -1,13 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import LoginIcon from '@mui/icons-material/Login';
-import {
-    AppBar,
-    Box,
-    IconButton,
-    Drawer as MuiDrawer,
-    useMediaQuery,
-} from '@mui/material';
+import { AppBar, Box, IconButton, Drawer as MuiDrawer, useMediaQuery } from '@mui/material';
 import clsN from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import styles from '@components/layout/header/styles/Header.module.scss';
@@ -16,9 +10,9 @@ import GnbMain from '@components/layout/header/gnb/gnbMain/GnbMain';
 
 interface HeaderProps {
     /*
-    * iframe 이 작동중인 도큐먼트를 통해 주입됨
-    * 필요없으면 빼도됨
-    * */
+     * iframe 이 작동중인 도큐먼트를 통해 주입됨
+     * 필요없으면 빼도됨
+     * */
     window?: () => Window;
 }
 const Header = (props: HeaderProps) => {
@@ -45,21 +39,21 @@ const Header = (props: HeaderProps) => {
     const userToggle = (
         <Box className={clsN(`${styles.mobileMenu}`)}>
             <IconButton>
-                <LoginIcon fontSize='inherit' />
+                <LoginIcon fontSize="inherit" />
             </IconButton>
         </Box>
     );
 
     // result
     return (
-        <Box className={styles.header} component='header'>
-            <AppBar className={clsN(`${styles.app_bar_nav}`)} component='nav'>
+        <Box className={styles.header} component="header">
+            <AppBar className={clsN(`${styles.app_bar_nav}`)} component="nav">
                 <GnbMain
                     toolClsN={`${styles.tool_bar}`}
-                    logoTitle='DeamHome'
+                    logoTitle="DeamHome"
                     logoClsN={`${styles.logo}`}
                     onClick={handleDrawerToggle}
-                    variant='contained'
+                    variant="text"
                     menuBtnClsN={clsN(`${styles.menu_icon_btn}`)}
                     menuIconClsN={clsN(`${styles.menu_icon}`)}
                     loginClsN={clsN(`${styles.login}`, `${styles.loginTitle}`)}
@@ -68,14 +62,27 @@ const Header = (props: HeaderProps) => {
                     gnb_R_Icon_ClsN={styles.right_gnb_area_icon}
                 />
             </AppBar>
-            {isInTablet && <nav>
-                <MuiDrawer className={styles.drawer} container={container} variant='temporary' open={mobileOpen} onClose={handleDrawerToggle}
-                    ModalProps={{ /* 모바일에 성능 효율 좋다함 */ keepMounted: true }}
-                    sx={{ '& .MuiDrawer-paper': { width: drawerWidth } }}
-                >
-                    <Drawer wrapperClsN={`${styles.drawer_wrapper}`} mobHeaderClsN={`${styles.mobile_header}`} menuTitle='menu' onClick={handleDrawerToggle} variant='h1' />
-                </MuiDrawer>
-            </nav>}
+            {isInTablet && (
+                <nav>
+                    <MuiDrawer
+                        className={styles.drawer}
+                        container={container}
+                        variant="temporary"
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        ModalProps={{ /* 모바일에 성능 효율 좋다함 */ keepMounted: true }}
+                        sx={{ '& .MuiDrawer-paper': { width: drawerWidth } }}
+                    >
+                        <Drawer
+                            wrapperClsN={`${styles.drawer_wrapper}`}
+                            mobHeaderClsN={`${styles.mobile_header}`}
+                            menuTitle="menu"
+                            onClick={handleDrawerToggle}
+                            variant="h1"
+                        />
+                    </MuiDrawer>
+                </nav>
+            )}
         </Box>
     );
 };

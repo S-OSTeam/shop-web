@@ -12,7 +12,6 @@ interface graphQLProps<T> {
 }
 
 const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
-    const [loadingGlobal, setLoading] = useRecoilState(loadingAtom);
     const selectType = () => {
         if (type === 'mutation') {
             return useMutation(query, {
@@ -30,6 +29,9 @@ const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
             },
         });
     };
+
+    const [loadingGlobal, setLoading] = useRecoilState(loadingAtom);
+
     const [gql, { data, loading, error }] = selectType();
 
     const modifyLoading = (state: boolean) => {

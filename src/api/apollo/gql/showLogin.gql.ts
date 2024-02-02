@@ -16,8 +16,8 @@ export const Login = gql`
 `;
 
 // export const ReIssue = gql`
-//     mutation Reissue() {
-//         reIssue(){
+//     mutation Reissue{
+//         reIssue{
 //             accessToken
 //             refreshToken
 //         }
