@@ -1,139 +1,414 @@
 @import 'index.scss';
 
-header {
+// 헤더
+.header {
+
+}
+
+// 네비 자체를 감싸는 래퍼
+.app_bar_nav {
+  transition: 0.2s ease-in-out;
+  background-color: $primary-color;
+  padding: 0;
   position: fixed;
   display: block;
   width: 100%;
-  background: $primary-color;
   z-index: 30;
-}
-
-.navWrapper {
   box-sizing: border-box;
-  max-width: 1024px;
-  margin: 0 auto;
 
   * {
     list-style-type: none;
   }
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+// 헤더 내부 컨텐츠 정렬하는 컨테이너
 .container {
-  margin-left: auto;
-  margin-right: auto;
+  padding: 0;
+  height: 100%;
 }
 
-.mobileMenu {
-  display: none;
+// ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+.tool_bar {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+}
 
-  svg {
-    color: $white-color;
+// 우측 좋아요, 찜, 장바구니 메뉴
+.right_gnb_area {
+  justify-content: right;
+  white-space: nowrap;
+  margin-left: auto;
+
+  & > * {
+    position: relative;
+
+    &:after {
+      position: absolute;
+      display: block;
+      content: '';
+      right: 0;
+      top: 50%;
+      width: 1px;
+      transform: translateY(-50%);
+      border-radius: 1px;
+      background-color: white;
+    }
+
+    &:last-child:after {
+      width: 0;
+    }
   }
 }
 
+// 버튼
+.right_gnb_area_btn {
+
+}
+
+// 위 버튼의 아이콘
+.right_gnb_area_icon {
+
+}
+
+// 로그인 버튼
+.login {
+  color: gray;
+  background-color: white;
+
+  &:hover {
+    background-color: white;
+  }
+}
+
+.loginTitle {
+
+}
+
+// 메뉴 버튼
+.drawer_icon_btn {
+  box-sizing: border-box;
+
+  .drawer_icon {
+    color: white;
+  }
+}
+
+.drawer_icon_btn {
+}
+
+// 모바일 메뉴 : default 비활성화
+.mobileMenu {
+  display: none;
+  // 아이콘 색상
+  svg {
+    //color: white;
+  }
+}
+
+// 모바일 메뉴 감싸는 부모
+.drawer {
+  display: block;
+}
+
+// example 모바일 메뉴
+.drawer_wrapper {
+  text-align: center;
+
+  .mobile_header {
+    font-size: $title-s;
+    height: 56px;
+    line-height: 56px;
+  }
+
+  & .MuiDrawer-paper {
+    box-sizing: border-box;
+  }
+}
+
+// 모바일 좌측 메뉴 버튼
+.menu_icon_btn {
+  transition: 0.3s ease-in-out;
+  color: white;
+  padding: 0;
+
+  span {
+    position: relative;
+
+    svg {
+      position: absolute;
+      display: block;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.menu_icon {
+
+}
+
+// logo <span>
 .logo {
+  width: fit-content;
   cursor: pointer;
   color: $white-color;
   height: fit-content;
-  width: fit-content;
   font-size: 24px;
 }
 
-.test {
-  height: 3000px;
-}
+@include mobile {
+  .header {
 
-@include desktop {
-
-  .navWrapper {
-    min-width: 860px;
-    max-width: 760px;
-    width: 90%;
   }
+  // 모바일 좌측 메뉴 버튼
+  .menu_icon_btn {
+    margin-right: 4px;
+    padding-left: 0;
 
-  .navContainer {
-    padding-right: 20px;
-    padding-left: 20px;
+    svg {
+      font-size: 28px;
+    }
   }
+  .menu_icon {
+  }
+  .logo {
+    font-size: 16px;
+  }
+  //
+  .app_bar_nav {
+    min-height: 56px;
+    max-height: 100%;
+    display: flex;
+  }
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar {
+    justify-content: space-between;
 
-  .container {
-    height: 60px;
+    .drawer_icon_btn {
+      .drawer_icon {
 
-    .login {
-      display: flex;
-      min-width: 80px;
-      background: $white-color;
-
-      .loginTitle {
-        color: $primary-color;
-        font-size: 16px;
       }
     }
   }
+  // 헤더 내부 컨텐츠 정렬하는 컨테이너
+  .container {
+
+  }
+  .drawer {
+
+  }
+  .drawer_wrapper {
+
+
+  }
+  // 우측 좋아요, 찜, 장바구니 메뉴
+  .right_gnb_area {
+    min-width: 60px;
+    max-width: 110px;
+
+    & > * {
+      &:after {
+        height: 12px;
+      }
+
+      &:last-child:after {
+      }
+    }
+  }
+  .right_gnb_area_btn {
+    width: calc(110px / 3);
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  // 위 아이콘
+  .right_gnb_area_icon {
+
+  }
+  // 로그인 영역
+  .login {
+    margin-left: 4px;
+    box-sizing: border-box;
+    padding: 2px 0;
+    font-size: 16px;
+  }
 }
 
+// 480.~768 px
 @include tablet {
+  // 모바일 좌측 메뉴 버튼
+  .menu_icon_btn {
+    margin-right: 16px;
+    padding: 0;
 
-  .navWrapper {
-    max-width: 768px;
-    width: 90%;
-  }
-  .navContainer {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-  .container {
-    height: 60px;
+    span {
+      position: relative;
 
-    .login {
-      display: none;
-    }
-
-    .desktopCategory {
-      display: none;
+      svg {
+        font-size: 36px;
+      }
     }
   }
+  .app_bar_nav {
+    height: 64px;
+    padding: 0;
+  }
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar {
+    .drawer_icon_btn {
+      .drawer_icon {
+      }
+    }
+  }
+  .right_gnb_area {
+    min-width: 110px;
+    max-width: 140px;
 
-  .mobileMenu {
-    display: flex;
+    & > * {
+      &:after {
+        height: 12px;
+      }
+
+      &:last-child:after {
+      }
+    }
   }
-  .mobileCategory {
-    display: none;
+  // 로그인 영역
+  .login {
+    margin-left: 8px;
+    padding: 2px 0;
+    font-size: 16px;
   }
-  .isCheck {
+
+}
+
+// 테블릿 가로, 랩탑: 768px ~ 1024px
+@include laptop {
+  .app_bar_nav {
+    height: 64px;
+  }
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    height: 100%;
     display: flex;
+    justify-content: space-between;
+  }
+  // 우측 북마크 좋아요 장바구니
+  .right_gnb_area {
+    min-width: 110px;
+    max-width: 140px;
+
+    & > * {
+      &:after {
+        height: 12px;
+      }
+
+      &:last-child:after {
+      }
+    }
+  }
+  // 모바일 좌측 메뉴 버튼
+  .menu_icon_btn {
+    margin-right: 16px;
+    padding: 0;
+
+    span {
+      position: relative;
+
+      svg {
+        font-size: 36px;
+      }
+    }
+  }
+  // 로그인 영역
+  .login {
+    margin-left: 8px;
+    padding: 2px 0;
+    font-size: 16px;
   }
 }
 
-@include mobile {
-  .navContainer {
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-  .container {
-    height: 50px;
-
-    .login {
-      display: none;
-    }
-
-    .desktopCategory {
-      display: none;
-    }
-  }
-  .mobileMenu {
+// 데스크탑: 1024px ~ 1280px
+@include desktop {
+  .app_bar_nav {
     display: flex;
+    height: 64px;
   }
-  .mobileCategory {
-    display: none;
-  }
-  .isCheck {
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar {
+    /* min-width: 768px ~ max-width: 1080px */
+
+    width: max(14.25%, 1080px);
+    margin: 0 auto;
+    box-sizing: border-box;
+    height: 100%;
     display: flex;
+    justify-content: space-between;
+  }
+  // 로고
+  .logo {
+  }
+  // 우측 북마크 좋아요 장바구니
+  .right_gnb_area {
+    min-width: 110px;
+    max-width: 140px;
+    box-sizing: border-box;
+    padding-right: 12px;
+
+    & > * {
+      &:after {
+        height: 12px;
+      }
+
+      &:last-child:after {
+      }
+    }
+  }
+  // 로그인 영역
+  .login {
+    margin-left: 8px;
+    padding: 2px 0;
+    font-size: 16px;
+  }
+}
+
+// 1280px over
+@include desktop-large {
+  .app_bar_nav {
+    height: 64px;
+  }
+  // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
+  .tool_bar {
+    width: 1240px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  // 우측 북마크 좋아요 장바구니
+  .right_gnb_area {
+    min-width: 110px;
+    max-width: 140px;
+
+    & > * {
+      &:after {
+        height: 12px;
+      }
+
+      &:last-child:after {
+      }
+    }
+  }
+  // 로그인 영역
+  .login {
+    margin-left: 8px;
+    padding: 2px 12px;
+    font-size: 16px;
   }
 }

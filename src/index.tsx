@@ -4,19 +4,23 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import { ApolloProvider } from '@apollo/client';
 import { RecoilRoot } from 'recoil';
+import { StyledEngineProvider } from '@mui/material';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { client } from './api/apollo/client';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    <ApolloProvider client={client}>
-        <BrowserRouter>
-            <RecoilRoot>
-                <App />
-            </RecoilRoot>
-        </BrowserRouter>
-    </ApolloProvider>,
+    <StyledEngineProvider injectFirst>
+        <ApolloProvider client={client}>
+            <BrowserRouter>
+                <RecoilRoot>
+                    <App />
+                </RecoilRoot>
+            </BrowserRouter>
+        </ApolloProvider>
+        ,
+    </StyledEngineProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

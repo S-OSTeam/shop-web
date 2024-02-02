@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
+import {IconButton as MuiIconButton, IconButtonProps as MuiIconButtonProps} from '@mui/material';
 import Icon, { IconProps } from '@components/atoms/source/icon/Icon';
-import Button from '@components/atoms/button/Button';
 import style from './style/IconButton.module.scss';
 
-export interface IconBtnProps {
+export interface IconBtnProps extends MuiIconButtonProps{
     className?: string;
     iconClsN?: string;
     icon: React.ReactNode;
@@ -14,9 +14,9 @@ export interface IconBtnProps {
 
 const IconButton = ({ className, iconClsN, icon, fontSize }: IconBtnProps) => {
     return (
-        <Button className={clsN(className, `${style.btnIcon}`)} variant="text">
+        <MuiIconButton className={clsN(className, `${style.btnIcon}`)} >
             <Icon icon={icon} fontSize={fontSize} className={clsN(iconClsN, `${style.icon}`)} />
-        </Button>
+        </MuiIconButton>
     );
 };
 IconButton.propTypes = {

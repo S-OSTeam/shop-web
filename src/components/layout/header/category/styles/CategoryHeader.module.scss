@@ -1,75 +1,240 @@
 @import 'src/components/layout/header/styles/index.scss';
 
-@include desktop{
-  .category{
+@mixin set-desk($bg-color) {
+  .list_wrapper {
     display: flex;
+    height: 100%;
+    padding: 0 16px;
+    .parentCategory {
+      padding: 0;
+      height: 100%;
+      white-space: nowrap;
+      // li > btn
+      .list_item_btn{
+        position: relative;
+        flex-wrap: nowrap;
+        height: 100%;
+        width: 100%;
+        // title
+        .list_item_title{
 
+        }
+        // collapse icons on/off
+        .list_item_icon{
+          font-size: 24px;
+        }
+        // 2depth wrapper
+        .collapse{
+          box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.12);
+          background-color: $bg-color;
+          position: absolute;
+          left: 0;
+          top: 100%;
+          width: fit-content;
+          border-radius: 4px;
+          margin-top: 8px;
+          &::before{
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 8px;
+            left: 0;
+            top: -8px;
+            visibility: hidden;
+          }
+          // 2depth title
+          .list_items_wrapper{
+          }
+        }
+      }
+      // hover event
+      &:hover{
+
+      }
+    }
+  }
+}
+
+.category {
+  //리스트들 보여주는 부분
+  .modalItem {
+    li:hover > span {
+    }
+  }
+
+  li:hover {
+    .modalItem {
+    }
+  }
+
+  & > li {
+  }
+
+}
+
+.list_wrapper {
+
+}
+
+.list_items_wrapper {
+}
+
+.list_item_btn {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+.list_item_title {
+  width: 80%;
+}
+
+.list_item_icon {
+
+}
+
+.collapse {
+}
+
+.parentCategory {
+}
+
+@include mobile {
+  .category {
     //리스트들 보여주는 부분
     .modalItem {
-      padding: 23px 0;
-      background-color: #F5F5F5;
-      display: none;
-
-      li:hover > span{
-        color: coral;
+      li:hover > span {
       }
     }
 
     li:hover {
       .modalItem {
-        display: block;
       }
     }
 
     & > li {
-      position: relative;
     }
 
-    .listItemsWrapper {
-      white-space: nowrap;
-      position: absolute;
-      top: 100%; /* 위치를 조절해 필요에 맞게 설정하세요 */
-      left: 0px;
+  }
+  .parentCategory {
+  }
+  // 2 depth 감싸는 부모
+  .list_wrapper {
+    padding-right: 0;
+  }
+  // 2차 아이템 카테고리 리스트
+  .list_items_wrapper {
 
-      li {
-        padding: 3px 23px;
+  }
+  .list_item_btn {
 
-        span{
-          font-size: 14px;
-          color:$black-color;
-        }
+  }
+  .list_item_title {
+  }
+  .list_item_icon {
+    width: 20%;
+  }
+  .collapse {
+    width: 96%;
+  }
+  .list_wrapper {
+
+  }
+  .parentCategory {
+  }
+}
+
+// 모바일 가로, 테블릿 세로: 480px ~ 768px
+@include tablet {
+  .category {
+    //리스트들 보여주는 부분
+    .modalItem {
+
+    }
+    .list_items_wrapper {
+    }
+  }
+
+  .parentCategory {
+  }
+  .collapse {
+    width: 96%;
+  }
+  .parentCategory {
+  }
+  .list_item_icon {
+    width: 20%;
+  }
+}
+
+// 테블릿 가로, 랩탑: 768px ~ 1024px
+@include laptop {
+  .category {
+    //리스트들 보여주는 부분
+    .modalItem {
+      li:hover > span {
       }
     }
+
+    li:hover {
+      .modalItem {
+      }
+    }
+
+    & > li {
+    }
+
+    .list_items_wrapper {
+    }
   }
 
-  .parentCategory{
-    cursor: pointer;
-    padding: 4px;
-    span{
-      font-size: 16px;
-      color: $white-color;
-    }
+  .parentCategory {
+  }
+  .list_item_icon {
+    width: 20%;
   }
 }
 
-@include mobile{
-  .category{
-    .modalItem{
-      display: none;
+// 데스크탑: 1024px ~ 1280px
+@include desktop {
+  .category {
+    //리스트들 보여주는 부분
+    .modalItem {
     }
-    .categoryIcon{
-      display: none;
+
+    .list_items_wrapper {
     }
   }
+  @include set-desk(#{$primary-color});
+
 }
 
-@include tablet{
-  .category{
-    .modalItem{
-      display: none;
+// 데스크탑 이상 1279px~
+@include desktop-large {
+
+  .category {
+    //리스트들 보여주는 부분
+    .modalItem {
+      li:hover > span {
+      }
     }
-    .categoryIcon{
-      display: none;
+
+    li:hover {
+      .modalItem {
+      }
+    }
+
+    & > li {
+    }
+
+    .list_items_wrapper {
     }
   }
+
+  .parentCategory {
+
+  }
+  @include set-desk(#{$primary-color});
 }

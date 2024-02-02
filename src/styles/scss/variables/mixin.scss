@@ -1,4 +1,4 @@
-@import 'src/styles/scss/variables/variables';
+@import 'variables';
 
 /*
   mixin 은 함수처럼 다른곳에서 사용할 수 있음
@@ -20,25 +20,34 @@
   transform: translate(-50%, -50%);
 }
 
-// 모바일 767px ~ 480px
+// 모바일 세로 320px ~ 480px
 @mixin mobile {
-  @media all and (min-width: #{$breakpoint-mobile})
-  and (max-width: #{$breakpoint-tablet - 1px}) {
+  @media all and (min-width: $breakpoint-mobile-mini) and (max-width: #{$breakpoint-mobile}){
     @content;
   }
 }
-
-// 테블릿 1023px ~ 768px
+// 모바일 가로, 테블릿 세로: 480px ~ 768px
 @mixin tablet {
-  @media all and (min-width: #{$breakpoint-tablet})
-  and (max-width: #{$breakpoint-desktop - 1px}) {
+  @media all and (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet}){
+    @content;
+  }
+}
+// 테블릿 가로, 랩탑: 768px ~ 1024px
+@mixin laptop {
+  @media all and (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-laptop}){
+    @content;
+  }
+}
+// 데스크탑: 1024px ~ 1280px
+@mixin desktop {
+  @media all and (min-width: #{$breakpoint-laptop}) and (max-width: #{$breakpoint-desktop}){
     @content;
   }
 }
 
-// 데스크탑 1200px 이상
-@mixin desktop {
-  @media all and (min-width: #{$breakpoint-desktop}) {
+// 데스크탑 이상 1280px~
+@mixin desktop-large {
+  @media all and (min-width: #{$breakpoint-desktop}){
     @content;
   }
 }

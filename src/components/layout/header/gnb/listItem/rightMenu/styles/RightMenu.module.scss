@@ -1,0 +1,71 @@
+@import "src/components/layout/header/styles/index";
+
+// gnb 우측 즐겨찾기 영역
+.menu_stack{
+  .iconBtn{
+    color: white;
+    & > span{
+    }
+  }
+  .icon{
+  }
+}
+@include mobile{
+  .menu_stack{
+
+    .iconBtn{
+      & > span{
+      }
+    }
+    .icon{
+        font-size: 20px;
+    }
+  }
+}
+@include tablet{
+  .menu_stack{
+    .iconBtn{
+
+      & > span{
+      }
+    }
+    .icon{
+    }
+  }
+}
+@include laptop{
+  .menu_stack{
+
+    .iconBtn{
+
+      & > span{
+      }
+    }
+    .icon{
+    }
+  }
+}
+@include desktop{
+  .menu_stack{
+
+    .iconBtn{
+
+      & > span{
+      }
+    }
+    .icon{
+    }
+  }
+}
+@include desktop-large{
+  .menu_stack{
+
+    .iconBtn{
+
+      & > span{
+      }
+    }
+    .icon{
+    }
+  }
+}
