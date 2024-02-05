@@ -7,7 +7,7 @@ import CategoryHeader from '@components/layout/header/category/CategoryHeader';
 import RightMenu from '@components/layout/header/NavBar/listItem/rightMenu/RightMenu';
 import Button, { ButtonProps } from '@atoms/button/Button';
 import clsN from 'classnames';
-import styles from './styles/GnbMain.module.scss';
+import styles from './styles/NavMain.module.scss';
 import LeftMenuBtn from '@components/layout/header/NavBar/listItem/leftMenuBtn/leftMenuBtn';
 
 interface GnbMainProps {
