@@ -5,8 +5,8 @@ import { AppBar, Box, IconButton, Drawer as MuiDrawer, useMediaQuery } from '@mu
 import clsN from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import styles from '@components/layout/header/styles/Header.module.scss';
-import Drawer from '@components/layout/header/gnb/listItem/drawer/Drawer';
-import GnbMain from '@components/layout/header/gnb/gnbMain/GnbMain';
+import Drawer from '@components/layout/header/NavBar/listItem/drawer/Drawer';
+import NavMain from '@components/layout/header/NavBar/NavMain/NavMain';
 
 interface HeaderProps {
     /*
@@ -47,19 +47,19 @@ const Header = (props: HeaderProps) => {
     // result
     return (
         <Box className={styles.header} component="header">
-            <AppBar className={clsN(`${styles.app_bar_nav}`)} component="nav">
-                <GnbMain
-                    toolClsN={`${styles.tool_bar}`}
+            <AppBar className={clsN(`${styles.appBarNav}`)} component="nav">
+                <NavMain
+                    toolClsN={`${styles.toolBar}`}
                     logoTitle="DeamHome"
                     logoClsN={`${styles.logo}`}
                     onClick={handleDrawerToggle}
                     variant="text"
-                    menuBtnClsN={clsN(`${styles.menu_icon_btn}`)}
-                    menuIconClsN={clsN(`${styles.menu_icon}`)}
+                    menuBtnClsN={clsN(`${styles.menuIconBtn}`)}
+                    menuIconClsN={clsN(`${styles.menuIcon}`)}
                     loginClsN={clsN(`${styles.login}`, `${styles.loginTitle}`)}
-                    gnb_R_ClsN={styles.right_gnb_area}
-                    gnb_R_Btn_ClsN={clsN(`${styles.right_gnb_area_btn}`)}
-                    gnb_R_Icon_ClsN={styles.right_gnb_area_icon}
+                    navBarRightClsN={styles.rightNavBarArea}
+                    navBarRightBtnClsN={clsN(`${styles.rightNavBarAreaBtn}`)}
+                    navBarRightIconClsN={styles.rightNavBarAreaIcon}
                 />
             </AppBar>
             {isInTablet && (
@@ -74,8 +74,8 @@ const Header = (props: HeaderProps) => {
                         sx={{ '& .MuiDrawer-paper': { width: drawerWidth } }}
                     >
                         <Drawer
-                            wrapperClsN={`${styles.drawer_wrapper}`}
-                            mobHeaderClsN={`${styles.mobile_header}`}
+                            wrapperClsN={`${styles.drawerWrapper}`}
+                            mobHeaderClsN={`${styles.mobileHeader}`}
                             menuTitle="menu"
                             onClick={handleDrawerToggle}
                             variant="h1"

@@ -11,15 +11,7 @@ export const Login = gql`
         login(request: $request) {
             accessToken
             refreshToken
+            issuedAt
         }
     }
 `;
-
-// export const ReIssue = gql`
-//     mutation Reissue{
-//         reIssue{
-//             accessToken
-//             refreshToken
-//         }
-//     }
-// `;

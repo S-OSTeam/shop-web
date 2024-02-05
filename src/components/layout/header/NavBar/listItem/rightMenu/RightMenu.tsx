@@ -6,18 +6,18 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
-import styles from '@components/layout/header/gnb/listItem/rightMenu/styles/RightMenu.module.scss';
+import styles from '@components/layout/header/NavBar/listItem/rightMenu/styles/RightMenu.module.scss';
 
 interface HeaderMenuProps {
     // 네비게이션 우측 래퍼 클래스명
-    gnb_r_ClsN?: string;
+    navBarRightClsN?: string;
     // 아이콘버튼 클래스명
     icnBtnClsN?: string;
     // 아이콘버튼 내에 있는 클래스명
     iconClsN?: string;
 }
 
-const RightMenu = ({ gnb_r_ClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) => {
+const RightMenu = ({ navBarRightClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) => {
     const title = ['즐겨찾기', '관심상품', '장바구니'];
     const iconProvider = [
         <BookmarksIcon className={clsN(styles.icon, iconClsN)} />,
@@ -40,7 +40,7 @@ const RightMenu = ({ gnb_r_ClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) => {
         <Grid
             container
             justifyContent="space-between"
-            className={clsN(`${styles.menu_stack}`, gnb_r_ClsN)}
+            className={clsN(`${styles.menu_stack}`, navBarRightClsN)}
             direction="row"
         >
             {gridItemProvider}
@@ -48,12 +48,12 @@ const RightMenu = ({ gnb_r_ClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) => {
     );
 };
 RightMenu.propTypes = {
-    gnb_r_ClsN: PropTypes.string,
+    navBarRightClsN: PropTypes.string,
     icnBtnClsN: PropTypes.string,
     iconClsN: PropTypes.string,
 };
 RightMenu.defaultProps = {
-    gnb_r_ClsN: `${styles.menu_stack}`,
+    navBarRightClsN: `${styles.menuStack}`,
     icnBtnClsN: `${styles.iconBtn}`,
     iconClsN: `${styles.icon}`,
 };

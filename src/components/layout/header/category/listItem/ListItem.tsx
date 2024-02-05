@@ -15,16 +15,21 @@ interface ListItemProps {
 }
 
 const ListItem = ({ className, items, onClick }: ListItemProps) => {
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    return (<>
-        {items && items.map((item) => (
-            <MuiListItem key={item.publicId} disablePadding className={clsN(styles.listItem, className)}>
-                <ListItemButton className={styles.listItem_btn} onClick={/* onClick && onClick(item.title); */onClick}>
-                    <ListItemText primary={item.title} className={styles.listItem_primary_context} />
-                </ListItemButton>
-            </MuiListItem>
-        ))}
-    </>);
+    return (
+        <div>
+            {items &&
+                items.map((item) => (
+                    <MuiListItem key={item.publicId} disablePadding className={clsN(styles.listItem, className)}>
+                        <ListItemButton
+                            className={styles.listItem_btn}
+                            onClick={/* onClick && onClick(item.title); */ onClick}
+                        >
+                            <ListItemText primary={item.title} className={styles.listItem_primary_context} />
+                        </ListItemButton>
+                    </MuiListItem>
+                ))}
+        </div>
+    );
 };
 
 ListItem.propsType = {

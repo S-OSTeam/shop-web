@@ -1,7 +1,7 @@
 @import "src/components/layout/header/styles/index";
 
 // gnb 우측 즐겨찾기 영역
-.menu_stack{
+.menuStack{
   .iconBtn{
     color: white;
     & > span{
@@ -11,7 +11,7 @@
   }
 }
 @include mobile{
-  .menu_stack{
+  .menuStack{
 
     .iconBtn{
       & > span{
@@ -23,7 +23,7 @@
   }
 }
 @include tablet{
-  .menu_stack{
+  .menuStack{
     .iconBtn{
 
       & > span{
@@ -34,7 +34,7 @@
   }
 }
 @include laptop{
-  .menu_stack{
+  .menuStack{
 
     .iconBtn{
 
@@ -46,7 +46,7 @@
   }
 }
 @include desktop{
-  .menu_stack{
+  .menuStack{
 
     .iconBtn{
 
@@ -58,7 +58,7 @@
   }
 }
 @include desktop-large{
-  .menu_stack{
+  .menuStack{
 
     .iconBtn{
 

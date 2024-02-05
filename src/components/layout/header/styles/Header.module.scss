@@ -6,7 +6,7 @@
 }
 
 // 네비 자체를 감싸는 래퍼
-.app_bar_nav {
+.appBarNav {
   transition: 0.2s ease-in-out;
   background-color: $primary-color;
   padding: 0;
@@ -28,7 +28,7 @@
 }
 
 // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-.tool_bar {
+.toolBar {
   width: 100%;
   box-sizing: border-box;
   height: 100%;
@@ -36,7 +36,7 @@
 }
 
 // 우측 좋아요, 찜, 장바구니 메뉴
-.right_gnb_area {
+.rightNavBarArea {
   justify-content: right;
   white-space: nowrap;
   margin-left: auto;
@@ -63,12 +63,12 @@
 }
 
 // 버튼
-.right_gnb_area_btn {
+.rightNavBarAreaBtn {
 
 }
 
 // 위 버튼의 아이콘
-.right_gnb_area_icon {
+.rightNavBarAreaIcon {
 
 }
 
@@ -113,10 +113,10 @@
 }
 
 // example 모바일 메뉴
-.drawer_wrapper {
+.drawerWrapper {
   text-align: center;
 
-  .mobile_header {
+  .mobileHeader {
     font-size: $title-s;
     height: 56px;
     line-height: 56px;
@@ -128,7 +128,7 @@
 }
 
 // 모바일 좌측 메뉴 버튼
-.menu_icon_btn {
+.menuIconBtn {
   transition: 0.3s ease-in-out;
   color: white;
   padding: 0;
@@ -146,7 +146,7 @@
   }
 }
 
-.menu_icon {
+.menuIcon {
 
 }
 
@@ -164,7 +164,7 @@
 
   }
   // 모바일 좌측 메뉴 버튼
-  .menu_icon_btn {
+  .menuIconBtn {
     margin-right: 4px;
     padding-left: 0;
 
@@ -172,19 +172,19 @@
       font-size: 28px;
     }
   }
-  .menu_icon {
+  .menuIcon {
   }
   .logo {
     font-size: 16px;
   }
   //
-  .app_bar_nav {
+  .appBarNav {
     min-height: 56px;
     max-height: 100%;
     display: flex;
   }
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-  .tool_bar {
+  .toolBar {
     justify-content: space-between;
 
     .drawer_icon_btn {
@@ -200,12 +200,12 @@
   .drawer {
 
   }
-  .drawer_wrapper {
+  .drawerWrapper {
 
 
   }
   // 우측 좋아요, 찜, 장바구니 메뉴
-  .right_gnb_area {
+  .rightNavBarArea {
     min-width: 60px;
     max-width: 110px;
 
@@ -218,13 +218,13 @@
       }
     }
   }
-  .right_gnb_area_btn {
+  .rightNavBarAreaBtn {
     width: calc(110px / 3);
     padding-left: 4px;
     padding-right: 4px;
   }
   // 위 아이콘
-  .right_gnb_area_icon {
+  .rightNavBarAreaIcon {
 
   }
   // 로그인 영역
@@ -239,7 +239,7 @@
 // 480.~768 px
 @include tablet {
   // 모바일 좌측 메뉴 버튼
-  .menu_icon_btn {
+  .menuIconBtn {
     margin-right: 16px;
     padding: 0;
 
@@ -251,18 +251,18 @@
       }
     }
   }
-  .app_bar_nav {
+  .appBarNav {
     height: 64px;
     padding: 0;
   }
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-  .tool_bar {
+  .toolBar {
     .drawer_icon_btn {
       .drawer_icon {
       }
     }
   }
-  .right_gnb_area {
+  .rightNavBarArea {
     min-width: 110px;
     max-width: 140px;
 
@@ -286,11 +286,11 @@
 
 // 테블릿 가로, 랩탑: 768px ~ 1024px
 @include laptop {
-  .app_bar_nav {
+  .appBarNav {
     height: 64px;
   }
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-  .tool_bar {
+  .toolBar {
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
@@ -299,7 +299,7 @@
     justify-content: space-between;
   }
   // 우측 북마크 좋아요 장바구니
-  .right_gnb_area {
+  .rightNavBarArea {
     min-width: 110px;
     max-width: 140px;
 
@@ -313,7 +313,7 @@
     }
   }
   // 모바일 좌측 메뉴 버튼
-  .menu_icon_btn {
+  .menuIconBtn {
     margin-right: 16px;
     padding: 0;
 
@@ -335,12 +335,12 @@
 
 // 데스크탑: 1024px ~ 1280px
 @include desktop {
-  .app_bar_nav {
+  .appBarNav {
     display: flex;
     height: 64px;
   }
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-  .tool_bar {
+  .toolBar {
     /* min-width: 768px ~ max-width: 1080px */
 
     width: max(14.25%, 1080px);
@@ -354,7 +354,7 @@
   .logo {
   }
   // 우측 북마크 좋아요 장바구니
-  .right_gnb_area {
+  .rightNavBarArea {
     min-width: 110px;
     max-width: 140px;
     box-sizing: border-box;
@@ -379,11 +379,11 @@
 
 // 1280px over
 @include desktop-large {
-  .app_bar_nav {
+  .appBarNav {
     height: 64px;
   }
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-  .tool_bar {
+  .toolBar {
     width: 1240px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -392,7 +392,7 @@
     justify-content: space-between;
   }
   // 우측 북마크 좋아요 장바구니
-  .right_gnb_area {
+  .rightNavBarArea {
     min-width: 110px;
     max-width: 140px;
 
