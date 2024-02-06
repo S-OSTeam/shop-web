@@ -49,17 +49,17 @@ const Header = (props: HeaderProps) => {
         <Box className={styles.header} component="header">
             <AppBar className={clsN(`${styles.appBarNav}`)} component="nav">
                 <NavMain
-                    toolClsN={`${styles.toolBar}`}
+                    toolClsN={`${styles.appBarNav_toolBar}`}
                     logoTitle="DeamHome"
-                    logoClsN={`${styles.logo}`}
+                    logoClsN={`${styles.appBarNav_logo}`}
                     onClick={handleDrawerToggle}
                     variant="text"
-                    menuBtnClsN={clsN(`${styles.menuIconBtn}`)}
-                    menuIconClsN={clsN(`${styles.menuIcon}`)}
-                    loginClsN={clsN(`${styles.login}`, `${styles.loginTitle}`)}
-                    navBarRightClsN={styles.rightNavBarArea}
-                    navBarRightBtnClsN={clsN(`${styles.rightNavBarAreaBtn}`)}
-                    navBarRightIconClsN={styles.rightNavBarAreaIcon}
+                    mobileMenuBtn={clsN(`${styles.appBarNav_menuIconBtn}`)}
+                    mobileMenuIconClsN={clsN(`${styles.appBarNav_menuIcon}`)}
+                    loginClsN={clsN(`${styles.appBarNav_login}`)}
+                    navBarRightClsN={clsN(`${styles.appBarNav_branchNav_right}`)}
+                    navBarRightBtnClsN={clsN(`${styles.appBarNav_branchNav_right_iconBtn}`)}
+                    navBarRightIconClsN={clsN(`${styles.appBarNav_branchNav_right_icons}`)}
                 />
             </AppBar>
             {isInTablet && (
@@ -75,7 +75,7 @@ const Header = (props: HeaderProps) => {
                     >
                         <Drawer
                             wrapperClsN={`${styles.drawerWrapper}`}
-                            mobHeaderClsN={`${styles.mobileHeader}`}
+                            mobHeaderClsN={`${styles.drawerWrapper_mobileHeader}`}
                             menuTitle="menu"
                             onClick={handleDrawerToggle}
                             variant="h1"

@@ -17,8 +17,8 @@ interface GnbMainProps {
     onClick?: () => void;
     loginClsN?: string;
     variant?: ButtonProps['variant'];
-    menuBtnClsN?: string;
-    menuIconClsN?: string;
+    mobileMenuBtn?: string;
+    mobileMenuIconClsN?: string;
     navBarRightClsN?: string;
     navBarRightBtnClsN?: string;
     navBarRightIconClsN?: string;
@@ -31,8 +31,8 @@ const NavMain = ({
     onClick,
     loginClsN,
     variant,
-    menuBtnClsN,
-    menuIconClsN,
+    mobileMenuBtn,
+    mobileMenuIconClsN,
     navBarRightClsN,
     navBarRightBtnClsN,
     navBarRightIconClsN,
@@ -52,21 +52,21 @@ const NavMain = ({
         <Toolbar className={clsN(`${styles.toolBar}`, toolClsN)}>
             {isInTablet ? (
                 <LeftMenuBtn
-                    icon={<MenuIcon className={clsN(`${styles.headerMenuBtnIcon}`, menuIconClsN)} onClick={onClick} />}
-                    className={clsN(`${styles.headerMenuBtn}`, menuBtnClsN)}
+                    icon={<MenuIcon className={clsN(`${styles.toolBar_menuBtnIcon}`, mobileMenuIconClsN)} onClick={onClick} />}
+                    className={clsN(`${styles.toolBar_MenuBtn}`, mobileMenuBtn)}
                     edge="start"
                     ariaLabel="drawer Menu"
                     onClick={onClick}
                 />
             ) : null}
-            <Text text={logoTitle} className={clsN(`${styles.logo}`, logoClsN)} onClick={onClick} />
+            <Text text={logoTitle} className={clsN(`${styles.toolBar_logo}`, logoClsN)} onClick={onClick} />
             {isInTablet ? null : <CategoryHeader />}
             <RightMenu
                 navBarRightClsN={navBarRightClsN}
                 icnBtnClsN={navBarRightBtnClsN}
                 iconClsN={navBarRightIconClsN}
             />
-            <Button className={clsN(styles.login, styles.loginTitle, loginClsN)} variant={variant}>
+            <Button className={clsN(styles.toolBar_login, loginClsN)} variant={variant}>
                 로그인
             </Button>
         </Toolbar>

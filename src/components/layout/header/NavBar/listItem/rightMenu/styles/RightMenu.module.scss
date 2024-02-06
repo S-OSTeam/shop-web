@@ -1,71 +1,79 @@
 @import "src/components/layout/header/styles/index";
 
-// gnb 우측 즐겨찾기 영역
+// gnb 우측 즐겨찾기 영역 래퍼 [블록]
 .menuStack{
-  .iconBtn{
+  /* 요소 */
+  // 아이콘 버튼
+  &_iconBtn{
     color: white;
     & > span{
     }
   }
-  .icon{
+  // 아이콘
+  &_icon{
+
   }
 }
 @include mobile{
+  /* 블록 */
   .menuStack{
-
-    .iconBtn{
+    /* 요소 */
+    // 아이콘 버튼
+    &_iconBtn{
       & > span{
       }
     }
-    .icon{
+    // 아이콘
+    &_icon{
         font-size: 20px;
     }
   }
 }
 @include tablet{
+  /* 블록 */
   .menuStack{
-    .iconBtn{
-
+    /* 요소 */
+    &_iconBtn{
       & > span{
       }
     }
-    .icon{
+    &_icon{
     }
   }
 }
 @include laptop{
+  /* 블록 */
   .menuStack{
-
-    .iconBtn{
-
+    /* 요소 */
+    &_iconBtn{
       & > span{
       }
     }
-    .icon{
+    &_icon{
     }
   }
 }
 @include desktop{
+  /* 블록 */
   .menuStack{
-
-    .iconBtn{
-
+    /* 요소 */
+    &_iconBtn{
       & > span{
       }
     }
-    .icon{
+    &_icon{
     }
   }
 }
 @include desktop-large{
+  /* 블록 */
   .menuStack{
-
-    .iconBtn{
-
+    /* 요소 */
+    &_iconBtn{
       & > span{
       }
     }
-    .icon{
+    &_icon{
     }
   }
 }
