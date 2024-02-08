@@ -20,12 +20,25 @@
   transform: translate(-50%, -50%);
 }
 
-// 모바일 세로 320px ~ 480px
+
+/*
+  portrait(초상화) - 세로모드
+
+  landscape(풍경화) - 가로모드
+
+  모바일 최소 미디어쿼리는 320 으로 설정
+*/
+
+// Small devices (portrait phones)
+
+
 @mixin mobile {
   @media all and (min-width: $breakpoint-mobile-mini) and (max-width: #{$breakpoint-mobile}){
     @content;
   }
 }
+
+
 // 모바일 가로, 테블릿 세로: 480px ~ 768px
 @mixin tablet {
   @media all and (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet}){
@@ -48,6 +61,17 @@
 // 데스크탑 이상 1280px~
 @mixin desktop-large {
   @media all and (min-width: #{$breakpoint-desktop}){
+    @content;
+  }
+}
+// 그리드 변수 불러오기
+/*
+  map-get 을 통해 여러 데이터를 가지고 있는 변수를 선택 가능
+*/
+// 간단하게 mixin 수정 (모바일 우선 설계)
+@mixin media-breakpoint-up($size){
+  $min-width: map-get($grid-breakpoints, $size);
+  @media all and (min-width: $min-width){
     @content;
   }
 }

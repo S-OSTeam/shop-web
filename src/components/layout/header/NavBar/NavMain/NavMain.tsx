@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import { Toolbar, useMediaQuery } from '@mui/material';
+import { Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Text from '@atoms/text/Text';
 import CategoryHeader from '@components/layout/header/category/CategoryHeader';
@@ -9,6 +9,7 @@ import Button, { ButtonProps } from '@atoms/button/Button';
 import clsN from 'classnames';
 import styles from './styles/NavMain.module.scss';
 import LeftMenuBtn from '@components/layout/header/NavBar/listItem/leftMenuBtn/leftMenuBtn';
+import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 
 interface GnbMainProps {
     toolClsN?: string;
@@ -37,12 +38,8 @@ const NavMain = ({
     navBarRightBtnClsN,
     navBarRightIconClsN,
 }: GnbMainProps) => {
-    /*
-     * width 에 따라 <CategoryHeader /> 를 표시할지 안할지 정해야됨
-     * menuButton 도 포함
-     */
-    // useMediaQuery 로 일정수치 이내에만 true 아닐경우 false
-    const isInTablet = useMediaQuery('(max-width: 1024px)');
+    // 전역 아톰을 활용한 커스텀 훅 사용
+    const isInTablet = useDomSizeCheckHook(1024);
 
     const loginSuccess = <T,>(token: T) => {
         console.log(token);

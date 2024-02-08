@@ -5,11 +5,12 @@
 
 }
 /*
- * BEM 이란 : [블록]_[요소]__[변형자]
+ * BEM 이란 : [블록]__[요소]--[변형자]
  * 변형자는 해당 블록이나 요소가 바뀔경우 분기점으로 만들어준다.
+ * 케밥 케이스 접목 사용
  */
 // 네비 자체를 감싸는 래퍼 [BEM]
-.appBarNav {
+.app-bar-nav {
   transition: 0.2s ease-in-out;
   background-color: $primary-color;
   padding: 0;
@@ -25,7 +26,7 @@
   /* ------ 요소들 ------ */
   // 좌측 버튼 관련
   // 모바일 좌측 메뉴 버튼
-  &_menuIconBtn {
+  &__menu-icon-btn {
     transition: 0.3s ease-in-out;
     color: white;
     padding: 0;
@@ -44,12 +45,12 @@
   }
 
   // 모바일 메뉴 버튼의 아이콘
-  &_menuIcon {
+  &__menu-icon {
 
   }
 
   // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-  &_toolBar {
+  &__tool-bar {
     width: 100%;
     box-sizing: border-box;
     height: 100%;
@@ -58,7 +59,7 @@
 
   // 우측 좋아요, 찜, 장바구니 메뉴 요소이자 래퍼 navBarRightClsN
   // rightNavBarArea 가 원본
-  &_branchNav_right {
+  &__branch-nav-right {
     justify-content: right;
     white-space: nowrap;
     margin-left: auto;
@@ -84,18 +85,18 @@
     }
 
     // 우측 좋아요 즐겨찾기 등등...영역 버튼 클래스명
-    &_iconBtn {
+    &__icon-btn {
 
     }
 
     // 아이콘들 원본 rightNavBarAreaIcon
-    &_icons {
+    &__icons {
 
     }
   }
 
   // logo <span>
-  &_logo {
+  &__logo {
     width: fit-content;
     cursor: pointer;
     color: $white-color;
@@ -104,7 +105,7 @@
   }
 
   // 로그인 버튼
-  &_login {
+  &__login {
     color: gray;
     background-color: white;
 
@@ -115,7 +116,7 @@
 
 }
 // 모바일 메뉴 : default 비활성화 : 안씀
-.mobileMenu {
+.mobile-menu {
   display: none;
   // 아이콘 색상
   svg {
@@ -130,10 +131,10 @@
 }
 
 // example 모바일 메뉴 컨테이너 [실질적인 블록 요소]
-.drawerWrapper {
+.drawer-wrapper {
   text-align: center;
 
-  &_mobileHeader {
+  &__mobile-header {
     font-size: $title-s;
     height: 56px;
     line-height: 56px;
@@ -144,33 +145,31 @@
   }
 
 }
-
-
-@include mobile {
+@include media-breakpoint-up(xs){
   .header {
   }
   /* 블록 */
   // 네비 자체를 감싸는 래퍼 [Block]
-  .appBarNav {
+  .app-bar-nav {
     min-height: 56px;
     max-height: 100%;
     display: flex;
     /* 요소 */
     // 메뉴 아이콘
-    &_menuIcon {
+    &__menu-icon {
     }
     // 로고
-    &_logo {
+    &__logo {
       font-size: 16px;
     }
     // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-    &_toolBar {
+    &__tool-bar {
       justify-content: space-between;
 
     }
 
     // 모바일 좌측 메뉴 버튼
-    &_menuIconBtn {
+    &__menu-icon-btn {
       margin-right: 4px;
       padding-left: 0;
 
@@ -179,7 +178,7 @@
       }
     }
     // 우측 좋아요, 찜, 장바구니 메뉴
-    &_branchNav_right {
+    &__branch-nav-right {
       min-width: 60px;
       max-width: 110px;
       & > * {
@@ -190,18 +189,18 @@
         }
       }
       // 우측 좋아요 즐겨찾기 등등...영역 버튼 클래스명
-      &_iconBtn {
+      &__icon-btn {
         width: calc(110px / 3);
         padding-left: 4px;
         padding-right: 4px;
       }
       // 아이콘들 원본 rightNavBarAreaIcon
-      &_icons {
+      &__icons {
 
       }
     }
     // 로그인 영역
-    &_login {
+    &__login {
       margin-left: 4px;
       box-sizing: border-box;
       padding: 2px 0;
@@ -211,17 +210,15 @@
   /* 드로워 블록 영역 */
   .drawer {
   }
-  .drawerWrapper {
+  .drawer-wrapper {
   }
 }
 
-// 480.~768 px
-@include tablet {
-
+@include media-breakpoint-up(sm){
   // 네비 자체를 감싸는 래퍼 [Block]
-  .appBarNav {
+  .app-bar-nav {
     // 모바일 좌측 메뉴 버튼
-    &_menuIconBtn {
+    &__menu-icon-btn {
       margin-right: 16px;
       padding: 0;
 
@@ -239,10 +236,10 @@
     /* 요소 */
 
     // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-    &_toolBar {
+    &__tool-bar {
     }
     // 우측 좋아요, 찜, 장바구니 메뉴 요소이자 래퍼 navBarRightClsN
-    &_branchNav_right {
+    &__branch-nav-right {
       min-width: 110px;
       max-width: 140px;
 
@@ -256,22 +253,19 @@
       }
     }
     // 로그인 영역
-    &_login {
+    &__login {
       margin-left: 8px;
       padding: 2px 0;
       font-size: 16px;
     }
   }
-
-
 }
-
-// 테블릿 가로, 랩탑: 768px ~ 1024px
-@include laptop {
+// 768px
+@include media-breakpoint-up(md){
   // 블록
-  .appBarNav {
+  .app-bar-nav {
     // 모바일 좌측 메뉴 버튼
-    &_menuIconBtn {
+    &__menu-icon-btn {
       margin-right: 16px;
       padding: 0;
 
@@ -285,7 +279,7 @@
     }
     height: 64px;
     // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-    &_toolBar {
+    &__tool-bar {
       width: 100%;
       margin: 0 auto;
       box-sizing: border-box;
@@ -295,7 +289,7 @@
     }
 
     // 우측 북마크 좋아요 장바구니
-    &_branchNav_right {
+    &__branch-nav-right {
       min-width: 110px;
       max-width: 140px;
 
@@ -309,24 +303,23 @@
       }
     }
     // 로그인 영역
-    &_login {
+    &__login {
       margin-left: 8px;
       padding: 2px 0;
       font-size: 16px;
     }
   }
 }
-
-// 데스크탑: 1024px ~ 1280px
-@include desktop {
-  .appBarNav {
+// 992px
+@include media-breakpoint-up(lg){
+  .app-bar-nav {
     display: flex;
     height: 64px;
     // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-    &_toolBar {
+    &__tool-bar {
       /* min-width: 768px ~ max-width: 1080px */
 
-      width: max(14.25%, 1080px);
+      width: max(14.25%, 992px);
       margin: 0 auto;
       box-sizing: border-box;
       height: 100%;
@@ -335,16 +328,16 @@
     }
 
     // 로고
-    &_logo {
+    &__logo {
     }
 
     // 우측 북마크 좋아요 장바구니
-    &_branchNav_right {
+    &__branch-nav-right {
       min-width: 110px;
       max-width: 140px;
       box-sizing: border-box;
       padding-right: 12px;
-
+      width: fit-content;
       & > * {
         &:after {
           height: 12px;
@@ -356,7 +349,7 @@
     }
 
     // 로그인 영역
-    &_login {
+    &__login {
       margin-left: 8px;
       padding: 2px 0;
       font-size: 16px;
@@ -364,12 +357,11 @@
   }
 }
 
-// 1280px over
-@include desktop-large {
-  .appBarNav {
+@include media-breakpoint-up(xxl){
+  .app-bar-nav {
     height: 64px;
     // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
-    &_toolBar {
+    &__tool-bar {
       width: 1240px;
       margin: 0 auto;
       box-sizing: border-box;
@@ -379,7 +371,7 @@
     }
 
     // 우측 북마크 좋아요 장바구니
-    &_branchNav_right {
+    &__branch-nav-right {
       min-width: 110px;
       max-width: 140px;
 
@@ -394,7 +386,7 @@
     }
 
     // 로그인 영역
-    &_login {
+    &__login {
       margin-left: 8px;
       padding: 2px 12px;
       font-size: 16px;

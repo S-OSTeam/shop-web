@@ -17,6 +17,22 @@ $breakpoint-desktop: 1280px;
 // 헤더 컨텐츠 너비
 $header-width-mobile: 280px;
 
+// 미디어쿼리 변수
+$grid-breakpoints: (
+        // minimum portrait mobile devices
+        xs: 360px,
+        // default portrait mobile devices
+        sm: 480px,
+        // landscape mobile and tablet devices
+        md: 768px,
+        // landscape tablet and small laptop
+        lg: 992px,
+        // small desk screen
+        xl: 1200px,
+        // FullHD screen for 16:9
+        xxl: 1400px
+);
+
 // 색상
 $primary-color: #80A1D4;
 $black-color: #000000;
