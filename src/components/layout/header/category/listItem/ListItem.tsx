@@ -19,12 +19,12 @@ const ListItem = ({ className, items, onClick }: ListItemProps) => {
         <div>
             {items &&
                 items.map((item) => (
-                    <MuiListItem key={item.publicId} disablePadding className={clsN(styles.listItem, className)}>
+                    <MuiListItem key={item.publicId} disablePadding className={clsN(styles['list-item'], className)}>
                         <ListItemButton
-                            className={styles.listItem_btn}
+                            className={clsN(styles['list-item__btn'])}
                             onClick={/* onClick && onClick(item.title); */ onClick}
                         >
-                            <ListItemText primary={item.title} className={styles.listItem_primary_context} />
+                            <ListItemText primary={item.title} className={clsN(styles['list-item__btn__primary-context'])} />
                         </ListItemButton>
                     </MuiListItem>
                 ))}

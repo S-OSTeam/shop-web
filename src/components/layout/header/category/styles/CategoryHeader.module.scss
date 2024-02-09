@@ -1,30 +1,33 @@
 @import 'src/components/layout/header/styles/index.scss';
 
 @mixin set-desk($bg-color) {
-  .list_wrapper {
+  .list-wrapper {
     display: flex;
     height: 100%;
     padding: 0 16px;
-    .parentCategory {
+
+    &__parent-category {
       padding: 0;
       height: 100%;
       white-space: nowrap;
       // li > btn
-      .list_item_btn{
+      &__btn {
         position: relative;
         flex-wrap: nowrap;
         height: 100%;
         width: 100%;
         // title
-        .list_item_title{
+        &__title {
 
         }
+
         // collapse icons on/off
-        .list_item_icon{
+        &__icon {
           font-size: 24px;
         }
+
         // 2depth wrapper
-        .collapse{
+        &__collapse {
           box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.12);
           background-color: $bg-color;
           position: absolute;
@@ -33,7 +36,8 @@
           width: fit-content;
           border-radius: 4px;
           margin-top: 8px;
-          &::before{
+
+          &::before {
             content: '';
             position: absolute;
             display: block;
@@ -43,198 +47,106 @@
             top: -8px;
             visibility: hidden;
           }
-          // 2depth title
-          .list_items_wrapper{
-          }
         }
       }
-      // hover event
-      &:hover{
+    }
+  }
+  // 2depth title
+  .list-items-wrapper {
+  }
+}
+
+
+.list-wrapper {
+  &__parent-category{
+    &__btn {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      &__title {
+        width: 80%;
+      }
+
+      &__icon {
 
       }
+
+      &__collapse {
+        width: 100%;
+      }
     }
+
+
   }
 }
 
-.category {
-  //리스트들 보여주는 부분
-  .modalItem {
-    li:hover > span {
-    }
-  }
-
-  li:hover {
-    .modalItem {
-    }
-  }
-
-  & > li {
-  }
-
+// 2 차 리스트들 보여주는 부분
+.list-items-wrapper {
 }
 
-.list_wrapper {
 
-}
-
-.list_items_wrapper {
-}
-
-.list_item_btn {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-}
-
-.list_item_title {
-  width: 80%;
-}
-
-.list_item_icon {
-
-}
-
-.collapse {
-}
-
-.parentCategory {
-}
 
 @include mobile {
-  .category {
-    //리스트들 보여주는 부분
-    .modalItem {
-      li:hover > span {
-      }
-    }
-
-    li:hover {
-      .modalItem {
-      }
-    }
-
-    & > li {
-    }
-
-  }
-  .parentCategory {
-  }
-  // 2 depth 감싸는 부모
-  .list_wrapper {
+  .list-wrapper {
     padding-right: 0;
+    &__parent-category {
+      &__btn {
+        &__title {
+        }
+        &__icon {
+          width: 20%;
+        }
+        &__collapse {
+          width: 96%;
+        }
+      }
+    }
   }
-  // 2차 아이템 카테고리 리스트
-  .list_items_wrapper {
+  .list-items-wrapper {
 
   }
-  .list_item_btn {
 
-  }
-  .list_item_title {
-  }
-  .list_item_icon {
-    width: 20%;
-  }
-  .collapse {
-    width: 96%;
-  }
-  .list_wrapper {
-
-  }
-  .parentCategory {
-  }
 }
 
 // 모바일 가로, 테블릿 세로: 480px ~ 768px
 @include tablet {
-  .category {
-    //리스트들 보여주는 부분
-    .modalItem {
+  //리스트들 보여주는 부분
+  .list-wrapper {
+    &__parent-category {
 
+      &__btn{
+        &__icon {
+          width: 20%;
+        }
+        &__collapse {
+          width: 96%;
+        }
+      }
     }
-    .list_items_wrapper {
-    }
+
   }
 
-  .parentCategory {
-  }
-  .collapse {
-    width: 96%;
-  }
-  .parentCategory {
-  }
-  .list_item_icon {
-    width: 20%;
-  }
 }
 
 // 테블릿 가로, 랩탑: 768px ~ 1024px
 @include laptop {
-  .category {
-    //리스트들 보여주는 부분
-    .modalItem {
-      li:hover > span {
+  .list-wrapper {
+    &__parent-category {
+      &__btn{
+        &__icon {
+          width: 20%;
+        }
       }
     }
-
-    li:hover {
-      .modalItem {
-      }
-    }
-
-    & > li {
-    }
-
-    .list_items_wrapper {
-    }
-  }
-
-  .parentCategory {
-  }
-  .list_item_icon {
-    width: 20%;
   }
 }
 
 // 데스크탑: 1024px ~ 1280px
 @include desktop {
-  .category {
-    //리스트들 보여주는 부분
-    .modalItem {
-    }
-
-    .list_items_wrapper {
-    }
-  }
   @include set-desk(#{$primary-color});
-
 }
 
 // 데스크탑 이상 1279px~
 @include desktop-large {
-
-  .category {
-    //리스트들 보여주는 부분
-    .modalItem {
-      li:hover > span {
-      }
-    }
-
-    li:hover {
-      .modalItem {
-      }
-    }
-
-    & > li {
-    }
-
-    .list_items_wrapper {
-    }
-  }
-
-  .parentCategory {
-
-  }
   @include set-desk(#{$primary-color});
 }

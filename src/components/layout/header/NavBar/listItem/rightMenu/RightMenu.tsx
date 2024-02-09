@@ -20,9 +20,9 @@ interface HeaderMenuProps {
 const RightMenu = ({ navBarRightClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) => {
     const title = ['즐겨찾기', '관심상품', '장바구니'];
     const iconProvider = [
-        <BookmarksIcon className={clsN(styles.menuStack_icon, iconClsN)} />,
-        <FavoriteBorderIcon className={clsN(styles.menuStack_icon, iconClsN)} />,
-        <ShoppingCartIcon className={clsN(styles.menuStack_icon, iconClsN)} />,
+        <BookmarksIcon className={clsN(styles['stack-menu__icon'], iconClsN)} />,
+        <FavoriteBorderIcon className={clsN(styles['stack-menu__icon'], iconClsN)} />,
+        <ShoppingCartIcon className={clsN(styles['stack-menu__icon'], iconClsN)} />,
     ];
     const gridItemProvider = title.map((item, idx) => {
         return (
@@ -30,7 +30,7 @@ const RightMenu = ({ navBarRightClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) =
                 <Tooltip title={item}>
                     {/* div 를 감싸야 ToolTip hover 기능 작동 */}
                     <div>
-                        <IconButton className={clsN(styles.menuStack_iconBtn, icnBtnClsN)} icon={iconProvider[idx]} />
+                        <IconButton className={clsN(styles['stack-menu__icon-btn'], icnBtnClsN)} icon={iconProvider[idx]} />
                     </div>
                 </Tooltip>
             </Grid>
@@ -40,7 +40,7 @@ const RightMenu = ({ navBarRightClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) =
         <Grid
             container
             justifyContent="space-between"
-            className={clsN(`${styles.menuStack}`, navBarRightClsN)}
+            className={clsN(`${styles['stack-menu']}`, navBarRightClsN)}
             direction="row"
         >
             {gridItemProvider}
@@ -53,8 +53,8 @@ RightMenu.propTypes = {
     iconClsN: PropTypes.string,
 };
 RightMenu.defaultProps = {
-    navBarRightClsN: `${styles.menuStack}`,
-    icnBtnClsN: `${styles.menuStack_iconBtn}`,
-    iconClsN: `${styles.menuStack_icon}`,
+    navBarRightClsN: `${styles['stack-menu']}`,
+    icnBtnClsN: `${styles['stack-menu__icon-btn']}`,
+    iconClsN: `${styles['stack-menu__icon']}`,
 };
 export default RightMenu;

@@ -46,24 +46,24 @@ const NavMain = ({
     };
 
     return (
-        <Toolbar className={clsN(`${styles.toolBar}`, toolClsN)}>
+        <Toolbar className={clsN(`${styles['tool-bar']}`, toolClsN)}>
             {isInTablet ? (
                 <LeftMenuBtn
-                    icon={<MenuIcon className={clsN(`${styles.toolBar_menuBtnIcon}`, mobileMenuIconClsN)} onClick={onClick} />}
-                    className={clsN(`${styles.toolBar_MenuBtn}`, mobileMenuBtn)}
+                    icon={<MenuIcon className={clsN(`${styles['tool-bar__icon']}`, mobileMenuIconClsN)} onClick={onClick} />}
+                    className={clsN(`${styles['tool-bar__btn']}`, mobileMenuBtn)}
                     edge="start"
                     ariaLabel="drawer Menu"
                     onClick={onClick}
                 />
             ) : null}
-            <Text text={logoTitle} className={clsN(`${styles.toolBar_logo}`, logoClsN)} onClick={onClick} />
+            <Text text={logoTitle} className={clsN(`${styles['tool-bar__logo]']}`, logoClsN)} onClick={onClick} />
             {isInTablet ? null : <CategoryHeader />}
             <RightMenu
                 navBarRightClsN={navBarRightClsN}
                 icnBtnClsN={navBarRightBtnClsN}
                 iconClsN={navBarRightIconClsN}
             />
-            <Button className={clsN(styles.toolBar_login, loginClsN)} variant={variant}>
+            <Button className={clsN(styles['tool-bar__login'], loginClsN)} variant={variant}>
                 로그인
             </Button>
         </Toolbar>

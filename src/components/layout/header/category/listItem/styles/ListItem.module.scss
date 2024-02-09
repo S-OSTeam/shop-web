@@ -1,15 +1,14 @@
 @import "index.scss";
 
-.listItem{
-}
-.listItem_btn{
+.list-item{
+  &__btn{
+    &__primary-context{
 
+    }
+  }
 }
-.listItem_primary_context{
 
-}
-
-.subItem{
+.sub-item{
   padding: 3px 23px;
 
   span{

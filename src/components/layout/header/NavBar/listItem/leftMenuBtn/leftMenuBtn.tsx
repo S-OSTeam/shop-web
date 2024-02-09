@@ -16,7 +16,7 @@ const LeftMenuBtn = ({ ariaLabel, edge, className, icon, onClick }: leftMenuBtnP
         <IconButton
             aria-label={ariaLabel}
             edge={edge}
-            className={clsN(className, `${styles.iconBtn}`)}
+            className={clsN(className, `${styles['icon-btn']}`)}
             icon={icon}
             onClick={onClick}
         />
@@ -34,7 +34,7 @@ LeftMenuBtn.propTypes = {
 LeftMenuBtn.defaultProps = {
     ariaLabel: 'CategoryMenu',
     edge: 'start',
-    className: `${styles.iconBtn}`,
+    className: `${styles['icon-btn']}`,
     onClick: undefined,
 };
 

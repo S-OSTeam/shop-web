@@ -61,23 +61,23 @@ const CategoryHeader = () => {
 
         return (
             <ClickAwayListener onClickAway={handleClickAway} key={item.publicId}>
-                <MuiListItem key={item.publicId} className={clsN(`${styles.parentCategory}`)} onKeyDown={undefined}>
+                <MuiListItem key={item.publicId} className={clsN(`${styles['list-wrapper__parent-category']}`)} onKeyDown={undefined}>
                     <ListItemButton
-                        className={styles.list_item_btn}
+                        className={styles['list-wrapper__parent-category__btn']}
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOff}
                         onTouchStart={onTouch}
                     >
-                        <ListItemText primary={item.title} className={styles.list_item_title} />
+                        <ListItemText primary={item.title} className={styles['list-wrapper__parent-category__btn__title']} />
                         {currentState ? (
-                            <ExpandLess className={styles.list_item_icon} />
+                            <ExpandLess className={styles['list-wrapper__parent-category__btn__icon']} />
                         ) : (
-                            <ExpandMore className={styles.list_item_icon} />
+                            <ExpandMore className={styles['list-wrapper__parent-category__btn__icon']} />
                         )}
-                        <Collapse in={currentState} timeout="auto" unmountOnExit className={styles.collapse}>
+                        <Collapse in={currentState} timeout="auto" unmountOnExit className={styles['list-wrapper__parent-category__btn__collapse']}>
                             <List disablePadding>
                                 <ListItem
-                                    className={`${styles.modalItem} ${styles.list_items_wrapper}`}
+                                    className={`${styles['list-items-wrapper']}`}
                                     items={item.children}
                                     onClick={(e) => {
                                         /* 부모인 ListItemButton 이벤트가 자식에게도 적용되는걸 방지 */
@@ -91,7 +91,7 @@ const CategoryHeader = () => {
             </ClickAwayListener>
         );
     });
-    return <List className={clsN(`${styles.list_wrapper}`)}>{renderListItems}</List>;
+    return <List className={clsN(`${styles['list-wrapper']}`)}>{renderListItems}</List>;
 };
 
 export default CategoryHeader;

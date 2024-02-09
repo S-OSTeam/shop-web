@@ -1,21 +1,21 @@
 @import "index";
 
 // 툴바 래퍼 블록
-.toolBar{
+.tool-bar{
   // 요소 : 아이콘 버튼
-  &_MenuBtn{
+  &__btn{
 
   }
   // 요소 : 좌측 메뉴 확장 버튼 아이콘
-  &_menuBtnIcon{
+  &__icon{
 
   }
   // 요소 : 로고
-  &_logo{
+  &__logo{
 
   }
   // 요소 : 로그인 버튼
-  &_login{
+  &__login{
 
   }
 }

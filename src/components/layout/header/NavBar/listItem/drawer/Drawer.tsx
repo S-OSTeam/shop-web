@@ -25,8 +25,8 @@ const Drawer = (
 ) => {
 
     return(
-        <Box component='nav' className={clsN(`${styles.drawerWrapper}`, wrapperClsN)}>
-            <Text text={menuTitle} onClick={onClick} variant={variant} className={clsN(`${styles.mobile_header}`, mobHeaderClsN)}/>
+        <Box component='nav' className={clsN(`${styles['drawer-wrapper']}`, wrapperClsN)}>
+            <Text text={menuTitle} onClick={onClick} variant={variant} className={clsN(`${styles['drawer-wrapper__mobile-header']}`, mobHeaderClsN)}/>
             <Divider/>
             <CategoryHeader />
         </Box>
@@ -40,8 +40,8 @@ Drawer.propTypes = {
     menuTitle: PropTypes.string.isRequired,
 }
 Drawer.defaultProps = {
-    wrapperClsN: `${styles.drawerWrapper}`,
-    mobHeaderClsN: `${styles.mobile_header}`,
+    wrapperClsN: `${styles['drawer-wrapper']}`,
+    mobHeaderClsN: `${styles['drawer-wrapper__mobile-header']}`,
     onClick: ()=>{},
     variant: 'body1'
 }
