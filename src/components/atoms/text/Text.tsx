@@ -25,7 +25,7 @@ const Text = ({ text, className, variant, align, onClick, onMouseOver }: TextPro
             {text}
         </Typography>
     ) : (
-        { text }
+        <span className={clsN(className, `${style.text}`)}>{text}</span>
     );
 };
 
@@ -56,7 +56,7 @@ Text.propTypes = {
 // Props 초기 셋팅
 Text.defaultProps = {
     className: `${style.text}`,
-    variant: 'body1',
+    variant: undefined,
     align: 'inherit',
     onClick: undefined,
     onMouseOver: undefined,

@@ -52,6 +52,13 @@ module.exports = {
             'warn',
             { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
         ],
+        'jsx-a11y/mouse-events-have-key-events': [
+            'error',
+            {
+                hoverInHandlers: ['onMouseOver', 'onMouseEnter', 'onPointerOver', 'onPointerEnter'],
+                hoverOutHandlers: ['onMouseOut', 'onMouseLeave', 'onPointerOut', 'onPointerLeave'],
+            },
+        ],
     },
     settings: {
         'jsx-a11y': {

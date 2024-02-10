@@ -1,26 +1,77 @@
-@import 'src/styles/scss/variables/variables';
+@import 'variables';
 
 /*
   mixin 은 함수처럼 다른곳에서 사용할 수 있음
   재사용성이 좋고 모듈화가 가능
 */
+// css 박스 스타일 속성
+
+@mixin round($radius: 3px) {
+  border-radius: $radius;
+}
+@mixin size($width, $height){
+  width: $width;
+  height: $height;
+}
+@mixin center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/*
+  portrait(초상화) - 세로모드
+
+  landscape(풍경화) - 가로모드
+
+  모바일 최소 미디어쿼리는 320 으로 설정
+*/
+
+// Small devices (portrait phones)
+
 
 @mixin mobile {
-  @media all and (min-width: #{$breakpoint-mobile})
-  and (max-width: #{$breakpoint-tablet - 1px}) {
+  @media all and (min-width: $breakpoint-mobile-mini) and (max-width: #{$breakpoint-mobile}){
     @content;
   }
 }
 
+
+// 모바일 가로, 테블릿 세로: 480px ~ 768px
 @mixin tablet {
-  @media all and (min-width: #{$breakpoint-tablet})
-  and (max-width: #{$breakpoint-desktop - 1px}) {
+  @media all and (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet}){
+    @content;
+  }
+}
+// 테블릿 가로, 랩탑: 768px ~ 1024px
+@mixin laptop {
+  @media all and (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-laptop}){
+    @content;
+  }
+}
+// 데스크탑: 1024px ~ 1280px
+@mixin desktop {
+  @media all and (min-width: #{$breakpoint-laptop}) and (max-width: #{$breakpoint-desktop}){
     @content;
   }
 }
 
-@mixin desktop {
-  @media all and (min-width: #{$breakpoint-desktop}) {
+// 데스크탑 이상 1280px~
+@mixin desktop-large {
+  @media all and (min-width: #{$breakpoint-desktop}){
+    @content;
+  }
+}
+// 그리드 변수 불러오기
+/*
+  map-get 을 통해 여러 데이터를 가지고 있는 변수를 선택 가능
+*/
+// 간단하게 mixin 수정 (모바일 우선 설계)
+@mixin media-breakpoint-up($size){
+  $min-width: map-get($grid-breakpoints, $size);
+  @media all and (min-width: $min-width){
     @content;
   }
 }

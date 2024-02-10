@@ -1,13 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import LinearProgress from '@atoms/progress/LinesrProgress/LinearProgress';
+import styles from '@components/layout/header/styles/Header.module.scss';
 
 const DeamHomePage = () => {
-    return (
-        <Box component="div">
-            <LinearProgress />
-        </Box>
-    );
+    return <Box className={styles.test} component="div" />;
 };
 
 export default DeamHomePage;

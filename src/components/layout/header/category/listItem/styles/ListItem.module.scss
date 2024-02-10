@@ -1,0 +1,18 @@
+@import "index.scss";
+
+.list-item{
+  &__btn{
+    &__primary-context{
+
+    }
+  }
+}
+
+.sub-item{
+  padding: 3px 23px;
+
+  span{
+    font-size: 14px;
+    color:$black-color;
+  }
+}

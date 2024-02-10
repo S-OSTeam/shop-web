@@ -3,17 +3,27 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import { ApolloProvider } from '@apollo/client';
+import { RecoilRoot } from 'recoil';
+import { StyledEngineProvider } from '@mui/material';
+import { client } from '@api/apollo/client';
+import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { client } from './api/apollo/client';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    <ApolloProvider client={client}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </ApolloProvider>,
+    <StyledEngineProvider injectFirst>
+        <ApolloProvider client={client}>
+            <CookiesProvider>
+                <BrowserRouter>
+                    <RecoilRoot>
+                        <App />
+                    </RecoilRoot>
+                </BrowserRouter>
+            </CookiesProvider>
+        </ApolloProvider>
+        ,
+    </StyledEngineProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

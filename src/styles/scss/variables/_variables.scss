@@ -3,12 +3,35 @@
 
 // 디스플레이별 브레이크 포인트
 
-// 데스크탑
-$breakpoint-desktop: 1024px;
-// 테블릿
-$breakpoint-tablet: 758px;
-// 모바일
-$breakpoint-mobile: 335px;
+// 모바일(수직 minimum)
+$breakpoint-mobile-mini: 320px;
+// 모바일(수직)
+$breakpoint-mobile: 480px;
+// 모바일(수평), 테블릿(수직)
+$breakpoint-tablet: 768px;
+// 테블릿(수평), 노트북
+$breakpoint-laptop: 1024px;
+// 테블릿(수평), 노트북 추가
+$breakpoint-desktop: 1280px;
+
+// 헤더 컨텐츠 너비
+$header-width-mobile: 280px;
+
+// 미디어쿼리 변수
+$grid-breakpoints: (
+        // minimum portrait mobile devices
+        xs: 360px,
+        // default portrait mobile devices
+        sm: 480px,
+        // landscape mobile and tablet devices
+        md: 768px,
+        // landscape tablet and small laptop
+        lg: 992px,
+        // small desk screen
+        xl: 1200px,
+        // FullHD screen for 16:9
+        xxl: 1400px
+);
 
 // 색상
 $primary-color: #80A1D4;
@@ -36,6 +59,11 @@ $header-h-mob: 32px;
 $header-body-font-L: 18px;
 $header-body-font-M: 16px;
 $header-body-font-S: 14px;
+
+// 헤더 폰트사이즈
+$title-s: 36px;
+$title-m: 40px;
+$title-l: 54px;
 
 // 네비게이션 링크 호버 색상
 $nav-li-hover: #61dafb;
