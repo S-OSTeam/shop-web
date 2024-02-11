@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
+import Image from '@atoms/source/image/Image';
 import Button from '@atoms/button/Button';
 
 export interface ImageBtnProps {
     className?: string;
     imgClsN?: string;
     imgPath: string;
-    alt?: string;
+    alt?: string
 }
 
 const ImageButton = ({ className, imgClsN, imgPath, alt }: ImageBtnProps) => {
