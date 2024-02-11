@@ -7,8 +7,10 @@ import { RecoilRoot } from 'recoil';
 import { StyledEngineProvider } from '@mui/material';
 import { client } from '@api/apollo/client';
 import { CookiesProvider } from 'react-cookie';
+import { StyledEngineProvider } from '@mui/material';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { client } from './api/apollo/client';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
