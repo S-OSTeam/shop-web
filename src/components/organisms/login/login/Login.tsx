@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Text from '@components/atoms/text/Text';
-import Input from '@components/atoms/input/Input';
+import {Box,Divider} from'@mui/material';
+
+import {Input} from '@components/atoms/input/Input';
+import SaveId from '@components/molecules/checkbox/saveId/SaveId';
 import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import clsN from 'classnames';
