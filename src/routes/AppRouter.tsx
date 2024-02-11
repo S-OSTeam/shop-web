@@ -7,6 +7,7 @@ import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import AdminPage from '@pages/admin/AdminPage';
 import Login from '@pages/login/LoginPage';
 import { AdminRouter } from './adminRouter/AdminRouter';
+import Login from '@pages/login/LoginPage';
 
 export const AppRouter = () => {
     // React Router 가 제공하는 useLocation 훅을 사용해서 조건부 랜더링하기
@@ -33,6 +34,7 @@ export const AppRouter = () => {
 
                 {/* 모듈화된 관리자 페이지 라우터 렌더하기 */}
                 <Route path="/manager/*" element={<AdminRouter />}/>
+                <Route path="/login" element={<Login />} />
             </Routes>
         </div>
     );

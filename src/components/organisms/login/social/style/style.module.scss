@@ -8,7 +8,7 @@
     flex-direction: column;
 
     &__title{
-   
+
         margin-top: 3rem;
         margin-bottom: 1rem;
         font-size: $title-font-size-S;
@@ -24,19 +24,19 @@
         border-radius: 30px;
         width: 60px;
         height: 60px;
-       
+
     }
     &__kakao-icon{
         background-color: $kakao-background;
     }
-    
+
 }
 
 .btn{
     background: rgba(0,0,0,0);
     box-shadow: none;
     padding: 0 0;
-   
+
     border: none;
     outline: none;
     &:hover, &:focus{
@@ -52,7 +52,7 @@
 .mobile-social-login-logo{
     margin-top: 2rem;
     width: 400px;
-   
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,7 +72,7 @@
         width: 280px;
         margin-top: 3rem;
         font-size: 14px;
-    
+
     }
     &__text{
         font-size: 12px;
@@ -84,7 +84,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
+
     &__naver-btn{
         display: flex;
         align-items: center;
@@ -105,7 +105,7 @@
             box-shadow: none;
         }
 
- 
+
         &__naver-login{
             margin-right: 3.8rem;
             margin-left: -4.5rem;
@@ -136,14 +136,14 @@
             box-shadow: none;
         }
 
- 
+
         &__kakao-login{
             margin-right: 3.8rem;
             margin-left: -4.5rem;
             width: 30px;
             height: 30px;
-          
-           
+
+
         }
     }
     &__google-btn{
@@ -167,21 +167,21 @@
             box-shadow: none;
         }
 
- 
+
         &__google-login{
             margin-right: 4rem;
             margin-left: -5rem;
             width: 30px;
             height: 30px;
-          
-           
+
+
         }
     }
-    
-   
- 
+
+
+
    }
-  
-  
+
+
 }
 
