@@ -36,6 +36,7 @@
         }
     },
     "include": [
+        "src/custom.d.ts", 
         "craco.config.js",
         "src",
         "src/**/*.ts",

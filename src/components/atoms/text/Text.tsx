@@ -25,7 +25,7 @@ const Text = ({ text, className, variant, align, onClick, onMouseOver }: TextPro
             {text}
         </Typography>
     ) : (
-        { text }
+        <> {text}</>
     );
 };
 
