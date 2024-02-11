@@ -8,6 +8,7 @@ import Header from '@components/layout/header/Header';
 import Login from './login/Login';
 import SignUp from './signup/Signup';
 
+
 export const AppRouter = () => {
     return (
         <div>
