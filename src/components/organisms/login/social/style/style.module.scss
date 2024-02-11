@@ -1,9 +1,40 @@
+@import "index";
+
 .social-login-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 500px;
-    height:200px;
-    background-color:red
-   
+    flex-direction: column;
+    &__title{
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        font-size: $title-font-size-S;
+    }
+   &__icon-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+    &__kakao-icon,&__naver-icon,&__google-icon{
+        border-radius: 30px;
+        width: 60px;
+        height: 60px;
+    
+       
+        
+    }
+    
+
+}
+
+.btn{
+    background: rgba(0,0,0,0);
+    box-shadow: none;
+    padding: 0 0;
+    margin-left: 2rem;
+    &:hover, &:focus{
+        background: none;
+        box-shadow: none;
+    }
+
 }
