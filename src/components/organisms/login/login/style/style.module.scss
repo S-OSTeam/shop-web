@@ -1,0 +1,48 @@
+@import "index";
+
+.login-wrapper{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   margin-top:10rem;
+  
+
+   &__title{
+    font-size: $title-font-size-S;
+    margin-bottom:5rem;
+   
+   }
+  
+    &__input-id,&__input-pwd{
+ 
+        width: 450px;
+        height: auto;
+        
+        padding: 5px;
+    }
+    &__login-btn{
+        width: 450px;
+        background-color: $primary-color;
+    }
+    &__btn-wrapper{
+       width: 470px;
+        display: flex;
+        align-items:center;
+        justify-content: space-around;
+
+        &__signup-btn,&__find-btn{
+            width: 250px;
+            font-size: 16px;
+            border-radius: 15px;
+            margin: 10px;
+            background-color: $white-color;
+            color: #838383;
+            border: 1px solid #3F424A;
+            margin-top: 1rem;
+        }
+
+    }
+    
+   
+}
