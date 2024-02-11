@@ -35,5 +35,5 @@ export const ImageButton = (
 };
 ImageButton.defaultProps = {
     className: `${style.btnIcon}`,
-}
+};
 export default ImageButton;
