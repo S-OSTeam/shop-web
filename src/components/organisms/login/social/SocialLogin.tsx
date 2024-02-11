@@ -75,17 +75,3 @@ const SocialLogin = () => {
 };
 
 export default SocialLogin;
-// <Box className={clsN(`${style['social-login-wrapper__icon-wrapper']}`)}>
-//     {socialPlatforms.map((platform) => (
-//         <ImageButton
-//             key={platform.name}
-//             className={clsN(style.btn)}
-//             img={
-//                 <CustomIcon
-//                     name={platform.name}
-//                     className={clsN(`${style[`social-login-wrapper__${platform.name}-icon`]}`)}
-//                 />
-//             }
-//         />
-//     ))}
-// </Box>
