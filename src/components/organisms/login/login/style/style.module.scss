@@ -6,7 +6,7 @@
    justify-content: center;
    flex-direction: column;
    margin-top:10rem;
- 
+
 
    &__title{
     font-size: $title-font-size-S;
@@ -22,7 +22,7 @@
         padding: 5px;
     }
     &__save-id{
-   
+
         margin-right: 16rem;
         margin-left: -4.5rem;
     }
@@ -48,8 +48,8 @@
         }
 
     }
-    
-   
+
+
 }
 
 // mobile login scss
@@ -62,20 +62,20 @@
     border: 0.1px solid $black-color;
 }
    &__title{
-    font-size: 14px;  
+    font-size: 14px;
     margin-top: 1.5rem;
     width: 280px;
 }
 
    &__text{
-    font-size: 12px;   
+    font-size: 12px;
    }
    &__social-wrapper{
     width: 390px;
-   
+
    }
    &__btn-wrapper{
-    
+
 
      &__signup-btn,&__login-btn{
          width: 120px;
@@ -90,6 +90,6 @@
      }
 
  }
- 
+
 
 }
