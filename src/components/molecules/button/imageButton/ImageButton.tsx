@@ -12,12 +12,26 @@ export interface ImageBtnProps {
     alt?: string;
 }
 
-const ImageButton = ({ className, imgClsN, imgPath, alt }: ImageBtnProps) => {
-    return (
-        <Button className={clsN(className, `${style.imgButton}`)}>
-            <Image className={clsN(imgClsN, `${style.img}`)} imgPath={imgPath} alt={alt} />
+
+const ImageButton = (
+    {
+        className,
+        imgClsN,
+        imgPath,
+        alt
+    }:ImageBtnProps) => {
+    return(
+
+        <Button
+            className={clsN(className, `${style.imgButton}`)}
+        >
+            <Image
+                className={clsN(imgClsN, `${style.img}`)}
+                imgPath={imgPath}
+                alt={alt}
+            />
         </Button>
-    );
+    )
 };
 ImageButton.propTypes = {
     ...Image.propTypes,
