@@ -9,7 +9,7 @@ export interface ImageBtnProps {
     className?: string;
     imgClsN?: string;
     imgPath: string;
-    alt?: string
+    alt?: string;
 }
 
 
