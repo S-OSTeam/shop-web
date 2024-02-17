@@ -5,33 +5,68 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     &__title{
         margin-top: 3rem;
         margin-bottom: 1rem;
         font-size: $title-font-size-S;
     }
+
    &__icon-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
    }
+
     &__kakao-icon,&__naver-icon,&__google-icon{
         border-radius: 30px;
         width: 60px;
         height: 60px;
-    
        
-        
     }
     
-
 }
+
+// mobile social login
+
+.mobile-social-login-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+//     &__title{
+//         margin-top: 3rem;
+//         margin-bottom: 1rem;
+//         font-size: $title-font-size-S;
+//     }
+
+   &__social-wrapper{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+   }
+   // 임시 테스트
+    &__kakao-login,&__naver-login,&__google-login{
+        background-color: aqua;
+        margin: 5px;
+        width: 250px;
+        height: 40px;
+       
+    }
+    
+}
+
 
 .btn{
     background: rgba(0,0,0,0);
     box-shadow: none;
     padding: 0 0;
-    margin-left: 2rem;
+   
+    border: none;
+    outline: none;
     &:hover, &:focus{
         background: none;
         box-shadow: none;
