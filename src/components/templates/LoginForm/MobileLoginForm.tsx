@@ -5,7 +5,6 @@ import MobileSocialLogin from '@components/organisms/login/social/MobileSocialLo
 const MobileLoginForm = () => {
     return (
         <>
-            {/* logo componet 생성후 추가 예정 */}
             <MobileSocialLogin />
             <MobileLogin />
         </>

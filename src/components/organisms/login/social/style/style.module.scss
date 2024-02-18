@@ -28,18 +28,25 @@
 }
 
 // mobile social login
-
+.mobile-social-login-logo{
+    margin-top: 2rem;
+    width: 400px;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+}
 .mobile-social-login-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
-//     &__title{
-//         margin-top: 3rem;
-//         margin-bottom: 1rem;
-//         font-size: $title-font-size-S;
-//     }
+    &__title{
+        margin-top: 1rem;
+        font-size: 16px;
+    }
 
    &__social-wrapper{
    
