@@ -6,7 +6,7 @@
    justify-content: center;
    flex-direction: column;
    margin-top:10rem;
-  
+ 
 
    &__title{
     font-size: $title-font-size-S;
@@ -54,7 +54,12 @@
    justify-content: center;
    flex-direction: column;
    &__title{
-    font-size: 16px;   
+       
+    margin-top: 1.5rem;
+
+}
+   &__text{
+    font-size: 12px;   
    }
    &__social-wrapper{
     width: 390px;
