@@ -35,17 +35,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: red;
+
 }
 .mobile-social-login-wrapper{
+
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
     &__title{
-        margin-top: 1rem;
-        font-size: 16px;
+       
+        margin-top: 3rem;
+    
+    }
+    &__text{
+        font-size: 12px;
     }
 
    &__social-wrapper{
@@ -57,7 +62,7 @@
    }
    // 임시 테스트
     &__kakao-login,&__naver-login,&__google-login{
-        background-color: aqua;
+
         margin: 5px;
         width: 250px;
         height: 40px;
