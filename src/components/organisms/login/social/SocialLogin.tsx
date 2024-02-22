@@ -4,7 +4,6 @@ import { ReactComponent as GoogleIcon } from '@asset/image/icons/GoogleIcon.svg'
 import { ReactComponent as NaverIcon } from '@asset/image/icons/NaverIcon.svg';
 import { ReactComponent as KakaoIcon } from '@asset/image/icons/KakaoIcon.svg';
 import { ReactComponent as GoogleLogin } from '@asset/image/social/GoogleLogin.svg';
-import { ReactComponent as NaverLogin } from '@asset/image/social/NaverLogin.svg';
 import { ReactComponent as KakaoLogin } from '@asset/image/social/KakaoLogin.svg';
 import { ReactComponent as Logo } from '@asset/image/logo/Logo.svg';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
@@ -12,6 +11,8 @@ import DividerWithText from '@components/molecules/divider/dividerWithText/Divid
 import Text from '@components/atoms/text/Text';
 import ImageButton from '@components/molecules/button/imageButton/ImageButton';
 import clsN from 'classnames';
+
+import Button from '@components/atoms/button/Button';
 import style from './style/style.module.scss';
 
 const SocialLogin = () => {
@@ -35,14 +36,16 @@ const SocialLogin = () => {
                     </Box>
                     <Box className={clsN(`${style['mobile-social-login-wrapper__social-wrapper']}`)}>
                         <ImageButton className={clsN(style.btn)}>
-                            <NaverLogin className={clsN(`${style['mobile-social-login-wrapper__naver-login']}`)} />
-                        </ImageButton>
-                        <ImageButton className={clsN(style.btn)}>
                             <KakaoLogin className={clsN(`${style['mobile-social-login-wrapper__kakao-login']}`)} />
                         </ImageButton>
                         <ImageButton className={clsN(style.btn)}>
                             <GoogleLogin className={clsN(`${style['mobile-social-login-wrapper__google-login']}`)} />
                         </ImageButton>
+                        {/* 네이버 로그인 커스텀 중 */}
+                        <Button className={clsN(`${style['mobile-social-login-wrapper__button']}`)}>
+                            <NaverIcon className={clsN(`${style['mobile-social-login-wrapper__naver-login']}`)} />
+                            네이버 로그인
+                        </Button>
                     </Box>
                 </Box>
             ) : (
