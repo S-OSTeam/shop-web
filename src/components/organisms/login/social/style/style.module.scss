@@ -61,6 +61,7 @@
     flex-direction: column;
    }
    &__button{
+    height: 40px;
     width: 250px;
     padding: 0.6em 1em;
     border-radius: 0.25em;
@@ -74,6 +75,10 @@
     color: white;
     display: flex;
     align-items: center;
+    &:hover, &:focus{
+        background-color: #03C75A;
+        box-shadow: none;
+    }
     
  
    }
