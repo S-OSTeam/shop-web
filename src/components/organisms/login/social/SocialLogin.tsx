@@ -35,17 +35,16 @@ const SocialLogin = () => {
                         </DividerWithText>
                     </Box>
                     <Box className={clsN(`${style['mobile-social-login-wrapper__social-wrapper']}`)}>
+                        <Button className={clsN(`${style['mobile-social-login-wrapper__button']}`)}>
+                            <NaverIcon className={clsN(`${style['mobile-social-login-wrapper__naver-login']}`)} />
+                            네이버 로그인
+                        </Button>
                         <ImageButton className={clsN(style.btn)}>
                             <KakaoLogin className={clsN(`${style['mobile-social-login-wrapper__kakao-login']}`)} />
                         </ImageButton>
                         <ImageButton className={clsN(style.btn)}>
                             <GoogleLogin className={clsN(`${style['mobile-social-login-wrapper__google-login']}`)} />
                         </ImageButton>
-                        {/* 네이버 로그인 커스텀 중 */}
-                        <Button className={clsN(`${style['mobile-social-login-wrapper__button']}`)}>
-                            <NaverIcon className={clsN(`${style['mobile-social-login-wrapper__naver-login']}`)} />
-                            네이버 로그인
-                        </Button>
                     </Box>
                 </Box>
             ) : (
