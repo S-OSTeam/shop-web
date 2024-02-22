@@ -3,8 +3,6 @@ import { Box } from '@mui/material';
 import { ReactComponent as GoogleIcon } from '@asset/image/icons/GoogleIcon.svg';
 import { ReactComponent as NaverIcon } from '@asset/image/icons/NaverIcon.svg';
 import { ReactComponent as KakaoIcon } from '@asset/image/icons/KakaoIcon.svg';
-import { ReactComponent as GoogleLogin } from '@asset/image/social/GoogleLogin.svg';
-import { ReactComponent as KakaoLogin } from '@asset/image/social/KakaoLogin.svg';
 import { ReactComponent as Logo } from '@asset/image/logo/Logo.svg';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import DividerWithText from '@components/molecules/divider/dividerWithText/DividerWithText';
@@ -35,16 +33,30 @@ const SocialLogin = () => {
                         </DividerWithText>
                     </Box>
                     <Box className={clsN(`${style['mobile-social-login-wrapper__social-wrapper']}`)}>
-                        <Button className={clsN(`${style['mobile-social-login-wrapper__button']}`)}>
-                            <NaverIcon className={clsN(`${style['mobile-social-login-wrapper__naver-login']}`)} />
+                        <Button className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__naver-btn']}`)}>
+                            <NaverIcon
+                                className={clsN(
+                                    `${style['mobile-social-login-wrapper__social-wrapper__naver-btn__naver-login']}`,
+                                )}
+                            />
                             네이버 로그인
                         </Button>
-                        <ImageButton className={clsN(style.btn)}>
-                            <KakaoLogin className={clsN(`${style['mobile-social-login-wrapper__kakao-login']}`)} />
-                        </ImageButton>
-                        <ImageButton className={clsN(style.btn)}>
-                            <GoogleLogin className={clsN(`${style['mobile-social-login-wrapper__google-login']}`)} />
-                        </ImageButton>
+                        <Button className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__kakao-btn']}`)}>
+                            <KakaoIcon
+                                className={clsN(
+                                    `${style['mobile-social-login-wrapper__social-wrapper__kakao-btn__kakao-login']}`,
+                                )}
+                            />
+                            카카오 로그인
+                        </Button>
+                        <Button className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__google-btn']}`)}>
+                            <GoogleIcon
+                                className={clsN(
+                                    `${style['mobile-social-login-wrapper__social-wrapper__google-btn__google-login']}`,
+                                )}
+                            />
+                            구글 로그인
+                        </Button>
                     </Box>
                 </Box>
             ) : (

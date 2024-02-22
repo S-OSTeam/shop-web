@@ -1,5 +1,6 @@
 @import "index";
 
+// // PC social login
 .social-login-wrapper{
     display: flex;
     align-items: center;
@@ -24,8 +25,27 @@
         height: 60px;
        
     }
+    &__kakao-icon{
+        background-color: #FEE500;
+    }
     
 }
+
+.btn{
+    background: rgba(0,0,0,0);
+    box-shadow: none;
+    padding: 0 0;
+   
+    border: none;
+    outline: none;
+    &:hover, &:focus{
+        background: none;
+        box-shadow: none;
+    }
+
+}
+
+
 
 // mobile social login
 .mobile-social-login-logo{
@@ -37,6 +57,7 @@
     justify-content: center;
 
 }
+
 .mobile-social-login-wrapper{
 
     display: flex;
@@ -53,65 +74,110 @@
         font-size: 12px;
     }
 
+
    &__social-wrapper{
-   
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-   }
-   &__button{
-    height: 40px;
-    width: 250px;
-    padding: 0.6em 1em;
-    border-radius: 0.25em;
-    font-size: 0.8rem;
-    margin-top: 0.7em;
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    box-shadow: var(--shadow-1);
-    background-color: #03C75A;
-    color: white;
-    display: flex;
-    align-items: center;
-    &:hover, &:focus{
+    
+    &__naver-btn{
+        display: flex;
+        align-items: center;
+        height: 40px;
+        width: 250px;
+        padding: 0.6em 1em;
+        border-radius: 0.25em;
+        font-size: 0.8rem;
+        margin-top: 0.7em;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        box-shadow: var(--shadow-1);
         background-color: #03C75A;
-        box-shadow: none;
+
+        &:hover, &:focus{
+            background-color: #03C75A;
+            box-shadow: none;
+        }
+
+ 
+        &__naver-login{
+            margin-right: 3.8rem;
+            margin-left: -4.5rem;
+            width: 30px;
+            height: 30px;
+            color: white;
+        }
+    }
+
+    &__kakao-btn{
+        display: flex;
+        align-items: center;
+        height: 40px;
+        width: 250px;
+        padding: 0.6em 1em;
+        border-radius: 0.25em;
+        font-size: 0.8rem;
+        margin-top: 0.7em;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        box-shadow: var(--shadow-1);
+        background-color: #FEE500;
+        color: #000000;
+
+        &:hover, &:focus{
+            background-color: #FEE500;
+            box-shadow: none;
+        }
+
+ 
+        &__kakao-login{
+            margin-right: 3.8rem;
+            margin-left: -4.5rem;
+            width: 30px;
+            height: 30px;
+          
+           
+        }
+    }
+    &__google-btn{
+        display: flex;
+        align-items: center;
+        height: 40px;
+        width: 250px;
+        padding: 0.6em 1em;
+        border-radius: 0.25em;
+        font-size: 0.8rem;
+        margin-top: 0.7em;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        box-shadow: var(--shadow-1);
+        background-color:  #F2F2F2;
+        color: #000000;
+
+        &:hover, &:focus{
+            background-color:  #F2F2F2;
+            box-shadow: none;
+        }
+
+ 
+        &__google-login{
+            margin-right: 4rem;
+            margin-left: -5rem;
+            width: 30px;
+            height: 30px;
+          
+           
+        }
     }
     
+   
  
    }
-   &__naver-login{
-    margin-right: 3.8rem;
-    margin-left: -4.5rem;
-    width: 30px;
-    height: 30px;
-}
-   // 임시 테스트
-    &__kakao-login,&__google-login{
-
-       
-        width: 250px;
-        height: 40px;
-        margin: auto;
-       
-    }
   
-    
+  
 }
 
-
-.btn{
-    background: rgba(0,0,0,0);
-    box-shadow: none;
-    padding: 0 0;
-   
-    border: none;
-    outline: none;
-    &:hover, &:focus{
-        background: none;
-        box-shadow: none;
-    }
-
-}
