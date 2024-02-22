@@ -60,14 +60,39 @@
     justify-content: center;
     flex-direction: column;
    }
+   &__button{
+    width: 250px;
+    padding: 0.6em 1em;
+    border-radius: 0.25em;
+    font-size: 0.8rem;
+    margin-top: 0.7em;
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    box-shadow: var(--shadow-1);
+    background-color: #03C75A;
+    color: white;
+    display: flex;
+    align-items: center;
+    
+ 
+   }
+   &__naver-login{
+    margin-right: 3.8rem;
+    margin-left: -4.5rem;
+    width: 30px;
+    height: 30px;
+}
    // 임시 테스트
-    &__kakao-login,&__naver-login,&__google-login{
+    &__kakao-login,&__google-login{
 
-        margin: 5px;
+       
         width: 250px;
         height: 40px;
+        margin: auto;
        
     }
+  
     
 }
 
