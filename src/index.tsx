@@ -22,7 +22,6 @@ root.render(
                 </BrowserRouter>
             </CookiesProvider>
         </ApolloProvider>
-        ,
     </StyledEngineProvider>,
 );
 
