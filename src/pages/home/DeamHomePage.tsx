@@ -1,9 +1,19 @@
 import React from 'react';
+import { itemResponse } from '@util/test/data/ItemResponse';
 import { Box } from '@mui/material';
-import styles from '@components/layout/header/styles/Header.module.scss';
+import Swiper from '@molecules/swiper/Swiper';
 
 const DeamHomePage = () => {
-    return <Box className={styles.test} component="div" />;
+    const datas = itemResponse.map((item) => {
+        return item.imageUrls[0];
+    });
+    return (
+        <div>
+            <Box component="div">
+                <Swiper items={datas} />
+            </Box>
+        </div>
+    );
 };
 
 export default DeamHomePage;
