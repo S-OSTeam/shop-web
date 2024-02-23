@@ -19,17 +19,22 @@ interface CustomSwiperProps {
     isPagination?: boolean;
     isNavigation?: boolean;
     isAutoPlay?: boolean;
+    delay?: number;
 }
 
 const Swiper = ({ ...props }: CustomSwiperProps) => {
+    const pagination = {
+        clickable: true,
+    };
+    const autoPlay = { delay: props.delay, disableOnInteraction: false };
     return (
         <div>
             <CustomSwiper
                 className={clsN(props.className, styles.swiper)}
-                pagination={props.isPagination}
+                pagination={props.isPagination ? pagination : false}
                 navigation={props.isNavigation}
                 spaceBetween={props.spaceBetween}
-                autoplay={props.isAutoPlay}
+                autoplay={props.isAutoPlay ? autoPlay : false}
                 loop
                 loopedSlides={1}
                 modules={[Pagination, Navigation, Autoplay]}
@@ -57,6 +62,7 @@ Swiper.propTypes = {
     isNavigation: PropTypes.bool,
     isPagination: PropTypes.bool,
     isAutoPlay: PropTypes.bool,
+    delay: PropTypes.number,
 };
 
 Swiper.defaultProps = {
@@ -69,6 +75,7 @@ Swiper.defaultProps = {
     isNavigation: false,
     isPagination: false,
     isAutoPlay: false,
+    delay: 2000,
 };
 
 export default Swiper;
