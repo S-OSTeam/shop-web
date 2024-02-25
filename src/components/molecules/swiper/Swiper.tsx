@@ -38,7 +38,7 @@ const Swiper = ({ ...props }: CustomSwiperProps) => {
                 loop
                 loopedSlides={1}
                 modules={[Pagination, Navigation, Autoplay]}
-                onSlideChange={() => console.log('slide change')}
+                onSlideChange={props.onChange}
             >
                 {props.items.map((imgPath, index) => (
                     // eslint-disable-next-line react/no-array-index-key
