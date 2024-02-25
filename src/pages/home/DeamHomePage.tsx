@@ -10,7 +10,7 @@ const DeamHomePage = () => {
     return (
         <div>
             <Box component="div">
-                <Swiper items={datas} isPagination isNavigation isAutoPlay />
+                <Swiper items={datas} isPagination isNavigation />
             </Box>
         </div>
     );
