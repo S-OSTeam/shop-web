@@ -75,7 +75,7 @@ Swiper.defaultProps = {
     isNavigation: false,
     isPagination: false,
     isAutoPlay: false,
-    delay: 2000,
+    delay: 5000,
 };
 
 export default Swiper;
