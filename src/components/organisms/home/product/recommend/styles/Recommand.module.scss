@@ -1,0 +1,12 @@
+@import "./index";
+
+.recommend-wrapper{
+  &__title{
+    font-size: 32px;
+    color: #404040;
+  }
+  &__category-btn{
+    width: 252px;
+    height: 168px;
+  }
+}
