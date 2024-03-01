@@ -39,6 +39,7 @@
 
 /* PretendardVariable.woff2 ver */
 @font-face {
+  /* font-family 해당 폰트 적고 [산-세리프, 혹은 세리프 는 디자인 활용에 따라 다르므로 그냥 둠] */
   font-family: 'Pretendard Variable';
   font-weight: 45 920;
   font-style: normal;
