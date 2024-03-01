@@ -97,6 +97,7 @@
 
   // logo <span>
   &__logo {
+    font-family: Pretendard-Black, sans-serif;
     width: fit-content;
     cursor: pointer;
     color: $white-color;
@@ -360,6 +361,9 @@
 @include media-breakpoint-up(xxl){
   .app-bar-nav {
     height: 64px;
+    // 로고
+    &__logo{
+    }
     // ToolBar 네비 내부 진열된 아이템들 감싸는 부모
     &__tool-bar {
       width: 1240px;
