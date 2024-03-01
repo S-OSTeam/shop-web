@@ -1,0 +1,18 @@
+/*
+Copyright (c) 2021 Kil Hyung-jin, with Reserved Font Name Pretendard.
+https://github.com/orioncactus/pretendard
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+*/
+@font-face {
+	/* 폰트 이름 */
+	font-family: 'Pretendard Variable';
+	/* 폰트 굵기 */
+	font-weight: 45 920;
+	font-style: normal;
+	font-display: swap;
+	/* src: url 은 해당 폰트 파일을 받아옴, format 은 폰트를 포멧함 */
+	src: url('./woff2/PretendardVariable.woff2') format('woff2-variations');
+}
