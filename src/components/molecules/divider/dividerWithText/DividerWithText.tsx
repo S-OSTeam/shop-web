@@ -8,7 +8,7 @@ interface DividerWithTextProps extends TextProps {
     children: React.ReactNode;
 }
 
-const DividerWithText: React.FC<DividerWithTextProps> = ({ children, ...textProps }) => {
+const DividerWithText = ({ children, ...textProps }: DividerWithTextProps) => {
     return (
         <Box className={clsN(`${style['divider-container']}`)}>
             <Box className={clsN(`${style['divider-container__line']}`)} />

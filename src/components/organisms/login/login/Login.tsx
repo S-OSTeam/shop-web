@@ -75,7 +75,7 @@ const Login = () => {
                         type="password"
                         onChange={handleInputChange}
                     />
-                    <SaveId className={clsN(`${style['save-id']}`)} />
+                    <SaveId className={clsN(`${style['login-wrapper__save-id']}`)} />
                     <Button className={clsN(`${style['login-wrapper__login-btn']}`)} aria-label="Button label">
                         로그인
                     </Button>
