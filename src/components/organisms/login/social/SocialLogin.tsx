@@ -10,7 +10,7 @@ import Text from '@components/atoms/text/Text';
 import ImageButton from '@components/molecules/button/imageButton/ImageButton';
 import clsN from 'classnames';
 
-import Button from '@components/atoms/button/Button';
+import ImgTextButton from '@components/molecules/button/imgTextButton/ImgTextButton';
 import style from './style/style.module.scss';
 
 const SocialLogin = () => {
@@ -33,30 +33,39 @@ const SocialLogin = () => {
                         </DividerWithText>
                     </Box>
                     <Box className={clsN(`${style['mobile-social-login-wrapper__social-wrapper']}`)}>
-                        <Button className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__naver-btn']}`)}>
-                            <NaverIcon
-                                className={clsN(
-                                    `${style['mobile-social-login-wrapper__social-wrapper__naver-btn__naver-login']}`,
-                                )}
-                            />
-                            네이버 로그인
-                        </Button>
-                        <Button className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__kakao-btn']}`)}>
-                            <KakaoIcon
-                                className={clsN(
-                                    `${style['mobile-social-login-wrapper__social-wrapper__kakao-btn__kakao-login']}`,
-                                )}
-                            />
-                            카카오 로그인
-                        </Button>
-                        <Button className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__google-btn']}`)}>
-                            <GoogleIcon
-                                className={clsN(
-                                    `${style['mobile-social-login-wrapper__social-wrapper__google-btn__google-login']}`,
-                                )}
-                            />
-                            구글 로그인
-                        </Button>
+                        <ImgTextButton
+                            className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__naver-btn']}`)}
+                            icon={
+                                <NaverIcon
+                                    className={clsN(
+                                        `${style['mobile-social-login-wrapper__social-wrapper__naver-btn__naver-login']}`,
+                                    )}
+                                />
+                            }
+                            text="네이버 로그인"
+                        />
+                        <ImgTextButton
+                            className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__kakao-btn']}`)}
+                            icon={
+                                <KakaoIcon
+                                    className={clsN(
+                                        `${style['mobile-social-login-wrapper__social-wrapper__kakao-btn__kakao-login']}`,
+                                    )}
+                                />
+                            }
+                            text="카카오 로그인"
+                        />
+                        <ImgTextButton
+                            className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__google-btn']}`)}
+                            icon={
+                                <GoogleIcon
+                                    className={clsN(
+                                        `${style['mobile-social-login-wrapper__social-wrapper__google-btn__google-login']}`,
+                                    )}
+                                />
+                            }
+                            text="구글 로그인"
+                        />
                     </Box>
                 </Box>
             ) : (
