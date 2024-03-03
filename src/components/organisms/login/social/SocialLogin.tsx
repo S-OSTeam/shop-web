@@ -35,7 +35,7 @@ const SocialLogin = () => {
                     <Box className={clsN(`${style['mobile-social-login-wrapper__social-wrapper']}`)}>
                         <ImgTextButton
                             className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__naver-btn']}`)}
-                            icon={
+                            img={
                                 <NaverIcon
                                     className={clsN(
                                         `${style['mobile-social-login-wrapper__social-wrapper__naver-btn__naver-login']}`,
@@ -46,7 +46,7 @@ const SocialLogin = () => {
                         />
                         <ImgTextButton
                             className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__kakao-btn']}`)}
-                            icon={
+                            img={
                                 <KakaoIcon
                                     className={clsN(
                                         `${style['mobile-social-login-wrapper__social-wrapper__kakao-btn__kakao-login']}`,
@@ -57,7 +57,7 @@ const SocialLogin = () => {
                         />
                         <ImgTextButton
                             className={clsN(`${style['mobile-social-login-wrapper__social-wrapper__google-btn']}`)}
-                            icon={
+                            img={
                                 <GoogleIcon
                                     className={clsN(
                                         `${style['mobile-social-login-wrapper__social-wrapper__google-btn__google-login']}`,
@@ -77,15 +77,18 @@ const SocialLogin = () => {
                         align="center"
                     />
                     <Box className={clsN(`${style['social-login-wrapper__icon-wrapper']}`)}>
-                        <ImageButton className={clsN(style.btn)}>
-                            <NaverIcon className={clsN(`${style['social-login-wrapper__naver-icon']}`)} />
-                        </ImageButton>
-                        <ImageButton className={clsN(style.btn)}>
-                            <KakaoIcon className={clsN(`${style['social-login-wrapper__kakao-icon']}`)} />
-                        </ImageButton>
-                        <ImageButton className={clsN(style.btn)}>
-                            <GoogleIcon className={clsN(`${style['social-login-wrapper__google-icon']}`)} />
-                        </ImageButton>
+                        <ImageButton
+                            className={clsN(style.btn)}
+                            img={<NaverIcon className={clsN(`${style['social-login-wrapper__naver-icon']}`)} />}
+                        />
+                        <ImageButton
+                            className={clsN(style.btn)}
+                            img={<KakaoIcon className={clsN(`${style['social-login-wrapper__kakao-icon']}`)} />}
+                        />
+                        <ImageButton
+                            className={clsN(style.btn)}
+                            img={<GoogleIcon className={clsN(`${style['social-login-wrapper__google-icon']}`)} />}
+                        />
                     </Box>
                 </Box>
             )}

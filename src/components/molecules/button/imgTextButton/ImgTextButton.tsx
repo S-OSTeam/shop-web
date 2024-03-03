@@ -4,15 +4,14 @@ import Button from '@components/atoms/button/Button';
 
 export interface ImageTextBtnProps {
     className?: string;
-
-    icon: React.ReactNode;
+    img: React.ReactNode;
     text: string;
 }
 
-const ImgTextButton = ({ className, icon, text }: ImageTextBtnProps) => {
+const ImgTextButton = ({ className, img, text }: ImageTextBtnProps) => {
     return (
         <Button className={clsN(className)}>
-            {icon}
+            {img}
             {text}
         </Button>
     );
