@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
-import Image from '@atoms/source/image/Image';
 import Button from '@atoms/button/Button';
 import style from './style/ImageButton.module.scss';
 
