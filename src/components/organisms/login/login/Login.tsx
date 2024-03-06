@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import Text from '@components/atoms/text/Text';
 import Input from '@components/atoms/input/Input';
 import SaveId from '@components/organisms/login/saveId/SaveId';
 import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import DividerWithText from '@components/molecules/divider/dividerWithText/DividerWithText';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
@@ -30,14 +29,9 @@ const Login = () => {
             {isInMobile ? (
                 <Box className={clsN(`${style['mobile-login-wrapper']}`)}>
                     <Box className={clsN(`${style['mobile-login-wrapper__title']}`)}>
-                        <DividerWithText
-                            text="또는"
-                            variant="h6"
-                            align="center"
-                            className={clsN(`${style['mobile-login-wrapper__text']}`)}
-                        >
+                        <Divider variant="middle" textAlign="center">
                             또는
-                        </DividerWithText>
+                        </Divider>
                     </Box>
                     <Box className={clsN(`${style['mobile-login-wrapper__btn-wrapper']}`)}>
                         <Button

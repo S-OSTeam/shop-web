@@ -58,11 +58,15 @@
    align-items: center;
    justify-content: center;
    flex-direction: column;
-   &__title{
-       
-    margin-top: 1.5rem;
-
+   ::before,::after{
+    border: 0.1px solid #000000;
 }
+   &__title{
+    font-size: 14px;  
+    margin-top: 1.5rem;
+    width: 280px;
+}
+
    &__text{
     font-size: 12px;   
    }

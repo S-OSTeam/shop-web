@@ -8,6 +8,7 @@
     flex-direction: column;
 
     &__title{
+   
         margin-top: 3rem;
         margin-bottom: 1rem;
         font-size: $title-font-size-S;
@@ -64,10 +65,13 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
+    ::before,::after{
+        border: 0.1px solid #000000;
+    }
     &__title{
-       
+        width: 280px;
         margin-top: 3rem;
+        font-size: 14px;
     
     }
     &__text{
