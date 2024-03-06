@@ -8,7 +8,7 @@ import ImageButton from '@components/molecules/button/imageButton/ImageButton';
 import clsN from 'classnames';
 
 import ImgTextButton from '@components/molecules/button/imgTextButton/ImgTextButton';
-import Icon from '@components/atoms/icons/Icon';
+import CustomIcon from '@components/atoms/source/icon/customIcon/CustomIcon';
 import style from './style/style.module.scss';
 
 const SocialLogin = () => {
@@ -46,7 +46,7 @@ const SocialLogin = () => {
                                         `${style[`mobile-social-login-wrapper__social-wrapper__${platform.name}-btn`]}`,
                                     )}
                                     img={
-                                        <Icon
+                                        <CustomIcon
                                             name={platform.name}
                                             className={clsN(
                                                 `${
@@ -78,7 +78,7 @@ const SocialLogin = () => {
                                     key={platform.name}
                                     className={clsN(style.btn)}
                                     img={
-                                        <Icon
+                                        <CustomIcon
                                             name={platform.name}
                                             className={clsN(`${style[`social-login-wrapper__${platform.name}-icon`]}`)}
                                         />
