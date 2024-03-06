@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import Text from '@components/atoms/text/Text';
 import Input from '@components/atoms/input/Input';
 import SaveId from '@components/organisms/login/saveId/SaveId';
