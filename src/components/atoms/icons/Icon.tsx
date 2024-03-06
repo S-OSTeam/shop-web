@@ -2,14 +2,22 @@ import React from 'react';
 
 interface IconProps {
     name: string;
+    className?: string;
 }
 
-const Icon = ({ name }: IconProps) => {
-    let svgContent;
+const Icon = ({ name, className }: IconProps) => {
+    let svgContent = null;
     switch (name) {
         case 'naver':
             svgContent = (
-                <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                    className={className}
+                    width="54"
+                    height="54"
+                    viewBox="0 0 54 54"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
                     <rect width="54" height="54" rx="27" fill="#03C75A" />
                     <path
                         d="M30.5614 27.7033L23.1461 17H17V37H23.4386V26.295L30.8539 37H37V17H30.5614V27.7033Z"
@@ -20,7 +28,14 @@ const Icon = ({ name }: IconProps) => {
             break;
         case 'kakao':
             svgContent = (
-                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                    className={className}
+                    width="90"
+                    height="90"
+                    viewBox="0 0 90 90"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
                     <g clipPath="url(#clip0_1860_49)">
                         <path
                             fillRule="evenodd"
@@ -39,7 +54,14 @@ const Icon = ({ name }: IconProps) => {
             break;
         case 'google':
             svgContent = (
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                    className={className}
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
                     <rect width="40" height="40" rx="4" fill="#F2F2F2" />
                     <g clipPath="url(#clip0_710_6227)">
                         <path
@@ -69,9 +91,10 @@ const Icon = ({ name }: IconProps) => {
             break;
 
         default:
+            svgContent = null;
             break;
     }
-    return <div>{svgContent}</div>;
+    return svgContent;
 };
 
 export default Icon;
