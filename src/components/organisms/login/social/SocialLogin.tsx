@@ -1,8 +1,7 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import { ReactComponent as Logo } from '@asset/image/logo/Logo.svg';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import DividerWithText from '@components/molecules/divider/dividerWithText/DividerWithText';
 import Text from '@components/atoms/text/Text';
 import ImageButton from '@components/molecules/button/imageButton/ImageButton';
 import clsN from 'classnames';
@@ -29,13 +28,9 @@ const SocialLogin = () => {
                             <Logo className={clsN(`${style['mobile-social-login-logo']}`)} />
                         </Box>
                         <Box className={clsN(`${style['mobile-social-login-wrapper__title']}`)}>
-                            <DividerWithText
-                                text="간편 로그인"
-                                align="center"
-                                className={clsN(`${style['mobile-social-login-wrapper__text']}`)}
-                            >
-                                간편로그인
-                            </DividerWithText>
+                            <Divider variant="middle" textAlign="center">
+                                간편 로그인
+                            </Divider>
                         </Box>
                         <Box className={clsN(`${style['mobile-social-login-wrapper__social-wrapper']}`)}>
                             {socialPlatforms.map((platform) => (
