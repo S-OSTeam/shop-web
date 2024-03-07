@@ -1,0 +1,142 @@
+@import "index.scss";
+
+// cs 색션
+html{
+}
+.section-cs{
+  font-size: 16px;
+}
+
+.article{
+  &__headline-01{
+    @include font-size(headline1);
+    @include font-weight(semibold);
+  }
+  &__headline-02{
+    // @include font-size(headline2);
+  }
+  &__subtitle-01{
+    @include font-size(headline2);
+    @include font-weight(semibold);
+  }
+  &__subtitle-02{
+    @include font-size(subtitle2);
+  }
+
+}
+// sub-nav 구간
+.sub-nav{
+
+}
+
+
+// 모바일 small
+@include media-breakpoint-up(xs) {
+  .section-cs{
+    padding: 28px 20px 0;
+  }
+
+  .article{
+    &__headline-01{
+
+    }
+    &__headline-02{
+
+    }
+    &__subtitle-01{
+
+    }
+    &__subtitle-02{
+
+    }
+
+  }
+}
+// 모바일 default 진입
+@include media-breakpoint-up(sm) {
+  .section-cs{
+    padding-top: 28px;
+  }
+
+  .article{
+    &__headline-01{
+
+    }
+    &__headline-02{
+
+    }
+    &__subtitle-01{
+
+    }
+    &__subtitle-02{
+
+    }
+
+  }
+}
+// 태블릿 진입
+@include media-breakpoint-up(md) {
+  .section-cs{
+
+  }
+
+  .article{
+    &__headline-01{
+
+    }
+    &__headline-02{
+
+    }
+    &__subtitle-01{
+
+    }
+    &__subtitle-02{
+
+    }
+
+  }
+}
+// 랩탑
+@include media-breakpoint-up(lg) {
+  .section-cs{
+
+  }
+
+  .article{
+    &__headline-01{
+
+    }
+    &__headline-02{
+
+    }
+    &__subtitle-01{
+
+    }
+    &__subtitle-02{
+
+    }
+
+  }
+}
+// 데스크탑
+@include media-breakpoint-up(xl) {
+  .section-cs{
+
+  }
+
+  .article{
+    &__headline-01{
+
+    }
+    &__headline-02{
+
+    }
+    &__subtitle-01{
+
+    }
+    &__subtitle-02{
+
+    }
+
+  }
+}
