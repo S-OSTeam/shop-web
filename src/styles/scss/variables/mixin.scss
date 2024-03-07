@@ -75,3 +75,19 @@
     @content;
   }
 }
+
+// font-size map
+@function font-size($name){
+  @return map-get($font-size-map, $name);
+}
+@mixin font-size($name){
+  font-size: font-size($name);
+}
+
+// font-weight map
+@function font-weight($name){
+  @return map-get($font-weight-map, $name);
+}
+@mixin font-weight($name){
+  font-weight: font-weight($name);
+}
