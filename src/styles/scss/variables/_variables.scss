@@ -79,6 +79,38 @@ $font-weight-map: (
         black: 900
 );
 
+// 폰트 규격 (root 16px 기준)
+$font-size-map: (
+  // 34px
+  headline1: 2.125rem,
+  // 24px
+  headline2: 1.5rem,
+  // 16px
+  subtitle1: 1rem,
+  // 14px
+  subtitle2: 0.875rem,
+  // 16px(default)
+  body1: 1rem,
+  // 14px
+  body2: 0.875rem,
+  // 12px
+        caption: 0.75rem,
+  // 10px
+        overline: 0.625rem
+);
+
+$font-weight-map: (
+        thin: 100,
+        extralight: 200,
+        light: 300,
+        regular: 400,
+        medium: 500,
+        semibold: 600,
+        bold: 700,
+        extrabold: 800,
+        black: 900
+);
+
 // 색상
 $primary-color: #80A1D4;
 $black-color: #000000;
