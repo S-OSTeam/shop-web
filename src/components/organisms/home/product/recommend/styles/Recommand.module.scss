@@ -10,7 +10,7 @@
 
   &__category-btn{
     width: 100%;
-    height: 100%;
+    height: 155px;
     border-radius: 12px;
   }
 
@@ -19,5 +19,21 @@
     height: 100%;
     object-fit: cover;
     border-radius: 12px;
+  }
+}
+
+@include mobile{
+  .recommend-wrapper{
+    &__category-btn{
+      height: 190px;
+    }
+  }
+}
+
+@include tablet{
+  .recommend-wrapper{
+    &__category-btn{
+      height: 190px;
+    }
   }
 }

@@ -4,6 +4,7 @@ import { Pagination, Navigation, Autoplay, FreeMode } from 'swiper/modules';
 import ImageButton from '@molecules/button/imageButton/ImageButton';
 import { PaginationOptions } from 'swiper/types/modules/pagination';
 import { NavigationOptions } from 'swiper/types/modules/navigation';
+import { SwiperOptions } from 'swiper/types/swiper-options';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
 
@@ -29,6 +30,7 @@ interface CustomSwiperProps {
     isFreeMode?: boolean; // freeMode 사용 여부
     isLoop?: boolean; // loop 사용 여부
     delay?: number; // auto play 사용 시 delay
+    breakpoints?: { [width: number]: SwiperOptions; [ratio: string]: SwiperOptions } | boolean;
 }
 
 const Swiper = ({ ...props }: CustomSwiperProps) => {
@@ -43,6 +45,7 @@ const Swiper = ({ ...props }: CustomSwiperProps) => {
                 spaceBetween={props.spaceBetween}
                 autoplay={props.isAutoPlay ? autoPlay : false}
                 freeMode={props.isFreeMode}
+                breakpoints={props.breakpoints}
                 loop={props.isLoop}
                 loopedSlides={1}
                 modules={[Pagination, Navigation, Autoplay, FreeMode]}
@@ -80,6 +83,7 @@ Swiper.propTypes = {
     isFreeMode: PropTypes.bool,
     isLoop: PropTypes.bool,
     delay: PropTypes.number,
+    breakpoints: PropTypes.bool,
 };
 
 Swiper.defaultProps = {
@@ -97,6 +101,7 @@ Swiper.defaultProps = {
     isFreeMode: false,
     isLoop: true,
     delay: 5000,
+    breakpoints: false,
 };
 
 export default Swiper;
