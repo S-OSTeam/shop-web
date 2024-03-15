@@ -19,6 +19,7 @@ $header-width-mobile: 280px;
 
 // 미디어쿼리 변수
 $grid-breakpoints: (
+        // for pitearphone
   // minimum portrait mobile devices
         xs: 360px,
   // default portrait mobile devices
@@ -76,15 +77,16 @@ $floaral-color: #F7F4EA;
 
 // BG 뒷배경
 $background-cornflowerblue: #5981BE;
-$background-dimgray: #767676;
+$background-dimgray: #585858;
 $background-white: #FFFFFF;
 $background-ghostwhite: #E8E8E8;
 
 // FC 글꼴 색상
 $color-text-black: #000000;
 $color-text-white: #ffffff;
-$color-text-dimgray: #767676;
-$color-text-cornflowerblue: #5981BE;
+$color-text-dimgray: #585858;
+$color-text-cornflowerblue: #4573D5;
+$color-text-darkblue: #1855B4;
 
 // 아이콘 사이즈
 $icon-size-max: 20px;
