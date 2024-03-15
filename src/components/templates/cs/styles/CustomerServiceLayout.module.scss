@@ -4,7 +4,7 @@
 html{
 }
 .section-cs{
-  font-size: 16px;
+
 }
 
 .article{
@@ -26,6 +26,31 @@ html{
 }
 // sub-nav 구간
 .sub-nav{
+  padding-top: 8px;
+  //border-bottom: 0.4px solid $background-ghostwhite;
+  /** Mui tab-wrapper 접근 */
+  & > div > div{
+    gap: 12px;
+  }
+  &__tab{
+    /* 컨텐츠 영역 */
+    @include font-size(subtitle1);
+    @include font-weight(medium);
+    padding: 8px 0 8px;
+    color: $color-text-dimgray;
+    &:hover{
+      @include font-weight(semibold);
+      color: $color-text-darkblue;
+    }
+  }
+  &__tab-active{
+    @include font-weight(semibold);
+    color: $color-text-darkblue;
+  }
+}
+
+// section-content : panel
+.panel{
 
 }
 
@@ -33,10 +58,11 @@ html{
 // 모바일 small
 @include media-breakpoint-up(xs) {
   .section-cs{
-    padding: 28px 20px 0;
+    padding-top: 28px;
   }
 
   .article{
+    padding: 0 20px;
     &__headline-01{
 
     }
@@ -50,6 +76,28 @@ html{
 
     }
 
+  }
+
+  // sub-nav 구간
+  .sub-nav{
+    padding: 0 20px;
+    /** Mui tab-wrapper 접근 */
+    & > div > div{
+
+    }
+    &__tab{
+      /* 컨텐츠 영역 */
+
+
+    }
+    &__tab-active{
+
+    }
+  }
+
+  // section-content : panel
+  .panel{
+    padding-top: 8px;
   }
 }
 // 모바일 default 진입

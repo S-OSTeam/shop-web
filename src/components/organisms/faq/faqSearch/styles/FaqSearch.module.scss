@@ -1,0 +1,37 @@
+@import "index";
+
+.section {
+  background-color: $background-cornflowerblue;
+  padding: 16px 20px;
+}
+
+.search-bar {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  border-radius: 50px;
+  height: 38px;
+  padding: 0 20px;
+  &__input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    input{
+      padding: 0 20px;
+      height: 38px;
+      line-height: 38px;
+    }
+    input+fieldset{
+      border: none;
+    }
+
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

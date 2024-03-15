@@ -16,24 +16,24 @@ interface HeaderProps {
      */
     window?: () => Window;
 }
-const Header = (props: HeaderProps) => {
+const Header = ({ window }: HeaderProps) => {
     /* variable */
-    const drawerWidth = 320; // 사이드 메뉴 너비 px 기준
-    // 윈도우 DOM 을 props 를 통해 받아옴
-    const { window } = props;
+    // 사이드 메뉴 너비 px 기준
+    const drawerWidth = 320;
     // 헤더에 사용되는 상태
     const [mobileOpen, setMobileOpen] = React.useState<boolean>(false);
     // 전역 아톰을 활용한 커스텀 훅 사용
     const isInTablet = useDomSizeCheckHook(1024);
-
-    // 윈도우 사이즈 감지될 경우 dom.body 의 사이즈 가져옴
-    const container = window !== undefined ? () => window().document.body : undefined;
 
     /* methods */
     // 사이드 메뉴 토글 이벤트
     const handleDrawerToggle = () => {
         setMobileOpen((prev) => !prev);
     };
+
+    // 윈도우 사이즈 감지될 경우 dom.body 의 사이즈 가져옴
+    const container = window !== undefined ? ()=> window().document.body : undefined;
+
     const navigate = useNavigate();
     const homeHandler = () => {
         navigate('/');
