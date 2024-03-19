@@ -9,7 +9,9 @@ const Agreements = () => {
         <div>
             {isInMobile ? (
                 <Box>
-                    <Divider />
+                    <Divider variant="middle" textAlign="center">
+                        동의사항
+                    </Divider>
                 </Box>
             ) : (
                 <Box>hello</Box>
