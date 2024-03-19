@@ -1,0 +1,16 @@
+@import "index";
+
+
+// mobile version scss
+.gender-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    &__radio-group{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+}

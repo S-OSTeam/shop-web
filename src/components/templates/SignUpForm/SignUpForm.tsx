@@ -5,6 +5,7 @@ import Authentication from '@components/organisms/signup/authentication/Authenti
 import Text from '@components/atoms/text/Text';
 import Form from '@components/organisms/signup/form/Form';
 import Agreements from '@components/organisms/signup/agreements/Agreements';
+import Gender from '@components/organisms/signup/gender/Gender';
 
 const SignUpForm = () => {
     const isInMobile = useDomSizeCheckHook(768);
@@ -16,6 +17,7 @@ const SignUpForm = () => {
                     <Form />
                     <Authentication />
                     <Agreements />
+                    <Gender />
                 </Box>
             ) : (
                 <Box>pc회원가입</Box>
