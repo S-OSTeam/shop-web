@@ -16,8 +16,8 @@ const SignUpForm = () => {
                     <Text text="회원가입 " variant="subtitle1" align="center" />
                     <Form />
                     <Authentication />
-                    <Agreements />
                     <Gender />
+                    <Agreements />
                 </Box>
             ) : (
                 <Box>pc회원가입</Box>
