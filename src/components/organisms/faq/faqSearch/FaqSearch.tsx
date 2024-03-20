@@ -2,13 +2,16 @@
 import React from 'react';
 import { Box } from '@mui/material';
 // search 이걸 autocomplete 로 바꾸기
-
-import SearchBar from '@molecules/searchBar/SearchBar';
-import clsN from 'classnames';
-import styles from './styles/FaqSearch.module.scss';
 import SearchBarAuto from '@molecules/searchBarAuto/SearchBarAuto';
 import searchItemAtom from '@recoil/atoms/cs/searchItemAtom';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import clsN from 'classnames';
+import styles from './styles/FaqSearch.module.scss';
+import Swiper from '@molecules/faq/swiper/Swiper';
+import { itemResponse, itemResponseITF } from '@util/test/data/faq/swiper/itemResponse';
+import { FreeMode } from 'swiper/modules';
+import {Announcement, LocalShipping, Restore, CurrencyExchange, Person } from '@mui/icons-material';
+import Text from '@atoms/text/Text';
 
 export interface FaqOptions {
     id: number;
@@ -38,7 +41,7 @@ const FaqSearch = (
         placeholder,
         onInput,
         optionData,
-        parentCall
+        parentCall,
     }: FaqSearchProps,
 ) => {
 
@@ -61,49 +64,67 @@ const FaqSearch = (
     const handleCallback = () => {
         setIsEnter(true);
         parentCall(true);
-    }
+    };
 
     // 페이지 렌더시 임시데이터 들을 정리해서 자식모듈에게 옵션에 맞게 전달
     // 키워드와 일치하는 데이터 찾음 이걸 활용해 형제요소가 렌더하기
     const callSearchResult = () => {
-        const items = searchResult.map((item) =>{
-            const {id, question, answer} = item;
-            return(`id: ${id} question ${question} answer: ${answer}`)
-        })
+        const items = searchResult.map((item) => {
+            const { id, question, answer } = item;
+            return (`id: ${id} question ${question} answer: ${answer}`);
+        });
         console.log(`searchResult?? :  ${searchResult}`);
         return items;
     };
     const renderTest = callSearchResult();
 
+    // 아이템 속성마다 아이콘을 선택해서 반환
+    const iconThrower = (name: string) => {
+        switch (name){
+            case 'announce': return <Announcement/>;
+            case 'delivery': return <LocalShipping/>;
+            case 'return': return <Restore/>;
+            case 'refund': return <CurrencyExchange />;
+            case 'account': return <Person/>;
+        }
+    }
 
     // useEffect 로 입력이 참이면 함수 호출하고 다시 펄스로
-    React.useEffect(()=>{
+    React.useEffect(() => {
         setIsEnter(false);
-    },[isEnter])
+    }, [isEnter]);
 
     return (
         <Box
             component='section'
             className={clsN(className, styles.section)}
         >
-            <SearchBar
-                wrapperClsN={clsN(wrapperClsN, styles['search-bar'])}
-                inputClsN={clsN(inputClsN, styles['search-bar__input'])}
-                iconClsN={clsN(iconClsN, styles['search-bar__icon'])}
-                placeholder={placeholder}
-                onInput={onInput}
-            />
             <SearchBarAuto
                 options={optionData}
                 className={clsN(styles['search-bar'])}
                 inputClsN={clsN(styles['search-bar__input'])}
                 iconClsN={clsN(styles['search-bar__icon'])}
                 placeholder='궁금한 내용을 입력해 주세요'
-                submitCallBack={handleCallback}
             />
-            <div>
-                {renderTest}
-            </div>
+            <Swiper
+                parentClsN={clsN(styles[''])}
+                className={clsN(styles['swiper-container'])}
+                wrapperSlideClsN={clsN(styles['swiper__wrapper'])}
+                slideClsN={clsN(styles['swiper__wrapper__slide'])}
+                modules={[FreeMode]}
+                items={itemResponse}
+                spaceBetween={8}
+                slidesPerView={2}
+                renderSlide={(item: itemResponseITF, index: number) => (
+                    <div className={clsN(styles['slide-container'])}>
+                        {/*<h1>{`${item.publicId} ${item.categoryPublicId} ${item.title} ${item.categoryType} ${item.imageUrls} ${item.alt}`}</h1>*/}
+                        <div className={clsN(styles['slide-container__icon'])}>
+                            {iconThrower(item.categoryType)}
+                        </div>
+                        <Text text={item.title} className={styles['slide-container__textfield']} />
+                    </div>
+                )}
+            />
         </Box>
     );
 };

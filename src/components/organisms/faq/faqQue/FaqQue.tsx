@@ -4,6 +4,10 @@ import List from '@components/layout/list/List';
 import searchItemAtom from '@recoil/atoms/cs/searchItemAtom';
 import { useRecoilValue } from 'recoil';
 import CollapsedList from '@molecules/collapsedList/CollapsedList';
+import styles from './styles/FaqQue.module.scss';
+import clsN from 'classnames';
+
+import {ReactComponent as QueIcon} from '@asset/image/icons/faq/Que.svg';
 
 // 검색한 결과를 보여주는 유기체 구간
 
@@ -29,22 +33,44 @@ const FaqQue = (
     // 상태
     const [isRender, setIsRender] = React.useState<boolean>(false);
 
+    // collapse 토글 상태 관리
+    const [collRow, setCollRow] = React.useState<boolean[]>([]);
+
+    // collapse 클릭 이벤트
+    const collapseClick = (idx: number) => {
+        // 불변성 유지를 위한 원본 복사
+        const newCollState = [...collRow];
+        // 해당 인덱스 반전 처리
+        newCollState[idx] = !newCollState[idx];
+        // 상태 업데이트
+        setCollRow(newCollState);
+    }
+
     // 랜더 함수
     const resultTemp = searchResult.map((item, idx) => {
-        // 아톰 배열 길이
-        const arrLength = searchResult.length;
-
+        // 속성
         const { id, question, answer } = item;
-        // 미리 배열로 상태관리하기
-        const innerState: boolean[] = new Array(arrLength).fill(false);
-        // 콜랩스 이벤트
-        const inChangeEvent = (arrIdx: number) => {
-            innerState[arrIdx] = !innerState[arrIdx];
-        };
+        // 상태
+        const collState = collRow[idx];
+        // 이벤트
+        const onClick = () => {
+            collapseClick(idx);
+        }
+
         return (
-            <CollapsedList primary={question} innerChildren={answer} isOpen={innerState[idx]} onClick={() => {
-                inChangeEvent(idx);
-            }} />
+            <CollapsedList
+                primary={question}
+                innerChildren={answer}
+                isOpen={collState}
+                onClick={onClick}
+                className={clsN(styles['list'])}
+                listBtnClsN={clsN(styles['list-btn'])}
+                listIconClsN={clsN(styles['list-btn__icon'])}
+                primaryClsN={clsN(styles['list-btn__content'])}
+                collClsN={clsN(styles['list__collapse'])}
+                collListClsN={clsN(styles['list__collapse__list'])}
+                listIcon={<QueIcon/>}
+            />
         );
     });
 
@@ -55,7 +81,12 @@ const FaqQue = (
             parentCall(isRender);
         }
     }
-
+    // coll 상태 초기화 이벤트
+    // 아톰이 바뀌거나 마운트시
+    React.useEffect(()=>{
+        const tempState = collRow.map(()=>false);
+        setCollRow(tempState);
+    },[])
 
     // useEffect 상태가 바뀔 때
     React.useEffect(() => {
@@ -66,7 +97,7 @@ const FaqQue = (
     }, [isRender]);
 
     return (
-        <List>
+        <List className={clsN(styles['list'])}>
             {resultTemp}
         </List>
     );

@@ -1,1 +1,32 @@
 @import "index";
+
+// 부모
+.list{
+  width: 100%;
+  // 버튼
+  &-btn{
+    width: 100%;
+    // 아이콘
+    &__icon{
+
+    }
+    // 텍스트(컨텐츠)
+    &__content{
+      //@include font-size(headline1);
+
+    }
+
+  }
+
+  // 콜랩스
+  &__collapse{
+    // 리스트 그리고 안에 reactNode 를 받게되어있으므로 체크
+    &__list{
+
+    }
+  }
+}
+
+
+
+

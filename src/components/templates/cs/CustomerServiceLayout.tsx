@@ -93,7 +93,10 @@ const CustomerServiceLayout = () => {
                     optionData={optionProvider}
                     parentCall={parentCall}
                 />
-                <FaqQue isAllowed={isEnter} parentCall={parentCall}/>
+                {/* 검색 결과 */}
+                <h1>자주 묻는 질문들</h1>
+                <h4>ALL</h4>
+                <FaqQue isAllowed={isEnter} parentCall={parentCall} />
             </TabPanel>
             <TabPanel value={tabVal} index={1} className={styles['panel']}>content2</TabPanel>
             <TabPanel value={tabVal} index={2} className={styles['panel']}>content3</TabPanel>

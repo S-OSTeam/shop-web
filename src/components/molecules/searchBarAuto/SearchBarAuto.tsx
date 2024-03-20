@@ -1,10 +1,12 @@
 /* eslint-disable */
-import React, { FormEventHandler } from 'react';
-import SearchItemAtom from '@recoil/atoms/cs/searchItemAtom';
-import { Autocomplete, AutocompleteProps, TextField, createFilterOptions } from '@mui/material';
-import { number } from 'prop-types';
+import React from 'react';
+import { Autocomplete, TextField, createFilterOptions } from '@mui/material';
 import searchItemAtom from '@recoil/atoms/cs/searchItemAtom';
 import { useSetRecoilState } from 'recoil';
+import clsN from 'classnames';
+import styles from './style/SearchBar.module.scss';
+import PropTypes from 'prop-types';
+
 
 
 /*
@@ -50,27 +52,30 @@ interface SearchBarProps {
     // inputField 클래스명
     inputClsN?: string;
     iconClsN?: string;
+    fieldsetClsN?: string;
     placeholder?: string;
-    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
     inputLabel?: string;
     // 읽기전용(변형 불가) 알수없음 <배열>
     options: OptionDataType[];
     onSubmit?: () => void;
-    submitCallBack?: ()=> void;
 }
 
 const SearchBarAuto = (
     {
         className,
-        onChange,
+        inputClsN,
+        iconClsN,
         onSubmit,
         options,
-        inputClsN,
         inputLabel,
         placeholder,
-        submitCallBack
+        fieldsetClsN
     }: SearchBarProps,
 ) => {
+
+    // 포커스 상태
+    const [isFocus, setIsFocus] = React.useState<boolean>(false);
+
     // 스팸 방지 딜레이 구현하기
 
 
@@ -88,6 +93,13 @@ const SearchBarAuto = (
     const filter = createFilterOptions<{ question: string, answer: string }>();
 
     // 메소드
+    // 포커스 이벤트
+    const handleFocus = () => {
+        setIsFocus(true);
+    }
+    const handleUnFocus = () => {
+        setIsFocus(false);
+    }
 
     // 아톰 값 수정하기 위해 훅 사용
     const setSearchAtom = useSetRecoilState(searchItemAtom);
@@ -131,23 +143,70 @@ const SearchBarAuto = (
     // options 만들기
     return (
         <Autocomplete
-            className={className}
+            ListboxProps={{
+                className: styles['list-box']
+            }}
+            classes={{
+                root: clsN(className, styles['autocomplete']),
+                // focused: clsN(styles['autocomplete__input-focused']),
+                // input: clsN(inputClsN, styles['autocomplete__input']),
+                paper: clsN(styles['autocomplete__paper']),
+                popper: clsN(styles['autocomplete__popper']),
+                hasPopupIcon: clsN(styles['autocomplete__has-icon']),
+                listbox: clsN(styles['autocomplete__listbox']),
+                groupUl: clsN(styles['autocomplete__group-ul']),
+                groupLabel: clsN(styles['autocomplete__group-ul']),
+                inputRoot: clsN(inputClsN, styles['autocomplete__input'])
+            }}
             options={options}
             onSubmit={onSubmit}
             getOptionLabel={(option) => option.question}
+            onKeyDown={handleSubmit}
             renderInput={
                 (params) =>
                     <TextField
                         {...params}
-                        className={inputClsN}
+                        className={clsN(inputClsN, styles['autocomplete__input'])}
                         label={inputLabel}
                         value={iptVal}
                         onChange={handleChange}
                         placeholder={placeholder}
                         onKeyDown={handleSubmit}
+                        InputProps={{
+                            ...params.InputProps,
+                            classes: {
+                                root: clsN(inputClsN, styles['autocomplete__input']),
+                                notchedOutline: clsN(fieldsetClsN, styles['autocomplete__fieldset']),
+                                focused: clsN(fieldsetClsN, styles['autocomplete__input-focused']),
+                            },
+                        }}
+                        size='small'
                     />
             }
         />
     );
 };
+SearchBarAuto.propTypes = {
+    className: PropTypes.string,
+    inputClsN: PropTypes.string,
+    iconClsN: PropTypes.string,
+    onSubmit: PropTypes.func,
+    options: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        question: PropTypes.string.isRequired,
+        answer: PropTypes.string.isRequired,
+    })).isRequired,
+    inputLabel: PropTypes.string,
+    placeholder: PropTypes.string,
+    fieldsetClsN: PropTypes.string,
+}
+SearchBarAuto.defaultProps = {
+    className: styles.autocomplete,
+    inputClsN: styles['autocomplete__input'],
+    iconClsN: styles['autocomplete__icon'],
+    onSubmit: undefined,
+    inputLabel: undefined,
+    placeholder: undefined,
+    fieldsetClsN: styles['autocomplete__fieldset']
+}
 export default SearchBarAuto;
