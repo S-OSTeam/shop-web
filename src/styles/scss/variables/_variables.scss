@@ -49,9 +49,11 @@ $font-size-map: (
   // 14px
   body2: 0.875rem,
   // 12px
-        caption: 0.75rem,
+  caption: 0.75rem,
   // 10px
-        overline: 0.625rem
+  overline: 0.625rem,
+  // for-icon
+  backgroundicon: 1.8rem
 );
 
 $font-weight-map: (
@@ -76,10 +78,13 @@ $floaral-color: #F7F4EA;
 // --- PAGE FAQ ---
 
 // BG 뒷배경
-$background-cornflowerblue: #5981BE;
-$background-dimgray: #585858;
 $background-white: #FFFFFF;
 $background-ghostwhite: #E8E8E8;
+$background-skyblue: #b5d1ff;
+$background-cornflowerblue: #5981BE;
+$background-dimgray: #585858;
+$background-darkslategray: #3F4756;
+$background-darkgray: #2F2F2F;
 
 // FC 글꼴 색상
 $color-text-black: #000000;
