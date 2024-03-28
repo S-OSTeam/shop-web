@@ -25,10 +25,14 @@ code {
     monospace;
 }
 /* Mui-root */
-.MuiTypography-root, .MuiButtonBase-root{
-    font-size: inherit;
-    font-weight: inherit;
-}
-.MuiListItemButton-root {
-    justify-content: stretch;
+/*.MuiTypography-root, .MuiButtonBase-root{*/
+/*    font-size: inherit;*/
+/*    font-weight: inherit;*/
+/*}*/
+/*.MuiListItemButton-root {*/
+/*    justify-content: stretch;*/
+/*}*/
+body, html{
+    margin: 0;
+    overflow-x: hidden;
 }

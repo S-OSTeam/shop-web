@@ -10,7 +10,7 @@
 }
 
 .search-bar {
-  margin-bottom: 8px;
+  margin: 0 auto 8px;
   &__input {
     input{
     }
@@ -54,6 +54,8 @@
   width: 100%;
   // 가로 / 세로 비율
   aspect-ratio: 16/9;
+  //max-height: 96px;
+
   // 자식 속성 색상
   & > * {
     color: $color-text-white;
@@ -68,5 +70,297 @@
     height: fit-content;
     @include font-size(headline2);
     @include font-weight(light);
+  }
+}
+
+// 300px ~
+@include media-breakpoint-up(xxs){
+  .section {
+  }
+
+  .search-bar {
+    width: 100%;
+    &__input {
+      input{
+      }
+      input+fieldset{
+      }
+
+    }
+
+    &__icon {
+    }
+  }
+
+  // 스와이퍼 감싸는 div
+  .swiper-parent{
+  }
+
+  // 스와이퍼
+  .swiper-container{
+    &__wrapper{
+      &__slide{
+
+      }
+    }
+  }
+
+  .slide-container{
+    // 가로 / 세로 비율
+    min-height: 106px;
+    // 자식 속성 색상
+    & > * {
+    }
+    &__icon{
+      svg{
+      }
+    }
+    &__textfield{
+
+    }
+  }
+}
+
+// 480~
+@include media-breakpoint-up(sm){
+  .section {
+  }
+
+  .search-bar {
+    &__input {
+      input{
+      }
+      input+fieldset{
+      }
+
+    }
+
+    &__icon {
+    }
+  }
+
+  // 스와이퍼 감싸는 div
+  .swiper-parent{
+  }
+
+  // 스와이퍼
+  .swiper-container{
+    &__wrapper{
+      &__slide{
+
+      }
+    }
+  }
+
+  .slide-container{
+    // 가로 / 세로 비율
+    max-height: 138px;
+    // 자식 속성 색상
+    & > * {
+    }
+    &__icon{
+      svg{
+      }
+    }
+    &__textfield{
+
+    }
+  }
+}
+
+// 768~
+@include media-breakpoint-up(md){
+  .section {
+
+  }
+
+  .search-bar {
+    &__input {
+      input{
+      }
+      input+fieldset{
+      }
+
+    }
+
+    &__icon {
+    }
+  }
+
+  // 스와이퍼 감싸는 div
+  .swiper-parent{
+
+  }
+
+  // 스와이퍼
+  .swiper-container{
+    &__wrapper{
+      &__slide{
+
+      }
+    }
+  }
+
+  .slide-container{
+    // 가로 / 세로 비율
+
+    // 자식 속성 색상
+    & > * {
+    }
+    &__icon{
+      svg{
+      }
+    }
+    &__textfield{
+
+    }
+  }
+}
+// 980~
+@include media-breakpoint-up(lg){
+  .section {
+  }
+
+  .search-bar {
+    &__input {
+      input{
+
+      }
+      input+fieldset{
+      }
+
+    }
+
+    &__icon {
+    }
+  }
+
+  // 스와이퍼 감싸는 div
+  .swiper-parent{
+  }
+
+  // 스와이퍼
+  .swiper-container{
+    &__wrapper{
+      &__slide{
+
+      }
+    }
+  }
+
+  .slide-container{
+    // 가로 / 세로 비율
+
+    // 자식 속성 색상
+    & > * {
+    }
+    &__icon{
+      svg{
+      }
+    }
+    &__textfield{
+
+    }
+  }
+}
+// 1024~
+@include media-breakpoint-up(xl){
+  .section {
+  }
+
+  .search-bar {
+    @include set-content-size(xl);
+    margin-bottom: 8px;
+    &__input {
+      input{
+
+      }
+      input+fieldset{
+      }
+
+    }
+
+    &__icon {
+    }
+  }
+
+  // 스와이퍼 감싸는 div
+  .swiper-parent{
+
+  }
+
+  // 스와이퍼
+  .swiper-container{
+    width: 980px;
+    &__wrapper{
+      &__slide{
+
+      }
+    }
+  }
+
+  .slide-container{
+    // 가로 / 세로 비율
+
+    // 자식 속성 색상
+    & > * {
+    }
+    &__icon{
+      svg{
+      }
+    }
+    &__textfield{
+
+    }
+  }
+}
+// 1400~
+@include media-breakpoint-up(xxl){
+  .section {
+  }
+
+  .search-bar {
+    width: 618px;
+    &__input {
+      input{
+
+      }
+      input+fieldset{
+      }
+
+    }
+
+    &__icon {
+    }
+  }
+
+  // 스와이퍼 감싸는 div
+  .swiper-parent{
+    width: 1024px;
+  }
+
+  // 스와이퍼
+  .swiper-container{
+    @include set-content-size(xl);
+    &__wrapper{
+      &__slide{
+
+      }
+    }
+  }
+
+  .slide-container{
+    // 가로 / 세로 비율
+
+    // 자식 속성 색상
+    & > * {
+    }
+    &__icon{
+      svg{
+      }
+    }
+    &__textfield{
+
+    }
   }
 }

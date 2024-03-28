@@ -6,6 +6,7 @@ import { useSetRecoilState } from 'recoil';
 import clsN from 'classnames';
 import styles from './style/SearchBar.module.scss';
 import PropTypes from 'prop-types';
+import { inherits } from 'util';
 
 
 
@@ -39,7 +40,7 @@ import PropTypes from 'prop-types';
  배열객체 쓰기로
  */
 
-interface OptionDataType {
+export interface OptionDataType {
     id: number;
     question: string;
     answer: string;

@@ -2,21 +2,30 @@
 import React from 'react';
 import { ItemNavCsResponse } from '@util/test/data/itemNavCsResponse';
 import Headline from '@organisms/headline/Headline';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import clsN from 'classnames';
-import styles from './styles/CustomerServiceLayout.module.scss';
+import styles from './styles/CsMain.module.scss';
 import Tab from '@atoms/tab/Tab';
 import TabPanel from '@components/layout/tabPanel/TabPanel';
 import Tabs from '@molecules/tabs/Tabs';
-import FaqSearch, { FaqOptions } from '@organisms/faq/faqSearch/FaqSearch';
+import FaqSearch from '@organisms/faq/faqSearch/FaqSearch';
 import { CsSuggest } from '@util/test/data/CustomerServiceSuggestResponse';
 import FaqQue from '@organisms/faq/faqQue/FaqQue';
+import Button from '@atoms/button/Button';
+import { category } from '@util/test/data/CategoryResponse';
+import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
+
+export interface FaqOptions {
+    id: number;
+    question: string;
+    answer: string;
+}
 
 interface CsPageProps {
     tabList: Array<string>;
 }
 
-const CustomerServiceLayout = () => {
+const CsMain = () => {
     // 상태
 
     // 네비 상태
@@ -29,6 +38,10 @@ const CustomerServiceLayout = () => {
     /** 그래프 큐엘을 통해 데이터를 받는다 가정 */
     // 문의 관련 내용들 카테고리별 객체 배열로 정리되어 있음
     // CsSuggest
+    // 미디어 쿼리 훅 활용
+    /**
+     * 다른 돔사이즈 훅과 호출이 겹쳐서 이벤트가 서로 엇갈림
+     */
 
     /** 탭 활성/비활성 클래스 상태 변경 */
     const parentCall = (boolArr: boolean) => {
@@ -38,14 +51,6 @@ const CustomerServiceLayout = () => {
     const handleTabClick = (newVal: number) => {
         // 부모 상태 업데이트
         setTabVal(newVal);
-    };
-
-    // fc for tab components
-    const allyProps = (index: number) => {
-        return {
-            id: `simple-tab-${index}`,
-            'aria-controls': `simple-tabpanel-${index}`,
-        };
     };
 
     // faq 에 전달할 데이터 정리하기
@@ -62,8 +67,9 @@ const CustomerServiceLayout = () => {
                 optionProvider.push({id, question, answer});
             });
         })
-
     })
+
+
 
     const TabRender = ItemNavCsResponse.map((item, idx) => {
         const tabClsN = styles['sub-nav__tab'];
@@ -77,6 +83,7 @@ const CustomerServiceLayout = () => {
             />
         );
     });
+
     return (
         /* intro */
         <Box component='section' className={`${styles['section-cs']}`}>
@@ -85,7 +92,14 @@ const CustomerServiceLayout = () => {
                 headline01={{ text: 'LOGO PLACE', classname: clsN(styles['article__headline-01']) }}
                 subtitle01={{ text: '무엇을 도와드릴까요?', classname: clsN(styles['article__subtitle-01']) }}
             />
-            <Tabs value={tabVal} ariaLabel='simple-tab' className={clsN(styles['sub-nav'])}>
+            <Tabs
+                value={tabVal}
+                ariaLabel='simple-tab'
+                className={clsN(styles['sub-nav'])}
+                variant='scrollable'
+                allowScrollButtonsMobile
+                scrollButtons = 'auto'
+            >
                 {TabRender}
             </Tabs>
             <TabPanel value={tabVal} index={0} className={styles['panel']}>
@@ -93,10 +107,19 @@ const CustomerServiceLayout = () => {
                     optionData={optionProvider}
                     parentCall={parentCall}
                 />
-                {/* 검색 결과 */}
-                <h1>자주 묻는 질문들</h1>
-                <h4>ALL</h4>
-                <FaqQue isAllowed={isEnter} parentCall={parentCall} />
+                <div className={clsN(styles['divider-wrapper'])}>
+                    <Divider className={clsN(styles['divider-wrapper__divider'])} variant='middle' />
+                </div>
+                <FaqQue
+                    className={clsN(styles['que-block'])}
+                    wrapperClsN={clsN(styles['que-block__list'])}
+                    itemClsN={clsN(styles['que-block__list__collapse'])}
+                    expendClsN={clsN(styles['que-block__expend'])}
+                    buttonClsN={clsN(styles['que-block__expend__button'])}
+                    isAllowed={isEnter}
+                    parentCall={parentCall}
+                    optionData={optionProvider}
+                />
             </TabPanel>
             <TabPanel value={tabVal} index={1} className={styles['panel']}>content2</TabPanel>
             <TabPanel value={tabVal} index={2} className={styles['panel']}>content3</TabPanel>
@@ -105,4 +128,4 @@ const CustomerServiceLayout = () => {
         </Box>
     );
 };
-export default CustomerServiceLayout;
+export default CsMain;

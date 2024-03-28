@@ -1,6 +1,13 @@
-// announce delivery return refund account
+export interface CsObject {
+    [key: string]: FaqItem[];
+}
+export interface FaqItem {
+    id: number;
+    question: string;
+    answer: string;
+}
 
-export const CsSuggest = [
+export const CsSuggest: CsObject[] = [
     {
         announce: [
             {
