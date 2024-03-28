@@ -19,11 +19,11 @@ interface HeaderProps {
 const Header = ({ window }: HeaderProps) => {
     /* variable */
     // 사이드 메뉴 너비 px 기준
-    const drawerWidth = 320;
+    const drawerWidth = 300;
     // 헤더에 사용되는 상태
     const [mobileOpen, setMobileOpen] = React.useState<boolean>(false);
     // 전역 아톰을 활용한 커스텀 훅 사용
-    const isInTablet = useDomSizeCheckHook(1024);
+    const isInTablet = useDomSizeCheckHook(980);
 
     /* methods */
     // 사이드 메뉴 토글 이벤트

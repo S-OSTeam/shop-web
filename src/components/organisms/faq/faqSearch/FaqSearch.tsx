@@ -2,9 +2,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
 // search 이걸 autocomplete 로 바꾸기
-import SearchBarAuto from '@molecules/searchBarAuto/SearchBarAuto';
+import SearchBarAuto, { OptionDataType } from '@molecules/searchBarAuto/SearchBarAuto';
 import searchItemAtom from '@recoil/atoms/cs/searchItemAtom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import clsN from 'classnames';
 import styles from './styles/FaqSearch.module.scss';
 import Swiper from '@molecules/faq/swiper/Swiper';
@@ -12,12 +12,9 @@ import { itemResponse, itemResponseITF } from '@util/test/data/faq/swiper/itemRe
 import { FreeMode } from 'swiper/modules';
 import {Announcement, LocalShipping, Restore, CurrencyExchange, Person } from '@mui/icons-material';
 import Text from '@atoms/text/Text';
+import { CsSuggest } from '@util/test/data/CustomerServiceSuggestResponse';
+import { FaqOptions } from '@templates/cs/CsMain';
 
-export interface FaqOptions {
-    id: number;
-    question: string;
-    answer: string;
-}
 
 interface FaqSearchProps {
     className?: string;
@@ -50,6 +47,12 @@ const FaqSearch = (
 
     // 아톰 상태
     const searchResult = useRecoilValue(searchItemAtom);
+    // 아톰 값 수정
+    const setSearchResult = useSetRecoilState(searchItemAtom);
+
+    // 스와이퍼
+    /* 슬라이드 클릭시 아톰 내용 수정하고 출력하기 */
+    const [isClicked, setIsClicked] = React.useState<boolean>(false);
 
     // 검색기능 구현
     // 그래프 큐엘로 데이터(페이지 로드할때 모두 받아올지 아니면 미리 받아올지)를 임시로 변수에 저장
@@ -59,12 +62,6 @@ const FaqSearch = (
     // N건의 '키워드' 관련 FAQ 를 찾았어요
     // 검색한 특정 키워드 폰트 색상 바꾸기
 
-    // faq 질의응답 관련 데이터 (그래프 큐엘 받는다 가정)
-    // 자식이 부모의 상태가 바뀜을 알리기 위해
-    const handleCallback = () => {
-        setIsEnter(true);
-        parentCall(true);
-    };
 
     // 페이지 렌더시 임시데이터 들을 정리해서 자식모듈에게 옵션에 맞게 전달
     // 키워드와 일치하는 데이터 찾음 이걸 활용해 형제요소가 렌더하기
@@ -73,7 +70,7 @@ const FaqSearch = (
             const { id, question, answer } = item;
             return (`id: ${id} question ${question} answer: ${answer}`);
         });
-        console.log(`searchResult?? :  ${searchResult}`);
+        // console.log(`searchResult?? :  ${searchResult}`);
         return items;
     };
     const renderTest = callSearchResult();
@@ -89,10 +86,25 @@ const FaqSearch = (
         }
     }
 
+    //
+    // Swiper Click 이벤트
+    const handleSlideClick = (name: string) => {
+        setIsClicked(true);
+        const filterArr = CsSuggest.map(section => section[name])[0];
+        submit(filterArr);
+    }
+    const submit = (data:OptionDataType[]) => {
+        setSearchResult(data);
+    }
+
+
     // useEffect 로 입력이 참이면 함수 호출하고 다시 펄스로
     React.useEffect(() => {
         setIsEnter(false);
     }, [isEnter]);
+    React.useEffect(()=>{
+
+    },[isClicked]);
 
     return (
         <Box
@@ -114,9 +126,29 @@ const FaqSearch = (
                 modules={[FreeMode]}
                 items={itemResponse}
                 spaceBetween={8}
-                slidesPerView={2}
+
+                breakpoints={
+                    {
+                        320: {
+                            slidesPerView: 2,
+                        },
+                        // when window width is >= 640px
+                        620: {
+                            slidesPerView: 3,
+                        },
+                        768: {
+                            slidesPerView: 4,
+                        },
+                        980: {
+                            slidesPerView: 5
+                        },
+
+                    }
+                }
                 renderSlide={(item: itemResponseITF, index: number) => (
-                    <div className={clsN(styles['slide-container'])}>
+                    <div className={clsN(styles['slide-container'])} onClick={()=>{
+                        handleSlideClick(item.categoryType)
+                    }}>
                         {/*<h1>{`${item.publicId} ${item.categoryPublicId} ${item.title} ${item.categoryType} ${item.imageUrls} ${item.alt}`}</h1>*/}
                         <div className={clsN(styles['slide-container__icon'])}>
                             {iconThrower(item.categoryType)}

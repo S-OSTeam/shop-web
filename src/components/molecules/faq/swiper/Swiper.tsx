@@ -46,6 +46,7 @@ interface SwiperProps<T> extends MySwiperProps{
     slidesPerView?: number
     /** 스와이퍼 부모 클래스명 */
     parentClsN?: string;
+    breakpoints?: MySwiperProps['breakpoints'];
 }
 
 // <T, > : 타입스크립트에서 제너릭 사용시 콤마를 붙임, 문법적 요구사항이라고함
@@ -64,7 +65,8 @@ const Swiper = <T,>(
         delay,
         modules,
         slidesPerView,
-        parentClsN
+        parentClsN,
+        breakpoints
     }:SwiperProps<T>
 ) => {
     /** 상태 */
@@ -85,6 +87,8 @@ const Swiper = <T,>(
                 onSlideChange={onChange}
                 wrapperClass={clsN(wrapperSlideClsN, styles['swiper__wrapper'])}
                 slidesPerView={slidesPerView}
+                breakpoints={breakpoints}
+
             >
                 {items.map((item, idx)=> {
                     return(

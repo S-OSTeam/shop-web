@@ -7,9 +7,12 @@
 
 .list-btn{
   &__icon{
-
+    min-width: 0;
   }
-  &__primary{
+  &__root{
+    &__primary{
+
+    }
 
   }
 }

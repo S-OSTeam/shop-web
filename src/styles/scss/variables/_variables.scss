@@ -19,41 +19,48 @@ $header-width-mobile: 280px;
 
 // 미디어쿼리 변수
 $grid-breakpoints: (
-        // for pitearphone
-  // minimum portrait mobile devices
-        xs: 360px,
-  // default portrait mobile devices
-        sm: 480px,
-  // landscape mobile and tablet devices
-        md: 768px,
-  // landscape tablet and small laptop
-        lg: 980px,
-  // small desk screen
-        xl: 1080px,
-  // FullHD screen for 16:9
-        xxl: 1400px
+        xxs: 300px, /* for minimum-phone */
+        xs: 360px, /* minimum portrait mobile devices */
+        sm: 480px, /* default portrait mobile devices */
+        md: 768px, /* landscape mobile and tablet devices */
+        lg: 980px, /* landscape tablet and small laptop */
+        xl: 1024px, /* small desk screen */
+        xxl: 1400px /* FullHD screen for 16:9 */
 );
+// 미디어쿼리 변수 콘텐츠 크기
+$grid-content-size: (
+        xxs: 100%, /* for minimum-phone, window-size: 300px */
+        xs: 100%, /* minimum portrait mobile devices, window-size: 360px */
+        sm: 100%, /* default portrait mobile devices, window-size: 480px */
+        md: 100%, /* landscape mobile and tablet devices, window-size: 768px */
+        lg: 100%, /* landscape tablet and small laptop, window-size: 980px */
+        xl: 980px, /* small desk screen, window-size: 1024px */
+        xxl: 1200px /* FullHD screen for 16:9, window-size: 1400px */
+);
+
+//$content-width
 
 // 폰트 규격 (root 16px 기준)
 $font-size-map: (
   // 34px
-  headline1: 2.125rem,
+        headline1: 2.125rem,
   // 24px
-  headline2: 1.5rem,
+        headline2: 1.5rem,
+        headline3: 1.3rem,
   // 16px
-  subtitle1: 1rem,
+        subtitle1: 1rem,
   // 14px
-  subtitle2: 0.875rem,
+        subtitle2: 0.875rem,
   // 16px(default)
-  body1: 1rem,
+        body1: 1rem,
   // 14px
-  body2: 0.875rem,
+        body2: 0.875rem,
   // 12px
-  caption: 0.75rem,
+        caption: 0.75rem,
   // 10px
-  overline: 0.625rem,
+        overline: 0.625rem,
   // for-icon
-  backgroundicon: 1.8rem
+        backgroundicon: 1.8rem
 );
 
 $font-weight-map: (
@@ -90,7 +97,7 @@ $background-darkgray: #2F2F2F;
 $color-text-black: #000000;
 $color-text-white: #ffffff;
 $color-text-dimgray: #585858;
-$color-text-cornflowerblue: #4573D5;
+$color-text-cornflowerblue: #5981BE;
 $color-text-darkblue: #1855B4;
 
 // 아이콘 사이즈

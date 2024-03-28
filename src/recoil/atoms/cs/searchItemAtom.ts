@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-interface searchItemType {
+export interface searchItemType {
     id: number;
     question: string;
     answer: string;
