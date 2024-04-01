@@ -1,0 +1,54 @@
+@import "./index";
+
+.event-wrapper {
+  margin-top: 48px;
+
+  &__title{
+    font-size: 32px;
+    color: #404040;
+    font-family: 'Pretendard Variable', serif;
+    font-weight: 500;
+  }
+
+  &__category {
+    margin-top: 8px;
+  }
+
+  &__category-btn {
+    width: 100%;
+    height: 208px;
+    border-radius: 12px;
+  }
+}
+
+@include laptop {
+  .event-wrapper {
+    margin-top: 40px;
+
+    &__category {
+      margin-top: 12px;
+    }
+
+    &__category-btn {
+      width: 100%;
+      height: 151px;
+      border-radius: 12px;
+    }
+  }
+}
+
+@include tablet {
+  .event-wrapper {
+    margin-top: 12px;
+
+    &__category {
+      margin-top: 8px;
+    }
+
+    &__category-btn {
+      width: 100%;
+      height: 130px;
+      border-radius: 12px;
+    }
+  }
+}

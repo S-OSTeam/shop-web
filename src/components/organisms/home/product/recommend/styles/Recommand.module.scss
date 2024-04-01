@@ -8,6 +8,10 @@
     font-weight: 500;
   }
 
+  &__category{
+    margin-top: 20px;
+  }
+
   &__category-btn{
     width: 100%;
     height: 155px;
@@ -22,16 +26,28 @@
   }
 }
 
-@include mobile{
+/*나중에 tablet로 바꿔야됨 아직 scss 머지 x*/
+@include laptop{
   .recommend-wrapper{
+
+    &__category{
+      margin-top: 8px;
+    }
+
     &__category-btn{
       height: 190px;
     }
   }
 }
 
+/*나중에 mobile로 바꿔야됨 아직 scss 머지 x*/
 @include tablet{
   .recommend-wrapper{
+
+    &__category{
+      margin-top: 8px;
+    }
+
     &__category-btn{
       height: 190px;
     }

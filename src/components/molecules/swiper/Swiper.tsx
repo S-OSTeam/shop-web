@@ -45,11 +45,11 @@ const Swiper = ({ ...props }: CustomSwiperProps) => {
                 spaceBetween={props.spaceBetween}
                 autoplay={props.isAutoPlay ? autoPlay : false}
                 freeMode={props.isFreeMode}
-                breakpoints={props.breakpoints}
                 loop={props.isLoop}
                 loopedSlides={1}
                 modules={[Pagination, Navigation, Autoplay, FreeMode]}
                 onSlideChange={props.onChange}
+                breakpoints={props.breakpoints}
             >
                 {props.items.map((imgPath, index) => (
                     // eslint-disable-next-line react/no-array-index-key

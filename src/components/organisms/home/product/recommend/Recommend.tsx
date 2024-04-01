@@ -33,10 +33,10 @@ const Recommend = ({ recommendItem }: RecommendProps) => {
             <Text className={clsN(styles['recommend-wrapper__title'])} text="추천 카테고리" />
             <Swiper
                 items={items}
+                className={clsN(styles['recommend-wrapper__category'])}
                 slideClsN={clsN(styles['recommend-wrapper__category-slide'])}
                 btnClsN={clsN(styles['recommend-wrapper__category-btn'])}
                 imgClsN={clsN(styles['recommend-wrapper__category-img'])}
-                isFreeMode
                 spaceBetween={8}
                 slidesPerView={4}
                 isLoop={false}
