@@ -1,6 +1,9 @@
 @import "./index";
 
 .recommend-wrapper{
+  padding: 48px 24px 0 24px;
+  overflow: hidden;
+
   &__title{
     font-size: 32px;
     color: #404040;
@@ -10,6 +13,8 @@
 
   &__category{
     margin-top: 20px;
+    padding: 0;
+    overflow: visible;
   }
 
   &__category-btn{

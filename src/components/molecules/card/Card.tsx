@@ -16,7 +16,13 @@ const Card = ({ className, imgClsN, contentClsN, imgPath, children }: CardProps)
     return (
         <MuiCard className={clsN(className, styles.card)}>
             <CardMedia className={clsN(imgClsN, styles['card-img'])} image={imgPath} />
-            <CardContent className={clsN(contentClsN, styles['card-content'])}>{children}</CardContent>
+            <CardContent
+                classes={{
+                    root: clsN(contentClsN, styles['card-content']),
+                }}
+            >
+                {children}
+            </CardContent>
         </MuiCard>
     );
 };

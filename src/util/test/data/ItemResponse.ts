@@ -299,7 +299,7 @@ export const itemResponse = [
         title: '[24년8월입고] 새로운 상사는 귀여운 허당 오렌지루즈 넨도로이드 No.2386 시로사키 유세이',
         content: '새로운 상사는 귀여운 허당 오렌지루즈 넨도로이드 No.2386 시로사키 유세이',
         summary: '새로운 상사는 귀여운 허당 오렌지루즈 넨도로이드 No.2386 시로사키 유세이',
-        price: 50000,
+        price: 25000,
         sellCnt: 130,
         wishCnt: 120,
         stockCnt: 150,

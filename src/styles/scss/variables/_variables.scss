@@ -19,18 +19,60 @@ $header-width-mobile: 280px;
 
 // 미디어쿼리 변수
 $grid-breakpoints: (
-        // minimum portrait mobile devices
-        xs: 360px,
-        // default portrait mobile devices
-        sm: 480px,
-        // landscape mobile and tablet devices
-        md: 768px,
-        // landscape tablet and small laptop
-        lg: 992px,
-        // small desk screen
-        xl: 1200px,
-        // FullHD screen for 16:9
-        xxl: 1400px
+        xxs: 300px, /* for minimum-phone */
+        xs: 360px, /* minimum portrait mobile devices */
+        sm: 480px, /* default portrait mobile devices */
+        md: 768px, /* landscape mobile and tablet devices */
+        lg: 980px, /* landscape tablet and small laptop */
+        xl: 1024px, /* small desk screen */
+        xxl: 1400px /* FullHD screen for 16:9 */
+);
+// 미디어쿼리 변수 콘텐츠 크기
+$grid-content-size: (
+        xxs: 100%, /* for minimum-phone, window-size: 300px */
+        xs: 100%, /* minimum portrait mobile devices, window-size: 360px */
+        sm: 100%, /* default portrait mobile devices, window-size: 480px */
+        md: 100%, /* landscape mobile and tablet devices, window-size: 768px */
+        lg: 100%, /* landscape tablet and small laptop, window-size: 980px */
+        xl: 980px, /* small desk screen, window-size: 1024px */
+        xxl: 1200px /* FullHD screen for 16:9, window-size: 1400px */
+);
+
+//$content-width
+
+// 폰트 규격 (root 16px 기준)
+$font-size-map: (
+  // 34px
+        headline1: 2.125rem,
+  // 24px
+        headline2: 1.5rem,
+        headline3: 1.3rem,
+  // 16px
+        subtitle1: 1rem,
+  // 14px
+        subtitle2: 0.875rem,
+  // 16px(default)
+        body1: 1rem,
+  // 14px
+        body2: 0.875rem,
+  // 12px
+        caption: 0.75rem,
+  // 10px
+        overline: 0.625rem,
+  // for-icon
+        backgroundicon: 1.8rem
+);
+
+$font-weight-map: (
+        thin: 100,
+        extralight: 200,
+        light: 300,
+        regular: 400,
+        medium: 500,
+        semibold: 600,
+        bold: 700,
+        extrabold: 800,
+        black: 900
 );
 
 // 색상
@@ -40,6 +82,24 @@ $white-color: #FFFFFF;
 $gray-color: #D9D9D9;
 $floaral-color: #F7F4EA;
 $black-gray-color: #7A7A7A;
+
+// --- PAGE FAQ ---
+
+// BG 뒷배경
+$background-white: #FFFFFF;
+$background-ghostwhite: #E8E8E8;
+$background-skyblue: #b5d1ff;
+$background-cornflowerblue: #5981BE;
+$background-dimgray: #585858;
+$background-darkslategray: #3F4756;
+$background-darkgray: #2F2F2F;
+
+// FC 글꼴 색상
+$color-text-black: #000000;
+$color-text-white: #ffffff;
+$color-text-dimgray: #585858;
+$color-text-cornflowerblue: #5981BE;
+$color-text-darkblue: #1855B4;
 
 // 아이콘 사이즈
 $icon-size-max: 20px;
