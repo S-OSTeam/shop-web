@@ -1,0 +1,13 @@
+@import "index";
+
+.parent{
+
+}
+
+.swiper-container{
+  //@extend .swiper-container;
+  &__wrapper{
+    &__slide{
+    }
+  }
+}
