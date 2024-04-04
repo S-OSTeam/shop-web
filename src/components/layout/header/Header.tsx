@@ -1,13 +1,10 @@
-/* eslint-disable */
 import React from 'react';
-import LoginIcon from '@mui/icons-material/Login';
-import { AppBar, Box, IconButton, Drawer as MuiDrawer } from '@mui/material';
+import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
+import { AppBar, Box, Drawer as MuiDrawer } from '@mui/material';
 import clsN from 'classnames';
-import { useNavigate } from 'react-router-dom';
 import styles from '@components/layout/header/styles/Header.module.scss';
 import Drawer from '@components/layout/header/NavBar/listItem/drawer/Drawer';
 import NavMain from '@components/layout/header/NavBar/NavMain/NavMain';
-import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 
 interface HeaderProps {
     /*
@@ -32,25 +29,25 @@ const Header = ({ window }: HeaderProps) => {
     };
 
     // 윈도우 사이즈 감지될 경우 dom.body 의 사이즈 가져옴
-    const container = window !== undefined ? ()=> window().document.body : undefined;
+    const container = window !== undefined ? () => window().document.body : undefined;
 
-    const navigate = useNavigate();
-    const homeHandler = () => {
+    /* const navigate = useNavigate(); */
+    /* const homeHandler = () => {
         navigate('/');
         console.log('-------------moving home-------------');
-    };
+    }; */
     /* jsxElements */
-    const userToggle = (
+    /* const userToggle = (
         <Box className={clsN(styles['mobile-menu'])}>
             <IconButton>
                 <LoginIcon fontSize="inherit" />
             </IconButton>
         </Box>
-    );
+    ); */
 
     // result
     return (
-        <Box className={styles['header']} component="header">
+        <Box className={styles.header} component="header">
             <AppBar className={clsN(styles['app-bar-nav'])} component="nav">
                 <NavMain
                     toolClsN={clsN(styles['app-bar-nav__tool-bar'])}
