@@ -1,13 +1,8 @@
 import React from 'react';
-import Layout from '@components/layout/Layout';
-import DeamHomePage from '../../pages/home/DeamHomePage';
+import DeamHomePage from '@pages/home/DeamHomePage';
 
 const DeamHome = () => {
-    return (
-        <Layout>
-            <DeamHomePage />
-        </Layout>
-    );
+    return <DeamHomePage />;
 };
 
 export default DeamHome;
