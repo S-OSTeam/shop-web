@@ -12,12 +12,12 @@ interface AdminTemplateProps {}
 const AdminTemplate = ({}: AdminTemplateProps) => {
     return (
         <Box component="div" className={clsN(styles.wrapper)}>
-            {/*<AsideNav
+            <AsideNav
                 className={clsN(styles['aside-nav'])}
                 listClsN={clsN()}
                 items={}
                 itemFactor={(item: AdminAsideListITF, index: number) => <ul></ul>}
-            />*/}
+            />
         </Box>
     );
 };
