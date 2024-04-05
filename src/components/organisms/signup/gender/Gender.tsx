@@ -1,7 +1,7 @@
 // eslint-disable
 
 import React, { useState } from 'react';
-import { Box, Divider, FormControl, FormLabel, Radio, RadioGroup } from '@mui/material';
+import { Box, Divider, FormControl, Radio, RadioGroup } from '@mui/material';
 
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import clsN from 'classnames';
@@ -19,12 +19,10 @@ const Gender = () => {
         <div>
             {isInMobile ? (
                 <Box className={clsN(`${style['gender-wrapper']}`)}>
-                    <FormControl>
-                        <FormLabel>
-                            <Divider variant="middle" textAlign="left">
-                                성별
-                            </Divider>
-                        </FormLabel>
+                    <Divider className={clsN(`${style['gender-wrapper__divider']}`)} variant="middle" textAlign="left">
+                        성별
+                    </Divider>
+                    <FormControl className={clsN(`${style['gender-wrapper__form-control']}`)}>
                         <RadioGroup
                             defaultValue="남성"
                             value={value}

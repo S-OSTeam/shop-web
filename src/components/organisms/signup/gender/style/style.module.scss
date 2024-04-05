@@ -1,16 +1,25 @@
 @import "index";
 
-
 // mobile version scss
-.gender-wrapper{
+.gender-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__form-control {
+    display: flex;
+    justify-content: flex-start;
+    width: 55%;
+  }
+
+  &__radio-group {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    &__radio-group{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-    }
+    flex-direction: row;
+  }
+
+  &__divider {
+    width: 55%;
+  }
 }
