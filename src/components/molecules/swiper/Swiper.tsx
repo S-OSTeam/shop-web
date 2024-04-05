@@ -34,7 +34,6 @@ interface CustomSwiperProps {
 }
 
 const Swiper = ({ ...props }: CustomSwiperProps) => {
-    const pagination = { clickable: true, };
     const autoPlay = { delay: props.delay, disableOnInteraction: false };
     return (
         <div>
