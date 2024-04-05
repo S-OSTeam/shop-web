@@ -10,27 +10,31 @@
 
   &__id, &__pwd, &__email {
     width: 50%;
-      margin: 8px;
+    margin: 8px;
   }
-  &__email-authentication-btn{
+
+  &__email-authentication-btn {
     // 그 프라이머리 텍스트 이런거 써서 변경해야함
     width: 50%;
     height: 50px;
-    font-size:20px;
+    font-size: 20px;
   }
-  &__divider{
+
+  &__divider {
     width: 55%;
-    margin:3%;
+    margin: 3%;
   }
 
 }
-.authentication-wrapper{
+
+.authentication-wrapper {
   width: 50%;
 
-  &__name{
+  &__name {
     margin: 3px;
   }
-  &__btn{
+
+  &__btn {
     width: 22%;
     height: 2.5rem;
     margin: 3px;

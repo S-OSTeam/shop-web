@@ -7,19 +7,23 @@ import Form from '@components/organisms/signup/form/Form';
 import Agreements from '@components/organisms/signup/agreements/Agreements';
 import Gender from '@components/organisms/signup/gender/Gender';
 import Button from '@components/atoms/button/Button';
+import clsN from 'classnames';
+import style from './style/style.module.scss';
 
 const SignUpForm = () => {
     const isInMobile = useDomSizeCheckHook(768);
     return (
         <Box>
             {isInMobile ? (
-                <Box>
+                <Box className={clsN(`${style['mobile-wrapper']}`)}>
                     <Text text="회원가입 " variant="subtitle1" align="center" />
                     <Form />
                     <Authentication />
                     <Gender />
                     <Agreements />
-                    <Button>회원가입</Button>
+                    <Box className={clsN(`${style['template-wrapper']}`)}>
+                        <Button className={clsN(`${style['template-wrapper__btn']}`)}>회원가입</Button>
+                    </Box>
                 </Box>
             ) : (
                 <Box>pc회원가입</Box>
