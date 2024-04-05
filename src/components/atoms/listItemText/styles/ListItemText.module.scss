@@ -1,0 +1,11 @@
+@import "index";
+.list{
+
+  &__container{
+
+  }
+  &__primary{
+    // @organism : faq
+    @extend .primary;
+  }
+}

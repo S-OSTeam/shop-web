@@ -46,3 +46,7 @@
   font-display: swap;
   src: url('../src/asset/fonts/PretendardVariable.woff2') format('woff2-variations');
 }
+
+*{
+  font-family: "Pretendard Variable", sans-serif !important;
+}
