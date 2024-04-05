@@ -12,7 +12,11 @@ const Agreements = () => {
         <div>
             {isInMobile ? (
                 <Box className={clsN(`${style['agreements-wrapper']}`)}>
-                    <Divider variant="middle" textAlign="center">
+                    <Divider
+                        variant="middle"
+                        textAlign="center"
+                        className={clsN(`${style['agreements-wrapper__divider']}`)}
+                    >
                         동의사항
                     </Divider>
                     <Box className={clsN(`${style['agreements-wrapper__checkbox-wrapper']}`)}>

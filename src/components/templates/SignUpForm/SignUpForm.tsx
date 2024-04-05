@@ -6,6 +6,7 @@ import Text from '@components/atoms/text/Text';
 import Form from '@components/organisms/signup/form/Form';
 import Agreements from '@components/organisms/signup/agreements/Agreements';
 import Gender from '@components/organisms/signup/gender/Gender';
+import Button from '@components/atoms/button/Button';
 
 const SignUpForm = () => {
     const isInMobile = useDomSizeCheckHook(768);
@@ -18,6 +19,7 @@ const SignUpForm = () => {
                     <Authentication />
                     <Gender />
                     <Agreements />
+                    <Button>회원가입</Button>
                 </Box>
             ) : (
                 <Box>pc회원가입</Box>

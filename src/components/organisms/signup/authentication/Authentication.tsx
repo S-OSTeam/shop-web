@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Divider, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
@@ -29,14 +29,6 @@ const Authentication = () => {
                         }}
                         placeholder="1900.00.00"
                     />
-                    <Divider variant="middle" textAlign="center">
-                        {/* <RadioGroup defaultValue="outlined" name="radio-buttons-group">
-                            <Radio value="outlined" />
-                            
-                            남자
-                            <Radio value="outlined" />
-                        </RadioGroup> */}
-                    </Divider>
                 </Box>
             ) : (
                 <Box>hello</Box>

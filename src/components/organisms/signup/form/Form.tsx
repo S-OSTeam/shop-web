@@ -46,9 +46,14 @@ const Form = () => {
                         />
                     ))}
 
-                    <Button>이메일 인증</Button>
-                    <Divider orientation="vertical" variant="middle" flexItem />
-                    <Box>
+                    <Button className={clsN(`${style['form-wrapper__email-authentication-btn']}`)}>이메일 인증</Button>
+                    <Divider
+                        className={clsN(`${style['form-wrapper__divider']}`)}
+                        orientation="horizontal"
+                        variant="middle"
+                    />
+
+                    <Box className={clsN(`${style['authentication-wrapper']}`)}>
                         <TextField
                             label="인증번호"
                             className={clsN(`${style['authentication-wrapper__name']}`)}
@@ -57,10 +62,17 @@ const Form = () => {
                                 shrink: true,
                             }}
                             placeholder="0000"
+                            inputProps={{
+                                style: { height: '10px' }, // input 요소에만 적용
+                            }}
                         />
-                        <Button>인증</Button>
+                        <Button className={clsN(`${style['authentication-wrapper__btn']}`)}>인증</Button>
                     </Box>
-                    <Divider orientation="vertical" variant="middle" flexItem />
+                    <Divider
+                        className={clsN(`${style['form-wrapper__divider']}`)}
+                        orientation="horizontal"
+                        variant="middle"
+                    />
                 </Box>
             ) : (
                 <Box>helloPC</Box>

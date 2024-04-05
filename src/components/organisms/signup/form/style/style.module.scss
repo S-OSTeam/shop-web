@@ -2,9 +2,37 @@
 
 
 // mobile version scss
-.form-wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.form-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__id, &__pwd, &__email {
+    width: 50%;
+      margin: 8px;
+  }
+  &__email-authentication-btn{
+    // 그 프라이머리 텍스트 이런거 써서 변경해야함
+    width: 50%;
+    height: 50px;
+    font-size:20px;
+  }
+  &__divider{
+    width: 55%;
+    margin:3%;
+  }
+
+}
+.authentication-wrapper{
+  width: 50%;
+
+  &__name{
+    margin: 3px;
+  }
+  &__btn{
+    width: 22%;
+    height: 2.5rem;
+    margin: 3px;
+  }
 }

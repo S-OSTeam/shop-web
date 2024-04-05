@@ -1,6 +1,6 @@
 // eslint-disable
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Divider, FormControl, FormLabel, Radio, RadioGroup } from '@mui/material';
 
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
@@ -9,7 +9,7 @@ import style from './style/style.module.scss';
 
 const Gender = () => {
     const isInMobile = useDomSizeCheckHook(768);
-    const [value, setValue] = React.useState('female');
+    const [value, setValue] = useState('female');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);

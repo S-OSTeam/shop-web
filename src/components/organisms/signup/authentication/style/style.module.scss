@@ -5,4 +5,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    &__name,&__birth{
+        width: 50%;
+        margin: 5px;
+    }
 }

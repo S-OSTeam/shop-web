@@ -1,0 +1,11 @@
+@import "index";
+
+.agreements-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &__divider{
+    width: 60%;
+  }
+}
