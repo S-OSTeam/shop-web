@@ -21,15 +21,24 @@ interface PopularProps {
 /**
  *
  * @param popularItems 아이템의 태그 받을거 포함(Tags로 string배열로 예상)
+ * 인기상품 뿐만 아니라 신규상품 까지 같은 탬플릿을 사용해서 재활용 하였다.
  * @param content
  * @constructor
  */
 const Popular = ({ popularItems, content }: PopularProps) => {
     const testTags: string[] = ['무료배송', '특가'];
+
+    /**
+     * 여러가지 받은 태그를 map형태로 리턴 해준다.
+     */
     const tags = () => {
         return testTags.map((tag) => <Chip className={clsN(styles['popular-wrapper__tag'])} label={tag} />);
     };
 
+    /**
+     * @param price
+     * price값을 받으면 한국식 화페 단위로 포멧을 변경 후에 TextGroup에 넘겨줄 string배열값을 리턴해준다.
+     */
     const priceFormat = (price: string) => {
         const numericPrice = parseFloat(price);
         const priceStr: string[] = [];
@@ -40,6 +49,10 @@ const Popular = ({ popularItems, content }: PopularProps) => {
         return priceStr;
     };
 
+    /**
+     * @param review
+     * review값을 인자로 받아 ReactNode배열 타입의 변수인 reviewStr에 해당 평점을 포멧해주고서 해당 배열을 리턴해준다.
+     */
     const reviewFormat = (review: number) => {
         const reviewStr: React.ReactNode[] = [];
 

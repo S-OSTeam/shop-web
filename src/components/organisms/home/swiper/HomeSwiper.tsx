@@ -11,8 +11,13 @@ interface HomeSwiperProps {
     swiperItem: Item[];
 }
 
+/**
+ *
+ * @param swiperItem
+ * @constructor
+ */
 const HomeSwiper = ({ swiperItem }: HomeSwiperProps) => {
-    /*
+    /**
      * custom pagination
      * -pagination option-
      * clickable: pagination을 마우스로 이동 시킬 필요 없이 클릭 시 해당 슬라이드로 이동 가능
@@ -39,6 +44,9 @@ const HomeSwiper = ({ swiperItem }: HomeSwiperProps) => {
         },
     };
 
+    /**
+     * Swiper에 출력되는 item들의 값에서 image의 맨 처음만 리턴 해주는 함수
+     */
     const items = swiperItem.map((item) => {
         return item.imageUrls[0];
     });

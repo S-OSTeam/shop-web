@@ -7,8 +7,8 @@ import { itemResponse } from '@util/test/data/ItemResponse';
 import styles from './styles/Pick.module.scss';
 
 const Pick = () => {
-    const heights: number[] = [419, 203, 203];
-    const images: string[] = [
+    const testHeights: number[] = [419, 203, 203];
+    const testImages: string[] = [
         `${itemResponse[11].imageUrls[0]}`,
         `${itemResponse[12].imageUrls[0]}`,
         `${itemResponse[13].imageUrls[0]}`,
@@ -19,10 +19,10 @@ const Pick = () => {
             <Box className={clsN(styles['pick-wrapper__items'])}>
                 <Masonry
                     imgClsN={clsN(styles['pick-wrapper__img'])}
-                    heights={heights}
+                    heights={testHeights}
                     columns={2}
                     spacing={2}
-                    images={images}
+                    images={testImages}
                 />
             </Box>
         </Box>

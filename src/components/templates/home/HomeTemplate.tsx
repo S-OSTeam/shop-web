@@ -19,7 +19,7 @@ const HomeTemplate = () => {
             <HomeSwiper swiperItem={items} />
             <Box className={clsN(styles['home-product'])}>
                 <Recommend recommendItem={items} />
-                <Event />
+                <Event eventItem={items} />
                 <Popular popularItems={items} content="월간 인기 상품" />
                 <Pick />
                 <Popular popularItems={items} content="신규 상품" />
