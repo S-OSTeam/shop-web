@@ -16,7 +16,12 @@ const SignUpForm = () => {
         <Box>
             {isInMobile ? (
                 <Box className={clsN(`${style['mobile-wrapper']}`)}>
-                    <Text text="회원가입 " variant="subtitle1" align="center" />
+                    <Text
+                        text="회원가입 "
+                        variant="subtitle1"
+                        align="center"
+                        className={clsN(`${style['mobile-wrapper__title']}`)}
+                    />
                     <Form />
                     <Authentication />
                     <Gender />

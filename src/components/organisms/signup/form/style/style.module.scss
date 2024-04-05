@@ -14,7 +14,9 @@
   }
 
   &__email-authentication-btn {
-    // 그 프라이머리 텍스트 이런거 써서 변경해야함
+    background-color: $primary-color;
+    color: $basic-font-color;
+    font-weight: bold;
     width: 50%;
     height: 50px;
     font-size: $title-font-size-S;
@@ -35,6 +37,9 @@
   }
 
   &__btn {
+    background-color: $primary-color;
+    color: $basic-font-color;
+    font-weight: bold;
     width: 22%;
     height: 2.5rem;
     margin: 3px;
