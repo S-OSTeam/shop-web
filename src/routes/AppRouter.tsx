@@ -1,17 +1,21 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import CustomerService from '@routes/cs/CustomerService';
-import AdminPage from '@pages/admin/AdminPage';
 import DeamHome from '@pages/home/DeamHomePage';
 import Product from '@pages/product/ProductPage';
+import Header from '@components/layout/header/Header';
+import CustomerServicePage from '@pages/cs/CustomerServicePage';
+import AdminPage from '@pages/admin/AdminPage';
 
 export const AppRouter = () => {
     return (
-        <Routes>
-            <Route path="/" element={<DeamHome />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/cs" element={<CustomerService />} />
-            <Route path="/admin" element={<AdminPage />} />
-        </Routes>
+        <div>
+            <Header />
+            <Routes>
+                <Route path="/" element={<DeamHome />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/support" element={<CustomerServicePage />} />
+                <Route path="/manager" element={<AdminPage />} />
+            </Routes>
+        </div>
     );
 };
