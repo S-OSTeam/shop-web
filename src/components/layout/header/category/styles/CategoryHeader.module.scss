@@ -23,7 +23,8 @@
 
         // collapse icons on/off
         &__icon {
-          font-size: 24px;
+          @include font-size(subtitle1);
+          padding-left: 8px;
         }
 
         // 2depth wrapper
@@ -59,6 +60,7 @@
 
 .list-wrapper {
   &__parent-category{
+    width: 100%;
     &__btn {
       display: flex;
       flex-direction: row;
@@ -68,7 +70,8 @@
       }
 
       &__icon {
-
+        @include font-size(subtitle1);
+        padding-left: 8px;
       }
 
       &__collapse {
@@ -85,8 +88,8 @@
 }
 
 
-
-@include mobile {
+// 300px
+@include media-breakpoint-up(xxs) {
   .list-wrapper {
     padding-right: 0;
     &__parent-category {
@@ -94,7 +97,6 @@
         &__title {
         }
         &__icon {
-          width: 20%;
         }
         &__collapse {
           width: 96%;
@@ -107,16 +109,19 @@
   }
 
 }
+// 360px
+@include media-breakpoint-up(xs){
 
-// 모바일 가로, 테블릿 세로: 480px ~ 768px
-@include tablet {
+}
+
+// 480
+@include media-breakpoint-up(sm) {
   //리스트들 보여주는 부분
   .list-wrapper {
     &__parent-category {
 
       &__btn{
         &__icon {
-          width: 20%;
         }
         &__collapse {
           width: 96%;
@@ -128,25 +133,31 @@
 
 }
 
-// 테블릿 가로, 랩탑: 768px ~ 1024px
-@include laptop {
+@include media-breakpoint-up(md) {
   .list-wrapper {
     &__parent-category {
+
       &__btn{
         &__icon {
-          width: 20%;
         }
       }
     }
   }
 }
 
-// 데스크탑: 1024px ~ 1280px
-@include desktop {
+// 980
+@include media-breakpoint-up(lg) {
+
+
   @include set-desk(#{$primary-color});
 }
 
-// 데스크탑 이상 1279px~
-@include desktop-large {
+// 1024
+@include media-breakpoint-up(xl)  {
+  @include set-desk(#{$primary-color});
+}
+
+// 1400
+@include media-breakpoint-up(xxl)  {
   @include set-desk(#{$primary-color});
 }

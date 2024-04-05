@@ -1,7 +1,11 @@
-// _ : 변수 저장 파일 '_' 언더바로 사직하는 파일은 파일 단위로 분리되어 컴파일 되지 않는다.
-// $: 변수 선언
+/*
+* _ : 변수 저장 파일 '_' 언더바로 사직하는 파일은 파일 단위로 분리되어 컴파일 되지 않는다.
+* $: 변수 선언
+*/
 
-// 디스플레이별 브레이크 포인트
+/*
+디스플레이별 브레이크 포인트 - 구버전, $grid-breakpoints 규격으로 통일
+*/
 
 // 모바일(수직 minimum)
 $breakpoint-mobile-mini: 320px;
@@ -82,6 +86,24 @@ $white-color: #FFFFFF;
 $gray-color: #D9D9D9;
 $floaral-color: #F7F4EA;
 $black-gray-color: #7A7A7A;
+
+// --- PAGE FAQ ---
+
+// BG 뒷배경
+$background-white: #FFFFFF;
+$background-ghostwhite: #E8E8E8;
+$background-skyblue: #b5d1ff;
+$background-cornflowerblue: #5981BE;
+$background-dimgray: #585858;
+$background-darkslategray: #3F4756;
+$background-darkgray: #2F2F2F;
+
+// FC 글꼴 색상
+$color-text-black: #000000;
+$color-text-white: #ffffff;
+$color-text-dimgray: #585858;
+$color-text-cornflowerblue: #5981BE;
+$color-text-darkblue: #1855B4;
 
 // --- PAGE FAQ ---
 

@@ -1,15 +1,8 @@
 @import 'variables';
 
-/*
-  mixin 은 함수처럼 다른곳에서 사용할 수 있음
-  재사용성이 좋고 모듈화가 가능
-*/
+/* mixin 은 함수처럼 다른곳에서 사용할 수 있음 재사용성이 좋고 모듈화가 가능 */
 
-/*
-  mixin 과의 차이점은 mixin 은 스타일 마크업을 반환하지만,
-  function 은 @return 를 통하여 값 을 반환한다
-  function 을 선언 할 때는, @function 를 사용
-*/
+/* mixin 과의 차이점은 mixin 은 스타일 마크업을 반환하지만, function 은 @return 를 통하여 값 을 반환한다. function 을 선언 할 때는, @function 를 사용 */
 
 @mixin round($radius: 3px) {
   border-radius: $radius;
