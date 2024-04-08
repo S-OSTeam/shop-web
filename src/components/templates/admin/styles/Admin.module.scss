@@ -1,10 +1,84 @@
 @import "index";
 
 // 메인 래퍼
-.wrapper{
+.wrapper {
+  display: flex;
+}
+
+// 사이드 네비
+.aside-nav {
+  list-style-type: none;
+  background-color: $background-darkslategray;
+  height: 100vh;
+  // 첫번째 링크 감싸는 영역
+  &__linker {
+    // 버튼
+    &__button{
+      color: white;
+    }
+  }
+}
+
+// 2차 ul
+.inner {
+  transition: 0.3s ease;
+  &__link {
+    // 통일 영역
+    &__common{
+      color: white;
+      *{
+        color: white;
+      }
+    }
+    // 텍스트
+    &__primary{
+
+    }
+    // 버튼
+    &__button{
+    }
+    // 아이콘
+    &__button{
+
+    }
+  }
+}
+
+// 링크 영역
+.link-first {
+}
+
+.link-second {
+}
+
+
+@include media-breakpoint-up(xxs) {
 
 }
-// 사이드 네비
-.aside-nav{
 
+@include media-breakpoint-up(md) {
+  // 사이드 네비
+  .aside-nav {
+
+  }
+  // ul 영역
+  .nav-ul {
+
+    &__li {
+
+      &:hover .depth-ul {
+      }
+
+      &__link {
+      }
+    }
+  }
+  // 2차 ul
+  .depth-ul {
+    &__li {
+      &__link {
+
+      }
+    }
+  }
 }

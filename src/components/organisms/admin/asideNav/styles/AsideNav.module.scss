@@ -1,0 +1,21 @@
+/* 헤더 높이 전역변수 정하기 */
+.nav{
+  box-sizing: border-box;
+  &__logo{
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    height: 50px;
+    margin: 0;
+    span{
+
+      width: 100%;
+      box-sizing: border-box;
+      color: white;
+    }
+  }
+  &__ul{
+
+  }
+}
