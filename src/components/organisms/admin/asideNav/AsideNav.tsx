@@ -1,6 +1,7 @@
-/* eslint-disable */
 import React from 'react';
 import { Box } from '@mui/material';
+import clsN from 'classnames';
+import styles from './styles/AsideNav.module.scss';
 
 /**
  * 제너릭으로 받아 처리하기
@@ -10,19 +11,36 @@ interface AsideNavProps<T> {
     // asideNav 클래스명
     className?: string;
     // ul 클래스명
-    listClsN?: string;
+    listWrapperClsN?: string;
     // 라우트 컨텐츠
     items: T[];
     // 랜더하는 과정
     itemFactor: (item: T, index: number) => React.ReactNode;
 }
 
-const AsideNav = <T,>({ className, listClsN, items, itemFactor }: AsideNavProps<T>) => {
+const AsideNav = <T, >(
+    {
+        className,
+        listWrapperClsN,
+        items,
+        itemFactor,
+    }: AsideNavProps<T>,
+) => {
     // 상수 처리
     const ItemTemp = items.map((item: T, idx: number) => {
         // 제너릭 타입 받아서 처리
         return itemFactor(item, idx);
     });
-    return <Box component="nav">{ItemTemp}</Box>;
+    return (
+        <Box component='nav' className={clsN(className, styles.nav)}>
+            <p className={clsN(styles.nav__logo)}>
+                <span>
+                    DeamHome
+                </span>
+            </p>
+            <Box component='div' className={clsN(listWrapperClsN, styles.nav__ul)}>
+                {ItemTemp}
+            </Box>
+        </Box>);
 };
 export default AsideNav;
