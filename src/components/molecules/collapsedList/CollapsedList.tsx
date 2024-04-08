@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { Box } from '@mui/material';
 import ListItemButton from '@atoms/listItemButton/ListItemButton';
@@ -15,7 +16,6 @@ interface CollapsedListProps {
     className?: string;
     // 첫번째리스트 버튼 클래스명
     listBtnClsN?: string;
-
     // 아이콘 클래스명
     listIconClsN?: string;
     // 콜랩스 클래스명
@@ -27,7 +27,9 @@ interface CollapsedListProps {
     // 체크 속성
     isOpen?: boolean;
     // 클릭 이벤트
-    onClick?:  React.MouseEventHandler<HTMLDivElement>;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    // 리스트 primary 텍스트 클릭 이벤트
+    onPrimaryClick?: ()=> void;
     // 콜랩스 내부 컨텐츠
     innerChildren: React.ReactNode;
     // 콜랩스 내부 리스트 클래스 명
@@ -51,7 +53,8 @@ const CollapsedList = (
         innerChildren,
         collClsN,
         collListClsN,
-        listItemRootClsN
+        listItemRootClsN,
+        onPrimaryClick
     }:CollapsedListProps
 ) => {
 
