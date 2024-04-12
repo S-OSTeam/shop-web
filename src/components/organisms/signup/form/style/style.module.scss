@@ -9,7 +9,7 @@
   flex-direction: column;
 
   &__id, &__pwd, &__email {
-    width: 50%;
+    width: 70%;
     margin: 8px;
   }
 
@@ -17,23 +17,24 @@
     background-color: $primary-color;
     color: $basic-font-color;
     font-weight: bold;
-    width: 50%;
+    width: 70%;
     height: 50px;
     font-size: $title-font-size-S;
   }
 
   &__divider {
-    width: 55%;
+    width: 75%;
     margin: 3%;
   }
 
 }
 
 .authentication-wrapper {
-  width: 50%;
+  width: 70%;
 
   &__name {
     margin: 3px;
+    width: 70%;
   }
 
   &__btn {
