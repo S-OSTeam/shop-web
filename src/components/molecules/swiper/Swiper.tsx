@@ -31,6 +31,7 @@ interface CustomSwiperProps {
     isLoop?: boolean; // loop 사용 여부
     delay?: number; // auto play 사용 시 delay
     breakpoints?: { [width: number]: SwiperOptions; [ratio: string]: SwiperOptions } | boolean;
+    centeredSlides?: boolean;
 }
 
 const Swiper = ({ ...props }: CustomSwiperProps) => {
@@ -50,6 +51,7 @@ const Swiper = ({ ...props }: CustomSwiperProps) => {
                 modules={[Pagination, Navigation, Autoplay, FreeMode]}
                 onSlideChange={props.onChange}
                 breakpoints={props.breakpoints}
+                centeredSlides={props.centeredSlides}
             >
                 {props.items.map((imgPath, index) => (
                     // eslint-disable-next-line react/no-array-index-key
@@ -84,6 +86,7 @@ Swiper.propTypes = {
     isLoop: PropTypes.bool,
     delay: PropTypes.number,
     breakpoints: PropTypes.bool,
+    centeredSlides: PropTypes.bool,
 };
 
 Swiper.defaultProps = {
@@ -102,6 +105,7 @@ Swiper.defaultProps = {
     isLoop: true,
     delay: 5000,
     breakpoints: false,
+    centeredSlides: false,
 };
 
 export default Swiper;

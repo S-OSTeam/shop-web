@@ -53,7 +53,7 @@ const HomeSwiper = ({ swiperItem }: HomeSwiperProps) => {
 
     return (
         <Box className={clsN(styles['home-swiper'])}>
-            <Swiper isPagination={pagination} items={items} />
+            <Swiper isPagination={pagination} items={items} isAutoPlay delay={5000} />
         </Box>
     );
 };
