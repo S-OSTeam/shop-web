@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import CustomerService from '@routes/cs/CustomerService';
-import AdminPage from '@pages/admin/AdminPage';
 import DeamHome from '@pages/home/DeamHomePage';
 import Product from '@pages/product/ProductPage';
 import Header from '@components/layout/header/Header';
+import CustomerServicePage from '@pages/cs/CustomerServicePage';
+import AdminPage from '@pages/admin/AdminPage';
 import Login from './login/Login';
 import SignUp from './signup/Signup';
+
 
 
 export const AppRouter = () => {
@@ -16,7 +17,7 @@ export const AppRouter = () => {
     const currentLocation = useLocation();
     // 특정 경로당 컴포넌트 렌더 처리하기
     const headerProvider = () => {
-        if(currentLocation.pathname === '/manager'){
+        if((currentLocation.pathname).includes('/manager')){
             return null;
         }
         return <Header />
@@ -30,7 +31,7 @@ export const AppRouter = () => {
                 <Route path="/product" element={<Product />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
-                <Route path="/cs" element={<CustomerService />} />
+                <Route path="/cs" element={<CustomerServicePage />} />
                 <Route path="/admin" element={<AdminPage />} />
             </Routes>
         </div>

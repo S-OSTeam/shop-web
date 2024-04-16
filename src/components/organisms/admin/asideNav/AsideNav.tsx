@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, List } from '@mui/material';
 import clsN from 'classnames';
 import styles from './styles/AsideNav.module.scss';
 
@@ -16,6 +16,8 @@ interface AsideNavProps<T> {
     items: T[];
     // 랜더하는 과정
     itemFactor: (item: T, index: number) => React.ReactNode;
+    // 호버 애니메이션 클래스명
+    hoverClsN?: string;
 }
 
 const AsideNav = <T, >(
@@ -24,6 +26,7 @@ const AsideNav = <T, >(
         listWrapperClsN,
         items,
         itemFactor,
+        hoverClsN
     }: AsideNavProps<T>,
 ) => {
     // 상수 처리
@@ -38,9 +41,10 @@ const AsideNav = <T, >(
                     DeamHome
                 </span>
             </p>
-            <Box component='div' className={clsN(listWrapperClsN, styles.nav__ul)}>
+            <List component='div' className={clsN(listWrapperClsN, styles.nav__ul)}>
                 {ItemTemp}
-            </Box>
+                <div className={clsN(styles.hover, hoverClsN)}/>
+            </List>
         </Box>);
 };
 export default AsideNav;
