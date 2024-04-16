@@ -6,6 +6,7 @@ import Header from '@components/layout/header/Header';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import AdminPage from '@pages/admin/AdminPage';
 import Login from '@pages/login/LoginPage';
+import Dashboard from '@pages/manager/dashboard/Dashboard';
 
 export const AppRouter = () => {
     // React Router 가 제공하는 useLocation 훅을 사용해서 조건부 랜더링하기
@@ -14,7 +15,7 @@ export const AppRouter = () => {
     const currentLocation = useLocation();
     // 특정 경로당 컴포넌트 렌더 처리하기
     const headerProvider = () => {
-        if(currentLocation.pathname === '/manager'){
+        if((currentLocation.pathname).includes('/manager')){
             return null;
         }
         return <Header />
@@ -29,6 +30,10 @@ export const AppRouter = () => {
                 <Route path="/support" element={<CustomerServicePage />} />
                 <Route path="/manager" element={<AdminPage />} />
                 <Route path="/login" element={<Login />} />
+
+                {/* 관리자 페이지 */}
+                <Route path="/manager/main" element={<AdminPage />}/>
+                <Route path="/manager/dashboard" element={<Dashboard/>} />
             </Routes>
         </div>
     );

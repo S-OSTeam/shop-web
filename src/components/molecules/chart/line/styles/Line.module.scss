@@ -1,0 +1,8 @@
+@import "index";
+.wrapper{
+  box-sizing: border-box;
+
+  &__grid{
+    box-sizing: border-box;
+  }
+}
