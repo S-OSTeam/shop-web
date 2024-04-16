@@ -1,0 +1,10 @@
+@import "index";
+
+.this{
+  color: black;
+  &__red{
+    &:hover{
+      background-color: red;
+    }
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { itemResponse } from '@util/test/data/ItemResponse';
 import { Box } from '@mui/material';
 import Swiper from '@molecules/swiper/Swiper';
+import Exaple from '@atoms/example/Exaple';
 
 const DeamHomePage = () => {
     const datas = itemResponse.map((item) => {
@@ -11,6 +12,7 @@ const DeamHomePage = () => {
         <div>
             <Box component="div">
                 <Swiper items={datas} isPagination isNavigation isAutoPlay />
+                <Exaple isBackBgn>hi</Exaple>
             </Box>
         </div>
     );

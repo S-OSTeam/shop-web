@@ -158,6 +158,7 @@ const SearchBarAuto = (
                 groupUl: clsN(styles['autocomplete__group-ul']),
                 groupLabel: clsN(styles['autocomplete__group-ul']),
                 inputRoot: clsN(inputClsN, styles['autocomplete__input'])
+
             }}
             options={options}
             onSubmit={onSubmit}

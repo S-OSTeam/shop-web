@@ -53,7 +53,7 @@ Swiper.propTypes = {
     className: PropTypes.string,
     slideClsN: PropTypes.string,
     imgClsN: PropTypes.string,
-    items: PropTypes.arrayOf(PropTypes.string),
+    items: PropTypes.arrayOf(PropTypes.string).isRequired,
     alt: PropTypes.string,
     onChange: PropTypes.func,
     spaceBetween: PropTypes.number,
