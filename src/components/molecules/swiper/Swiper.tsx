@@ -5,9 +5,7 @@ import ImageButton from '@molecules/button/imageButton/ImageButton';
 import { PaginationOptions } from 'swiper/types/modules/pagination';
 import { NavigationOptions } from 'swiper/types/modules/navigation';
 import { SwiperOptions } from 'swiper/types/swiper-options';
-import PropTypes from 'prop-types';
 import clsN from 'classnames';
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -67,25 +65,6 @@ const Swiper = ({ ...props }: CustomSwiperProps) => {
             </CustomSwiper>
         </div>
     );
-};
-
-Swiper.propTypes = {
-    className: PropTypes.string,
-    slideClsN: PropTypes.string,
-    btnClsN: PropTypes.string,
-    imgClsN: PropTypes.string,
-    alt: PropTypes.string,
-    onSlideChange: PropTypes.func,
-    spaceBetween: PropTypes.number,
-    slidesPerView: PropTypes.number,
-    isNavigation: PropTypes.bool,
-    isPagination: PropTypes.bool,
-    isAutoPlay: PropTypes.bool,
-    isFreeMode: PropTypes.bool,
-    isLoop: PropTypes.bool,
-    delay: PropTypes.number,
-    breakpoints: PropTypes.bool,
-    centeredSlides: PropTypes.bool,
 };
 
 Swiper.defaultProps = {

@@ -126,7 +126,6 @@ const FaqSearch = (
                 modules={[FreeMode]}
                 items={itemResponse}
                 spaceBetween={8}
-
                 breakpoints={
                     {
                         320: {
