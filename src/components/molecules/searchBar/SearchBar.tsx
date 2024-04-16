@@ -36,7 +36,10 @@ const SearchBar = (
     return (
         <Paper
             component='form'
-            className={clsN(wrapperClsN, styles.wrapper)}
+            classes={{
+                root: clsN(wrapperClsN, styles.wrapper),
+
+            }}
         >
             <Input
                 className={clsN(inputClsN, styles.wrapper__input)}
