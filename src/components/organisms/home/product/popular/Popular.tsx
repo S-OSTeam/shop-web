@@ -77,16 +77,20 @@ const Popular = ({ popularItems, content }: PopularProps) => {
                         imgPath={item.imageUrls[0]}
                     >
                         {tags()}
-                        <Title className={clsN(styles['popular-wrapper__card-title'])} content={item.title} />
-                        <Title className={clsN(styles['popular-wrapper__card-info'])} content={item.content} />
-                        <TextGroup
-                            className={clsN(styles['popular-wrapper__card-price'])}
-                            textGroup={priceFormat(item.price.toString())}
-                        />
-                        <IconGroup
-                            className={clsN(styles['popular-wrapper__card-review'])}
-                            IconGroups={reviewFormat(item.reviewCnt)}
-                        />
+                        <Box className={clsN(styles['popular-wrapper__popular-info'])}>
+                            <Title className={clsN(styles['popular-wrapper__card-title'])} content={item.title} />
+                            <Title className={clsN(styles['popular-wrapper__card-info'])} content={item.content} />
+                        </Box>
+                        <Box className={clsN(styles['popular-wrapper__popular-review'])}>
+                            <TextGroup
+                                className={clsN(styles['popular-wrapper__card-price'])}
+                                textGroup={priceFormat(item.price.toString())}
+                            />
+                            <IconGroup
+                                className={clsN(styles['popular-wrapper__card-review'])}
+                                IconGroups={reviewFormat(item.reviewCnt)}
+                            />
+                        </Box>
                     </Card>
                 ))}
             </Box>

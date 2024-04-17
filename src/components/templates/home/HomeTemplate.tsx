@@ -9,12 +9,15 @@ import Popular from '@organisms/home/product/popular/Popular';
 import Pick from '@organisms/home/product/pick/Pick';
 import ReviewList from '@organisms/home/Review/ReviewList';
 import { ReviewResponse } from '@util/test/data/ReviewResponse';
-import { itemResponse } from '@util/test/data/ItemResponse';
+import { itemResponse, swiperResponse } from '@util/test/data/ItemResponse';
 import { EventInfoResponse } from '@util/test/data/EventResponse';
 import styles from './styles/HomeTemplate.module.scss';
 
 const HomeTemplate = () => {
     const items = itemResponse.map((item) => {
+        return item;
+    });
+    const swiperitems = swiperResponse.map((item) => {
         return item;
     });
 
@@ -38,9 +41,9 @@ const HomeTemplate = () => {
 
     return (
         <Box className={clsN(styles.home)}>
-            <HomeSwiper swiperItem={items} />
+            <HomeSwiper swiperItem={swiperitems} />
             <Box className={clsN(styles['home-product'])}>
-                <Recommend recommendItem={items} />
+                <Recommend recommendItem={swiperitems} />
                 <Event eventItem={eventItems} />
                 <Popular popularItems={items} content="월간 인기 상품" />
                 <Pick />
