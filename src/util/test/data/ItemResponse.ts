@@ -56,7 +56,11 @@ export const itemResponse = [
         status: false,
         sellerId: '판매완료',
         freeDelivery: false,
-        imageUrls: ['https://comics-art.co.kr/web/product/big/202403/fcd601b0f1f0d3fe2b586a9a9837e379.jpg'],
+        imageUrls: [
+            'https://comics-art.co.kr/web/product/big/202403/fcd601b0f1f0d3fe2b586a9a9837e379.jpg',
+            'https://toyntech.wisacdn.com/_data/product/item/1530680763/9e3d6d0e959789c163170b4420b1798e.jpg',
+            'https://toyntech.wisacdn.com/_data/product/item/1530680763/b437ae38ff57019b8a4543d1ed5167b0.jpg',
+        ],
     },
     {
         publicId: 4,

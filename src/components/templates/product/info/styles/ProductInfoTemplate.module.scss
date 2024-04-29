@@ -1,0 +1,38 @@
+@import "index";
+
+.product-info-wrapper{
+  margin-top: 65px;
+}
+
+// 360px ~ mini-mobile
+@include media-breakpoint-up(xs){
+  .product-info-wrapper{
+    margin-top: 56px;
+  }
+}
+
+// 480px ~ mobile
+@include media-breakpoint-up(sm) {
+  .product-info-wrapper{
+    margin-top: 56px;
+  }
+}
+
+// 768px ~ tablet
+@include media-breakpoint-up(md) {
+  .product-info-wrapper{
+    margin-top: 65px;
+  }
+}
+
+// 980px ~ laptop
+@include media-breakpoint-up(lg) {
+}
+
+// 1024 ~ pc
+@include media-breakpoint-up(xl) {
+}
+
+// 1400px
+@include media-breakpoint-up(xxl) {
+}

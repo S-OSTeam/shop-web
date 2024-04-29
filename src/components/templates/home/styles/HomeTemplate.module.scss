@@ -35,8 +35,32 @@
   }
 }
 
-/*나중에 tablet로 바꿔야됨 아직 scss 머지 x*/
-@include laptop{
+// 360px ~ mini-mobile
+@include media-breakpoint-up(xs){
+  .home{
+    margin-top: 56px;
+    margin-bottom: 26px;
+  }
+
+  .home-product{
+    margin: 12px 0 0 0;
+  }
+}
+
+// 480px ~ mobile
+@include media-breakpoint-up(sm) {
+  .home{
+    margin-top: 56px;
+    margin-bottom: 26px;
+  }
+
+  .home-product{
+    margin: 12px 0 0 0;
+  }
+}
+
+// 768px ~ tablet
+@include media-breakpoint-up(md) {
   .home{
     margin-top: 65px;
     margin-bottom: 26px;
@@ -47,14 +71,14 @@
   }
 }
 
-/*나중에 mobile로 바꿔야됨 아직 scss 머지 x*/
-@include tablet{
-  .home{
-    margin-top: 65px;
-    margin-bottom: 26px;
-  }
+// 980px ~ laptop
+@include media-breakpoint-up(lg) {
+}
 
-  .home-product{
-    margin: 12px 0 0 0;
-  }
+// 1024 ~ pc
+@include media-breakpoint-up(xl) {
+}
+
+// 1400px
+@include media-breakpoint-up(xxl) {
 }

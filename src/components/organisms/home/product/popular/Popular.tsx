@@ -10,6 +10,7 @@ import IconGroup from '@molecules/icon/IconGroup';
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { useNavigate } from 'react-router-dom';
 import { Item } from '@util/test/interface/Item';
 import styles from './styles/Popular.module.scss';
 
@@ -27,6 +28,7 @@ interface PopularProps {
  */
 const Popular = ({ popularItems, content }: PopularProps) => {
     const testTags: string[] = ['무료배송', '특가'];
+    const navigation = useNavigate();
 
     /**
      * 여러가지 받은 태그를 map형태로 리턴 해준다.
@@ -65,6 +67,14 @@ const Popular = ({ popularItems, content }: PopularProps) => {
         return reviewStr;
     };
 
+    const selectProduct = (item: Item) => {
+        navigation('/product', {
+            state: {
+                productItem: item,
+            },
+        });
+    };
+
     return (
         <Box className={clsN(styles['popular-wrapper'])}>
             <Text className={clsN(styles['popular-wrapper__title'])} text={content} />
@@ -75,6 +85,7 @@ const Popular = ({ popularItems, content }: PopularProps) => {
                         imgClsN={clsN(styles['popular-wrapper__card-media'])}
                         contentClsN={clsN(styles['popular-wrapper__card-content'])}
                         imgPath={item.imageUrls[0]}
+                        onClick={() => selectProduct && selectProduct(item)}
                     >
                         {tags()}
                         <Box className={clsN(styles['popular-wrapper__popular-info'])}>
