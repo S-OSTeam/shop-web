@@ -8,17 +8,18 @@ import Header from '@components/layout/header/Header';
 import Login from './login/Login';
 import SignUp from './signup/Signup';
 
-
 export const AppRouter = () => {
     return (
-        <Routes>
+        <div>
             <Header />
-            <Route path="/" element={<DeamHome />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/cs" element={<CustomerService/>} />
-            <Route path="/admin" element={<AdminPage />} />
-        </Routes>
+            <Routes>
+                <Route path="/" element={<DeamHome />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/cs" element={<CustomerService />} />
+                <Route path="/admin" element={<AdminPage />} />
+            </Routes>
+        </div>
     );
 };
