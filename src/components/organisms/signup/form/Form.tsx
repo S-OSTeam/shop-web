@@ -1,14 +1,29 @@
 // eslint-disable
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Divider, TextField } from '@mui/material';
 // import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import clsN from 'classnames';
+
 import Button from '@components/atoms/button/Button';
 import style from './style/style.module.scss';
 
 const Form = () => {
     // const isInMobile = useDomSizeCheckHook(768);
+    const [timeLeft, setTimeLeft] = useState(150);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (timeLeft > 0) {
+                setTimeLeft(timeLeft - 1);
+            }
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [timeLeft]);
+    const renderTimer = () => {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    };
 
     const textFieldsData = [
         { label: '아이디', className: style['form-wrapper__id'], id: 'outlined-required', placeholder: '아이디' },
@@ -59,6 +74,7 @@ const Form = () => {
                         style: { height: '1rem' }, // input 요소에만 적용
                     }}
                 />
+                <Box className={clsN(`${style['authentication-wrapper__timer']}`)}> {renderTimer()}</Box>
                 <Button className={clsN(`${style['authentication-wrapper__btn']}`)}>인증</Button>
             </Box>
             <Divider className={clsN(`${style['form-wrapper__divider']}`)} orientation="horizontal" variant="middle" />
