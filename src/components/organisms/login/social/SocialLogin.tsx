@@ -3,7 +3,7 @@ import { Box, Divider } from '@mui/material';
 import { ReactComponent as Logo } from '@asset/image/logo/Logo.svg';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import Text from '@components/atoms/text/Text';
-import ImageButton from '@components/molecules/button/imageButton/ImageButton';
+// import ImageButton from '@components/molecules/button/imageButton/ImageButton';
 import clsN from 'classnames';
 
 import ImgTextButton from '@components/molecules/button/imgTextButton/ImgTextButton';
@@ -67,20 +67,6 @@ const SocialLogin = () => {
                             className={clsN(`${style['social-login-wrapper__title']}`)}
                             align="center"
                         />
-                        <Box className={clsN(`${style['social-login-wrapper__icon-wrapper']}`)}>
-                            {socialPlatforms.map((platform) => (
-                                <ImageButton
-                                    key={platform.name}
-                                    className={clsN(style.btn)}
-                                    img={
-                                        <CustomIcon
-                                            name={platform.name}
-                                            className={clsN(`${style[`social-login-wrapper__${platform.name}-icon`]}`)}
-                                        />
-                                    }
-                                />
-                            ))}
-                        </Box>
                     </Box>
                 )}
             </Box>
@@ -89,3 +75,17 @@ const SocialLogin = () => {
 };
 
 export default SocialLogin;
+// <Box className={clsN(`${style['social-login-wrapper__icon-wrapper']}`)}>
+//     {socialPlatforms.map((platform) => (
+//         <ImageButton
+//             key={platform.name}
+//             className={clsN(style.btn)}
+//             img={
+//                 <CustomIcon
+//                     name={platform.name}
+//                     className={clsN(`${style[`social-login-wrapper__${platform.name}-icon`]}`)}
+//                 />
+//             }
+//         />
+//     ))}
+// </Box>

@@ -56,7 +56,7 @@ const Form = () => {
                     }}
                     placeholder="0000"
                     inputProps={{
-                        style: { height: '10px' }, // input 요소에만 적용
+                        style: { height: '1rem' }, // input 요소에만 적용
                     }}
                 />
                 <Button className={clsN(`${style['authentication-wrapper__btn']}`)}>인증</Button>

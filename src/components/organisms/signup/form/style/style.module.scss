@@ -9,7 +9,7 @@
 
   &__id, &__pwd, &__email {
     width: 70%;
-    margin: 8px;
+    margin: 0.5rem;
   }
 
   &__email-authentication-btn {
@@ -19,23 +19,24 @@
     width: 70%;
     height: 50px;
     font-size: $title-font-size-S;
+    margin-top: 0.5rem;
   }
 
   &__divider {
     width: 70%;
-    margin: 1.5%;
+    margin: 1rem;
   }
 }
 
 .authentication-wrapper {
   width: 75%;
-
+  margin-top : 0.2rem;
+  margin-bottom: 0.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   &__name {
-    margin: 2px;
-    width: 70%;
+    width: 72%;
   }
 
   &__btn {
@@ -44,8 +45,8 @@
     font-weight: bold;
     font-size: $title-font-size-S;
     width: 20%;
-    height: 2.5rem;
-    margin-left: 3px;
-    margin-right: 3px;
+    height: 3rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
   }
 }
