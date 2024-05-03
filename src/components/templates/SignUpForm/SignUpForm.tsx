@@ -12,6 +12,7 @@ import style from './style/style.module.scss';
 
 const SignUpForm = () => {
     const isInMobile = useDomSizeCheckHook(768);
+
     return (
         <Box>
             {isInMobile ? (

@@ -7,7 +7,7 @@
   justify-content: center;
   flex-direction: column;
 
-  &__id, &__pwd, &__email {
+  &__id, &__pwd, &__email,&__pwd-confirm {
     width: 70%;
     margin: 0.5rem;
   }
