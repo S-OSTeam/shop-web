@@ -3,26 +3,28 @@ import HomeTemplate from '@templates/home/HomeTemplate';
 import useGraphQL from '@hooks/useGraphQL';
 import { SEARCH_ITEM } from '@api/apollo/gql/queries/ItemResponseQuery.gql';
 import { ItemInterface } from '@util/test/interface/Item';
+// import { useQuery } from '@apollo/client';
 
 const DeamHomePage = () => {
-    const itemSearch = {
-        categoryPublicId: '01HWW3N8GVJE3QDBQTQHHYNNJX',
-        pageSize: '1',
-        pageNumber: '1',
-    };
+    const [itemList, setItemList] = useState<ItemInterface[]>();
 
-    const [itemList, setItemList] = useState<ItemInterface>();
-
-    const { data, refetch } = useGraphQL({ query: SEARCH_ITEM, type: 'query', request: itemSearch });
+    const { data: itemData, refetch: itemRefetch } = useGraphQL({
+        query: SEARCH_ITEM,
+        type: 'query',
+        request: {
+            pageSize: '10',
+            pageNumber: '1',
+        },
+    });
 
     useEffect(() => {
-        if (data) {
-            setItemList(data.searchItem);
-            console.log(data);
-            console.log(refetch);
+        itemRefetch().then();
+        if (itemData) {
+            setItemList(itemData.searchItem);
+            console.log(itemData);
             console.log(itemList);
         }
-    }, [data]);
+    }, [itemData]);
 
     return <HomeTemplate />;
 };

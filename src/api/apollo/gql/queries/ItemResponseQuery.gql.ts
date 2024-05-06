@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const SEARCH_ITEM = gql`
-    query ($request: ItemSearchRequest!) {
+    query SearchItem($request: ItemSearchRequest!) {
         searchItem(request: $request) {
             publicId
             categoryPublicId
