@@ -8,36 +8,46 @@ interface graphQLProps<T> {
     query: DocumentNode;
     request?: T;
     type: string;
-    option?: MutationHookOptions | LazyQueryHookOptions;
+    option?: MutationHookOptions | LazyQueryHookOptions | T;
 }
 
+/**
+ *
+ * @param query
+ * @param request
+ * @param type
+ * @param option
+ */
 const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
+    const [loadingGlobal, setLoading] = useRecoilState(loadingAtom);
+
     const selectType = () => {
         if (type === 'mutation') {
             return useMutation(query, {
+                context: {
+                    headers: { ...option },
+                },
                 variables: {
                     request: { ...request },
-                    ...option,
                 },
             });
         }
 
         return useLazyQuery(query, {
+            context: {
+                headers: { ...option },
+            },
             variables: {
                 request: { ...request },
-                ...option,
             },
         });
     };
-
-    const [loadingGlobal, setLoading] = useRecoilState(loadingAtom);
-
-    const [gql, { data, loading, error }] = selectType();
+    const [refetch, { data, loading, error }] = selectType();
 
     const modifyLoading = (state: boolean) => {
         if (state) setLoading(loadingGlobal + 1);
         else setLoading(loadingGlobal - 1 < 0 ? 0 : loadingGlobal - 1);
-        console.log(loadingGlobal);
+        console.log(`로딩... ${loadingGlobal}`);
     };
 
     useEffect(() => {
@@ -49,7 +59,7 @@ const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
         if (error) alert(error.message);
     });
 
-    return { data, gql };
+    return { data, refetch };
 };
 
 export default useGraphQL;

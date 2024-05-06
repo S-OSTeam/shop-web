@@ -9,6 +9,8 @@ import clsN from 'classnames';
 
 import Button from '@components/atoms/button/Button';
 import style from './style/style.module.scss';
+import useGraphQL from '@hooks/useGraphQL';
+import { CHECK_VERIFY_CODE_BY, SEND_VERIFY_CODE_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 
 const Form = () => {
     // const isInMobile = useDomSizeCheckHook(768);
@@ -24,6 +26,31 @@ const Form = () => {
 
     const [authData, setAuthData] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const { data: sendMail, refetch: sendMailRefetch } = useGraphQL({
+        query: SEND_VERIFY_CODE_REQUEST,
+        type: 'mutation',
+        request: {
+            email: formData.email,
+            verifyType: 'SIGNUP',
+        },
+        option: {
+            'Authorization-mac': '2C-6D-C1-87-E0-B5',
+        },
+    });
+
+    const { data: sendCheck, refetch: sendCheckRefetch } = useGraphQL({
+        query: CHECK_VERIFY_CODE_BY,
+        type: 'mutation',
+        request: {
+            email: formData.email,
+            verifyCode: authData,
+            verifyType: 'SIGNUP',
+        },
+        option: {
+            'Authorization-mac': '2C-6D-C1-87-E0-B5',
+        },
+    });
 
     useEffect(() => {
         let timer: number;
@@ -42,39 +69,33 @@ const Form = () => {
     };
 
     const handleEmailSend = async () => {
-        axios
-            .post(`${BaseUrl}/auth/mail`, { email: formData.email })
-            .then((response) => {
-                console.log('Email Send Response:', response.data);
-            })
-            .catch((error) => {
-                console.error('Email Send Error:', error);
-            });
+        // console.log(formData.email);
+        if (formData.email != '') {
+            sendMailRefetch().then();
+            console.log(sendMail);
+        }
+        // refetch().then();
+        // console.log(data);
     };
     const handleAuthConfirm = () => {
-        axios
-            .post(`${BaseUrl}/auth/code`, { authCode: authData, email: formData.email })
-            .then((response) => {
-                if (response.status === 200) {
-                    alert('이메일 인증이 완료되었습니다.');
-                    setIsAuthenticated(true);
-                    setTimeLeft(150);
-                } else {
-                    console.log('Auth Confirmation Pending');
-                }
-            })
-            .catch((error) => {
-                console.error('Auth Send Error:', error);
-            });
+        sendCheckRefetch().then();
+        console.log(sendCheck);
     };
     const textFieldsData = [
-        { label: '아이디', className: style['form-wrapper__id'], id: 'outlined-required', placeholder: '아이디' },
+        {
+            label: '아이디',
+            className: style['form-wrapper__id'],
+            id: 'outlined-required',
+            placeholder: '아이디',
+            inputData: 'userId', // userId 필드를 업데이트
+        },
         {
             label: '비밀번호',
             className: style['form-wrapper__pwd'],
             id: 'outlined-password-input',
             type: 'password',
             placeholder: '*******',
+            inputData: 'pwd', // pwd 필드를 업데이트
         },
         {
             label: '비밀번호 확인',
@@ -82,6 +103,7 @@ const Form = () => {
             id: 'outlined-password-input',
             type: 'password',
             placeholder: '*******',
+            inputData: 'confirmPwd', // confirmPwd 필드를 업데이트
         },
         {
             label: '이메일',
@@ -89,6 +111,7 @@ const Form = () => {
             id: 'outlined-email-input',
             type: 'email',
             placeholder: 'userid@email.com',
+            inputData: 'email', // email 필드를 업데이트
         },
     ];
 
@@ -105,7 +128,12 @@ const Form = () => {
                         shrink: true,
                     }}
                     placeholder={textField.placeholder}
-                    onChange={(e) => setFormData({ ...formData, [textField.id]: e.target.value })}
+                    onChange={(e) => {
+                        setFormData((prevFormData) => ({
+                            ...prevFormData,
+                            [textField.inputData]: e.target.value,
+                        }));
+                    }}
                 />
             ))}
 
