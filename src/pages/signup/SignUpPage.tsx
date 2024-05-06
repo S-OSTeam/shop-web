@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import SignUpForm from '@components/templates/SignUpForm/SignUpForm';
+import SignUpTemplate from '@templates/signup/SignUpTemplate';
 
 const SignUpPage = () => {
     return (
         <Box component="div">
-            <SignUpForm />
+            <SignUpTemplate />
         </Box>
     );
 };
