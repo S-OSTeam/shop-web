@@ -2,26 +2,37 @@
 import React, { useState, useEffect } from 'react';
 
 import { Box, Divider, TextField } from '@mui/material';
-import axios from 'axios';
-// import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-
 import clsN from 'classnames';
-
 import Button from '@components/atoms/button/Button';
 import style from './style/style.module.scss';
 import useGraphQL from '@hooks/useGraphQL';
 import { CHECK_VERIFY_CODE_BY, SEND_VERIFY_CODE_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { FormDataInterface } from '@interface/FormDataInterface';
 
-const Form = () => {
-    // const isInMobile = useDomSizeCheckHook(768);
-    const [formData, setFormData] = useState({
-        // formData와 setFormData 상태 생성
+interface FormProps {
+    formInfo: (formData: FormDataInterface) => void;
+}
+
+const Form = ({ formInfo }: FormProps) => {
+    const [formData, setFormData] = useState<FormDataInterface>({
         userId: '',
         pwd: '',
         confirmPwd: '',
+        sex: false,
+        birthday: new Date(),
+        zipcode: '',
+        address1: '',
+        address2: '',
+        address3: '',
+        address4: '',
         email: '',
+        phone: '',
+        receiveMail: true,
+        snsid: '',
+        sns: 'NORMAL',
+        userName: '',
     });
-    const BaseUrl = 'https://deamhome.synology.me';
+
     const [timeLeft, setTimeLeft] = useState(150);
 
     const [authData, setAuthData] = useState('');
@@ -78,7 +89,9 @@ const Form = () => {
         // console.log(data);
     };
     const handleAuthConfirm = () => {
-        sendCheckRefetch().then();
+        sendCheckRefetch().then(() => {
+            formInfo(formData);
+        });
         console.log(sendCheck);
     };
     const textFieldsData = [
