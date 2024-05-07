@@ -1,0 +1,100 @@
+@import "index";
+
+.mobile-wrapper{
+  &__title{
+    font-size: $title-font-size-S;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+}
+
+.template-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__btn{
+    width: 70%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary-color;
+    color: $basic-font-color;
+    font-weight: bold;
+    font-size: $title-font-size-S;
+    margin-bottom: 3rem;
+
+  }
+}
+.authentication-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__name,&__birth{
+    width: 70%;
+    margin-bottom: 0.5rem;
+    margin-top:0.5rem;
+  }
+}
+.gender-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__form-control {
+    display: flex;
+    justify-content: flex-start;
+    width: 70%;
+  }
+
+  &__radio-group {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  &__divider {
+    width: 70%;
+  }
+}
+
+.agreements-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &__divider{
+    width: 70%;
+  }
+  &__checkbox-wrapper{
+    width: 65%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+    &__checkbox{
+      margin: -7px;
+      //background-color: red;
+      width: 110%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+}
+
+
+.pc-wrapper{
+  max-width: 768px;// 임시로 지정한 max-width값
+  margin: 0 auto; // 이거 넣어줘야 됨
+
+  &__title{
+    font-size: $title-font-size-S;
+    font-weight: bold;
+  }
+}
