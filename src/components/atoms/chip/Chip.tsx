@@ -1,12 +1,11 @@
 import React from 'react';
 import { Chip as MuiChip, ChipProps as MuiChipProps } from '@mui/material';
-import PropTypes from 'prop-types';
 import clsN from 'classnames';
 import style from './style/Chip.module.scss';
 
 interface ChipProps extends MuiChipProps {
     className?: string; // scss를 적용시키기 위한 class이름
-    label: string; // chip component에 글씨를 보여주기 위한 라벨
+    label: React.ReactNode; // chip component에 글씨를 보여주기 위한 라벨
     onClick?: MuiChipProps['onClick']; // onClick 버튼
     onDelete?: MuiChipProps['onDelete']; // default값이거 Icon을 입력받으면 우측에 x버튼이나 아이콘을 제어
     variant?: MuiChipProps['variant']; // color 속성 값으로 화면을 Chip component를 채우거나 혹은 안채우고 아웃라인만 유지하는지 설정
@@ -26,25 +25,6 @@ const Chip = ({ className, label, onClick, onDelete, variant, avatar, color }: C
             color={color}
         />
     );
-};
-
-Chip.propsType = {
-    className: PropTypes.string,
-    label: PropTypes.string,
-    onClick: PropTypes.func,
-    onDelete: PropTypes.func,
-    variant: PropTypes.oneOf(['filled', 'outlined']),
-    avatar: PropTypes.oneOf(['none', 'letter', 'img']),
-    color: PropTypes.oneOf(['default', 'primary', 'secondary', 'error', 'info', 'success', 'warning']),
-};
-
-Chip.defaultProps = {
-    className: `${style.chip}`,
-    onClick: undefined,
-    onDelete: undefined,
-    variant: 'outlined',
-    avatar: 'letter',
-    color: 'default',
 };
 
 export default Chip;

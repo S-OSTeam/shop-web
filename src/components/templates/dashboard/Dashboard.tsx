@@ -1,10 +1,12 @@
-/* eslint-disable */
 import React from 'react';
-import AnnualIncome from '@organisms/admin/chart/annualIncome/AnnualIncome';
+import AnnualIncome from '@organisms/admin/page/dashboard/chart/annualIncome/AnnualIncome';
+import { Stack } from '@mui/material';
 // import PropTypes from 'prop-types';
+import { ProductState } from '@organisms/admin/page/dashboard/productSection/ProductState';
+import Orders from '@organisms/admin/page/dashboard/orders/Orders';
+import Heading from '@molecules/admin/layout/heading/Heading';
 import clsN from 'classnames';
 import styles from './styles/Dashboard.module.scss';
-import Orders from '@organisms/admin/layOut/orders/Orders';
 
 interface DashboardTemplateProps{
     className?: string;
@@ -18,12 +20,25 @@ const DashboardTemplate = (
         chartClsN
     }:DashboardTemplateProps
 ) => {
+    /* 상태 */
+
+
+    /* JSX 모듈 */
+    const headline = <Heading heading="Dashboard" subtitle1="대시보드 페이지입니다."/>
+
+    /* 함수 */
+    // 시간 반환
 
     return(
-        <div className={clsN(styles.main, className)}>
-            <AnnualIncome className={clsN(chartClsN)} />
+        <Stack className={clsN(styles.main, className)} spacing={1}>
+            {headline}
             <Orders/>
-        </div>
+            {/*  */}
+            <Stack direction='row' className={clsN(styles.stack)} justifyContent='space-between' gap={1}>
+                <AnnualIncome className={clsN(chartClsN, styles.stack__chart)}/>
+                <ProductState className={clsN(styles['stack__product-state'])}/>
+            </Stack>
+        </Stack>
     );
 }
 export default DashboardTemplate;
