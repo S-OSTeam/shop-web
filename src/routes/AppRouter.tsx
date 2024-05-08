@@ -6,7 +6,7 @@ import Header from '@components/layout/header/Header';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import AdminPage from '@pages/admin/AdminPage';
 import Login from '@pages/login/LoginPage';
-import Dashboard from '@pages/manager/dashboard/Dashboard';
+import { AdminRouter } from './adminRouter/AdminRouter';
 
 export const AppRouter = () => {
     // React Router 가 제공하는 useLocation 훅을 사용해서 조건부 랜더링하기
@@ -31,9 +31,8 @@ export const AppRouter = () => {
                 <Route path="/manager" element={<AdminPage />} />
                 <Route path="/login" element={<Login />} />
 
-                {/* 관리자 페이지 */}
-                <Route path="/manager/main" element={<AdminPage />}/>
-                <Route path="/manager/dashboard" element={<Dashboard/>} />
+                {/* 모듈화된 관리자 페이지 라우터 렌더하기 */}
+                <Route path="/manager/*" element={<AdminRouter />}/>
             </Routes>
         </div>
     );

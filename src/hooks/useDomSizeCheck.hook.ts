@@ -6,8 +6,8 @@ import { useMediaQuery } from '@mui/material';
 /**
  * 윈도우 가로값을 측정하여 특정범위 이내일 경우에만 true 반환, 아닐시 false
  * @param {number} activateMenuWidth - max-width
- * @returns {boolean} isMobile - windowSizeAtom(Atom)상태값 반환
  * @type {(activateMenuWidth : number) => boolean}
+ * @returns {boolean} isMobile - windowSizeAtom(Atom)상태값 반환
  * */
 
 export const useDomSizeCheckHook = (activateMenuWidth: number) => {

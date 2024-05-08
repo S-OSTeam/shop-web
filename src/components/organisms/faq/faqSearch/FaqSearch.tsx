@@ -4,13 +4,13 @@ import { Box } from '@mui/material';
 // search 이걸 autocomplete 로 바꾸기
 import SearchBarAuto, { OptionDataType } from '@molecules/searchBarAuto/SearchBarAuto';
 import searchItemAtom from '@recoil/atoms/cs/searchItemAtom';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import clsN from 'classnames';
 import styles from './styles/FaqSearch.module.scss';
 import Swiper from '@molecules/faq/swiper/Swiper';
 import { itemResponse, itemResponseITF } from '@util/test/data/faq/swiper/itemResponse';
 import { FreeMode } from 'swiper/modules';
-import {Announcement, LocalShipping, Restore, CurrencyExchange, Person } from '@mui/icons-material';
+import { Announcement, CurrencyExchange, LocalShipping, Person, Restore } from '@mui/icons-material';
 import Text from '@atoms/text/Text';
 import { CsSuggest } from '@util/test/data/CustomerServiceSuggestResponse';
 import { FaqOptions } from '@templates/cs/CsMain';
@@ -66,12 +66,11 @@ const FaqSearch = (
     // 페이지 렌더시 임시데이터 들을 정리해서 자식모듈에게 옵션에 맞게 전달
     // 키워드와 일치하는 데이터 찾음 이걸 활용해 형제요소가 렌더하기
     const callSearchResult = () => {
-        const items = searchResult.map((item) => {
+        // console.log(`searchResult?? :  ${searchResult}`);
+        return searchResult.map((item) => {
             const { id, question, answer } = item;
             return (`id: ${id} question ${question} answer: ${answer}`);
         });
-        // console.log(`searchResult?? :  ${searchResult}`);
-        return items;
     };
     const renderTest = callSearchResult();
 
