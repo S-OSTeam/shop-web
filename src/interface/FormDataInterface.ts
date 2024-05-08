@@ -12,7 +12,7 @@ export interface FormDataInterface {
     email: string;
     phone: string;
     receiveMail: boolean;
-    snsid: string;
+    snsId: string;
     sns: string;
     userName: string;
 }

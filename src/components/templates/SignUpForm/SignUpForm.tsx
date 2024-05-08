@@ -30,7 +30,7 @@ const SignUpForm = () => {
             email: formData.email,
             phone: '',
             receiveMail: true,
-            snsid: formData.email,
+            snsId: formData.email,
             sns: 'NORMAL',
             userName: '',
         });

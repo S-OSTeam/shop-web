@@ -19,7 +19,7 @@ const SignUpTemplate = () => {
     const [value, setValue] = useState(false);
     const [checkBox, setCheckBox] = useState(false);
     const checkboxTexts = ['선택적 SNS 광고 동의 여부', '기타 고객정보 영리적 사용 등', '기타 등등'];
-    const [request, setSignUpData] = useState<FormDataInterface>({
+    const [signUpData, setSignUpData] = useState<FormDataInterface>({
         userId: '',
         pwd: '',
         confirmPwd: '',
@@ -33,7 +33,7 @@ const SignUpTemplate = () => {
         email: '',
         phone: '',
         receiveMail: true,
-        snsid: '',
+        snsId: '',
         sns: 'NORMAL',
         userName: '',
     });
@@ -42,7 +42,7 @@ const SignUpTemplate = () => {
         query: SIGN_UP,
         type: 'mutation',
         request: {
-            request,
+            ...signUpData,
         },
         option: {
             'Authorization-mac': '2C-6D-C1-87-E0-B5',
@@ -51,9 +51,9 @@ const SignUpTemplate = () => {
 
     useEffect(() => {
         setSignUpData({
-            userId: request.userId,
-            pwd: request.pwd,
-            confirmPwd: request.confirmPwd,
+            userId: signUpData.userId,
+            pwd: signUpData.pwd,
+            confirmPwd: signUpData.confirmPwd,
             sex: value,
             birthday: new Date(birthDay),
             zipcode: '',
@@ -61,10 +61,10 @@ const SignUpTemplate = () => {
             address2: '',
             address3: '',
             address4: '',
-            email: request.email,
+            email: signUpData.email,
             phone: '',
             receiveMail: checkBox,
-            snsid: request.email,
+            snsId: signUpData.email,
             sns: 'NORMAL',
             userName: name,
         });
@@ -87,7 +87,7 @@ const SignUpTemplate = () => {
             email: formData.email,
             phone: '',
             receiveMail: checkBox,
-            snsid: formData.email,
+            snsId: formData.email,
             sns: 'NORMAL',
             userName: name,
         });
@@ -217,7 +217,7 @@ const SignUpTemplate = () => {
                                 shrink: true,
                             }}
                             placeholder="홍 길 동"
-                            onChange={() => setName}
+                            onChange={onNameHandle}
                         />
                         <TextField
                             label="생년월일"
@@ -227,7 +227,7 @@ const SignUpTemplate = () => {
                                 shrink: true,
                             }}
                             placeholder="1900.00.00"
-                            onChange={() => setBirthDay}
+                            onChange={onBirthHandle}
                         />
                     </Box>
                     <Box className={clsN(`${style['gender-wrapper']}`)}>
@@ -261,8 +261,8 @@ const SignUpTemplate = () => {
                         <Box className={clsN(style['agreements-wrapper__checkbox-wrapper'])}>
                             {checkboxTexts.map((text) => (
                                 <CheckboxWithText
-                                    value={checkBox}
                                     onChange={handleCheckBox}
+                                    value={checkBox}
                                     key={text}
                                     className={clsN(style['agreements-wrapper__checkbox-wrapper__checkbox'])}
                                     text={text}
