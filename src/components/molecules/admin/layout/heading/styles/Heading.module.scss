@@ -1,0 +1,18 @@
+@import "index";
+
+// 최상위
+.stack{
+  padding: 16px 0;
+  *{color: $color-text-dimgray;}
+  &__heading{
+    @include font-size(headline1);
+    @include font-weight(medium);
+  }
+  &__subtitle1{
+    @include font-size(subtitle1);
+    @include font-weight(medium);
+  }
+  &__subtitle2{
+    @include font-size(subtitle1);
+  }
+}

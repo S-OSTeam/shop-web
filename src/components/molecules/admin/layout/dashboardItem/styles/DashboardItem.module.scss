@@ -1,41 +1,54 @@
 @import "index";
-*{
-  box-sizing: border-box;
-}
-// 최상단 블록 영역
-.wrapper{
-  height: 100%;
-  background-color: $white-color;
-  border-radius: 8px;
-  //box-shadow: 1px 1px 1px rgba(0,0,0, 0.4);
-}
-
-// 아이콘 영역
-.icon-place{
-  svg{
+// root
+.root{
+  position: relative;
+  padding: 16px;
+  border-radius: 4px;
+  // 아이콘 영역
+  &__icon-place{
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 4px;
   }
-
-}
-
-// 데이터 내용 영역
-.item-context{
-  // 항목 제목 영역
+  // 제목 영역
   &__title{
-
+    color: $color-text-dimgray;
+    @include font-size(body1);
+    @include font-weight(medium);
   }
-}
+  // state 수치 표기 영역
+  &__state{
+    color: $color-text-dimgray;
+    @include font-size(headline2);
+    @include font-weight(semibold);
+    &__text-effect{
+      padding-right: 2px;
 
-
-// 부제목 리스트
-.subtitle-list{
-  // 아이템 감싸는 요소
-  &__block{
-    justify-content: space-between;
-    // 부제목
-    &__subtitle{
-      &:last-child{
-        padding-left: 8px;
-      }
     }
   }
+}
+// 추가 정보
+.more-info{
+  position: absolute;
+  top: 8px;
+  right: 4px;
+  visibility: hidden;
+  background-color: white;
+  padding: 4px 8px;
+  box-shadow: 0 1px 1px 1px rgba(1,1,1,0.1);
+}
+// 더보기 버튼 (정확히는 chip)
+.more-horiz{
+  position: absolute;
+  top: 8px;
+  right: 4px;
+  color: $color-text-dimgray;
+  background-color: inherit;
+  svg{
+    @include font-size(headline3)
+  }
+}
+// 호버시
+.more-info:hover, .more-horiz:hover+.more-info {
+  visibility: visible;
 }
