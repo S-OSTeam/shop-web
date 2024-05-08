@@ -10,6 +10,8 @@ import clsN from 'classnames';
 import styles from './styles/NavMain.module.scss';
 import LeftMenuBtn from '@components/layout/header/NavBar/listItem/leftMenuBtn/leftMenuBtn';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
+import useGraphQL from '@hooks/useGraphQL';
+import { SEND_VERIFY_CODE } from '@api/apollo/gql/mutations/LoginMutation.gql';
 
 interface GnbMainProps {
     toolClsN?: string;
@@ -49,7 +51,12 @@ const NavMain = ({
         <Toolbar className={clsN(`${styles['tool-bar']}`, toolClsN)}>
             {isInTablet ? (
                 <LeftMenuBtn
-                    icon={<MenuIcon className={clsN(`${styles['tool-bar__icon']}`, mobileMenuIconClsN)} onClick={onClick} />}
+                    icon={
+                        <MenuIcon
+                            className={clsN(`${styles['tool-bar__icon']}`, mobileMenuIconClsN)}
+                            onClick={onClick}
+                        />
+                    }
                     className={clsN(`${styles['tool-bar__btn']}`, mobileMenuBtn)}
                     edge="start"
                     ariaLabel="drawer Menu"
