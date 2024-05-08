@@ -1,0 +1,60 @@
+@import "index";
+
+// mobile version scss
+.form-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__id, &__pwd, &__email,&__pwd-confirm {
+    width: 70%;
+    margin: 0.5rem;
+  }
+
+  &__email-authentication-btn {
+    background-color: $primary-color;
+    color: $basic-font-color;
+    font-weight: bold;
+    width: 70%;
+    height: 50px;
+    font-size: $title-font-size-S;
+    margin-top: 0.5rem;
+
+  }
+
+  &__divider {
+    width: 70%;
+    margin: 1rem;
+  }
+}
+
+.authentication-wrapper {
+  width: 75%;
+  margin-top : 0.2rem;
+  margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__name {
+    width: 72%;
+  }
+  &__timer{
+    position: absolute;
+    //margin-left: 13rem;
+    right: 37%;
+
+  }
+
+  &__btn {
+    background-color: $primary-color;
+    color: $basic-font-color;
+    font-weight: bold;
+    font-size: $title-font-size-S;
+    width: 20%;
+    height: 3rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    white-space: nowrap;
+  }
+}

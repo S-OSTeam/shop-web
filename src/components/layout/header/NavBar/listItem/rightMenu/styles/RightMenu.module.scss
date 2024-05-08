@@ -1,0 +1,79 @@
+@import "src/components/layout/header/styles/index";
+
+// gnb 우측 즐겨찾기 영역 래퍼 [블록]
+.stack-menu{
+  /* 요소 */
+  // 아이콘 버튼
+  &__icon-btn{
+    color: white;
+    & > span{
+    }
+  }
+  // 아이콘
+  &__icon{
+
+  }
+}
+@include mobile{
+  /* 블록 */
+  .stack-menu{
+    /* 요소 */
+    // 아이콘 버튼
+    &__icon-btn{
+      & > span{
+      }
+    }
+    // 아이콘
+    &__icon{
+        font-size: 20px;
+    }
+  }
+}
+@include tablet{
+  /* 블록 */
+  .stack-menu{
+    /* 요소 */
+    &__icon-btn{
+      & > span{
+      }
+    }
+    &__icon{
+    }
+  }
+}
+@include laptop{
+  /* 블록 */
+  .stack-menu{
+    /* 요소 */
+    &__icon-btn{
+      & > span{
+      }
+    }
+    &__icon{
+    }
+  }
+}
+@include desktop{
+  /* 블록 */
+  .stack-menu{
+    /* 요소 */
+    &__icon-btn{
+      & > span{
+      }
+    }
+    &__icon{
+    }
+  }
+}
+@include desktop-large{
+  /* 블록 */
+  .stack-menu{
+    /* 요소 */
+    &__icon-btn{
+      & > span{
+      }
+    }
+    &__icon{
+    }
+  }
+}

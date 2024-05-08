@@ -1,0 +1,163 @@
+@import 'src/components/layout/header/styles/index.scss';
+
+@mixin set-desk($bg-color) {
+  .list-wrapper {
+    display: flex;
+    height: 100%;
+    padding: 0 16px;
+
+    &__parent-category {
+      padding: 0;
+      height: 100%;
+      white-space: nowrap;
+      // li > btn
+      &__btn {
+        position: relative;
+        flex-wrap: nowrap;
+        height: 100%;
+        width: 100%;
+        // title
+        &__title {
+
+        }
+
+        // collapse icons on/off
+        &__icon {
+          @include font-size(subtitle1);
+          padding-left: 8px;
+        }
+
+        // 2depth wrapper
+        &__collapse {
+          box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.12);
+          background-color: $bg-color;
+          position: absolute;
+          left: 0;
+          top: 100%;
+          width: fit-content;
+          border-radius: 4px;
+          margin-top: 8px;
+
+          &::before {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 8px;
+            left: 0;
+            top: -8px;
+            visibility: hidden;
+          }
+        }
+      }
+    }
+  }
+  // 2depth title
+  .list-items-wrapper {
+  }
+}
+
+
+.list-wrapper {
+  &__parent-category{
+    width: 100%;
+    &__btn {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      &__title {
+        width: 80%;
+      }
+
+      &__icon {
+        @include font-size(subtitle1);
+        padding-left: 8px;
+      }
+
+      &__collapse {
+        width: 100%;
+      }
+    }
+
+
+  }
+}
+
+// 2 차 리스트들 보여주는 부분
+.list-items-wrapper {
+}
+
+
+// 300px
+@include media-breakpoint-up(xxs) {
+  .list-wrapper {
+    padding-right: 0;
+    &__parent-category {
+      &__btn {
+        &__title {
+        }
+        &__icon {
+        }
+        &__collapse {
+          width: 96%;
+        }
+      }
+    }
+  }
+  .list-items-wrapper {
+
+  }
+
+}
+// 360px
+@include media-breakpoint-up(xs){
+
+}
+
+// 480
+@include media-breakpoint-up(sm) {
+  //리스트들 보여주는 부분
+  .list-wrapper {
+    &__parent-category {
+
+      &__btn{
+        &__icon {
+        }
+        &__collapse {
+          width: 96%;
+        }
+      }
+    }
+
+  }
+
+}
+
+@include media-breakpoint-up(md) {
+  .list-wrapper {
+    &__parent-category {
+
+      &__btn{
+        &__icon {
+        }
+      }
+    }
+  }
+}
+
+// 980
+@include media-breakpoint-up(lg) {
+
+
+  @include set-desk(#{$primary-color});
+}
+
+// 1024
+@include media-breakpoint-up(xl)  {
+  @include set-desk(#{$primary-color});
+}
+
+// 1400
+@include media-breakpoint-up(xxl)  {
+  @include set-desk(#{$primary-color});
+}
