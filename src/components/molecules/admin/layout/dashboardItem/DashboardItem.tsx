@@ -1,76 +1,95 @@
+/* eslint-disable */
 import React from 'react';
-import { Box, Stack } from '@mui/material';
+import { Box, Chip, Stack } from '@mui/material';
+import IconButton from '@molecules/button/iconButton/IconButton';
+import { MoreHoriz, MoreVert } from '@mui/icons-material';
 import Text from '@atoms/text/Text';
 import clsN from 'classnames';
 import styles from './styles/DashboardItem.module.scss';
 
-interface DashboardItemProps {
-    // root 클래스 명
+interface DashboardItemProps<T> {
+    // root 클래스명
     className?: string;
-    // 모듈(제목) 명
-    moduleLabel: string;
+    // 항목 이름
+    itemName: string;
+    // 항목 이름 클래스명
+    itemNameClsN?: string;
     // 아이콘
-    iconPlace: React.ReactNode;
-    // 아이콘 부모 클래스명
-    iconPlaceClsN?: string;
-    // 데이터
-    data: Array<{ title: string, amount: number }>;
-    // 현황 리스트 블록 클래스명
-    stateListClsN?: string;
-    // 현황 리스트 내부 아이템 클래스명
-    stateItemClsN?: string;
-    // 아이템의 텍스트 클래스명
-    itemTextClsN?: string;
-    // 아이템 텍스트 감싸는 클래스명
-    itemContextClsN?: string;
-    // 아이템 제목 영역
-    itemTitleClsN?: string;
+    icon: React.ReactNode;
+    // 아이콘 감싸는 클래스명
+    iconClsN?: string;
+    // 아이템 표시건 수
+    count: number;
+    // 아이템 표시 클래스명
+    countClsN?: string;
+    // 아이템 표시 색상 강조 클래스명
+    countEffectClsN?: string;
+
+    // T 제너릭을 통해 랜더할 컴포넌트 정하기
+    // 받을 내용
+    moreHorizItems: T[];
+    // T 타입의 아이템과 인덱스를 받고 렌더
+    renderItems: (item: T, index: number) => React.ReactNode;
 }
 
-const DashboardItem = (
+const DashboardItem = <T, >(
     {
         className,
-        moduleLabel,
-        iconPlace,
-        iconPlaceClsN,
-        data,
-        stateListClsN,
-        stateItemClsN,
-        itemTextClsN,
-        itemContextClsN,
-        itemTitleClsN
-    }: DashboardItemProps,
+        itemName,
+        icon,
+        count,
+        itemNameClsN,
+        countClsN,
+        countEffectClsN,
+        iconClsN,
+        moreHorizItems,
+        renderItems,
+
+    }: DashboardItemProps<T>,
 ) => {
 
     /* 상태 */
 
-    /* 함수 */
-    /* 데이터를 받고 해당 데이터 순서대로 출력 */
-    const dataRender = data.map((item) => {
-        // 속성 조회
-        const { title, amount } = item;
-        const subTitleComponent = <Text variant='subtitle2' className={clsN(itemTextClsN, styles['subtitle-list__block__subtitle'])} text={title} />;
-        const amountText = <Text variant='subtitle2' className={clsN(itemTextClsN, styles['subtitle-list__block__subtitle'])} text={`${amount.toString()}건`} />;
-        return (
-            <Stack className={clsN(stateItemClsN, styles['subtitle-list__block'])} direction='row'>
-                {subTitleComponent}
-                {amountText}
-            </Stack>
-        )
-    });
+    /* JSX 컴포넌트 */
+
+
+    // 항목 주제
+    const titleName = (<Text text={itemName} className={clsN(itemNameClsN, styles['root__title'])} />);
+    // 항목 건
+    const countState = (
+        <Box className={clsN(countClsN, styles['root__state'])}>
+            <Text text={`${count}`} className={clsN(countEffectClsN, styles['root__state__text-effect'])} />
+            <Text text='건' />
+        </Box>
+    );
+
+    // 더보기 버튼
+    const expandBtn = (
+        <Chip label={<MoreHoriz />} size='small' className={clsN(styles['more-horiz'])} />
+    );
+
+    // 더보기 항목
+    const expandInfo = (
+        <Stack className={clsN(styles['more-info'])} gap={0.4}>
+            {moreHorizItems.map((item, idx) => {
+                return (renderItems(item, idx));
+            })}
+        </Stack>
+    );
+
 
     /* 렌더 */
     return (
-        <Stack className={clsN(className, styles.wrapper)} direction='row' boxShadow={2}>
-            <Box className={clsN(iconPlaceClsN, styles['icon-place'])} component='div'>
-                {iconPlace}
-            </Box>
-            <Box component='div' className={clsN(itemContextClsN, styles['item-context'])}>
-                <Text text={moduleLabel} className={clsN(itemTitleClsN, styles['item-context__title'])}/>
-                <Stack className={clsN(stateListClsN, styles['subtitle-list'])}>
-                    {dataRender}
-                </Stack>
-            </Box>
+        <Stack className={clsN(className, styles.root)} direction='row' boxShadow={1} flexGrow={1} gap={2} borderRadius={1} >
+            <Stack className={clsN(iconClsN, styles['root__icon-place'])}>
+                {icon}
+            </Stack>
+            <Stack flexDirection='column' gap={0.5}>
+                {titleName}
+                {countState}
+            </Stack>
+            {expandBtn}
+            {expandInfo}
         </Stack>
     );
 };

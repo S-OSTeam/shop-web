@@ -62,7 +62,7 @@ const AnnualIncome = (
 
 
     return (
-        <Box component='div' className={clsN(styles.component)}>
+        <Box component='div' className={clsN(styles.component, className)} boxShadow={1}>
             <LineChart
                 className={clsN(styles.grid)}
                 gridClsN={clsN(styles.grid__graph)}

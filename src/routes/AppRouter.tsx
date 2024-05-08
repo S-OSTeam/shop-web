@@ -4,7 +4,7 @@ import DeamHome from '@pages/home/DeamHomePage';
 import Product from '@pages/product/ProductPage';
 import Header from '@components/layout/header/Header';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
-import AdminPage from '@pages/admin/AdminPage';
+import { AdminRouter } from './adminRouter/AdminRouter';
 import Login from './login/Login';
 import SignUp from './signup/Signup';
 
@@ -29,10 +29,12 @@ export const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<DeamHome />} />
                 <Route path="/product" element={<Product />} />
+                <Route path="/support" element={<CustomerServicePage />} />
+
+                {/* 모듈화된 관리자 페이지 라우터 렌더하기 */}
+                <Route path="/manager/*" element={<AdminRouter />}/>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
-                <Route path="/cs" element={<CustomerServicePage />} />
-                <Route path="/admin" element={<AdminPage />} />
             </Routes>
         </div>
     );
