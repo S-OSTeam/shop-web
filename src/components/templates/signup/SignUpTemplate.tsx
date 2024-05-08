@@ -119,16 +119,14 @@ const SignUpTemplate = () => {
     return (
         <Box>
             {isInMobile ? (
-                <Box>
-                    <Box className={clsN(`${style['mobile-wrapper']}`)}>
-                        <Text
-                            text="회원가입 "
-                            variant="subtitle1"
-                            align="center"
-                            className={clsN(`${style['mobile-wrapper__title']}`)}
-                        />
-                        <Form formInfo={handleFormDataOnclick} />
-                    </Box>
+                <Box className={clsN(`${style['mobile-wrapper']}`)}>
+                    <Text
+                        text="회원가입 "
+                        variant="subtitle1"
+                        align="center"
+                        className={clsN(`${style['mobile-wrapper__title']}`)}
+                    />
+                    <Form formInfo={handleFormDataOnclick} />
                     <Box className={clsN(`${style['authentication-wrapper']}`)}>
                         <TextField
                             label="성 함"
@@ -198,16 +196,14 @@ const SignUpTemplate = () => {
                     </Box>
                 </Box>
             ) : (
-                <Box>
-                    <Box className={clsN(`${style['pc-wrapper']}`)}>
-                        <Text
-                            text="회원가입 "
-                            variant="subtitle1"
-                            align="center"
-                            className={clsN(`${style['mobile-wrapper__title']}`)}
-                        />
-                        <Form formInfo={handleFormDataOnclick} />
-                    </Box>
+                <Box className={clsN(`${style['pc-wrapper']}`)}>
+                    <Text
+                        text="회원가입 "
+                        variant="subtitle1"
+                        align="center"
+                        className={clsN(`${style['mobile-wrapper__title']}`)}
+                    />
+                    <Form formInfo={handleFormDataOnclick} />
                     <Box className={clsN(`${style['authentication-wrapper']}`)}>
                         <TextField
                             label="성 함"
