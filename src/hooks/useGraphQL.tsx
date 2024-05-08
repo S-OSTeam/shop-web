@@ -8,7 +8,7 @@ interface graphQLProps<T> {
     query: DocumentNode;
     request?: T;
     type: string;
-    option?: MutationHookOptions | LazyQueryHookOptions;
+    option?: MutationHookOptions | LazyQueryHookOptions | T;
 }
 
 /**
@@ -24,17 +24,21 @@ const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
     const selectType = () => {
         if (type === 'mutation') {
             return useMutation(query, {
+                context: {
+                    headers: { ...option },
+                },
                 variables: {
                     request: { ...request },
-                    ...option,
                 },
             });
         }
 
         return useLazyQuery(query, {
+            context: {
+                headers: { ...option },
+            },
             variables: {
                 request: { ...request },
-                ...option,
             },
         });
     };
