@@ -32,59 +32,56 @@ interface DashboardItemProps<T> {
     renderItems: (item: T, index: number) => React.ReactNode;
 }
 
-const DashboardItem = <T, >(
-    {
-        className,
-        itemName,
-        icon,
-        count,
-        itemNameClsN,
-        countClsN,
-        countEffectClsN,
-        iconClsN,
-        moreHorizItems,
-        renderItems,
-
-    }: DashboardItemProps<T>,
-) => {
-
+const DashboardItem = <T,>({
+    className,
+    itemName,
+    icon,
+    count,
+    itemNameClsN,
+    countClsN,
+    countEffectClsN,
+    iconClsN,
+    moreHorizItems,
+    renderItems,
+}: DashboardItemProps<T>) => {
     /* 상태 */
 
     /* JSX 컴포넌트 */
 
-
     // 항목 주제
-    const titleName = (<Text text={itemName} className={clsN(itemNameClsN, styles['root__title'])} />);
+    const titleName = <Text text={itemName} className={clsN(itemNameClsN, styles['root__title'])} />;
     // 항목 건
     const countState = (
         <Box className={clsN(countClsN, styles['root__state'])}>
             <Text text={`${count}`} className={clsN(countEffectClsN, styles['root__state__text-effect'])} />
-            <Text text='건' />
+            <Text text="건" />
         </Box>
     );
 
     // 더보기 버튼
-    const expandBtn = (
-        <Chip label={<MoreHoriz />} size='small' className={clsN(styles['more-horiz'])} />
-    );
+    const expandBtn = <Chip label={<MoreHoriz />} size="small" className={clsN(styles['more-horiz'])} />;
 
     // 더보기 항목
     const expandInfo = (
         <Stack className={clsN(styles['more-info'])} gap={0.4}>
             {moreHorizItems.map((item, idx) => {
-                return (renderItems(item, idx));
+                return renderItems(item, idx);
             })}
         </Stack>
     );
 
-
     /* 렌더 */
     return (
-        <Stack className={clsN(className, styles.root)} direction='row' boxShadow={1} flexGrow={1} gap={2} borderRadius={1} >
-            <Stack className={clsN(iconClsN, styles['root__icon-place'])}>
-                {icon}
-            </Stack>
-            <Stack flexDirection='column' gap={0.5}>
+        <Stack
+            className={clsN(className, styles.root)}
+            direction="row"
+            boxShadow={3}
+            flexGrow={1}
+            gap={2}
+            borderRadius={1}
+        >
+            <Stack className={clsN(iconClsN, styles['root__icon-place'])}>{icon}</Stack>
+            <Stack flexDirection="column" gap={0.5}>
                 {titleName}
                 {countState}
             </Stack>

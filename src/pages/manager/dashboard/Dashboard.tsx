@@ -1,17 +1,12 @@
-/* eslint-disable */
 import React from 'react';
 import AdminComponent from '@templates/admin/Admin';
 import DashboardTemplate from '@templates/dashboard/Dashboard';
 
-interface DashboardProps {
-
-}
-
-const Dashboard = ({}:DashboardProps) => {
-    return(
+const Dashboard = () => {
+    return (
         <AdminComponent>
-            <DashboardTemplate/>
+            <DashboardTemplate />
         </AdminComponent>
     );
-}
+};
 export default Dashboard;
