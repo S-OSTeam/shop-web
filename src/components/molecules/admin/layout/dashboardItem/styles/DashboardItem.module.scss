@@ -1,6 +1,7 @@
 @import "index";
 // root
 .root{
+  background-color: #ffffff;
   position: relative;
   padding: 16px;
   border-radius: 4px;
@@ -35,7 +36,6 @@
   visibility: hidden;
   background-color: white;
   padding: 4px 8px;
-  box-shadow: 0 1px 1px 1px rgba(1,1,1,0.1);
 }
 // 더보기 버튼 (정확히는 chip)
 .more-horiz{

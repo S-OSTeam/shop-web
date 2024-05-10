@@ -14,15 +14,10 @@ interface AnnualIncomeProps {
     className?: string;
 }
 
-const AnnualIncome = (
-    {
-        className,
-    }: AnnualIncomeProps,
-) => {
+const AnnualIncome = ({ className }: AnnualIncomeProps) => {
     // test
     const pData = [50000, 30000, 120000, 155000];
     const cData = [40000, 20000, 620000, 455000];
-
 
     // 데이터 [] 얻기 : 그래프큐엘 쓴다 가정
     const chartDB = AnnualIncomeItem;
@@ -42,7 +37,7 @@ const AnnualIncome = (
                 console.log(`salesRecords: ${salesRecords}`);
                 if (salesRecords) {
                     // 해당 값이 존재할 경우 [Object...] 이므로 forEach 로 객체 속성에 접근하기
-                    salesRecords.forEach(record => {
+                    salesRecords.forEach((record) => {
                         // 객체 속성 접근
                         console.log(`sold: ${record.totalSold}`);
                         currentMonthSales.incomeValue = record.totalSold;
@@ -60,18 +55,19 @@ const AnnualIncome = (
     const monthsArr: string[] = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
     // 상태
 
-
     return (
-        <Box component='div' className={clsN(styles.component, className)} boxShadow={1}>
+        <Box component="div" className={clsN(styles.component, className)} boxShadow={3}>
             <LineChart
                 className={clsN(styles.grid)}
                 gridClsN={clsN(styles.grid__graph)}
                 // series={[{ data: pData, label: '2023'}, { data: cData, label: '2024'}]}
-                series={[{data: pData, label:'2023'}, {data: cData, label:'2024'}]}
-                xAxis={[{ scaleType: 'point', data: monthsArr}]}
-                yAxis={[{valueFormatter: (value) => `${(value / 10000).toLocaleString()}만원`}]}
+                series={[
+                    { data: pData, label: '2023' },
+                    { data: cData, label: '2024' },
+                ]}
+                xAxis={[{ scaleType: 'point', data: monthsArr }]}
+                yAxis={[{ valueFormatter: (value) => `${(value / 10000).toLocaleString()}만원` }]}
             />
-
         </Box>
     );
 };
