@@ -20,7 +20,7 @@ interface AsideNavProps<T> {
     hoverClsN?: string;
 }
 
-const AsideNav = <T, >(
+export const AsideNav = <T, >(
     {
         className,
         listWrapperClsN,
@@ -47,4 +47,8 @@ const AsideNav = <T, >(
             </List>
         </Box>);
 };
-export default AsideNav;
+AsideNav.defaultProps = {
+    className: styles.nav,
+    listWrapperClsN: styles.nav__ul,
+    hoverClsN : styles.hover,
+}

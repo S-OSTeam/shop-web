@@ -1,9 +1,12 @@
 @import "index";
 
-.wrapper{
-
+.search{
+  display: flex;
   &__input{
-    border-radius: 20px;
+    border-color: inherit;
+  }
+  &__notched-outline{
+    //border-color: rgba(0,0,0,0);
   }
   &__icon{
 

@@ -4,7 +4,7 @@ import LineChart from '@molecules/chart/line/Line';
 import PropTypes, { number } from 'prop-types';
 import clsN from 'classnames';
 import styles from './styles/AnnualIncome.module.scss';
-import { Box } from '@mui/material';
+import { Paper } from '@mui/material';
 import { AnnualIncomeItem, Month } from '@util/test/data/admin/annualIncome/AnnualIncome';
 import { LineSeriesType } from '@mui/x-charts';
 import { MakeOptional } from '@mui/x-charts/models/helpers';
@@ -56,7 +56,7 @@ const AnnualIncome = ({ className }: AnnualIncomeProps) => {
     // 상태
 
     return (
-        <Box component="div" className={clsN(styles.component, className)} boxShadow={3}>
+        <Paper  className={clsN(styles.component, className)} elevation={2} variant='outlined'>
             <LineChart
                 className={clsN(styles.grid)}
                 gridClsN={clsN(styles.grid__graph)}
@@ -68,7 +68,7 @@ const AnnualIncome = ({ className }: AnnualIncomeProps) => {
                 xAxis={[{ scaleType: 'point', data: monthsArr }]}
                 yAxis={[{ valueFormatter: (value) => `${(value / 10000).toLocaleString()}만원` }]}
             />
-        </Box>
+        </Paper>
     );
 };
 export default AnnualIncome;

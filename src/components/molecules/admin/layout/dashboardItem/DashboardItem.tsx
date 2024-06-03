@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import { Box, Chip, Stack } from '@mui/material';
+import { Box, Chip, Paper, Stack } from '@mui/material';
 import IconButton from '@molecules/button/iconButton/IconButton';
 import { MoreHoriz, MoreVert } from '@mui/icons-material';
 import Text from '@atoms/text/Text';
@@ -72,14 +72,8 @@ const DashboardItem = <T,>({
 
     /* 렌더 */
     return (
-        <Stack
-            className={clsN(className, styles.root)}
-            direction="row"
-            boxShadow={3}
-            flexGrow={1}
-            gap={2}
-            borderRadius={1}
-        >
+        <Paper variant='outlined'  elevation={2} className={clsN(className, styles.root)}>
+
             <Stack className={clsN(iconClsN, styles['root__icon-place'])}>{icon}</Stack>
             <Stack flexDirection="column" gap={0.5}>
                 {titleName}
@@ -87,7 +81,7 @@ const DashboardItem = <T,>({
             </Stack>
             {expandBtn}
             {expandInfo}
-        </Stack>
+        </Paper>
     );
 };
 export default DashboardItem;
