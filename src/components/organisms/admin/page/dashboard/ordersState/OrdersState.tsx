@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import Heading from '@molecules/admin/layout/heading/Heading';
+import { Heading } from '@molecules/admin/layout/heading/Heading';
 import clsN from 'classnames';
 import styles from './styles/OrdersState.module.scss';
 

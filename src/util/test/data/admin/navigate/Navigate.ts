@@ -4,7 +4,7 @@ export interface NavigateITF {
     title: string;
     route: string;
     // 2차 뎁스
-    depthItem?:secondItem[];
+    depthItem?: secondItem[];
 }
 interface secondItem {
     id: string;
@@ -13,11 +13,11 @@ interface secondItem {
 }
 
 // 1차 ts
-export const NavigateItem:NavigateITF[] = [
+export const NavigateItem: NavigateITF[] = [
     {
         navigateId: 0,
         title: 'Dashboard',
-        route: '/manager/dashboard'
+        route: '/manager/dashboard',
     },
     {
         navigateId: 1,
@@ -28,8 +28,8 @@ export const NavigateItem:NavigateITF[] = [
                 id: 'productManagement',
                 title: '상품 관리',
                 ref: '0',
-            }
-        ]
+            },
+        ],
     },
     {
         navigateId: 2,
@@ -44,31 +44,28 @@ export const NavigateItem:NavigateITF[] = [
     {
         navigateId: 4,
         title: 'Clients',
-        route: '/manager/clients'
+        route: '/manager/clients',
     },
     {
         navigateId: 5,
         title: 'Inquiry',
         route: '/manager/inquiry',
-        depthItem:[
+        depthItem: [
             {
-                id: 'InquiryTotal',
-                title: '문의 관리 현황',
-                ref: '0',
+                id: 'QaList',
+                title: 'Q&A 관리',
+                ref: 'qa',
             },
             {
-                id: 'InquiryResponsive',
-                title: '미답변',
-                ref: '1',
+                id: 'Faqs',
+                title: 'FAQ 관리',
+                ref: 'fa',
             },
             {
-                id: 'InquiryEnd',
-                title: ' 답변완료',
-                ref: '2',
-            }
-
-        ]
+                id: 'Notices',
+                title: '공지사항 관리',
+                ref: 'notices',
+            },
+        ],
     },
-
-
-]
+];

@@ -24,4 +24,7 @@ const List = (
         </MuiList>
     )
 }
+List.defaultProps = {
+    className: undefined
+}
 export default List;

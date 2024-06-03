@@ -1,6 +1,6 @@
 import React from 'react';
 import { productStateAtom, productStateType, slotType } from '@recoil/atoms/cs/productStateAtom';
-import { Stack } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import Text from '@atoms/text/Text';
 import clsN from 'classnames';
@@ -17,24 +17,19 @@ export const ProductState = ({ className }: OrderSectionProps) => {
     /* 함수 */
     /// 파라미터 키값과 value 를 읽어들어 컴포넌트 반환
     const renderItems = (key: string, value: slotType) => {
-        // 키값 콘솔 조회
-        console.log(`key : ${key}`);
+
         // value 조회
         const { name, amount, date } = value;
         return (
-            <Stack
-                className={clsN(styles['item-state'])}
-                borderRadius={1}
-                boxShadow={3}
-                gap={1}
-                justifyContent="space-between"
+            <Paper
+                className={clsN(styles['item-state'])} elevation={0} variant='outlined'
             >
                 <Stack className={clsN(styles['item-state__stack'])} direction="row" justifyContent="space-between">
                     <Text text={name} className={clsN(styles['item-state__stack__title'])} />
                     <Text text={`${amount}건`} className={clsN(styles['item-state__stack__amount'])} />
                 </Stack>
                 <Text text={`마지막 업데이트 ${date}`} className={clsN(styles['item-state__date'])} />
-            </Stack>
+            </Paper>
         );
     };
     /// 오브젝트 체크
@@ -52,11 +47,14 @@ export const ProductState = ({ className }: OrderSectionProps) => {
 
     // 렌더
     return (
-        <Stack direction="column" className={clsN(styles.root, className)} boxShadow={3} borderRadius={1}>
+        <Paper className={clsN(styles.root, className)} elevation={2} variant='outlined'>
             <Text text="상품현황" variant="h4" className={clsN(styles.root__headline)} />
             <Stack className={clsN(styles['root__item-wrapper'])} alignItems="stretch" gap={1}>
                 {renderItemDataProvider}
             </Stack>
-        </Stack>
+        </Paper>
     );
 };
+ProductState.defaultProps = {
+    className: styles.root
+}
