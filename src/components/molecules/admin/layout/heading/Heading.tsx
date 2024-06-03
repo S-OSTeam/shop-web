@@ -58,4 +58,11 @@ export const Heading = (
         </Stack>
     );
 }
-export default Heading;
+Heading.defaultProps = {
+    className: styles.stack,
+    subtitle1: undefined,
+    subtitle2: undefined,
+    headingClsN: styles.stack__heading,
+    subtitle1ClsN: styles.stack__subtitle1,
+    subtitle2clsN: styles.stack__subtitle2
+}

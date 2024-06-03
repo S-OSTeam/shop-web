@@ -6,9 +6,9 @@ import style from './style/Avatar.module.scss';
 
 
 export interface AvatarProps extends MuiAvatarProps {
-    alt?: MuiAvatarProps['alt'];
+    alt: MuiAvatarProps['alt'];
     className?: MuiAvatarProps['className'];
-    children: React.ReactNode;
+    children?: React.ReactNode;
     ariaLabel?: MuiAvatarProps['aria-label'];
     variant?: MuiAvatarProps['variant'];
     src?: MuiAvatarProps['src'];
@@ -40,13 +40,14 @@ Avatar.propTypes = {
     alt: PropTypes.string,
     className: PropTypes.string,
     ariaLabel: PropTypes.string,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     variant: PropTypes.oneOf(['circular', 'rounded', 'square', undefined]),
     src: PropTypes.string,
 };
 Avatar.defaultProps = {
     alt: undefined,
     className: undefined,
+    children: undefined,
     ariaLabel: undefined,
     variant: 'circular',
     src: undefined,

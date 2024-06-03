@@ -1,11 +1,10 @@
-import Input from '@atoms/input/Input';
+import { Input } from '@atoms/input/Input';
 import type { Meta, StoryObj } from '@storybook/react';
 
 // eslint-disable-next-line storybook/story-exports
 const meta = {
     title: 'Components/Atoms/Input',
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
     component: Input,
     parameters: {
         layout: 'centered',

@@ -14,7 +14,7 @@ export interface ButtonProps extends MuiButtonProps {
     size?: MuiButtonProps['size'];
 }
 
-const Button = ({ id, className, variant, children, onClick, onMouseOver, size, disabled }: ButtonProps) => {
+const Button = ({ id, className, variant, children, onClick, onMouseOver, size, disabled , ...props}: ButtonProps) => {
     return (
         <MuiButton
             id={id}
@@ -25,6 +25,7 @@ const Button = ({ id, className, variant, children, onClick, onMouseOver, size, 
             onMouseOver={onMouseOver}
             disabled={disabled}
             size={size}
+            {...props}
         >
             {children}
         </MuiButton>
