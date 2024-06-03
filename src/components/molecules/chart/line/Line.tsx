@@ -1,6 +1,5 @@
 import React from 'react';
 import {LineChart, LineChartProps} from '@mui/x-charts';
-import PropTypes from 'prop-types';
 import clsN from 'classnames';
 import styles from './styles/Line.module.scss';
 
@@ -19,7 +18,7 @@ interface LineProps extends LineChartProps{
  * @param xAxis
  * @constructor
  */
-const Line =(
+export const Line =(
     {
         className,
         gridClsN,
@@ -37,10 +36,8 @@ const Line =(
         </div>
     );
 }
-Line.propTypes = {
-    className: PropTypes.string
-};
 Line.defaultProps = {
-    className: styles.chart
+    className: styles.chart,
+    gridClsN: styles.wrapper__grid
 }
 export default Line;

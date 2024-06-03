@@ -1,12 +1,9 @@
-/* eslint-disable */
 import React from 'react';
-import { Box, Breadcrumbs, Stack } from '@mui/material';
-import PropTypes from 'prop-types';
+import { Stack } from '@mui/material';
+import SearchBarAuto from '@molecules/searchBarAuto/SearchBarAuto';
+import UserLoginPlace from '@molecules/userLoginPlace/UserLoginPlace';
 import clsN from 'classnames';
 import styles from './styles/MainNav.module.scss';
-import SearchBarAuto from '@molecules/searchBarAuto/SearchBarAuto';
-import SearchBar from '@molecules/searchBar/SearchBar';
-import UserLoginPlace from '@molecules/userLoginPlace/UserLoginPlace';
 
 
 interface MainNavProps{

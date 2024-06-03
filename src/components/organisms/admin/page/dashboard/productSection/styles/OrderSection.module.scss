@@ -7,6 +7,9 @@
   padding: 16px;
   height: 100%;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
   // 기본 공통 텍스트 색상
   color: $color-text-dimgray;
   // 섹션 헤드라인
@@ -26,6 +29,10 @@
 
 // renderItems 가 리턴하는 컴포넌트 스타일
 .item-state{
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: space-between;
   padding: 16px;
   height: calc(100% / 3);
   // 분자 영역
@@ -48,6 +55,7 @@
   // 마지막 업데이트 시기
   &__date {
     @include font-size(caption);
+    @include font-weight(semibold);
     color: $color-text_darkblue;
   }
 

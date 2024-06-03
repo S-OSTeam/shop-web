@@ -1,10 +1,14 @@
 @import "index";
 // root
 .root{
+  width: 100%;
   background-color: #ffffff;
   position: relative;
   padding: 16px;
   border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
   // 아이콘 영역
   &__icon-place{
     height: 100%;
