@@ -3,8 +3,9 @@ import AnnualIncome from '@organisms/admin/page/dashboard/chart/annualIncome/Ann
 import { Stack } from '@mui/material';
 // import PropTypes from 'prop-types';
 import { ProductState } from '@organisms/admin/page/dashboard/productSection/ProductState';
+import { InquiryListView } from '@organisms/admin/page/dashboard/inquiryListView/inquiryListView';
 import Orders from '@organisms/admin/page/dashboard/orders/Orders';
-import Heading from '@molecules/admin/layout/heading/Heading';
+import { Heading } from '@molecules/admin/layout/heading/Heading';
 import clsN from 'classnames';
 import styles from './styles/Dashboard.module.scss';
 
@@ -33,12 +34,18 @@ const DashboardTemplate = (
         <Stack className={clsN(styles.main, className)} spacing={1}>
             {headline}
             <Orders/>
-            {/*  */}
+            {/* 중앙 영역 */}
             <Stack direction='row' className={clsN(styles.stack)} justifyContent='space-between' gap={1}>
                 <AnnualIncome className={clsN(chartClsN, styles.stack__chart)}/>
                 <ProductState className={clsN(styles['stack__product-state'])}/>
             </Stack>
+            {/* 하단 영역 */}
+            <InquiryListView/>
         </Stack>
     );
+}
+DashboardTemplate.defaultProps = {
+    className: styles.main,
+    chartClsN: styles.stack__chart
 }
 export default DashboardTemplate;

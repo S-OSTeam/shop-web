@@ -25,4 +25,9 @@ const ListItemButton = (
         </MuiListItemBtn>
     )
 }
+ListItemButton.defaultProps = {
+    onClick: undefined,
+    className: undefined,
+    children: undefined
+}
 export default ListItemButton;
