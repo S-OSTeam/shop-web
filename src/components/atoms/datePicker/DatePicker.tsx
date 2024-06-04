@@ -14,13 +14,13 @@ import styles from './styles/DatePicler.module.scss';
 const DatePicker = <TData extends Dayjs>({
     className,
     label,
+    value,
+    onChange,
     slotProps,
 }: MuiDatePickerProps<TData> & {
     className?: string;
     label?: React.ReactNode;
 }): React.ReactElement => {
-    /** @type {Dayjs | null} 날짜 */
-    const [dateVal, setDateVal] = React.useState<TData | null>(null);
     /* 렌더 */
     return (
         <MuiDatePicker
@@ -41,8 +41,8 @@ const DatePicker = <TData extends Dayjs>({
             }}
             className={clsN(className, styles['date-root__datepicker'])}
             label={label}
-            value={dateVal}
-            onChange={(newVal) => setDateVal(newVal)}
+            value={value}
+            onChange={onChange}
         />
     );
 };
