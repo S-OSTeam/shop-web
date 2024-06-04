@@ -67,37 +67,15 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
             확인
         </Button>
     );
-    // map 으로 나온 JSX 는 새로운 객체이므로 당연히 handleClick null 값의 새로운 객체가 만들어짐
-    // 고로 해당 컴포넌트가 지워질 경우 저장해야 할 경우면 저장 분기 처리하기
-
-    // 날짜 범위 조회 컴포넌트
-    // const DatePickerRender = dateLabels.map((item, idx) => {
-    //     const stateCont = [fromD, endD];
-    //     const setStateCont = [setFromD, setEndD];
-    //     // 구분 컴포넌트
-    //     const separatorJSX = idx !== 1 && <p className={clsN(styles['date-range__picker__separator'])} />;
-    //
-    //     return (
-    //         <>
-    //             <DatePicker
-    //                 className={clsN(styles['date-range__picker'], pickerClsN)}
-    //                 label={item}
-    //                 value={stateCont[idx]}
-    //                 onChange={(newVal) => setStateCont[idx](newVal)}
-    //             />
-    //             {separatorJSX}
-    //         </>
-    //     );
-    // });
-    // 위에꺼 다시
-    const DatePickerRender = (labels: string[], calenderStart: Dayjs | null, calenderEnd: Dayjs | null) => {
+    // 받은 인자로 DatePicker 컴포넌트 반환
+    const DatePickerRender = (labels: string[]) => {
         // 캘린더 시작일 컴포넌트
         const StartCalender = (
             <DatePicker
                 label={labels[0]}
                 className={clsN(styles['date-range__picker'], pickerClsN)}
-                value={calenderStart}
-                onChange={handleDateChange}
+                value={fromD}
+                onChange={(newValue) => setFromD(newValue)}
             />
         );
         // 캘린더 종료일 컴포넌트
@@ -105,8 +83,8 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
             <DatePicker
                 label={labels[1]}
                 className={clsN(styles['date-range__picker'], pickerClsN)}
-                value={calenderEnd}
-                onChange={handleDateChange}
+                value={endD}
+                onChange={(newValue) => setEndD(newValue)}
             />
         );
         return (
@@ -125,7 +103,7 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
                 direction="row"
                 boxShadow={3}
             >
-                {DatePickerRender(dateLabels, fromD, endD)}
+                {DatePickerRender(dateLabels)}
                 {dateSubmitBtn}
             </Stack>
         </LocalizationProvider>
@@ -146,10 +124,10 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
     React.useEffect(() => {
         if (fromD == null && endD == null) {
             setBtnText(btnIdleText);
-            console.log(`start ${fromD} | end ${endD}`);
+            console.log(`값 Null... start ${fromD} | end ${endD}`);
         }
         if (fromD !== null || endD !== null) {
-            console.log(`start ${fromD} | end ${endD}`);
+            console.log(`값 받음... start ${fromD} | end ${endD}`);
         }
         setDatePicked(false);
     }, [datePicked]);
