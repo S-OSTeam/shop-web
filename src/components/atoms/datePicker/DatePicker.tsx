@@ -20,7 +20,7 @@ const DatePicker = <TData extends Dayjs>({
     label?: React.ReactNode;
 }): React.ReactElement => {
     /** @type {Dayjs | null} 날짜 */
-    const [dValue, setdValue] = React.useState<Dayjs | null>(null);
+    const [dateVal, setDateVal] = React.useState<TData | null>(null);
     /* 렌더 */
     return (
         <MuiDatePicker
@@ -41,8 +41,8 @@ const DatePicker = <TData extends Dayjs>({
             }}
             className={clsN(className, styles['date-root__datepicker'])}
             label={label}
-            value={dValue}
-            onChange={(newVal) => setdValue(newVal)}
+            value={dateVal}
+            onChange={(newVal) => setDateVal(newVal)}
         />
     );
 };
