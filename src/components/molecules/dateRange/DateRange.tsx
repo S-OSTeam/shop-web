@@ -25,8 +25,9 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
     const [fromD, setFromD] = React.useState<Dayjs | null>(null);
     const [endD, setEndD] = React.useState<Dayjs | null>(null);
     // 캘린더 입력 이벤트
-    const handleDateChange = (date: Dayjs | null) => {
-        setFromD(date);
+    const handleDateChange = (_form: Dayjs | null, _end: Dayjs | null) => {
+        setFromD(_form);
+        setEndD(_end);
     };
     // 버튼 토글 상태
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -75,7 +76,9 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
                 label={labels[0]}
                 className={clsN(styles['date-range__picker'], pickerClsN)}
                 value={fromD}
-                onChange={(newValue) => setFromD(newValue)}
+                onChange={(newValue) => {
+                    setFromD(newValue);
+                }}
             />
         );
         // 캘린더 종료일 컴포넌트
@@ -120,8 +123,12 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
             {btnText}
         </Button>
     );
-
+    const isFirstRender = React.useRef(true);
     React.useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
         if (fromD == null && endD == null) {
             setBtnText(btnIdleText);
             console.log(`값 Null... start ${fromD} | end ${endD}`);
@@ -130,7 +137,7 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
             console.log(`값 받음... start ${fromD} | end ${endD}`);
         }
         setDatePicked(false);
-    }, [datePicked]);
+    }, [fromD, endD, datePicked]);
 
     return (
         <Stack className={clsN(styles['date-range-stack'])}>
