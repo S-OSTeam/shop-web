@@ -1,6 +1,28 @@
 @import "index";
 
 // root
-.fs-root{
-
+.filter-root{
+  width: 100%;
+  //
+  &__button{
+    margin-left: auto;
+    &-clear{
+      background-color: rgba(0,0,0,0);
+      border-color: $background-dimgray;
+      color: $color-text-dimgray;
+      &:hover{
+        background-color: $background-dimgray;
+        color: $color-text-white;
+        border-color: $background-dimgray;
+      }
+    }
+    &-search{
+      margin-left: 4px;
+      background-color: $background-primary;
+      color: $color-text-white;
+      &:hover{
+        background-color: $background-hover;
+      }
+    }
+  }
 }
