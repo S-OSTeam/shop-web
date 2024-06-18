@@ -1,30 +1,25 @@
 import React from 'react';
 import { Collapse as MuiCollapse, CollapseProps as MuiCollapseProps } from '@mui/material';
-import PropTypes from 'prop-types';
 import clsN from 'classnames';
 import styles from './styles/Collapse.module.scss';
 
 interface CollapseProps extends MuiCollapseProps {
+    // root 클래스명
     className?: string;
+    // 내부 컨텐츠
     children: React.ReactNode;
-    isOpen?: boolean;
+    // 열람 여부
+    in?: boolean;
 }
 
-const Collapse = ({children, className, isOpen}:CollapseProps) => {
-
-    return(
-        <MuiCollapse className={clsN(className,styles.collapse)} in={isOpen}>
-            {children}
+export const Collapse = ({ ...props }: CollapseProps) => {
+    return (
+        <MuiCollapse className={clsN(props.className, styles.collapse)} in={props.in}>
+            {props.children}
         </MuiCollapse>
-    )
-}
-Collapse.propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    isOpen: PropTypes.bool,
-}
+    );
+};
 Collapse.defaultProps = {
     className: styles.collapse,
-    isOpen: undefined,
-}
-export default Collapse;
+    in: undefined,
+};
