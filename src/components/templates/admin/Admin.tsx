@@ -6,7 +6,7 @@ import clsN from 'classnames';
 import styles from './styles/Admin.module.scss';
 import { NavigateItem, NavigateITF } from '@util/test/data/admin/navigate/Navigate';
 import LinkBtn from '@molecules/link/Link';
-import CollapsedList from '@molecules/collapsedList/CollapsedList';
+import CollapsedListUnUsed from '@molecules/collapsedList_origin/CollapsedListUnUsed';
 import { Dashboard, Help, LocalShipping, Payment, Person, ShoppingBag } from '@mui/icons-material';
 import MainNav from '@organisms/admin/mainNav/MainNav';
 import { useLocationHook } from '@hooks/useLocation.hook';
@@ -111,7 +111,7 @@ const AdminTemplate = ({ children }: AdminTemplateProps) => {
         // 여러 아이템이 있는 경우 콜랩스로
         if (depthEle) {
             return (
-                <CollapsedList
+                <CollapsedListUnUsed
                     className={clsN(styles.collapse, styles['font-color'], styles['parent-list'])}
                     listBtnClsN={clsN(styles['collapse__button'], styles['btn-set'])}
                     listIconClsN={clsN(styles['collapse__button__icon'], styles['font-color'])}
