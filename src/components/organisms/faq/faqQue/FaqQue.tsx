@@ -3,7 +3,7 @@ import React from 'react';
 import List from '@components/layout/list/List';
 import searchItemAtom, { searchItemType } from '@recoil/atoms/cs/searchItemAtom';
 import { useRecoilCallback, useRecoilValue, useSetRecoilState } from 'recoil';
-import CollapsedList from '@molecules/collapsedList/CollapsedList';
+import CollapsedListUnUsed from '@molecules/collapsedList_origin/CollapsedListUnUsed';
 import styles from './styles/FaqQue.module.scss';
 import clsN from 'classnames';
 
@@ -33,21 +33,20 @@ interface FaqQueProps {
     optionData: FaqOptions[];
 }
 
-const FaqQue = (
-    {
-        className,
-        wrapperClsN,
-        itemClsN,
-        expendClsN,
-        buttonClsN,
-        isAllowed,
-        parentCall,
-        optionData,
-    }: FaqQueProps) => {
+const FaqQue = ({
+    className,
+    wrapperClsN,
+    itemClsN,
+    expendClsN,
+    buttonClsN,
+    isAllowed,
+    parentCall,
+    optionData,
+}: FaqQueProps) => {
     /*
-    * 아톰이 바뀌므로 그냥 map 으로 렌더 처리하기
-    * 처음 렌더시 useEffect로 마운트 해서 데이터 파일들 모두 넣기
-    * */
+     * 아톰이 바뀌므로 그냥 map 으로 렌더 처리하기
+     * 처음 렌더시 useEffect로 마운트 해서 데이터 파일들 모두 넣기
+     * */
 
     // 아톰 값 수정하기 위해 훅 사용
     const setSearchAtom = useSetRecoilState(searchItemAtom);
@@ -75,21 +74,21 @@ const FaqQue = (
         // 불변성 유지, 원본 복사
         const newCollState = [...annRow];
         // 인덱스 반전처리
-        newCollState[idx] = ! newCollState[idx];
+        newCollState[idx] = !newCollState[idx];
         // 업데이트
         setAnnRow(newCollState);
-    }
+    };
 
     // expendMore 이벤트 처리
     const handleExpend = () => {
-        setCurrentCount(prevState => prevState + 5);
+        setCurrentCount((prevState) => prevState + 5);
     };
     // 랜더 함수
     const resultTemp = searchResult.slice(0, currentCount).map((item, idx) => {
         /**
          * 보여줄 컨텐츠 갯수 상태 까지 자름
          */
-            // 속성
+        // 속성
         const { id, question, answer } = item;
         // 상태
         const collState = collRow[idx];
@@ -98,7 +97,7 @@ const FaqQue = (
             collapseClick(idx);
         };
         return (
-            <CollapsedList
+            <CollapsedListUnUsed
                 primary={question}
                 innerChildren={answer}
                 isOpen={collState}
@@ -115,11 +114,8 @@ const FaqQue = (
         );
     });
 
-
-
     // 버튼 참 거짓 여부 값 설정
-    const checkExpand = (searchResult.length > currentCount);
-
+    const checkExpand = searchResult.length > currentCount;
 
     // coll 상태 초기화 이벤트
     // 아톰이 바뀌거나 마운트시
@@ -128,11 +124,10 @@ const FaqQue = (
         const tempState = collRow.map(() => false);
         setCollRow(tempState);
     }, []);
-    React.useEffect(()=>{
-
+    React.useEffect(() => {
         // 객체 배열의 객체 특정 키값을 제외한 나머지를 가져옴
         // const prevData:CsObject[] = CsSuggest.map(({announce, ...rest})=> {
-    },[]);
+    }, []);
     // searchResult(아톰) 변환시 CurrentCount 0 초기화
     React.useEffect(() => {
         setCurrentCount(5);
@@ -143,24 +138,20 @@ const FaqQue = (
     }, [resultTemp]);
 
     return (
-        <Box component='div' className={clsN(className, styles['wrapper'])}>
-            <Box component='div' className={clsN(styles['wrapper__headline'])}>
-                <Text text='자주 묻는 질문들' className={clsN(styles['wrapper__headline__title'])} />
-                <Text text='ALL' className={clsN(styles['wrapper__headline__subtitle'])} />
-
+        <Box component="div" className={clsN(className, styles['wrapper'])}>
+            <Box component="div" className={clsN(styles['wrapper__headline'])}>
+                <Text text="자주 묻는 질문들" className={clsN(styles['wrapper__headline__title'])} />
+                <Text text="ALL" className={clsN(styles['wrapper__headline__subtitle'])} />
             </Box>
-            <List className={clsN(wrapperClsN, styles['list'], styles['list-wrapper'])}>
-                {resultTemp}
-            </List>
-            <Box component='div' className={clsN(expendClsN, styles['expend'])}>
-                {isMoreExpand &&
+            <List className={clsN(wrapperClsN, styles['list'], styles['list-wrapper'])}>{resultTemp}</List>
+            <Box component="div" className={clsN(expendClsN, styles['expend'])}>
+                {isMoreExpand && (
                     <Button className={clsN(buttonClsN, styles['expend__button'])} onClick={handleExpend}>
                         더보기
                     </Button>
-                }
+                )}
             </Box>
         </Box>
-
     );
 };
 
