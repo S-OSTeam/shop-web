@@ -9,11 +9,12 @@ export interface IconBtnProps extends MuiIconButtonProps {
     iconClsN?: string;
     icon: React.ReactNode;
     fontSize?: IconProps['fontSize'];
+    onClick?: MuiIconButtonProps['onClick'];
 }
 
-export const IconButton = ({ className, iconClsN, icon, fontSize }: IconBtnProps) => {
+const IconButton = ({ className, iconClsN, icon, fontSize, onClick }: IconBtnProps) => {
     return (
-        <MuiIconButton className={clsN(className, `${style.btnIcon}`)}>
+        <MuiIconButton className={clsN(className, `${style.btnIcon}`)} onClick={onClick}>
             <Icon icon={icon} fontSize={fontSize} className={clsN(iconClsN, `${style.icon}`)} />
         </MuiIconButton>
     );
@@ -22,5 +23,6 @@ IconButton.defaultProps = {
     className: `${style.btnIcon}`,
     iconClsN: `${style.icon}`,
     fontSize: 'inherit',
+    onClick: undefined,
 };
 export default IconButton;
