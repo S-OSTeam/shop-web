@@ -1,49 +1,92 @@
 import React from 'react';
-import { TableCell, TableRow } from '@mui/material';
-import { CollapsedClassesProps, CollapsedList } from '@molecules/collapsedList/CollapsedList';
+import { Paper, Table, TableBody, TableContainer, TableHead } from '@mui/material';
 import clsN from 'classnames';
 import styles from './styles/CollapsedTable.module.scss';
 
-export interface TableClassesProps {
-    // T-Row
-    tableRow?: string;
-    // T-Cell
-    tableCell?: string;
+interface CollapsedTableClasses {
+    // root: TableContainer 클래스명
+    tContainerClsN?: string;
+    // TableContainer > Table 클래스명
+    tableClsN?: string;
+    // TableHead 클래스명
+    tableHeadClsN?: string;
+    // TableBody 클래스명
+    tableBodyClsN?: string;
 }
 
-interface CollapsedTableProps {
-    // 테이블 클래스명 영역
-    tableClasses?: TableClassesProps;
-    // Collapsed 클래스명 영역
-    collapsedClasses?: CollapsedClassesProps;
-    // collapsed 의 toggle 상태
-    in?: boolean;
-    primaryContent: React.ReactNode;
-    secondaryContent: React.ReactNode;
+interface CollapsedTableProps<T> {
+    // 클래스 모음
+    classesList?: CollapsedTableClasses;
+    // Table Aria-label
+    tAreaLabel: string;
+    // 제너릭 타입인 TableHead 데이터들
+    tHeadItems: T[];
+    // 제너릭 타입인 TableBody 데이터들
+    tBodyItems: T[];
+    // 제너릭 Collapsed 데이터들
+    tCollapsedItems: T[];
+    // T 타입에 따른 TableHead 내부 컨텐츠 랜더
+    tHeadRender: (items: T) => React.ReactElement;
+    // T 타입에 따른 TableBody 내부 컨텐츠 랜더
+    tBodyRender: (items: T) => React.ReactElement;
+    // T 타입에 따른 CollapsedItem 내부 컨텐츠 랜더
+    tCollapsedRender: (items: T) => React.ReactElement;
 }
 
-export const CollapsedTable = ({ ...props }: CollapsedTableProps) => {
+export const CollapsedTable = <T,>({ ...props }: CollapsedTableProps<T>) => {
     /* 상태 */
+    const { classesList, tAreaLabel, tHeadItems, tBodyItems, tCollapsedItems } = props;
+    // 부모인 CollapsedTable 컴포넌트가 자식들의 상태 관리하기
+    const tableLength = tBodyItems.length;
+    // 현재 리스트들의 on/off 배열 상태
+    const [coll, setColl] = React.useState<boolean[]>(() => Array(tableLength).fill(false));
 
     /* 함수 */
-    /* TSX 요소 */
+    // coll 상태 전부 off 로 초기화
+    const resetCollState = () => {
+        setColl((prevState) => Array(prevState.length).fill(false));
+    };
+    // 해당 배열 인덱스의 값 반전 처리
+    const setArrayOfColl = (idx: number) => {
+        setColl((prevState) => {
+            const newState = [...prevState]; // 이전상태 복사
+            newState[idx] = !newState[idx]; // 해당 인덱스 반전 처리
+            return newState; // 수정된 상태 반환
+        });
+    };
+    // TableCell 제공 : <Thead>
+    const renderTHeadItems = tHeadItems.map((item) => {
+        return props.tHeadRender(item);
+    });
+    // TableCell 제공 : <Tbody> 컨텐츠
+    const renderTBodyItems = tBodyItems.map((item) => {
+        return props.tBodyRender(item);
+    });
+    // TableCell Body->Collapsed 컨텐츠
+    const renderCollItems = tCollapsedItems.map((item) => {
+        return props.tCollapsedRender(item);
+    });
 
+    /* TSX 요소 */
+    // T-Head
+    const TableHeadProvider = <TableHead>{renderTHeadItems}</TableHead>;
+    // T-Body
+    const TableBodyProvider = (
+        <TableBody>
+            {renderTBodyItems}
+            {renderCollItems}
+        </TableBody>
+    );
     /* 렌더 */
+    // CollapsedTableItem 들을 렌더함
+
     return (
-        <TableRow className={clsN(styles['table-row'], props.tableClasses?.tableRow)}>
-            <TableCell className={clsN(styles['table-rot__cell'], props.tableClasses?.tableCell)}>
-                <CollapsedList
-                    classes={{
-                        wrapper: props.collapsedClasses?.wrapper,
-                        listItem: props.collapsedClasses?.listItem,
-                        collapsed: props.collapsedClasses?.collapsed,
-                    }}
-                    primaryCont={props.primaryContent}
-                    secondaryCont={props.secondaryContent}
-                    in={props.in}
-                />
-            </TableCell>
-        </TableRow>
+        <TableContainer component={Paper} className={clsN(classesList?.tContainerClsN)}>
+            <Table aria-label={tAreaLabel} className={clsN(classesList?.tableClsN)}>
+                {TableHeadProvider}
+                {TableBodyProvider}
+            </Table>
+        </TableContainer>
     );
 };
 CollapsedTable.defaultProps = {
