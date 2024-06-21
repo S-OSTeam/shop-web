@@ -1,21 +1,17 @@
 @import "index";
 
-// 테이블 row
-.table-row{
-  // 테이블 cell
-  &__cell{
+// 테이블 콘테이너(root)
+.table-container{
 
-  }
 }
-
-// 콜렙스 root
-.collapsed-wrapper{
-  // 리스트 컨텐츠
-  &__list-item{
+// 테이블 컴포넌트 클래스명
+.table{
+  // 테이블 헤드
+  &__head{
 
   }
-  // collapsed
-  &__collapsed{
+  // 테이블 바디
+  &__body{
 
   }
 }
