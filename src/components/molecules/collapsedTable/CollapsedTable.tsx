@@ -1,9 +1,10 @@
+/* eslint-disable */
 import React from 'react';
-import { Paper, Table, TableBody, TableContainer, TableHead } from '@mui/material';
+import { Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import clsN from 'classnames';
 import styles from './styles/CollapsedTable.module.scss';
 
-interface CollapsedTableClasses {
+export interface CollapsedTableClasses {
     // root: TableContainer 클래스명
     tContainerClsN?: string;
     // TableContainer > Table 클래스명
@@ -71,11 +72,11 @@ export const CollapsedTable = <T,>({ ...props }: CollapsedTableProps<T>) => {
     // T-Head
     const TableHeadProvider = <TableHead>{renderTHeadItems}</TableHead>;
     // T-Body
-    const TableBodyProvider = (
-        <TableBody>
+    const TableRowsProvider = (
+        <TableRow>
             {renderTBodyItems}
             {renderCollItems}
-        </TableBody>
+        </TableRow>
     );
     /* 렌더 */
     // CollapsedTableItem 들을 렌더함
@@ -84,20 +85,20 @@ export const CollapsedTable = <T,>({ ...props }: CollapsedTableProps<T>) => {
         <TableContainer component={Paper} className={clsN(classesList?.tContainerClsN)}>
             <Table aria-label={tAreaLabel} className={clsN(classesList?.tableClsN)}>
                 {TableHeadProvider}
-                {TableBodyProvider}
+                <TableBody>{TableRowsProvider}</TableBody>
             </Table>
         </TableContainer>
     );
 };
 CollapsedTable.defaultProps = {
-    tableClasses: {
-        tableRow: styles['table-row'],
-        tableCell: styles['table-rot__cell'],
+    classesList: {
+        // root: TableContainer 클래스명
+        tContainerClsN: styles['table-container'],
+        // TableContainer > Table 클래스명
+        tableClsN: styles.table,
+        // TableHead 클래스명
+        tableHeadClsN: styles.table__head,
+        // TableBody 클래스명
+        tableBodyClsN: styles.table__body,
     },
-    collapsedClasses: {
-        wrapper: styles['collapsed-wrapper'],
-        listItem: styles['collapsed-wrapper__list-item'],
-        collapsed: styles['collapsed-wrapper__collapsed'],
-    },
-    in: undefined,
 };
