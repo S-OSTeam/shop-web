@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
 import { Box, Divider } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 import Text from '@components/atoms/text/Text';
 import Input from '@components/atoms/input/Input';
 import SaveId from '@components/organisms/login/saveId/SaveId';
 import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
+import { LoginFormDataInterface } from '@interface/LoginFormDataInterface';
+import { useMutation } from '@apollo/client';
+import { Login } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
-const Login = () => {
+const LoginOrganisms = () => {
     const isInMobile = useDomSizeCheckHook(768);
+    const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        id: '',
+    const [formData, setFormData] = useState<LoginFormDataInterface>({
         pwd: '',
+        userId: '',
+        email: '',
+        snsId: '',
+        sns: '',
     });
+
+    const [login, { data }] = useMutation(Login);
 
     const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         const { name, value } = event.target;
@@ -22,6 +33,21 @@ const Login = () => {
             ...formData,
             [name]: value,
         });
+    };
+
+    const handleSignUp = () => {
+        navigate('/signup');
+    };
+
+    const handleFormSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        try {
+            const response = await login({ variables: { request: formData } });
+            console.log('Login success :', response.data);
+            console.log(data);
+        } catch (error) {
+            console.error('login error:', error);
+        }
     };
 
     return (
@@ -37,6 +63,7 @@ const Login = () => {
                         <Button
                             className={clsN(`${style['mobile-login-wrapper__btn-wrapper__signup-btn']}`)}
                             variant="outlined"
+                            onClick={handleSignUp}
                         >
                             회원가입
                         </Button>
@@ -70,13 +97,18 @@ const Login = () => {
                         onChange={handleInputChange}
                     />
                     <SaveId className={clsN(`${style['login-wrapper__save-id']}`)} />
-                    <Button className={clsN(`${style['login-wrapper__login-btn']}`)} aria-label="Button label">
+                    <Button
+                        className={clsN(`${style['login-wrapper__login-btn']}`)}
+                        aria-label="Button label"
+                        onClick={handleFormSubmit}
+                    >
                         로그인
                     </Button>
                     <Box className={clsN(`${style['login-wrapper__btn-wrapper']}`)}>
                         <Button
                             className={clsN(`${style['login-wrapper__btn-wrapper__signup-btn']}`)}
                             variant="outlined"
+                            onClick={handleSignUp}
                         >
                             회원가입
                         </Button>
@@ -90,4 +122,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default LoginOrganisms;
