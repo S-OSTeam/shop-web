@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
 import Text from '@components/atoms/text/Text';
 import Input from '@components/atoms/input/Input';
 import SaveId from '@components/organisms/login/saveId/SaveId';
@@ -58,6 +57,21 @@ const LoginOrganisms = () => {
                         <Divider variant="middle" textAlign="center">
                             또는
                         </Divider>
+                    </Box>
+                    <Box className={clsN(`${style['mobile-login-wrapper__input-wrapper']}`)}>
+                        <Input
+                            className={clsN(`${style['mobile-login-wrapper__input-wrapper__input-id']}`)}
+                            placeholder="아이디"
+                            variant="standard"
+                            onChange={handleInputChange}
+                        />
+                        <Input
+                            className={clsN(`${style['mobile-login-wrapper__input-wrapper__input-pwd']}`)}
+                            placeholder="비밀번호"
+                            variant="standard"
+                            type="password"
+                            onChange={handleInputChange}
+                        />
                     </Box>
                     <Box className={clsN(`${style['mobile-login-wrapper__btn-wrapper']}`)}>
                         <Button

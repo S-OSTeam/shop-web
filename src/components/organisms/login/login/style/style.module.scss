@@ -6,12 +6,9 @@
    justify-content: center;
    flex-direction: column;
    margin-top:10rem;
- 
-
    &__title{
     font-size: $title-font-size-S;
     margin-bottom:5rem;
-   
    }
   
     &__input-id,&__input-pwd{
@@ -22,7 +19,6 @@
         padding: 5px;
     }
     &__save-id{
-   
         margin-right: 16rem;
         margin-left: -4.5rem;
     }
@@ -58,25 +54,26 @@
    align-items: center;
    justify-content: center;
    flex-direction: column;
-   ::before,::after{
-    border: 0.1px solid $black-color;
-}
+   &__input-wrapper{
+     width: 15rem;
+     height: auto;
+     &__input-id,&__input-pwd{
+       height: auto;
+        padding:0.1em;
+     }
+   }
    &__title{
     font-size: 14px;  
     margin-top: 1.5rem;
     width: 280px;
-}
-
+   }
    &__text{
     font-size: 12px;   
    }
    &__social-wrapper{
     width: 390px;
-   
    }
    &__btn-wrapper{
-    
-
      &__signup-btn,&__login-btn{
          width: 120px;
          height: 35px;
@@ -88,8 +85,5 @@
          border: 1px solid $gray-color;
          margin-top: 1rem;
      }
-
- }
- 
-
+   }
 }
