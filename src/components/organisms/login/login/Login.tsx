@@ -8,6 +8,7 @@ import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { LoginFormDataInterface } from '@interface/LoginFormDataInterface';
 import { useMutation } from '@apollo/client';
+import { setCookie } from '@util/CookieUtil';
 import { Login } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
@@ -43,6 +44,10 @@ const LoginOrganisms = () => {
         try {
             const response = await login({ variables: { request: formData } });
             console.log('Login success :', response.data);
+
+            const { accessToken, refreshToken } = response.data.login;
+            setCookie('accessToken', accessToken, { path: '/' });
+            setCookie('refreshToken', refreshToken, { path: '/' });
             console.log(data);
         } catch (error) {
             console.error('login error:', error);
@@ -84,6 +89,7 @@ const LoginOrganisms = () => {
                         <Button
                             className={clsN(`${style['mobile-login-wrapper__btn-wrapper__login-btn']}`)}
                             variant="outlined"
+                            onClick={handleFormSubmit}
                         >
                             로그인
                         </Button>
