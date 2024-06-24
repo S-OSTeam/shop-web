@@ -41,10 +41,16 @@ const LoginOrganisms = () => {
     });
 
     const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { name, value } = event.target;
         setFormData({
             ...formData,
-            [name]: value,
+            userId: event.target.value.toString(),
+        });
+    };
+
+    const handleInputPwdChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+        setFormData({
+            ...formData,
+            pwd: event.target.value.toString(),
         });
     };
 
@@ -89,7 +95,7 @@ const LoginOrganisms = () => {
                             placeholder="비밀번호"
                             variant="standard"
                             type="password"
-                            onChange={handleInputChange}
+                            onChange={handleInputPwdChange}
                         />
                     </Box>
                     <Box className={clsN(`${style['mobile-login-wrapper__btn-wrapper']}`)}>
@@ -128,7 +134,7 @@ const LoginOrganisms = () => {
                         placeholder="비밀번호"
                         variant="standard"
                         type="password"
-                        onChange={handleInputChange}
+                        onChange={handleInputPwdChange}
                     />
                     <SaveId className={clsN(`${style['login-wrapper__save-id']}`)} />
                     <Button
