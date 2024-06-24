@@ -7,7 +7,7 @@ import SaveId from '@components/organisms/login/saveId/SaveId';
 import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { LoginFormDataInterface } from '@interface/LoginFormDataInterface';
-import { useMutation } from '@apollo/client';
+import useGraphQL from '@hooks/useGraphQL';
 import { setCookie } from '@util/CookieUtil';
 import { Login } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import clsN from 'classnames';
@@ -25,7 +25,20 @@ const LoginOrganisms = () => {
         sns: '',
     });
 
-    const [login, { data }] = useMutation(Login);
+    const { data, gql: login } = useGraphQL({
+        query: Login,
+        type: 'mutation',
+        request: {
+            ...formData,
+        },
+        option: {
+            context: {
+                headers: {
+                    'Authorization-mac': '2C-6D-C1-87-E0-B5',
+                },
+            },
+        },
+    });
 
     const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         const { name, value } = event.target;
@@ -41,8 +54,9 @@ const LoginOrganisms = () => {
 
     const handleFormSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+
         try {
-            const response = await login({ variables: { request: formData } });
+            const response = await login().then();
             console.log('Login success :', response.data);
 
             const { accessToken, refreshToken } = response.data.login;
