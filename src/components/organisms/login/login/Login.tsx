@@ -6,7 +6,7 @@ import Input from '@components/atoms/input/Input';
 import SaveId from '@components/organisms/login/saveId/SaveId';
 import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import { LoginFormDataInterface } from '@interface/LoginFormDataInterface';
+
 import useGraphQL from '@hooks/useGraphQL';
 import { setCookie } from '@util/CookieUtil';
 import { Login } from '@api/apollo/gql/mutations/LoginMutation.gql';
@@ -17,27 +17,17 @@ const LoginOrganisms = () => {
     const isInMobile = useDomSizeCheckHook(768);
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState<LoginFormDataInterface>({
+    const [formData, setFormData] = useState({
         pwd: '',
         userId: '',
-        email: '',
-        snsId: '',
-        sns: '',
+        sns: 'NORMAL',
     });
 
-    const { data, gql: login } = useGraphQL({
+    const { data, refetch: login } = useGraphQL({
         query: Login,
         type: 'mutation',
-        request: {
-            ...formData,
-        },
-        option: {
-            context: {
-                headers: {
-                    'Authorization-mac': '2C-6D-C1-87-E0-B5',
-                },
-            },
-        },
+        request: { ...formData },
+        option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
 
     const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -58,17 +48,16 @@ const LoginOrganisms = () => {
         navigate('/signup');
     };
 
-    const handleFormSubmit = async (event: React.FormEvent) => {
+    const handleFormSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
         try {
-            const response = await login().then();
-            console.log('Login success :', response.data);
+            login().then();
+            console.log('Login success :', data.data);
 
-            const { accessToken, refreshToken } = response.data.login;
+            const { accessToken, refreshToken } = data.data.login;
             setCookie('accessToken', accessToken, { path: '/' });
             setCookie('refreshToken', refreshToken, { path: '/' });
-            console.log(data);
         } catch (error) {
             console.error('login error:', error);
         }
