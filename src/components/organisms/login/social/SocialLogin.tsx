@@ -18,6 +18,31 @@ const SocialLogin = () => {
         { name: 'google', text: '구글 로그인' },
     ];
 
+    const handleNaverLogin = () => {
+        console.log('NaverLogin is clicked!');
+    };
+
+    const handleKakaoLogin = () => {
+        console.log('KakaoLogin is clicked!');
+    };
+
+    const handleGoogleLogin = () => {
+        console.log('GoogleLogin is clicked!');
+    };
+
+    const getPlatformHandler = (platformName: string) => {
+        switch (platformName) {
+            case 'naver':
+                return handleNaverLogin;
+            case 'kakao':
+                return handleKakaoLogin;
+            case 'google':
+                return handleGoogleLogin;
+            default:
+                return undefined;
+        }
+    };
+
     return (
         <div>
             <Box className={clsN(`${style['social-login-wrapper']}`)}>
@@ -52,6 +77,7 @@ const SocialLogin = () => {
                                         />
                                     }
                                     text={platform.text}
+                                    onClick={getPlatformHandler(platform.name)}
                                 />
                             ))}
                         </Box>
@@ -68,7 +94,11 @@ const SocialLogin = () => {
                         />
                         <Box className={clsN(`${style['social-login-wrapper__icon-wrapper']}`)}>
                             {socialPlatforms.map((platform) => (
-                                <Button key={platform.name} className={clsN(style.btn)}>
+                                <Button
+                                    key={platform.name}
+                                    className={clsN(style.btn)}
+                                    onClick={getPlatformHandler(platform.name)}
+                                >
                                     <CustomIcon
                                         name={platform.name}
                                         className={clsN(`${style[`social-login-wrapper__${platform.name}-icon`]}`)}
