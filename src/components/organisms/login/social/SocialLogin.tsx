@@ -20,11 +20,8 @@ const SocialLogin = () => {
 
     const handleNaverLogin = () => {
         console.log('NaverLogin is clicked!');
-        const NAVER_CLIENT_ID = 'Jr_uoE5CqdiK5VAarAZE';
-        const REDIRECT_URI = 'http://localhost:3000/login';
         const STATE = false;
-        const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
-
+        const NAVER_AUTH_URL = `${process.env.REACT_APP_NAVER_AUTH_URL}&state=${STATE}&client_id=${process.env.NAVER_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}`;
         window.open(NAVER_AUTH_URL, '_blank', 'width=500,height=600');
     };
 
