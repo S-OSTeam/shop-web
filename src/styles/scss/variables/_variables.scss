@@ -133,6 +133,11 @@ $title-l: 54px;
 $nav-li-hover: #61dafb;
 $nav-li-depth-hover: #707070;
 
+// 소셜로그인 색상
+$naver-background : #03C75A;
+$kakao-background : #FEE500;
+$google-background: #F2F2F2;
+
 :root {
   --breakpoint-desktop: #{$breakpoint-desktop};
   --breakpoint-tablet: #{$breakpoint-tablet};
@@ -162,4 +167,8 @@ $nav-li-depth-hover: #707070;
 
   --nav-li-hover: #{$nav-li-hover};
   --nav-li-depth-hover: #{$nav-li-depth-hover};
+
+  --background-color-naver : #{$naver-background};
+  --background-color-kakao : #{$kakao-background};
+  --background-color-google : #{$google-background};
 }

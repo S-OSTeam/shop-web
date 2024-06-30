@@ -1,15 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import clsN from 'classnames';
 import Image from '@atoms/source/image/Image';
 import Button from '@atoms/button/Button';
+import clsN from 'classnames';
 import style from './style/ImageButton.module.scss';
 
 export interface ImageBtnProps {
     className?: string;
     imgClsN?: string;
     imgPath: string;
-    alt?: string
+    alt?: string;
 }
 
 
@@ -21,7 +20,6 @@ const ImageButton = (
         alt
     }:ImageBtnProps) => {
     return(
-
         <Button
             className={clsN(className, `${style.imgButton}`)}
         >
@@ -32,11 +30,6 @@ const ImageButton = (
             />
         </Button>
     )
-};
-ImageButton.propTypes = {
-    ...Image.propTypes,
-    imgClsN:  PropTypes.string,
-    className: PropTypes.string,
 };
 ImageButton.defaultProps = {
     ...Image.defaultProps,

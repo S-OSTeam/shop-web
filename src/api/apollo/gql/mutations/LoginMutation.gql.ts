@@ -7,11 +7,10 @@ export const SIGN_UP = gql`
 `;
 
 export const Login = gql`
-    mutation LOGIN($request: LoginRequest!) {
+    mutation ($request: LoginRequest!) {
         login(request: $request) {
             accessToken
             refreshToken
-            issuedAt
         }
     }
 `;
