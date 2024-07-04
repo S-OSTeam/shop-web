@@ -14,3 +14,11 @@ export const Login = gql`
         }
     }
 `;
+export const NAVER_LOGIN = gql`
+    mutation NaverLogin($request: NaverRequest!) {
+        naverLogin(request: $request) {
+            code
+            state
+        }
+    }
+`;
