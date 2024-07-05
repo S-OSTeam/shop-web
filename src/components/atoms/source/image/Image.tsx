@@ -10,7 +10,7 @@ export interface ImgProps {
 }
 
 const Image = ({ imgPath, className, alt }: ImgProps) => {
-    return <img className={clsN(className, `${style.img}`)} src={require(`${imgPath}`)} alt={alt} />;
+    return <img className={clsN(className, `${style.img}`)} src={`${imgPath}`} alt={alt} />;
 };
 
 Image.propTypes = {
