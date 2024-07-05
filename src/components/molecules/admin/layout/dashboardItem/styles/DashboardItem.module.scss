@@ -1,0 +1,58 @@
+@import "index";
+// root
+.root{
+  width: 100%;
+  background-color: #ffffff;
+  position: relative;
+  padding: 16px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  // 아이콘 영역
+  &__icon-place{
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 4px;
+  }
+  // 제목 영역
+  &__title{
+    color: $color-text-dimgray;
+    @include font-size(body1);
+    @include font-weight(medium);
+  }
+  // state 수치 표기 영역
+  &__state{
+    color: $color-text-dimgray;
+    @include font-size(headline2);
+    @include font-weight(semibold);
+    &__text-effect{
+      padding-right: 2px;
+
+    }
+  }
+}
+// 추가 정보
+.more-info{
+  position: absolute;
+  top: 8px;
+  right: 4px;
+  visibility: hidden;
+  background-color: white;
+  padding: 4px 8px;
+}
+// 더보기 버튼 (정확히는 chip)
+.more-horiz{
+  position: absolute;
+  top: 8px;
+  right: 4px;
+  color: $color-text-dimgray;
+  background-color: inherit;
+  svg{
+    @include font-size(headline3)
+  }
+}
+// 호버시
+.more-info:hover, .more-horiz:hover+.more-info {
+  visibility: visible;
+}

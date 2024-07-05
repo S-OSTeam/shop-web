@@ -1,0 +1,14 @@
+@import "index";
+
+.search{
+  display: flex;
+  &__input{
+    border-color: inherit;
+  }
+  &__notched-outline{
+    //border-color: rgba(0,0,0,0);
+  }
+  &__icon{
+
+  }
+}

@@ -1,0 +1,39 @@
+@import "index";
+
+// root
+.filter-root{
+  width: 100%;
+  //
+  &__button{
+    margin-left: auto;
+    text-wrap: nowrap;
+    &__date{
+      text-wrap: nowrap;
+    }
+    &__clear{
+      background-color: rgba(0,0,0,0);
+      border-color: $background-dimgray;
+      color: $color-text-dimgray;
+      &:hover{
+        background-color: $background-dimgray;
+        color: $color-text-white;
+        border-color: $background-dimgray;
+      }
+    }
+    &__search{
+      margin-left: 4px;
+      background-color: $background-primary;
+      color: $color-text-white;
+      &:hover{
+        background-color: $background-hover;
+      }
+    }
+  }
+}
+
+// dateRage 영역
+.date-range{
+  &__picker{
+
+  }
+}

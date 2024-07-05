@@ -1,0 +1,37 @@
+@import "index";
+*{
+  box-sizing: border-box;
+}
+// 차트 패딩값 포함한 너비 계산
+$percent-w: 75%;
+$add-p: 0px;
+// 굴곡처리
+@mixin add-border($px){
+  border-radius: #{$px}px;
+}
+$border-r: 4px;
+.main{
+  padding: 16px;
+}
+
+.headline{
+  @include font-size(headline1);
+  padding: 16px;
+}
+
+.stack{
+  height: 300px;
+  // 차트
+  &__chart{
+    width: calc(#{$percent-w} - #{$add-p});
+    height: 100%;
+    @include add-border(4);
+  }
+  // 상품현황
+  &__product-state{
+    height: 100%;
+    padding: 16px;
+    width: calc(#{25%} - #{4px});
+    @include add-border(4);
+  }
+}

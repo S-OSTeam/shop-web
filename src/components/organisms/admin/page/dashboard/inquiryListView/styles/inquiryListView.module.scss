@@ -1,0 +1,17 @@
+@import "index";
+
+// root
+.root{
+  padding: 16px;
+  height: 100%;
+
+  // 헤딩
+  &__heading{
+    @include font-size(headline2);
+  }
+  // 부제목1
+  &__subtitle1{
+    @include font-size(subtitle1);
+
+  }
+}

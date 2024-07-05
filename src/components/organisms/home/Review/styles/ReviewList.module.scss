@@ -1,0 +1,181 @@
+@import './index';
+
+.review-wrapper{
+  padding: 48px 24px 0 24px;
+
+  &__title{
+    font-size: 32px;
+    color: #404040;
+    font-family: 'Pretendard Variable', serif;
+    font-weight: 500;
+  }
+
+  &__items{
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, auto)); // 5개의 그리드 컬럼으로 설정
+    gap: 8px;
+    justify-content: center;
+  }
+
+  &__card{
+    width: 100%;
+    height: auto;
+    min-height: 322px;
+    padding: 0;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__card-media{
+    margin-top: 4px;
+    width: 191px;
+    height: 202px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  &__card-content{
+    width: 100%
+  }
+
+  &__review-info{
+    min-height: 66px;
+    padding: 5px;
+  }
+
+  &__card-title{
+    font-size: 14px;
+    font-family: 'Pretendard Variable', serif;
+    font-weight: 200;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__card-info{
+    margin-top: 4px;
+    font-size: 10px;
+    font-family: 'Pretendard Variable', serif;
+    font-weight: 200;
+  }
+
+  &__review-detail{
+    width: 100%;
+    margin-top: 5px;
+    padding: 0 5px 0 5px;
+    height: 38px;
+    border-radius: 0;
+    background: $primary-color;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &:focus{
+      background: $primary-color;
+    }
+  }
+
+  &__review-title{
+    width: fit-content;
+    font-size: 12px;
+    font-family: 'Pretendard Variable', serif;
+    font-weight: 200;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__review-move{
+    width: fit-content;
+    font-size: 9px;
+    font-family: 'Pretendard Variable', serif;
+    font-weight: 200;
+  }
+}
+
+// 360px ~ mini-mobile
+@include media-breakpoint-up(xs){
+  .review-wrapper{
+    padding: 12px 16px 0 16px;
+
+    &__title{
+      font-size: 32px;
+      color: #404040;
+      font-family: 'Pretendard Variable', serif;
+      font-weight: 500;
+    }
+  }
+}
+
+// 480px ~ mobile
+@include media-breakpoint-up(sm) {
+  .review-wrapper{
+    padding: 12px 16px 0 16px;
+
+    &__title{
+      font-size: 32px;
+      color: #404040;
+      font-family: 'Pretendard Variable', serif;
+      font-weight: 500;
+    }
+  }
+}
+
+// 768px ~ tablet
+@include media-breakpoint-up(md) {
+  .review-wrapper{
+    padding: 40px 24px 0 24px;
+
+    &__title{
+      font-size: 32px;
+      color: #404040;
+      font-family: 'Pretendard Variable', serif;
+      font-weight: 500;
+    }
+  }
+}
+
+// 980px ~ laptop
+@include media-breakpoint-up(lg) {
+  .review-wrapper{
+    padding: 48px 24px 0 24px;
+
+    &__title{
+      font-size: 32px;
+      color: #404040;
+      font-family: 'Pretendard Variable', serif;
+      font-weight: 500;
+    }
+  }
+}
+
+// 1024 ~ pc
+@include media-breakpoint-up(xl) {
+  .review-wrapper{
+    padding: 48px 24px 0 24px;
+
+    &__title{
+      font-size: 32px;
+      color: #404040;
+      font-family: 'Pretendard Variable', serif;
+      font-weight: 500;
+    }
+  }
+}
+
+// 1400px
+@include media-breakpoint-up(xxl) {
+  .review-wrapper{
+    padding: 48px 24px 0 24px;
+
+    &__title{
+      font-size: 32px;
+      color: #404040;
+      font-family: 'Pretendard Variable', serif;
+      font-weight: 500;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import "index";
+
+*{
+  box-sizing: border-box;
+}
+
+// classes loot
+.select-root{
+  max-height: inherit;
+  padding: 0;
+  height: 40px;
+}
+
+// form Root
+.select-from{
+  // label
+  &__label{
+
+  }
+  // select box
+  &__select{
+  }
+}
