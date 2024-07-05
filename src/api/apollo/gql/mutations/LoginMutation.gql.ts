@@ -23,7 +23,6 @@ export const Login = gql`
         login(request: $request) {
             accessToken
             refreshToken
-            issuedAt
         }
     }
 `;

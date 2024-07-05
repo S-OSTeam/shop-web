@@ -7,7 +7,7 @@ import loadingAtom from '@recoil/atoms/loadingAtom';
 interface graphQLProps<T> {
     query: DocumentNode;
     request?: T;
-    type: string;
+    type: 'query' | 'mutation';
     option?: MutationHookOptions | LazyQueryHookOptions | T;
 }
 
@@ -47,7 +47,6 @@ const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
     const modifyLoading = (state: boolean) => {
         if (state) setLoading(loadingGlobal + 1);
         else setLoading(loadingGlobal - 1 < 0 ? 0 : loadingGlobal - 1);
-        console.log(`로딩... ${loadingGlobal}`);
     };
 
     useEffect(() => {
