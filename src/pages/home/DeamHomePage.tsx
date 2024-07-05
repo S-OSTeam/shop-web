@@ -17,7 +17,7 @@ const DeamHomePage = () => {
         },
     });
 
-    useEffect(() => {
+    React.useEffect(() => {
         itemRefetch().then();
         if (itemData) {
             setItemList(itemData.searchItem);
