@@ -1,0 +1,42 @@
+@import "index";
+
+// 색상 테마
+$theme-bg: ($background-darkgreen, $background-plump, $background-royalblue, $background-orange);
+
+.root {
+  // 위젯
+  &__widget {
+    // 아이콘 영역
+    &__icon-place {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &__state-color{
+      color: inherit;
+    }
+    // for 반복문을 활용하여 중복 방지
+    @for $i from 1 through length($theme-bg) {
+      // 아이콘 뒷배경 영역
+      &:nth-child(#{$i}) &__icon-place{
+        background-color: nth($theme-bg, $i);
+      }
+      // 테마에 따른 상태값 색상
+      &:nth-child(#{$i}) &__state-color{
+        color: nth($theme-bg, $i);
+      }
+    }
+  }
+}
+.icon {
+  @include font-size(headline2);
+  color: white;
+}
+
+// 대시보드 more-Horiz 영역
+.more-horiz-row{
+  @include font-size(caption);
+  &__text{
+    width: 100%;
+  }
+}

@@ -1,0 +1,31 @@
+@import "index";
+*{
+
+}
+// root-paper
+.paper{
+
+}
+
+// 테이블 컨테이너
+.table{
+  // 테이블 헤드
+  &__head{
+    &__cell{
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
+      &:first-child{
+
+      }
+    }
+  }
+  // 테이블 바디
+  &__body{
+
+  }
+}
+
+// 테이블 페이지네이션
+.pagination{
+
+}

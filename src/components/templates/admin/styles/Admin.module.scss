@@ -1,10 +1,189 @@
 @import "index";
 
+@mixin button-height($_height){
+  height: $_height;
+}
+
+
 // 메인 래퍼
-.wrapper{
+.wrapper {
+  display: flex;
+  position: relative;
+}
+
+// 공용
+
+// 첫번째 공통 스타일
+.font-color{
+  color: $white-color;
+}
+// 버튼 높이
+.btn-set{
+  position: relative;
+  @include button-height(32px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 24px;
+  box-sizing: border-box;
+  gap: 8px;
+  text-decoration: none;
+  &::before{
+    transition: 0.3s ease-in-out;
+    position: absolute;
+    content: '';
+    width: 86%;
+    height: 100%;
+    border-radius: 4px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// 사이드 네비
+.aside-nav {
+  width: 240px;
+  list-style-type: none;
+  background-color: $background-navy;
+  height: 100vh;
+  // 첫번째 링크 감싸는 영역
+  &__linker {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    // 버튼
+    &__button{
+    }
+  }
+}
+
+// 콜랩스 버전 첫번째 링크
+.collapse{
+  // 리스트 버튼
+  &__button{
+    // 아이콘
+    &__icon{
+
+    }
+  }
+  // 리스트 텍스트 부모
+  &__primary{
+    position: relative;
+    // 리스트 텍스트의 내용
+    &__text{
+
+    }
+    // 형제요소
+    &~svg{
+      @include font-size(subtitle1);
+    }
+  }
+  // 콜랩스
+  &__coll{
+    // 콜랩스 내부 리스트
+    &__list{
+
+    }
+  }
+}
+// 1차 메뉴 호버이벤트
+.parent-list{
+  position: relative;
+  padding: 4px 0;
+  &:hover .btn-set::before{
+    background-color: rgba(255,255,255,0.5);
+  }
+}
+.parent-list--animate{
+  position: absolute;
+}
+// 1차 액티브 이벤트
+.active{
 
 }
-// 사이드 네비
-.aside-nav{
 
+// 2차 collapse > ul
+.inner {
+  overflow-y: hidden;
+  padding: 12px 16px 12px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(0,0,0,0.1);
+  &__link {
+    padding-right: 4px;
+    &:first-child{
+      border-radius: 8px 8px 0 0;
+    }
+    &:last-child{
+      border-radius: 0 0 8px 8px;
+    }
+    // 텍스트
+    &__primary{
+    }
+    // 버튼
+    &__button{
+      color: white;
+      text-decoration: none;
+      padding: 4px 16px;
+      display: block;
+      border-radius: 4px;
+      &:hover{
+        background-color: rgba(0,0,0,0.3);
+      }
+    }
+    // 아이콘
+    &__button{
+
+    }
+  }
+}
+
+// 링크 영역
+.link-first {
+}
+
+.link-second {
+}
+
+/* 우측 메인 컨텐츠 */
+.section{
+  width: 100%;
+  box-sizing: border-box;
+  background-color: $background-ghostwhite;
+  /* 헤더 */
+  height: 100vh;
+}
+
+
+@include media-breakpoint-up(xxs) {
+
+}
+
+@include media-breakpoint-up(md) {
+  // 사이드 네비
+  .aside-nav {
+
+  }
+  // ul 영역
+  .nav-ul {
+
+    &__li {
+
+      &:hover .depth-ul {
+      }
+
+      &__link {
+      }
+    }
+  }
+  // 2차 ul
+  .depth-ul {
+    &__li {
+      &__link {
+
+      }
+    }
+  }
 }

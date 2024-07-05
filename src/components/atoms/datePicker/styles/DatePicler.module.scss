@@ -1,0 +1,18 @@
+@import "index";
+
+*{
+  box-sizing: border-box;
+}
+// classes root
+.date-root{
+  // datePicker
+  &__datepicker{
+  }
+
+  // input
+  &__input{
+  }
+  // input-label
+  &__label{
+  }
+}
