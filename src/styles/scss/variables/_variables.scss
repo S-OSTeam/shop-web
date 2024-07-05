@@ -28,7 +28,7 @@ $grid-breakpoints: (
         sm: 480px, /* default portrait mobile devices */
         md: 768px, /* landscape mobile and tablet devices */
         lg: 980px, /* landscape tablet and small laptop */
-        xl: 1024px, /* small desk screen */
+        xl: 1080px, /* small desk screen laptop test 1080 1024 */
         xxl: 1400px /* FullHD screen for 16:9 */
 );
 // 미디어쿼리 변수 콘텐츠 크기
@@ -117,6 +117,25 @@ $black-color: #000000;
 $white-color: #FFFFFF;
 $gray-color: #D9D9D9;
 $floaral-color: #F7F4EA;
+$black-gray-color: #7A7A7A;
+
+// --- PAGE FAQ ---
+
+// BG 뒷배경
+$background-white: #FFFFFF;
+$background-ghostwhite: #E8E8E8;
+$background-skyblue: #b5d1ff;
+$background-cornflowerblue: #5981BE;
+$background-dimgray: #585858;
+$background-darkslategray: #3F4756;
+$background-darkgray: #2F2F2F;
+
+// FC 글꼴 색상
+$color-text-black: #000000;
+$color-text-white: #ffffff;
+$color-text-dimgray: #585858;
+$color-text-cornflowerblue: #5981BE;
+$color-text-darkblue: #1855B4;
 
 // --- PAGE FAQ ---
 

@@ -6,21 +6,11 @@ import { TextProps } from '@atoms/text/Text';
 export interface CardContentProps {
     contents: React.ReactElement<TextProps>[];
 }
-const CardContent = (
-    {
-        contents
-    }:CardContentProps) => {
-
-    return(
-        <MuiCardContent>
-            {contents}
-        </MuiCardContent>
-    );
-}
+const CardContent = ({ contents }: CardContentProps) => {
+    return <MuiCardContent>{contents}</MuiCardContent>;
+};
 CardContent.propTypes = {
-    contents: PropTypes.arrayOf(PropTypes.element.isRequired).isRequired
-}
-CardContent.defaultProps = {
-
-}
+    contents: PropTypes.arrayOf(PropTypes.element.isRequired).isRequired,
+};
+CardContent.defaultProps = {};
 export default CardContent;
