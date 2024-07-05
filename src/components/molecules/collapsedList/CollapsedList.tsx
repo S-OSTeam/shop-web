@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { Box, CollapseProps } from '@mui/material';
+import { CollapseProps, Stack } from '@mui/material';
 import { Collapse } from '@atoms/collapse/Collapse';
 import ListItemButton from '@atoms/listItemButton/ListItemButton';
 import clsN from 'classnames';
@@ -27,17 +27,14 @@ interface CollapsedListProps extends CollapseProps {
     // renderPrimary: (item: T) => React.ReactNode;
     // secondary 컨텐츠
     secondaryCont: React.ReactNode;
+    // collapsed onClick 클릭 이벤트
+    onCollapse?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 export const CollapsedList = ({ ...props }: CollapsedListProps) => {
-    /* 상태 */
-
     const { classes } = props;
     /* 함수 */
-    // 제너릭 T 타입 에 따라 map 으로 신규 컴포넌트 생성
-    /* const mappingPrimary = props.primaryItem.map((item: T) => {
-        return props.renderPrimary(item);
-    }); */
+
     /* JSX */
     // 리스트 아이템 버튼
     const ListItemBtn = (
@@ -57,6 +54,7 @@ export const CollapsedList = ({ ...props }: CollapsedListProps) => {
     // 콜랩스 컴포넌트
     const CollapsedElement = (
         <Collapse
+            onClick={props.onCollapse}
             className={clsN(styles['collapsed-wrapper__collapsed'], classes?.collapsed)}
             in={props.in}
             unmountOnExit
@@ -66,10 +64,10 @@ export const CollapsedList = ({ ...props }: CollapsedListProps) => {
     );
     /* 렌더 */
     return (
-        <Box component="div" className={clsN(classes?.wrapper, styles['collapsed-wrapper'])}>
+        <Stack component="div" className={clsN(classes?.wrapper, styles['collapsed-wrapper'])} direction="column">
             {ListItemBtn}
             {CollapsedElement}
-        </Box>
+        </Stack>
     );
 };
 CollapsedList.defaultProps = {
@@ -83,4 +81,5 @@ CollapsedList.defaultProps = {
     in: false,
     // Expand 아이콘 위치
     expandPos: 'start',
+    onCollapse: undefined,
 };
