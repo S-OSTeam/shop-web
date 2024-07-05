@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import clsN from 'classnames';
 import styles from './styles/ProductInfoTemplate.module.scss';
 
-interface ProductInfoProps {
+export interface ProductInfoProps {
     className?: string;
     item: Item;
 }
