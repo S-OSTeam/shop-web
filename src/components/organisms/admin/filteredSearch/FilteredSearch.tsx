@@ -53,11 +53,20 @@ export const FilteredSearch = ({ className }: FilteredSearchProps) => {
         return <MenuItem value={_item.value}>{menuText}</MenuItem>;
     };
     /* JSX */
+
     // 날짜조회 컴포넌트
-    const DateRangeCont = <DateRange />;
+    const DateRangeCont = (
+        <DateRange
+            className={clsN(styles['filter-root__button'], styles['filter-root__button__date'])}
+            pickerClsN={clsN(styles['filter-root__button'], styles['filter-root__button__date'])}
+        />
+    );
     // 초기화 버튼 컴포넌트
     const ClearBtn = (
-        <Button variant="outlined" className={clsN(styles['filter-root__button'], styles['filter-root__button-clear'])}>
+        <Button
+            variant="outlined"
+            className={clsN(styles['filter-root__button'], styles['filter-root__button__clear'])}
+        >
             Clear
         </Button>
     );
@@ -65,7 +74,7 @@ export const FilteredSearch = ({ className }: FilteredSearchProps) => {
     const SearchBtn = (
         <Button
             variant="outlined"
-            className={clsN(styles['filter-root__button'], styles['filter-root__button-search'])}
+            className={clsN(styles['filter-root__button'], styles['filter-root__button__search'])}
         >
             Search
         </Button>
