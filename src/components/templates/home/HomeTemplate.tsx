@@ -13,6 +13,16 @@ import { itemResponse, swiperResponse } from '@util/test/data/ItemResponse';
 import { EventInfoResponse } from '@util/test/data/EventResponse';
 import styles from './styles/HomeTemplate.module.scss';
 
+// interface HomeTemplateProps {
+//     mainBanner?: ItemInterface;
+//     recommandItem?: ItemInterface;
+//     evnetItem?: ItemInterface;
+//     popularItem?: ItemInterface;
+//     pickItem?: ItemInterface;
+//     newItem?: ItemInterface;
+//     review?: ItemInterface;
+// }
+
 const HomeTemplate = () => {
     const items = itemResponse.map((item) => {
         return item;

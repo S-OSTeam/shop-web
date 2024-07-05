@@ -14,7 +14,7 @@ interface TextGroupProps {
 const TextGroup = ({ className, textClsNs, textGroup }: TextGroupProps) => {
     const textClsN = (textData: string[] | undefined, index: number) => {
         if (textData === undefined || textData[index] === undefined) {
-            return '';
+            return undefined;
         }
         return textData[index];
     };
