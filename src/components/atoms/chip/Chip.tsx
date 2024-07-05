@@ -43,7 +43,7 @@ Chip.defaultProps = {
     onClick: undefined,
     onDelete: undefined,
     variant: 'outlined',
-    avatar: 'letter',
+    avatar: 'none',
     color: 'default',
 };
 

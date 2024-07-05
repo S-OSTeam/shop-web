@@ -7,13 +7,12 @@ import Login from '@pages/login/LoginPage';
 
 export const AppRouter = () => {
     return (
-        <div>
-            <Header />
+        <Layout>
             <Routes>
                 <Route path="/" element={<DeamHome />} />
                 <Route path="/product" element={<Product />} />
                 <Route path="/login" element={<Login />} />
             </Routes>
-        </div>
+        </Layout>
     );
 };

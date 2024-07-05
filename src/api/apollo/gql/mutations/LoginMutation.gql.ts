@@ -6,6 +6,12 @@ export const SIGN_UP = gql`
     }
 `;
 
+export const SEND_VERIFY_CODE = gql`
+    mutation ($request: SendVerifyCodeRequest!) {
+        sendVerifyCode(request: $request)
+    }
+`;
+
 export const Login = gql`
     mutation ($request: LoginRequest!) {
         login(request: $request) {
