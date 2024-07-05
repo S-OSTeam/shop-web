@@ -11,7 +11,7 @@ interface ListItemProps {
     // 리스트 아이템의 인터페이스 []
     items: ItemCategoryTreeResponse[];
     // onClick?: (title: string) => void;
-    onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+    onClick?: (publicId: string, e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const ListItem = ({ className, items, onClick }: ListItemProps) => {
@@ -22,9 +22,12 @@ const ListItem = ({ className, items, onClick }: ListItemProps) => {
                     <MuiListItem key={item.publicId} disablePadding className={clsN(styles['list-item'], className)}>
                         <ListItemButton
                             className={clsN(styles['list-item__btn'])}
-                            onClick={/* onClick && onClick(item.title); */ onClick}
+                            onClick={(e) => onClick && onClick(item.publicId, e)}
                         >
-                            <ListItemText primary={item.title} className={clsN(styles['list-item__btn__primary-context'])} />
+                            <ListItemText
+                                primary={item.title}
+                                className={clsN(styles['list-item__btn__primary-context'])}
+                            />
                         </ListItemButton>
                     </MuiListItem>
                 ))}

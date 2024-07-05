@@ -1,13 +1,13 @@
 export interface ItemCategoryResponse {
     title: string;
-    publicId: number;
-    parentPublicId: number;
+    publicId: string;
+    parentPublicId: string;
 }
 
 export interface ItemCategoryTreeResponse {
     title: string;
     children: ItemCategoryTreeResponse[];
-    publicId: number;
+    publicId: string;
 }
 
 export interface tokenResponse {
