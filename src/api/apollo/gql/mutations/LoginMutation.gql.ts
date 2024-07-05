@@ -22,3 +22,12 @@ export const NAVER_LOGIN = gql`
         }
     }
 `;
+
+export const KAKAO_LOGIN = gql`
+    mutation KakaoLogin($request: KakaoRequest!) {
+        kakaoLogin(request: $request) {
+            code
+            state
+        }
+    }
+`;
