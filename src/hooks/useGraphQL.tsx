@@ -7,7 +7,7 @@ import loadingAtom from '@recoil/atoms/loadingAtom';
 interface graphQLProps<T> {
     query: DocumentNode;
     request?: T;
-    type: string;
+    type: 'query' | 'mutation';
     option?: MutationHookOptions | LazyQueryHookOptions | T;
 }
 
