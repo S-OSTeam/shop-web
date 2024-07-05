@@ -1,47 +1,67 @@
 import React from 'react';
 import { Swiper as CustomSwiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, Autoplay } from 'swiper/modules';
+import { Pagination, Navigation, Autoplay, FreeMode } from 'swiper/modules';
+import ImageButton from '@molecules/button/imageButton/ImageButton';
+import { PaginationOptions } from 'swiper/types/modules/pagination';
+import { NavigationOptions } from 'swiper/types/modules/navigation';
+import { SwiperOptions } from 'swiper/types/swiper-options';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/free-mode';
 import styles from './style/Swiper.module.scss';
 
 interface CustomSwiperProps {
-    className?: string;
-    slideClsN?: string;
-    imgClsN?: string;
-    items: string[];
+    className?: string; // 전체 swiper className
+    slideClsN?: string; // swiper slide className
+    btnClsN?: string; // ImageButton의 Button className
+    imgClsN?: string; // ImageBUtton의 Image className
+    items: string[]; // 아이템의 이미지 주소
     alt?: string;
-    onChange?: () => void;
-    spaceBetween?: number;
-    isPagination?: boolean;
-    isNavigation?: boolean;
-    isAutoPlay?: boolean;
-    delay?: number;
+    onSlideChange?: () => void; // slide 넘길때 발생하는 onSlideChange 옵션
+    spaceBetween?: number; // 각 slide 간격
+    slidesPerView?: number; // 한 화면에 출력하는 총 slide의 갯수
+    isPagination?: PaginationOptions | boolean; // pagination 사용 여부 및 커스텀 pagination
+    isNavigation?: NavigationOptions | boolean; // navigation 사용 여부 및 커스텀 navigation
+    isAutoPlay?: boolean; // auto play 사용 여부
+    isFreeMode?: boolean; // freeMode 사용 여부
+    isLoop?: boolean; // loop 사용 여부
+    delay?: number; // auto play 사용 시 delay
+    breakpoints?: { [width: number]: SwiperOptions; [ratio: string]: SwiperOptions } | boolean;
+    centeredSlides?: boolean;
 }
 
 const Swiper = ({ ...props }: CustomSwiperProps) => {
-    const pagination = { clickable: true, };
     const autoPlay = { delay: props.delay, disableOnInteraction: false };
     return (
         <div>
             <CustomSwiper
-                className={clsN(props.className, styles.swiper)}
-                pagination={props.isPagination ? pagination : false}
+                className={clsN(props.className, styles['swiper-wrapper'])}
+                slidesPerView={props.slidesPerView}
+                pagination={props.isPagination}
                 navigation={props.isNavigation}
                 spaceBetween={props.spaceBetween}
                 autoplay={props.isAutoPlay ? autoPlay : false}
-                loop
+                freeMode={props.isFreeMode}
+                loop={props.isLoop}
                 loopedSlides={1}
-                modules={[Pagination, Navigation, Autoplay]}
-                onSlideChange={props.onChange}
+                modules={[Pagination, Navigation, Autoplay, FreeMode]}
+                onSlideChange={props.onSlideChange}
+                breakpoints={props.breakpoints}
+                centeredSlides={props.centeredSlides}
             >
                 {props.items.map((imgPath, index) => (
                     // eslint-disable-next-line react/no-array-index-key
-                    <SwiperSlide className={clsN(props.slideClsN, styles['swiper__swiper-slide'])} key={index}>
-                        <img className={clsN(props.imgClsN, styles.img)} alt={props.alt} src={imgPath} />
+                    <SwiperSlide className={clsN(props.slideClsN, styles['swiper-wrapper__swiper-slide'])} key={index}>
+                        <ImageButton
+                            className={clsN(props.btnClsN, styles.btn)}
+                            imgClsN={clsN(props.imgClsN, styles.img)}
+                            alt={props.alt}
+                            imgPath={imgPath}
+                        />
                     </SwiperSlide>
                 ))}
             </CustomSwiper>
@@ -52,28 +72,39 @@ const Swiper = ({ ...props }: CustomSwiperProps) => {
 Swiper.propTypes = {
     className: PropTypes.string,
     slideClsN: PropTypes.string,
+    btnClsN: PropTypes.string,
     imgClsN: PropTypes.string,
-    items: PropTypes.arrayOf(PropTypes.string),
     alt: PropTypes.string,
-    onChange: PropTypes.func,
+    onSlideChange: PropTypes.func,
     spaceBetween: PropTypes.number,
+    slidesPerView: PropTypes.number,
     isNavigation: PropTypes.bool,
     isPagination: PropTypes.bool,
     isAutoPlay: PropTypes.bool,
+    isFreeMode: PropTypes.bool,
+    isLoop: PropTypes.bool,
     delay: PropTypes.number,
+    breakpoints: PropTypes.bool,
+    centeredSlides: PropTypes.bool,
 };
 
 Swiper.defaultProps = {
-    onChange: undefined,
+    onSlideChange: undefined,
     alt: '이미지가 없습니다.',
     className: styles[''],
     slideClsN: styles[''],
+    btnClsN: styles[''],
     imgClsN: styles[''],
-    spaceBetween: 50,
+    spaceBetween: 0,
+    slidesPerView: 1,
     isNavigation: false,
     isPagination: false,
     isAutoPlay: false,
+    isFreeMode: false,
+    isLoop: true,
     delay: 5000,
+    breakpoints: false,
+    centeredSlides: false,
 };
 
 export default Swiper;
