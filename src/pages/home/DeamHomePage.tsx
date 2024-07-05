@@ -11,6 +11,7 @@ const DeamHomePage = () => {
         query: SEARCH_ITEM,
         type: 'query',
         request: {
+            categoryPublicId: '01HX6NCX81BHPZ0Y5ARTFQ6HRS',
             pageSize: '10',
             pageNumber: '1',
         },
@@ -20,7 +21,6 @@ const DeamHomePage = () => {
         itemRefetch().then();
         if (itemData) {
             setItemList(itemData.searchItem);
-            console.log(itemData);
             console.log(itemList);
         }
     }, [itemData]);

@@ -21,7 +21,7 @@ interface CustomSwiperProps {
     imgClsN?: string; // ImageBUtton의 Image className
     items: string[]; // 아이템의 이미지 주소
     alt?: string;
-    onChange?: () => void; // slide 넘길때 발생하는 onChange 옵션
+    onSlideChange?: () => void; // slide 넘길때 발생하는 onSlideChange 옵션
     spaceBetween?: number; // 각 slide 간격
     slidesPerView?: number; // 한 화면에 출력하는 총 slide의 갯수
     isPagination?: PaginationOptions | boolean; // pagination 사용 여부 및 커스텀 pagination
@@ -49,7 +49,7 @@ const Swiper = ({ ...props }: CustomSwiperProps) => {
                 loop={props.isLoop}
                 loopedSlides={1}
                 modules={[Pagination, Navigation, Autoplay, FreeMode]}
-                onSlideChange={props.onChange}
+                onSlideChange={props.onSlideChange}
                 breakpoints={props.breakpoints}
                 centeredSlides={props.centeredSlides}
             >
@@ -74,9 +74,8 @@ Swiper.propTypes = {
     slideClsN: PropTypes.string,
     btnClsN: PropTypes.string,
     imgClsN: PropTypes.string,
-    items: PropTypes.arrayOf(PropTypes.string),
     alt: PropTypes.string,
-    onChange: PropTypes.func,
+    onSlideChange: PropTypes.func,
     spaceBetween: PropTypes.number,
     slidesPerView: PropTypes.number,
     isNavigation: PropTypes.bool,
@@ -90,7 +89,7 @@ Swiper.propTypes = {
 };
 
 Swiper.defaultProps = {
-    onChange: undefined,
+    onSlideChange: undefined,
     alt: '이미지가 없습니다.',
     className: styles[''],
     slideClsN: styles[''],
