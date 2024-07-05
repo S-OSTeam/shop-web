@@ -1,7 +1,6 @@
 import React from 'react';
 import AdminTemplate from '@templates/admin/Admin';
-import { NoticesTemplate } from '@templates/notices/Notices';
-
+import { NoticesTemplate } from '@templates/inquiry/notices/Notices';
 
 /*
 interface NoticesProps {
@@ -12,9 +11,9 @@ interface NoticesProps {
 */
 
 export const Notices = () => {
-    return(
+    return (
         <AdminTemplate>
-            <NoticesTemplate/>
+            <NoticesTemplate />
         </AdminTemplate>
-    )
+    );
 };

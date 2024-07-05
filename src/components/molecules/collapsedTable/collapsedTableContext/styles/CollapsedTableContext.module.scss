@@ -1,0 +1,16 @@
+@import "index";
+
+// root
+.table-row{
+  // cell
+  &__cell{
+    // 펼쳐짐
+    &--on{
+      padding: inherit;
+    }
+    // 펼쳐지지 않음
+    &--off{
+      padding: 0;
+    }
+  }
+}

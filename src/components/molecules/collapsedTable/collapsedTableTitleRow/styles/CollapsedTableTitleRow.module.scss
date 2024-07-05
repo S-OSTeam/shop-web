@@ -1,0 +1,13 @@
+@import 'index';
+
+// root : table-row
+.table-row{
+
+  // cell
+  &__cell{
+    &:last-of-type{
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}

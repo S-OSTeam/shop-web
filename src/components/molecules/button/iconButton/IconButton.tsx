@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clsN from 'classnames';
 import { IconButton as MuiIconButton, IconButtonProps as MuiIconButtonProps } from '@mui/material';
 import Icon, { IconProps } from '@components/atoms/source/icon/Icon';

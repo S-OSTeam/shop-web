@@ -3,18 +3,29 @@
 // 실질적인 root
 .date-range-stack{
   position: relative;
-  &__button-show{
+  max-width: 130px;
+  height: 40px;
+  &__button{
+    width: fit-content;
     height: 100%;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    &--on{
 
+    }
+    &--off{
+
+    }
   }
 }
 
 .date-range {
   visibility: hidden;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 16px);
   padding: 8px;
   align-items: center;
+
   &__picker {
     width: 180px;
     &:first-child {

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
@@ -8,10 +7,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DatePicker from '@atoms/datePicker/DatePicker';
 import Button from '@atoms/button/Button';
 import { ArrowDropDown, ArrowDropUp, CalendarMonth } from '@mui/icons-material';
-import clsN from 'classnames';
-import styles from './styles/DateRange.module.scss';
 import { useRecoilState } from 'recoil';
 import { noticesFilterStateAtom } from '@recoil/atoms/admin/inquiry/notices/noticesFilterAtom';
+import clsN from 'classnames';
+import styles from './styles/DateRange.module.scss';
 
 interface DateRangeProps {
     className?: string; // 클래스명
@@ -52,10 +51,12 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
             if (_date1?.isBefore(_date2)) {
                 // 인자1 이 인자2 보다 작음 (-1)
                 return -1;
-            } else if (_date1?.isAfter(_date2)) {
+            }
+            if (_date1?.isAfter(_date2)) {
                 // 인자1 이 인자2 보다 큼 (+1)
                 return 1;
-            } else if (_date1?.isSame(_date2)) {
+            }
+            if (_date1?.isSame(_date2)) {
                 // 두 인자값이 같을 경우 (0)
                 return 0;
             }
@@ -75,9 +76,8 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
             case -1:
                 // 인자1 이 인자2 보다 작음
                 break;
-            case 0:
-                // 인자중 하나라도 null 인 상황, 그 중 큰값은 endD 로 정하기 -1 까지 조회하도록 하기
-                // 종료일 찾기
+            case 0: {
+                // 종료일 찾기 // 인자중 하나라도 null 인 상황, 그 중 큰값은 endD 로 정하기 -1 까지 조회하도록 하기
                 const tempEndDate = fromD?.isAfter(endD) ? fromD : endD;
                 // 널 병합 연산자 (??) 를 사용해서 undefined 발생할 경우 방지하기
                 const tempStartDate = tempEndDate?.subtract(1, 'day') ?? null;
@@ -85,11 +85,15 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
                 setFromD(tempStartDate);
                 setEndD(tempEndDate);
                 break;
-            case 1:
+            }
+            case 1: {
                 // 인자1 이 인자2 보다 큼
                 const tempLastDate = fromD;
                 setFromD(endD);
                 setEndD(tempLastDate);
+                break;
+            }
+            default:
                 break;
         }
     };
@@ -97,8 +101,8 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
     // 버튼 내용 분기에 따라 번경하기
     const setButtonContext = () => {
         // submit true 일 때 아래 분기 실행
-        let startDate = formatDayjs(fromD);
-        let endDate = formatDayjs(endD);
+        const startDate = formatDayjs(fromD);
+        const endDate = formatDayjs(endD);
 
         // 상태값 변경
         setBtnText(`${startDate} ~ ${endDate}`);
@@ -131,17 +135,6 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
         // 아래 수행할 함수 실행
         setDatePicked((prevState) => !prevState);
     };
-    // 날짜 리셋 이벤트
-    const handleDateReset = () => {
-        console.log(`Previous Date is : ( ${fromD} ${endD} )`);
-        resetDate();
-        console.log(`Date Stores now : ( ${fromD} ${endD} )`);
-    };
-    // useState 초기화
-    const resetDate = () => {
-        setFromD(null);
-        setEndD(null);
-    };
 
     /* JSX 컴포넌트 */
 
@@ -152,35 +145,26 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
         </Button>
     );
     // 받은 인자로 DatePicker 컴포넌트 반환
-    const DatePickerRender = (labels: string[]) => {
-        // 캘린더 시작일 컴포넌트
-        const StartCalender = (
+    const DatePickerRender = (
+        <Stack direction="row" alignItems="center">
             <DatePicker
-                label={labels[0]}
+                label={dateLabels[0]}
                 className={clsN(styles['date-range__picker'], pickerClsN)}
                 value={fromD}
                 onChange={(newValue) => {
                     setFromD(newValue);
                 }}
             />
-        );
-        // 캘린더 종료일 컴포넌트
-        const EndCalender = (
+            <p className={clsN(styles['date-range__picker__separator'])} />
             <DatePicker
-                label={labels[1]}
+                label={dateLabels[1]}
                 className={clsN(styles['date-range__picker'], pickerClsN)}
                 value={endD}
                 onChange={(newValue) => setEndD(newValue)}
             />
-        );
-        return (
-            <Stack direction="row" alignItems="center">
-                {StartCalender}
-                <p className={clsN(styles['date-range__picker__separator'])} />
-                {EndCalender}
-            </Stack>
-        );
-    };
+        </Stack>
+    );
+
     // date picker 컴포넌트를 지역에 맞게 양식을 수정하고 배포
     const DatePickerProvider = (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ko">
@@ -189,7 +173,7 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
                 direction="row"
                 boxShadow={3}
             >
-                {DatePickerRender(dateLabels)}
+                {DatePickerRender}
                 {dateSubmitBtn}
             </Stack>
         </LocalizationProvider>
@@ -197,7 +181,11 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
     // 날짜조회 드롭다운 버튼 컴포넌트
     const DateRangeBtn = (
         <Button
-            className={clsN(styles['date-range-stack__button-show'])}
+            className={clsN({
+                [styles['date-range-stack__button']]: true,
+                [styles['date-range-stack__button--on']]: isOpen,
+                [styles['date-range-stack__button--off']]: !isOpen,
+            })}
             startIcon={<CalendarMonth />}
             endIcon={isOpen ? <ArrowDropUp /> : <ArrowDropDown />}
             onClick={handleDateOpen}
