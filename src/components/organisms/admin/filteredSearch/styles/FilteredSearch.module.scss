@@ -6,7 +6,11 @@
   //
   &__button{
     margin-left: auto;
-    &-clear{
+    text-wrap: nowrap;
+    &__date{
+      text-wrap: nowrap;
+    }
+    &__clear{
       background-color: rgba(0,0,0,0);
       border-color: $background-dimgray;
       color: $color-text-dimgray;
@@ -16,7 +20,7 @@
         border-color: $background-dimgray;
       }
     }
-    &-search{
+    &__search{
       margin-left: 4px;
       background-color: $background-primary;
       color: $color-text-white;
@@ -24,5 +28,12 @@
         background-color: $background-hover;
       }
     }
+  }
+}
+
+// dateRage 영역
+.date-range{
+  &__picker{
+
   }
 }

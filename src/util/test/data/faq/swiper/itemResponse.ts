@@ -5,8 +5,14 @@ export interface itemResponseITF {
     categoryType: 'announce' | 'delivery' | 'return' | 'refund' | 'account';
     imageUrls?: string;
     alt?: string;
+    // 업로드일
+    uploadDate: Date;
+    // 수정일
+    fixDate?: Date;
+    // 공개 상태
+    postState: 'posted' | 'clear';
 }
-export const itemResponse:itemResponseITF[] = [
+export const itemResponse: itemResponseITF[] = [
     {
         publicId: 1,
         categoryPublicId: 1,
@@ -14,6 +20,8 @@ export const itemResponse:itemResponseITF[] = [
         categoryType: 'announce',
         imageUrls: undefined,
         alt: undefined,
+        uploadDate: new Date('2024/06/06/'),
+        postState: 'posted',
     },
     {
         publicId: 2,
@@ -22,6 +30,8 @@ export const itemResponse:itemResponseITF[] = [
         categoryType: 'delivery',
         imageUrls: undefined,
         alt: undefined,
+        uploadDate: new Date('2024/06/06/'),
+        postState: 'posted',
     },
     {
         publicId: 3,
@@ -30,6 +40,8 @@ export const itemResponse:itemResponseITF[] = [
         categoryType: 'return',
         imageUrls: undefined,
         alt: undefined,
+        uploadDate: new Date('2024/06/06/'),
+        postState: 'posted',
     },
     {
         publicId: 4,
@@ -38,6 +50,8 @@ export const itemResponse:itemResponseITF[] = [
         categoryType: 'refund',
         imageUrls: undefined,
         alt: undefined,
+        uploadDate: new Date('2024/06/06/'),
+        postState: 'posted',
     },
     {
         publicId: 5,
@@ -46,5 +60,7 @@ export const itemResponse:itemResponseITF[] = [
         categoryType: 'account',
         imageUrls: undefined,
         alt: undefined,
+        uploadDate: new Date('2024/06/06/'),
+        postState: 'posted',
     },
-]
+];
