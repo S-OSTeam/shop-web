@@ -3,7 +3,7 @@ import { Box, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import Text from '@components/atoms/text/Text';
-import Input from '@components/atoms/input/Input';
+import { Input } from '@components/atoms/input/Input';
 import SaveId from '@components/organisms/login/saveId/SaveId';
 import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
@@ -31,14 +31,14 @@ const LoginOrganisms = () => {
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
 
-    const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
             ...formData,
             userId: event.target.value.toString(),
         });
     };
 
-    const handleInputPwdChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const handleInputPwdChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
             ...formData,
             pwd: event.target.value.toString(),
