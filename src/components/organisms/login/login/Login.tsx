@@ -16,7 +16,7 @@ const Login = () => {
         pwd: '',
     });
 
-    const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
         setFormData({
             ...formData,
