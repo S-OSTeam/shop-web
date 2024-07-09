@@ -11,7 +11,6 @@ import styles from './styles/NavMain.module.scss';
 import LeftMenuBtn from '@components/layout/header/NavBar/listItem/leftMenuBtn/leftMenuBtn';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import useGraphQL from '@hooks/useGraphQL';
-import { SEND_VERIFY_CODE } from '@api/apollo/gql/mutations/LoginMutation.gql';
 
 interface GnbMainProps {
     toolClsN?: string;

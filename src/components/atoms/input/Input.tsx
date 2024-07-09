@@ -28,6 +28,8 @@ interface InputProps {
     name?: string | undefined;
     // 가로 최대 확장 여부
     fullWidth?: boolean | undefined;
+    // 새로운 type 속성 추가
+    type?: React.InputHTMLAttributes<unknown>['type'];
 }
 
 export const Input = ({
@@ -42,6 +44,7 @@ export const Input = ({
     name,
     outlineClsN,
     fullWidth,
+    type, // 새로운 속성 추가
 }: InputProps) => {
     return (
         <TextField
@@ -62,6 +65,7 @@ export const Input = ({
             onChange={onChange}
             multiline={multiline}
             fullWidth={fullWidth}
+            type={type} // TextField에 type 속성 전달
         />
     );
 };
