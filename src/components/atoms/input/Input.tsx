@@ -45,6 +45,7 @@ export const Input = ({
     outlineClsN,
     fullWidth,
     type, // 새로운 속성 추가
+
 }: InputProps) => {
     return (
         <TextField
@@ -66,6 +67,7 @@ export const Input = ({
             multiline={multiline}
             fullWidth={fullWidth}
             type={type} // TextField에 type 속성 전달
+
         />
     );
 };
