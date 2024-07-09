@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import React, { useEffect, useState } from 'react';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { Box, Divider, FormControl, Radio, RadioGroup, TextField } from '@mui/material';
@@ -8,9 +7,9 @@ import { FormDataInterface } from '@interface/FormDataInterface';
 import CheckboxWithText from '@molecules/checkbox/checkboxWithText/CheckboxWithText';
 import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
-import style from './style/style.module.scss';
 import useGraphQL from '@hooks/useGraphQL';
 import { SIGN_UP } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import style from './style/style.module.scss';
 
 const SignUpTemplate = () => {
     const isInMobile = useDomSizeCheckHook(768);
@@ -72,7 +71,7 @@ const SignUpTemplate = () => {
 
     const handleFormDataOnclick = (formData: FormDataInterface) => {
         console.log(formData);
-
+        console.log(data);
         setSignUpData({
             userId: formData.userId,
             pwd: formData.pwd,
