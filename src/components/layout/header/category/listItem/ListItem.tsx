@@ -1,9 +1,9 @@
 import React from 'react';
 import { ListItem as MuiListItem, ListItemButton, ListItemText } from '@mui/material';
-import { ItemCategoryTreeResponse } from '@util/test/interface/Category';
 import clsN from 'classnames';
 import styles from '@components/layout/header/category/listItem/styles/ListItem.module.scss';
 import PropTypes from 'prop-types';
+import { ItemCategoryTreeResponse } from '@interface/category/Category';
 
 interface ListItemProps {
     // 카테고리 아이템 <li> 클래스명

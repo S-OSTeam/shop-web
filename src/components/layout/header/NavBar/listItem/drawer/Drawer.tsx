@@ -5,9 +5,11 @@ import CategoryHeader from '@components/layout/header/category/CategoryHeader';
 import PropTypes from 'prop-types';
 import clsN from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { ItemCategoryTreeResponse } from '@interface/category/Category';
 import styles from './styles/Drawer.module.scss';
 
 interface DrawerProps {
+    categories: ItemCategoryTreeResponse[];
     wrapperClsN?: string;
     mobHeaderClsN?: string;
     onClick?: () => void;
@@ -15,7 +17,7 @@ interface DrawerProps {
     menuTitle: string;
 }
 
-const Drawer = ({ wrapperClsN, mobHeaderClsN, onClick, variant, menuTitle }: DrawerProps) => {
+const Drawer = ({ categories, wrapperClsN, mobHeaderClsN, onClick, variant, menuTitle }: DrawerProps) => {
     const navigate = useNavigate();
 
     const goToCategory = (categoryId: string) => {
@@ -31,7 +33,7 @@ const Drawer = ({ wrapperClsN, mobHeaderClsN, onClick, variant, menuTitle }: Dra
                 className={clsN(`${styles['drawer-wrapper__mobile-header']}`, mobHeaderClsN)}
             />
             <Divider />
-            <CategoryHeader onClick={(title) => goToCategory(title)} />
+            <CategoryHeader categories={categories} onClick={(title) => goToCategory(title)} />
         </Box>
     );
 };

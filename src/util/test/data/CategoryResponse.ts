@@ -1,4 +1,4 @@
-import { ItemCategoryTreeResponse } from '@util/test/interface/Category';
+import { ItemCategoryTreeResponse } from '@interface/category/Category';
 
 export const signUp = {
     userId: 'dmltn888',

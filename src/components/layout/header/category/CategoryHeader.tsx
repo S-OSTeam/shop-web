@@ -2,7 +2,6 @@
 import React from 'react';
 import styles from '@components/layout/header/category/styles/CategoryHeader.module.scss';
 import clsN from 'classnames';
-import { category } from '@util/test/data/CategoryResponse';
 import {
     ClickAwayListener,
     Collapse,
@@ -13,12 +12,14 @@ import {
 } from '@mui/material';
 import ListItem from '@components/layout/header/category/listItem/ListItem';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { ItemCategoryTreeResponse } from '@interface/category/Category';
 
 interface CategoryHeaderProps {
     onClick: (publicId: string) => void;
+    categories: ItemCategoryTreeResponse[];
 }
 
-const CategoryHeader = ({ onClick }: CategoryHeaderProps) => {
+const CategoryHeader = ({ onClick, categories }: CategoryHeaderProps) => {
     // Menu Bar 마다 불리언 상태로 관리
     const [toggleState, setToggleState] = React.useState<boolean[]>([]);
     // 토글 이벤트 param(idx: 클릭한 인덱스)
@@ -28,7 +29,7 @@ const CategoryHeader = ({ onClick }: CategoryHeaderProps) => {
     };
 
     // 리스트 컴포넌트 랜더
-    const renderListItems = category.map((item, idx) => {
+    const renderListItems = categories.map((item, idx) => {
         // collapse 변수들 boolean 으로 관리하기
         const currentState = toggleState[idx];
         // 토글 체크
@@ -72,6 +73,7 @@ const CategoryHeader = ({ onClick }: CategoryHeaderProps) => {
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOff}
                         onTouchStart={onTouch}
+                        onClick={() => onClick(item.publicId)}
                     >
                         <ListItemText
                             primary={item.title}
