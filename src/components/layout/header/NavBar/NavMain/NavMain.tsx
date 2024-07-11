@@ -10,10 +10,11 @@ import clsN from 'classnames';
 import styles from './styles/NavMain.module.scss';
 import LeftMenuBtn from '@components/layout/header/NavBar/listItem/leftMenuBtn/leftMenuBtn';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import useGraphQL from '@hooks/useGraphQL';
-import { SEND_VERIFY_CODE } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { useNavigate } from 'react-router-dom';
+import { ItemCategoryTreeResponse } from '@interface/category/Category';
 
 interface GnbMainProps {
+    categories: ItemCategoryTreeResponse[];
     toolClsN?: string;
     logoTitle: string;
     logoClsN?: string;
@@ -28,6 +29,7 @@ interface GnbMainProps {
 }
 
 const NavMain = ({
+    categories,
     toolClsN,
     logoTitle,
     logoClsN,
@@ -43,8 +45,16 @@ const NavMain = ({
     // 전역 아톰을 활용한 커스텀 훅 사용
     const isInTablet = useDomSizeCheckHook(1024);
 
-    const loginSuccess = <T,>(token: T) => {
-        console.log(token);
+    const navigate = useNavigate();
+
+    const goToCategory = (publicId: string) => {
+        console.log(publicId);
+        navigate(`/shop/category?categoryId=${publicId}`);
+    };
+
+    const handleHomeClick = () => {
+        console.log('Home button clicked'); // 디버깅을 위해 추가
+        navigate('/', { replace: true });
     };
 
     return (
@@ -63,8 +73,15 @@ const NavMain = ({
                     onClick={onClick}
                 />
             ) : null}
-            <Text text={logoTitle} className={clsN(`${styles['tool-bar__logo]']}`, logoClsN)} onClick={onClick} />
-            {isInTablet ? null : <CategoryHeader />}
+            <Text
+                variant="button"
+                text={logoTitle}
+                className={clsN(`${styles['tool-bar__logo]']}`, logoClsN)}
+                onClick={handleHomeClick}
+            />
+            {isInTablet ? null : (
+                <CategoryHeader categories={categories} onClick={(publicId) => goToCategory(publicId)} />
+            )}
             <RightMenu
                 navBarRightClsN={navBarRightClsN}
                 icnBtnClsN={navBarRightBtnClsN}

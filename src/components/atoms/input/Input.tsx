@@ -15,9 +15,9 @@ interface InputProps {
     // 컴포넌트의 사이즈 small : 32px, medium: 40px?
     size?: 'small' | 'medium' | undefined;
     // input 필드의 오른쪽에 추가적 컨텐츠나 요소를 렌더링 할때 사용
-    endAdornment?: React.ReactNode;
+    endAdornment?: React.ReactNode | undefined;
     // 항목의 설명
-    label?: React.ReactNode;
+    label?: React.ReactNode | undefined;
     // 문자나 이미지 등의 요소가 들어갈 자리에 임시로 채워놓는 내용물을 의미
     placeholder?: string | undefined;
     // onChange 이벤트 활성화 시 오브젝트 e 를 통한 작업 처리 => 반환 없음
@@ -65,4 +65,17 @@ export const Input = ({
         />
     );
 };
-Input.defaultProps = {};
+
+Input.defaultProps = {
+    className: styles[''],
+    outlineClsN: styles[''],
+    variant: 'filled',
+    size: 'medium',
+    endAdornment: undefined,
+    label: undefined,
+    placeholder: undefined,
+    onChange: undefined,
+    multiline: undefined,
+    name: undefined,
+    fullWidth: undefined,
+};

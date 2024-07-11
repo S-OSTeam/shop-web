@@ -2,7 +2,7 @@ import React from 'react';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { CollapseProps, Stack } from '@mui/material';
 import { Collapse } from '@atoms/collapse/Collapse';
-import ListItemButton from '@atoms/listItemButton/ListItemButton';
+import ListItemButton from '@atoms/button/listItemButton/ListItemButton';
 import clsN from 'classnames';
 import styles from './styles/CollapsedList.module.scss';
 

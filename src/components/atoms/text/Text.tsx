@@ -49,8 +49,6 @@ Text.propTypes = {
         'overline',
     ]),
     align: PropTypes.oneOf(['inherit', 'left', 'center', 'right', 'justify']),
-    onClick: PropTypes.func,
-    onMouseOver: PropTypes.func,
 };
 
 // Props 초기 셋팅
