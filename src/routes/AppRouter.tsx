@@ -5,7 +5,7 @@ import Product from '@pages/product/ProductPage';
 import Header from '@components/layout/header/Header';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import AdminPage from '@pages/admin/AdminPage';
-import Login from '@pages/login/LoginPage';
+import Login from '@routes/login/Login';
 import { AdminRouter } from './adminRouter/AdminRouter';
 
 export const AppRouter = () => {
