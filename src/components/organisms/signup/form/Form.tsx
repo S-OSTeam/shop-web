@@ -6,7 +6,7 @@ import clsN from 'classnames';
 import Button from '@components/atoms/button/Button';
 import style from './style/style.module.scss';
 import useGraphQL from '@hooks/useGraphQL';
-import { CHECK_VERIFY_CODE_BY, SEND_VERIFY_CODE_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { SEND_VERIFY_CODE_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { FormDataInterface } from '@interface/FormDataInterface';
 
 interface FormProps {
@@ -51,7 +51,7 @@ const Form = ({ formInfo }: FormProps) => {
     });
 
     const { data: sendCheck, refetch: sendCheckRefetch } = useGraphQL({
-        query: CHECK_VERIFY_CODE_BY,
+        query: SEND_VERIFY_CODE_REQUEST,
         type: 'mutation',
         request: {
             email: formData.email,
