@@ -10,9 +10,10 @@ export interface ItemCategoryTreeResponse {
     publicId: string;
 }
 
-export interface tokenResponse {
-    accessToken: string;
-    refreshToken: string;
-    userId: string;
-    issuedAt: Date;
-}
+export const EmptyCategoryTreeResponse: ItemCategoryTreeResponse[] = [
+    {
+        title: '',
+        publicId: '',
+        children: [],
+    },
+];

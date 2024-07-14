@@ -6,6 +6,7 @@ import Header from '@components/layout/header/Header';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import SignUp from '@routes/signup/Signup';
 import Login from '@routes/login/Login';
+import Category from '@routes/category/Category';
 import { AdminRouter } from './adminRouter/AdminRouter';
 
 
@@ -31,8 +32,9 @@ export const AppRouter = () => {
             {headerProvider()}
             <Routes>
                 <Route path="/" element={<DeamHome />} />
-                <Route path="/product" element={<Product />} />
+                <Route path="/shop/product" element={<Product />} />
                 <Route path="/support" element={<CustomerServicePage />} />
+                <Route path="/shop/category" element={<Category />} />
 
                 {/* 모듈화된 관리자 페이지 라우터 렌더하기 */}
                 <Route path="/manager/*" element={<AdminRouter />} />
