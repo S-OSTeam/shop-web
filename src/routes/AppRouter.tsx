@@ -4,8 +4,15 @@ import DeamHome from '@pages/home/DeamHomePage';
 import Product from '@pages/product/ProductPage';
 import Header from '@components/layout/header/Header';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
+import SignUp from '@routes/signup/Signup';
+import Login from '@routes/login/Login';
 import Category from '@routes/category/Category';
 import { AdminRouter } from './adminRouter/AdminRouter';
+
+
+
+
+
 
 export const AppRouter = () => {
     // React Router 가 제공하는 useLocation 훅을 사용해서 조건부 랜더링하기
@@ -31,6 +38,8 @@ export const AppRouter = () => {
 
                 {/* 모듈화된 관리자 페이지 라우터 렌더하기 */}
                 <Route path="/manager/*" element={<AdminRouter />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
             </Routes>
         </div>
     );
