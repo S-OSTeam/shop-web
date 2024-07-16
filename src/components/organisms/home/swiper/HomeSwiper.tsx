@@ -1,5 +1,5 @@
 import React from 'react';
-import { Item } from '@util/test/interface/Item';
+import { Item } from '@interface/item/Item';
 import { Box } from '@mui/material';
 import Swiper from '@molecules/swiper/Swiper';
 import clsN from 'classnames';

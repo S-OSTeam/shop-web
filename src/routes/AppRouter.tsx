@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import DeamHome from '@pages/home/DeamHomePage';
-import Product from '@pages/product/ProductPage';
+import DeamHome from '@routes//home/DeamHome';
+import Product from '@routes/product/Product';
 import Header from '@components/layout/header/Header';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import SignUp from '@routes/signup/Signup';

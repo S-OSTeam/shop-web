@@ -10,7 +10,7 @@ import IconGroup from '@molecules/icon/IconGroup';
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { Item, ItemInterface } from '@util/test/interface/Item';
+import { Item, ItemInterface } from '@interface/item/Item';
 import styles from './styles/Popular.module.scss';
 
 interface PopularProps {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Item } from '@util/test/interface/Item';
+import { Item } from '@interface/item/Item';
 import clsN from 'classnames';
 import Text from '@atoms/text/Text';
 import Swiper from '@molecules/swiper/Swiper';

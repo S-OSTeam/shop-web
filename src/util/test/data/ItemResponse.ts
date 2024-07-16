@@ -1,4 +1,4 @@
-import { Item } from '@util/test/interface/Item';
+import { Item } from '@interface/item/Item';
 
 export const itemResponse = [
     {

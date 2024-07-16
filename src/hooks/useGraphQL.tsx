@@ -27,9 +27,7 @@ const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
                 context: {
                     headers: { ...option },
                 },
-                variables: {
-                    request: { ...request },
-                },
+                variables: { request },
             });
         }
 
@@ -37,9 +35,7 @@ const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
             context: {
                 headers: { ...option },
             },
-            variables: {
-                request: { ...request },
-            },
+            variables: { request },
         });
     };
     const [refetch, { data, loading, error }] = selectType();
