@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+/*eslint-disable*/
+import React, { useEffect, useMemo, useState } from 'react';
 import { Box } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import useGraphQL from '@hooks/useGraphQL';
@@ -6,7 +7,7 @@ import { SEARCH_ITEM } from '@api/apollo/gql/queries/ItemResponseQuery.gql';
 import Popular from '@organisms/home/product/popular/Popular';
 import { ItemInterface } from '@interface/item/Item';
 import { EmptyCategoryTreeResponse, ItemSearchRequest } from '@interface/category/Category';
-import { CATEGORY_TREE } from '@api/apollo/gql/queries/ItemCategoryTreeResponseQuery.gql';
+import { CATEGORY_TREE, FIND_CATEGORY } from '@api/apollo/gql/queries/ItemCategoryTreeResponseQuery.gql';
 import { ItemCategoryTreeResponse } from '@util/test/interface/Category';
 import CategoryTemplate from '@templates/category/CategoryTemplate';
 
@@ -21,23 +22,25 @@ const CategoryPage = () => {
     // pagination 처리를 위한 pageItem으로 pageSize와 pageNumber 변경 예정
     const [pageItem, setPageItem] = useState<ItemSearchRequest>({
         categoryPublicId: `${categoryId}`,
-        pageSize: '10',
+        pageSize: '15',
         pageNumber: '1',
     });
 
+    // useGraphQL 커스텀 훅을 이용해서 item을 조회
     const { data: itemData, refetch: itemRefetch } = useGraphQL({
         query: SEARCH_ITEM,
         type: 'query',
         request: { ...pageItem },
     });
 
+    // useGraphQL 커스텀 훅을 이용해서 categoryId를 필터링하여 카테고리 목록을 조회
     const { data: categoryData, refetch: categoryRefetch } = useGraphQL({
         query: CATEGORY_TREE,
         type: 'query',
         request: categoryId,
     });
 
-    useEffect(() => {
+    useMemo(() => {
         if (categoryId) {
             setPageItem((prevPageItem) => ({
                 ...prevPageItem,
@@ -47,17 +50,17 @@ const CategoryPage = () => {
         }
     }, [categoryId, itemRefetch]);
 
-    useEffect(() => {
+    useMemo(() => {
         if (itemData) {
             setItemList(itemData.searchItem);
         }
     }, [itemData]);
 
-    useEffect(() => {
+    useMemo(() => {
         categoryRefetch();
     }, [categoryRefetch]);
 
-    useEffect(() => {
+    useMemo(() => {
         if (categoryData) {
             setCategories(categoryData.findSubCategoriesTree.children);
         }
@@ -65,8 +68,7 @@ const CategoryPage = () => {
 
     return (
         <Box>
-            <CategoryTemplate categories={categories} />
-            {itemList && <Popular popularItems={itemList} content="신규 상품" />}
+            <CategoryTemplate categories={categories} items={itemList} />
         </Box>
     );
 };
