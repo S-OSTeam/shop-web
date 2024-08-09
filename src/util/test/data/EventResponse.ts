@@ -13,17 +13,6 @@ export const EventInfoResponse: EventInfo[] = [
         link: 'https://image10.coupangcdn.com/image/ccm/banner/c41b99e4c5beff8002ceff13854ab7a5.jp',
     },
     {
-        id: 15825002,
-        startedAt: '2024-04-15',
-        endedAt: '2024-05-15',
-        title: '첫구매 15,000원 쿠폰',
-        contents: '첫 구매 시 15,000원 쿠폰',
-        thumbnail: 'hthttps://image7.coupangcdn.com/image/ccm/banner/262f767e4fe84bda8b9ba11331f06b77.jpg',
-        items: [],
-        images: [],
-        link: 'https://image7.coupangcdn.com/image/ccm/banner/262f767e4fe84bda8b9ba11331f06b77.jpg',
-    },
-    {
         id: 15825003,
         startedAt: '2024-04-15',
         endedAt: '2024-05-15',

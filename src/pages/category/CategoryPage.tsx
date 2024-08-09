@@ -22,7 +22,7 @@ const CategoryPage = () => {
     // pagination 처리를 위한 pageItem으로 pageSize와 pageNumber 변경 예정
     const [pageItem, setPageItem] = useState<ItemSearchRequest>({
         categoryPublicId: `${categoryId}`,
-        pageSize: '15',
+        pageSize: '10',
         pageNumber: '1',
     });
 
