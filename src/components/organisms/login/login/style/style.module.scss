@@ -1,0 +1,89 @@
+@import "index";
+
+.login-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top:10rem;
+  &__title{
+    font-size: $title-font-size-S;
+    margin-bottom:5rem;
+  }
+
+  &__input-id,&__input-pwd{
+
+    width: 450px;
+    height: auto;
+
+    padding: 5px;
+  }
+  &__save-id{
+    margin-right: 16rem;
+    margin-left: -4.5rem;
+  }
+  &__login-btn{
+    width: 450px;
+    background-color: $primary-color;
+  }
+  &__btn-wrapper{
+    width: 470px;
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
+
+    &__signup-btn,&__find-btn{
+      width: 250px;
+      font-size: 16px;
+      border-radius: 15px;
+      margin: 10px;
+      background-color: $white-color;
+      color: $black-color;
+      border: 1px solid $gray-color;
+      margin-top: 1rem;
+    }
+
+  }
+
+
+}
+
+// mobile login scss
+.mobile-login-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &__input-wrapper{
+    width: 15rem;
+    height: auto;
+    &__input-id,&__input-pwd{
+      height: auto;
+      padding:0.1em;
+    }
+  }
+  &__title{
+    font-size: 14px;
+    margin-top: 1.5rem;
+    width: 280px;
+  }
+  &__text{
+    font-size: 12px;
+  }
+  &__social-wrapper{
+    width: 390px;
+  }
+  &__btn-wrapper{
+    &__signup-btn,&__login-btn{
+      width: 120px;
+      height: 35px;
+      font-size: 12px;
+      border-radius: 15px;
+      margin: 2px;
+      background-color: $white-color;
+      color: $black-color;
+      border: 1px solid $gray-color;
+      margin-top: 1rem;
+    }
+  }
+}

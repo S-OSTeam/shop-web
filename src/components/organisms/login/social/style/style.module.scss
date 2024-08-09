@@ -1,0 +1,185 @@
+@import "index";
+
+// // PC social login
+.social-login-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__title{
+
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        font-size: $title-font-size-S;
+    }
+
+   &__icon-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+
+    &__kakao-icon,&__naver-icon,&__google-icon{
+        border-radius: 30px;
+        width: 60px;
+        height: 60px;
+
+    }
+    &__kakao-icon{
+        background-color: $kakao-background;
+    }
+
+}
+
+.btn{
+    background: rgba(0,0,0,0);
+    box-shadow: none;
+    padding: 0 0;
+    margin-left: 2rem;
+    &:hover, &:focus{
+        background: none;
+        box-shadow: none;
+    }
+
+}
+
+
+
+// mobile social login
+.mobile-social-login-logo{
+    margin-top: 2rem;
+    width: 400px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.mobile-social-login-wrapper{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    ::before,::after{
+        border: 0.1px solid $black-color;
+    }
+    &__title{
+        width: 280px;
+        margin-top: 3rem;
+        font-size: 14px;
+
+    }
+    &__text{
+        font-size: 12px;
+    }
+
+
+   &__social-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__naver-btn{
+        display: flex;
+        align-items: center;
+        height: 40px;
+        width: 250px;
+        padding: 0.6em 1em;
+        border-radius: 0.25em;
+        font-size: 0.8rem;
+        margin-top: 0.7em;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        box-shadow: var(--shadow-1);
+        background-color: $naver-background;
+
+        &:hover, &:focus{
+            background-color:  $naver-background;
+            box-shadow: none;
+        }
+
+
+        &__naver-login{
+            margin-right: 3.8rem;
+            margin-left: -4.5rem;
+            width: 30px;
+            height: 30px;
+            color: $white-color;
+        }
+    }
+
+    &__kakao-btn{
+        display: flex;
+        align-items: center;
+        height: 40px;
+        width: 250px;
+        padding: 0.6em 1em;
+        border-radius: 0.25em;
+        font-size: 0.8rem;
+        margin-top: 0.7em;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        box-shadow: var(--shadow-1);
+        background-color: $kakao-background;
+        color: $black-color;
+
+        &:hover, &:focus{
+            background-color: $kakao-background;
+            box-shadow: none;
+        }
+
+
+        &__kakao-login{
+            margin-right: 3.8rem;
+            margin-left: -4.5rem;
+            width: 30px;
+            height: 30px;
+
+
+        }
+    }
+    &__google-btn{
+        display: flex;
+        align-items: center;
+        height: 40px;
+        width: 250px;
+        padding: 0.6em 1em;
+        border-radius: 0.25em;
+        font-size: 0.8rem;
+        margin-top: 0.7em;
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        box-shadow: var(--shadow-1);
+        background-color: $google-background;
+        color: $black-color;
+
+        &:hover, &:focus{
+            background-color:  $google-background;
+            box-shadow: none;
+        }
+
+
+        &__google-login{
+            margin-right: 4rem;
+            margin-left: -5rem;
+            width: 30px;
+            height: 30px;
+
+
+        }
+    }
+
+
+
+   }
+
+
+}
+

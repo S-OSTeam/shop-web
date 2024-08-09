@@ -2,7 +2,6 @@
 import React from 'react';
 import styles from '@components/layout/header/category/styles/CategoryHeader.module.scss';
 import clsN from 'classnames';
-import { category } from '@util/test/data/CategoryResponse';
 import {
     ClickAwayListener,
     Collapse,
@@ -13,8 +12,14 @@ import {
 } from '@mui/material';
 import ListItem from '@components/layout/header/category/listItem/ListItem';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { ItemCategoryTreeResponse } from '@interface/category/Category';
 
-const CategoryHeader = () => {
+interface CategoryHeaderProps {
+    onClick: (publicId: string) => void;
+    categories: ItemCategoryTreeResponse[];
+}
+
+const CategoryHeader = ({ onClick, categories }: CategoryHeaderProps) => {
     // Menu Bar 마다 불리언 상태로 관리
     const [toggleState, setToggleState] = React.useState<boolean[]>([]);
     // 토글 이벤트 param(idx: 클릭한 인덱스)
@@ -22,12 +27,9 @@ const CategoryHeader = () => {
         // 선택한 엘리먼트 인덱스가 같을경우에만 true 반환
         setToggleState((prev) => prev.map((stateItem, stateIdx) => stateIdx === idx));
     };
-    // check title
-    const onClickTitle = (title: string) => {
-        console.log(title);
-    };
+
     // 리스트 컴포넌트 랜더
-    const renderListItems = category.map((item, idx) => {
+    const renderListItems = categories.map((item, idx) => {
         // collapse 변수들 boolean 으로 관리하기
         const currentState = toggleState[idx];
         // 토글 체크
@@ -61,27 +63,40 @@ const CategoryHeader = () => {
 
         return (
             <ClickAwayListener onClickAway={handleClickAway} key={item.publicId}>
-                <MuiListItem key={item.publicId} className={clsN(`${styles['list-wrapper__parent-category']}`)} onKeyDown={undefined}>
+                <MuiListItem
+                    key={item.publicId}
+                    className={clsN(`${styles['list-wrapper__parent-category']}`)}
+                    onKeyDown={undefined}
+                >
                     <ListItemButton
                         className={styles['list-wrapper__parent-category__btn']}
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOff}
                         onTouchStart={onTouch}
+                        onClick={() => onClick(item.publicId)}
                     >
-                        <ListItemText primary={item.title} className={styles['list-wrapper__parent-category__btn__title']} />
+                        <ListItemText
+                            primary={item.title}
+                            className={styles['list-wrapper__parent-category__btn__title']}
+                        />
                         {currentState ? (
                             <ExpandLess className={styles['list-wrapper__parent-category__btn__icon']} />
                         ) : (
                             <ExpandMore className={styles['list-wrapper__parent-category__btn__icon']} />
                         )}
-                        <Collapse in={currentState} timeout="auto" unmountOnExit className={styles['list-wrapper__parent-category__btn__collapse']}>
+                        <Collapse
+                            in={currentState}
+                            timeout="auto"
+                            unmountOnExit
+                            className={styles['list-wrapper__parent-category__btn__collapse']}
+                        >
                             <List disablePadding>
                                 <ListItem
                                     className={`${styles['list-items-wrapper']}`}
                                     items={item.children}
-                                    onClick={(e) => {
-                                        /* 부모인 ListItemButton 이벤트가 자식에게도 적용되는걸 방지 */
-                                        e.stopPropagation();
+                                    onClick={(publicId, e) => {
+                                        onClick(publicId);
+                                        e.stopPropagation(); // 부모 이벤트 전파 방지
                                     }}
                                 />
                             </List>
