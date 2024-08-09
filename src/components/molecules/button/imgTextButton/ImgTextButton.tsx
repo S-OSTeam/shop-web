@@ -6,11 +6,12 @@ export interface ImageTextBtnProps {
     className?: string;
     img: React.ReactNode;
     text: string;
+    onClick?: () => void;
 }
 
-const ImgTextButton = ({ className, img, text }: ImageTextBtnProps) => {
+const ImgTextButton = ({ className, img, text, onClick }: ImageTextBtnProps) => {
     return (
-        <Button className={clsN(className)}>
+        <Button className={clsN(className)} onClick={onClick}>
             {img}
             {text}
         </Button>
