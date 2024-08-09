@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '@components/organisms/login/login/Login';
+import LoginOrganisms from '@components/organisms/login/login/Login';
 import SocialLogin from '@components/organisms/login/social/SocialLogin';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { Box } from '@mui/material';
@@ -11,11 +11,11 @@ const LoginForm = () => {
             {isInMobile ? (
                 <Box>
                     <SocialLogin />
-                    <Login />
+                    <LoginOrganisms />
                 </Box>
             ) : (
                 <Box>
-                    <Login />
+                    <LoginOrganisms />
                     <SocialLogin />
                 </Box>
             )}
