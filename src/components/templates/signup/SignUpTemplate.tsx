@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
+import { useNavigate } from 'react-router-dom';
 import { Box, Divider, FormControl, Radio, RadioGroup, TextField } from '@mui/material';
 import Form from '@components/organisms/signup/form/Form';
 import clsN from 'classnames';
@@ -7,6 +8,7 @@ import { FormDataInterface } from '@interface/FormDataInterface';
 import CheckboxWithText from '@molecules/checkbox/checkboxWithText/CheckboxWithText';
 import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
+import Modal from '@molecules/modal/Modal';
 import useGraphQL from '@hooks/useGraphQL';
 import { SIGN_UP } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import style from './style/style.module.scss';
@@ -17,6 +19,10 @@ const SignUpTemplate = () => {
     const [birthDay, setBirthDay] = useState('');
     const [value, setValue] = useState(false);
     const [checkBox, setCheckBox] = useState(false);
+    const [authModalOpen, setAuthModalOpen] = useState(false);
+
+    const navigate = useNavigate();
+
     const checkboxTexts = ['선택적 SNS 광고 동의 여부', '기타 고객정보 영리적 사용 등', '기타 등등'];
     const [signUpData, setSignUpData] = useState<FormDataInterface>({
         userId: '',
@@ -111,8 +117,15 @@ const SignUpTemplate = () => {
         setCheckBox(e.target.checked);
         console.log(e.target.checked);
     };
+
     const signUpHandler = () => {
-        refetch().then();
+        refetch().then(() => {
+            setAuthModalOpen(true);
+        });
+    };
+    const handleModalClose = () => {
+        setAuthModalOpen(false);
+        navigate('/');
     };
 
     return (
@@ -144,7 +157,7 @@ const SignUpTemplate = () => {
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            placeholder="1900.00.00"
+                            placeholder="1900-00-00"
                             onChange={onBirthHandle}
                         />
                     </Box>
@@ -221,7 +234,7 @@ const SignUpTemplate = () => {
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            placeholder="1900.00.00"
+                            placeholder="1900-00-00"
                             onChange={onBirthHandle}
                         />
                     </Box>
@@ -270,6 +283,12 @@ const SignUpTemplate = () => {
                             회원가입
                         </Button>
                     </Box>
+                    <Modal open={authModalOpen} onClose={handleModalClose}>
+                        <Box className={clsN(`${style['template-wrapper__modal']}`)}>
+                            <h2>회원가입이 성공하였습니다!</h2>
+                            <Button onClick={handleModalClose}>닫기</Button>
+                        </Box>
+                    </Modal>
                 </Box>
             )}
         </Box>

@@ -9,11 +9,6 @@ import Login from '@routes/login/Login';
 import Category from '@routes/category/Category';
 import { AdminRouter } from './adminRouter/AdminRouter';
 
-
-
-
-
-
 export const AppRouter = () => {
     // React Router 가 제공하는 useLocation 훅을 사용해서 조건부 랜더링하기
 
@@ -35,11 +30,11 @@ export const AppRouter = () => {
                 <Route path="/shop/product" element={<Product />} />
                 <Route path="/support" element={<CustomerServicePage />} />
                 <Route path="/shop/category" element={<Category />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
 
                 {/* 모듈화된 관리자 페이지 라우터 렌더하기 */}
                 <Route path="/manager/*" element={<AdminRouter />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
             </Routes>
         </div>
     );
