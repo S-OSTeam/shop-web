@@ -5,6 +5,7 @@ import Paper from '@mui/material/Paper';
 import Image from '@atoms/source/image/Image';
 import PropTypes, { string } from 'prop-types';
 import clsN from 'classnames';
+import { Item, ItemInterface } from '@util/test/interface/Item';
 import styles from './styles/Masonry.module.scss';
 
 interface MasonryProps {
@@ -13,7 +14,9 @@ interface MasonryProps {
     spacing?: number;
     heights: number[];
     images: string[];
+    items: Item[] | ItemInterface[];
     imgClsN?: string;
+    onClick?: (item: Item | ItemInterface) => void;
 }
 
 const Masonry = ({ ...props }: MasonryProps) => {
@@ -31,7 +34,7 @@ const Masonry = ({ ...props }: MasonryProps) => {
         <MuiMasonry className={clsN(props.className, styles.masonry)} columns={props.columns} spacing={props.spacing}>
             {heightData.map((height, index) => (
                 // eslint-disable-next-line react/no-array-index-key
-                <Item key={index} sx={{ height }}>
+                <Item key={index} sx={{ height }} onClick={() => props.onClick && props.onClick(props.items[index])}>
                     <Image className={clsN(props.imgClsN)} imgPath={props.images[index]} />
                 </Item>
             ))}
@@ -53,6 +56,7 @@ Masonry.defaultProps = {
     spacing: 0,
     imgClsN: styles[''],
     images: [''],
+    onClick: undefined,
 };
 
 export default Masonry;
