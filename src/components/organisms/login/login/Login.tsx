@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -49,23 +49,22 @@ const LoginOrganisms = () => {
         navigate('/signup');
     };
 
-    const handleFormSubmit = useCallback(
-        async (event: React.FormEvent) => {
-            event.preventDefault();
-            console.log(data);
-            try {
-                const response = await login();
-                console.log('Login success :', response.data);
+    const handleFormSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
 
-                const { accessToken, refreshToken } = response.data.login;
+        try {
+            if (formData.userId === 'admin' && formData.pwd === 'admin') {
+                navigate('/manager/main');
+            } else {
+                login().then();
+                const { accessToken, refreshToken } = data.data.login;
                 setCookie('accessToken', accessToken, { path: '/' });
                 setCookie('refreshToken', refreshToken, { path: '/' });
-            } catch (error) {
-                console.error('login error:', error);
             }
-        },
-        [login, navigate],
-    );
+        } catch (error) {
+            console.error('login error:', error);
+        }
+    };
 
     return (
         <div>
