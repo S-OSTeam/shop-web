@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import { Swiper as CustomSwiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay, FreeMode } from 'swiper/modules';
@@ -10,6 +11,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
+import { Item, ItemInterface } from '@util/test/interface/Item';
+import { EventInfo } from '@util/test/interface/Event';
 import styles from './style/Swiper.module.scss';
 
 interface CustomSwiperProps {
@@ -17,7 +20,7 @@ interface CustomSwiperProps {
     slideClsN?: string; // swiper slide className
     btnClsN?: string; // ImageButton의 Button className
     imgClsN?: string; // ImageBUtton의 Image className
-    items: string[]; // 아이템의 이미지 주소
+    itemImages: string[]; // 아이템의 이미지 주소
     alt?: string;
     onSlideChange?: () => void; // slide 넘길때 발생하는 onSlideChange 옵션
     spaceBetween?: number; // 각 slide 간격
@@ -30,10 +33,20 @@ interface CustomSwiperProps {
     delay?: number; // auto play 사용 시 delay
     breakpoints?: { [width: number]: SwiperOptions; [ratio: string]: SwiperOptions } | boolean;
     centeredSlides?: boolean;
+    onClick?: (item: Item | ItemInterface | EventInfo) => void;
+    items: Item[] | ItemInterface[] | EventInfo[];
 }
 
 const Swiper = ({ ...props }: CustomSwiperProps) => {
     const autoPlay = { delay: props.delay, disableOnInteraction: false };
+
+    // 이미지 판별
+    const imageHandler = (item: Item | ItemInterface | EventInfo) => {
+        if ('thumbnail' in item) {
+            return item.thumbnail;
+        }
+        return item.imageUrls[0];
+    };
     return (
         <div>
             <CustomSwiper
@@ -51,14 +64,17 @@ const Swiper = ({ ...props }: CustomSwiperProps) => {
                 breakpoints={props.breakpoints}
                 centeredSlides={props.centeredSlides}
             >
-                {props.items.map((imgPath, index) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <SwiperSlide className={clsN(props.slideClsN, styles['swiper-wrapper__swiper-slide'])} key={index}>
+                {props.items.map((item, index) => (
+                    <SwiperSlide
+                        className={clsN(props.slideClsN, styles['swiper-wrapper__swiper-slide'])}
+                        key={index}
+                        onClick={() => props.onClick && props.onClick(item)}
+                    >
                         <ImageButton
                             className={clsN(props.btnClsN, styles.btn)}
                             imgClsN={clsN(props.imgClsN, styles.img)}
                             alt={props.alt}
-                            imgPath={imgPath}
+                            imgPath={imageHandler(item)}
                         />
                     </SwiperSlide>
                 ))}
@@ -84,6 +100,7 @@ Swiper.defaultProps = {
     delay: 5000,
     breakpoints: false,
     centeredSlides: false,
+    onClick: undefined,
 };
 
 export default Swiper;

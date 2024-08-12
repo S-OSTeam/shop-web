@@ -1,12 +1,13 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useGraphQL from '@hooks/useGraphQL';
 import { SEARCH_ITEM } from '@api/apollo/gql/queries/ItemResponseQuery.gql';
 import Popular from '@organisms/home/product/popular/Popular';
-import { ItemInterface } from '@util/test/interface/Item';
+import { Item, ItemInterface } from '@util/test/interface/Item';
 
 const CategoryPage = () => {
+    const navigation = useNavigate();
     const [searchPararm] = useSearchParams();
     const categoryId = searchPararm.get('categoryId');
     const [itemList, setItemList] = React.useState<ItemInterface[]>();
@@ -29,10 +30,19 @@ const CategoryPage = () => {
         }
     }, [itemData]);
 
+    const onProductHandle = (item: Item | ItemInterface) => {
+        console.log(item.publicId.toString());
+        navigation(`/shop/product?publicId=${item.publicId.toString()}`, {
+            state: {
+                productItem: item,
+            },
+        });
+    };
+
     return (
         <Box>
             <h1 style={{ marginTop: 80, marginBottom: 300 }}>{categoryId}</h1>
-            {itemList && <Popular popularItems={itemList} content="신규 상품" />}
+            {itemList && <Popular popularItems={itemList} content="신규 상품" onProductClick={onProductHandle} />}
         </Box>
     );
 };

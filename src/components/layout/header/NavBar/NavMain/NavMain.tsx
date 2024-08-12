@@ -48,13 +48,24 @@ const NavMain = ({
     const navigate = useNavigate();
 
     const goToCategory = (publicId: string) => {
-        console.log(publicId);
-        navigate(`/shop/category?categoryId=${publicId}`);
+        if (publicId === '01HX6ES9ND3E5YG71BR23BSVTY') {
+            goToSupport();
+        } else {
+            navigate(`/shop/category?categoryId=${publicId}`);
+        }
     };
 
     const handleHomeClick = () => {
         console.log('Home button clicked'); // 디버깅을 위해 추가
         navigate('/', { replace: true });
+    };
+
+    const goToLogin = () => {
+        navigate('/login', { replace: true });
+    };
+
+    const goToSupport = () => {
+        navigate('/support');
     };
 
     return (
@@ -87,7 +98,7 @@ const NavMain = ({
                 icnBtnClsN={navBarRightBtnClsN}
                 iconClsN={navBarRightIconClsN}
             />
-            <Button className={clsN(styles['tool-bar__login'], loginClsN)} variant={variant}>
+            <Button className={clsN(styles['tool-bar__login'], loginClsN)} variant={variant} onClick={goToLogin}>
                 로그인
             </Button>
         </Toolbar>
