@@ -11,19 +11,20 @@ import ReviewList from '@organisms/home/Review/ReviewList';
 import { ReviewResponse } from '@util/test/data/ReviewResponse';
 import { itemResponse, swiperResponse } from '@util/test/data/ItemResponse';
 import { EventInfoResponse } from '@util/test/data/EventResponse';
+import { Item, ItemInterface } from '@util/test/interface/Item';
+import { EventInfo } from '@util/test/interface/Event';
 import styles from './styles/HomeTemplate.module.scss';
 
-// interface HomeTemplateProps {
-//     mainBanner?: ItemInterface;
-//     recommandItem?: ItemInterface;
-//     evnetItem?: ItemInterface;
-//     popularItem?: ItemInterface;
-//     pickItem?: ItemInterface;
-//     newItem?: ItemInterface;
-//     review?: ItemInterface;
-// }
+interface HomeTemplateProps {
+    onHomeSwiperClick: (item: Item | ItemInterface | EventInfo) => void;
+    onRecommendClick: (item: Item | ItemInterface | EventInfo) => void;
+    onEventClick: (item: Item | ItemInterface | EventInfo) => void;
+    onPickClick: (item: Item | ItemInterface) => void;
+    onProductClick: (item: Item | ItemInterface) => void;
+    onReviewClick: (id: string) => void;
+}
 
-const HomeTemplate = () => {
+const HomeTemplate = ({ ...props }: HomeTemplateProps) => {
     const items = itemResponse.map((item) => {
         return item;
     });
@@ -51,13 +52,13 @@ const HomeTemplate = () => {
 
     return (
         <Box className={clsN(styles.home)}>
-            <HomeSwiper swiperItem={swiperitems} />
+            <HomeSwiper onHomeSwiperClick={props.onHomeSwiperClick} swiperItem={swiperitems} />
             <Box className={clsN(styles['home-product'])}>
-                <Recommend recommendItem={swiperitems} />
-                <Event eventItem={eventItems} />
-                <Popular popularItems={items} content="월간 인기 상품" />
-                <Pick />
-                <Popular popularItems={items} content="신규 상품" />
+                <Recommend onRecommendClick={props.onRecommendClick} recommendItem={swiperitems} />
+                <Event eventItem={eventItems} onEventClick={props.onEventClick} />
+                <Popular onProductClick={props.onProductClick} popularItems={items} content="월간 인기 상품" />
+                <Pick onClick={props.onPickClick} />
+                <Popular onProductClick={props.onProductClick} popularItems={items} content="신규 상품" />
                 <ReviewList reviewItems={reviews} />
                 {isMoreReview && (
                     <Box className={clsN(styles['review-more-container'])}>

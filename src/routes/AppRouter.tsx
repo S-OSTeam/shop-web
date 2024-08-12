@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import DeamHome from '@routes//home/DeamHome';
-import Product from '@routes/product/Product';
 import Header from '@components/layout/header/Header';
-import CustomerServicePage from '@pages/cs/CustomerServicePage';
+import DeamHome from '@routes/home/DeamHome';
+import Product from '@routes/product/Product';
+import Event from '@routes/event/Event';
 import SignUp from '@routes/signup/Signup';
 import Login from '@routes/login/Login';
+import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import Category from '@routes/category/Category';
 import { AdminRouter } from './adminRouter/AdminRouter';
 
@@ -30,6 +31,7 @@ export const AppRouter = () => {
                 <Route path="/shop/product" element={<Product />} />
                 <Route path="/support" element={<CustomerServicePage />} />
                 <Route path="/shop/category" element={<Category />} />
+                <Route path="/shop/event" element={<Event />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
 

@@ -1,22 +1,25 @@
 import React from 'react';
-import { Item } from '@interface/item/Item';
+import { Item, ItemInterface } from '@util/test/interface/Item';
 import { Box } from '@mui/material';
 import Swiper from '@molecules/swiper/Swiper';
 import clsN from 'classnames';
 import * as ReactDOMServer from 'react-dom/server';
 import { PaginationOptions } from 'swiper/types/modules/pagination';
+import { EventInfo } from '@util/test/interface/Event';
 import styles from './styles/HomeSwiper.module.scss';
 
 interface HomeSwiperProps {
-    swiperItem: Item[];
+    swiperItem: Item[] | ItemInterface[];
+    onHomeSwiperClick: (item: Item | ItemInterface | EventInfo) => void;
 }
 
 /**
  *
  * @param swiperItem
+ * @param onHomeSwiperClick
  * @constructor
  */
-const HomeSwiper = ({ swiperItem }: HomeSwiperProps) => {
+const HomeSwiper = ({ swiperItem, onHomeSwiperClick }: HomeSwiperProps) => {
     /**
      * custom pagination
      * -pagination option-
@@ -53,7 +56,14 @@ const HomeSwiper = ({ swiperItem }: HomeSwiperProps) => {
 
     return (
         <Box className={clsN(styles['home-swiper'])}>
-            <Swiper isPagination={pagination} items={items} isAutoPlay delay={5000} />
+            <Swiper
+                isPagination={pagination}
+                itemImages={items}
+                isAutoPlay
+                delay={5000}
+                items={swiperItem}
+                onClick={onHomeSwiperClick}
+            />
         </Box>
     );
 };

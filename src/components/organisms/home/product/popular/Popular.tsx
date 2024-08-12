@@ -16,6 +16,7 @@ import styles from './styles/Popular.module.scss';
 interface PopularProps {
     popularItems: Item[] | ItemInterface[];
     content: string;
+    onProductClick?: (item: Item | ItemInterface) => void;
 }
 
 /**
@@ -25,7 +26,7 @@ interface PopularProps {
  * @param content
  * @constructor
  */
-const Popular = ({ popularItems, content }: PopularProps) => {
+const Popular = ({ popularItems, content, onProductClick }: PopularProps) => {
     const testTags: string[] = ['무료배송', '특가'];
 
     /**
@@ -75,6 +76,7 @@ const Popular = ({ popularItems, content }: PopularProps) => {
                         imgClsN={clsN(styles['popular-wrapper__card-media'])}
                         contentClsN={clsN(styles['popular-wrapper__card-content'])}
                         imgPath={item.imageUrls[0]}
+                        onClick={() => onProductClick && onProductClick(item)}
                     >
                         {tags()}
                         <Box className={clsN(styles['popular-wrapper__popular-info'])}>
@@ -96,6 +98,10 @@ const Popular = ({ popularItems, content }: PopularProps) => {
             </Box>
         </Box>
     );
+};
+
+Popular.defaultProps = {
+    onProductClick: undefined,
 };
 
 export default Popular;
