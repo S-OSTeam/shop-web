@@ -4,15 +4,21 @@ import Text from '@atoms/text/Text';
 import Masonry from '@molecules/masonry/Masonry';
 import clsN from 'classnames';
 import { itemResponse } from '@util/test/data/ItemResponse';
+import { Item, ItemInterface } from '@util/test/interface/Item';
 import styles from './styles/Pick.module.scss';
 
-const Pick = () => {
+interface PickProps {
+    onClick: (item: Item | ItemInterface) => void;
+}
+
+const Pick = ({ onClick }: PickProps) => {
     const testHeights: number[] = [419, 203, 203];
     const testImages: string[] = [
         `${itemResponse[11].imageUrls[0]}`,
         `${itemResponse[12].imageUrls[0]}`,
         `${itemResponse[13].imageUrls[0]}`,
     ];
+    const testItems: Item[] = [itemResponse[11], itemResponse[12], itemResponse[13]];
     return (
         <Box className={clsN(styles['pick-wrapper'])}>
             <Text className={clsN(styles['pick-wrapper__title'])} text="Deamhome 엄선 작품" />
@@ -23,6 +29,8 @@ const Pick = () => {
                     columns={2}
                     spacing={2}
                     images={testImages}
+                    items={testItems}
+                    onClick={onClick}
                 />
             </Box>
         </Box>
