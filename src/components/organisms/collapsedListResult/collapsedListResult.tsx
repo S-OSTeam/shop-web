@@ -2,7 +2,6 @@
 import React from 'react';
 import {
     Paper,
-    Stack,
     Table,
     TableBody,
     TableCell,
@@ -11,11 +10,10 @@ import {
     TablePagination,
     TableRow,
 } from '@mui/material';
-import clsN from 'classnames';
-import styles from './styles/collapsedListResult.module.scss';
-
 import { CollapsedTableTitleRow } from '@molecules/collapsedTable/collapsedTableTitleRow/CollapsedTableTitleRow';
 import { CollapsedTableContext } from '@molecules/collapsedTable/collapsedTableContext/CollapsedTableContext';
+import clsN from 'classnames';
+import styles from './styles/collapsedListResult.module.scss';
 
 // 클래스 모음 인터페이스
 interface CollapsedTableClasses {
@@ -82,6 +80,7 @@ export const CollapsedListResult = ({ ...props }: CollapsedManagerProps) => {
     // itemRender 에 쓰이는 인자를 string 으로 반환
 
     // 인자로 받은 인덱스로 해당 콜랩스 toggle 상태 변경
+    /*
     const setCollArr = (index: number) => {
         setColl((prevColl) => {
             // 원본 복제
@@ -92,24 +91,28 @@ export const CollapsedListResult = ({ ...props }: CollapsedManagerProps) => {
             return prevTemp;
         });
     };
+    */
 
-    // 속성을 통해 받은 본문 랜더 함수
+    // 고차 함수 방식으로 콜랩스 토글값 반전
+    const toggleCollapse =
+        (_index: number) =>
+        (arr: boolean[]): boolean[] =>
+            arr.map((_val, _idx) => (_idx === _index ? !_val : _val));
+    // 속성을 통해 받은 본문 랜더 함수, 고차 함수로 첫번째 함수인자(인덱스) 두번째함수인자(배열)
+    const setCollapseArray = (_index: number) => {
+        setColl((prevState) => toggleCollapse(_index)(prevState));
+    };
 
     // 테이블 Head 영역 렌더
     const tableHeaderRender = (_arr: string[]) => {
         const tCells = _arr.map((_item) => (
-            <TableCell size="small" component="th" align="center" className={clsN(styles['table__head__cell'])}>
+            <TableCell size="small" component="th" align="center" className={clsN(styles.table__head__cell)}>
                 {_item}
             </TableCell>
         ));
         return (
-            <TableRow className={clsN(styles['table__head'])}>
-                <TableCell
-                    padding="checkbox"
-                    className={clsN(styles['table__head__cell'])}
-                    component="th"
-                    align="left"
-                />
+            <TableRow className={clsN(styles.table__head)}>
+                <TableCell padding="checkbox" className={clsN(styles.table__head__cell)} component="th" align="left" />
                 {tCells}
             </TableRow>
         );
@@ -124,7 +127,7 @@ export const CollapsedListResult = ({ ...props }: CollapsedManagerProps) => {
             const currentState = coll[_index];
             // 상태 변화 함수
             const onCollapseChange = () => {
-                setCollArr(_index);
+                setCollapseArray(_index);
             };
             // 제목 렌더
             const provideTitle = (

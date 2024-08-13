@@ -25,9 +25,24 @@ export const NavigateItem: NavigateITF[] = [
         route: '/manager/product',
         depthItem: [
             {
-                id: 'productManagement',
-                title: '상품 관리',
-                ref: '0',
+                id: 'Management',
+                title: '상품 조회',
+                ref: 'prodmgt',
+            },
+            {
+                id: 'ProductPost',
+                title: '상품 등록',
+                ref: 'prodpost',
+            },
+            {
+                id: 'ProductCategory',
+                title: '카테고리',
+                ref: 'catmgt',
+            },
+            {
+                id: 'Announce',
+                title: '공지사항',
+                ref: 'anncmgt',
             },
         ],
     },
