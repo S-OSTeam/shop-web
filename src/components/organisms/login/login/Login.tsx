@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,6 +24,7 @@ const LoginOrganisms = () => {
         sns: 'NORMAL',
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, refetch: login } = useGraphQL({
         query: Login,
         type: 'mutation',
@@ -49,22 +50,18 @@ const LoginOrganisms = () => {
         navigate('/signup');
     };
 
-    const handleFormSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
+    const handleFormSubmit = useCallback(
+        async (event: React.FormEvent) => {
+            event.preventDefault();
 
-        try {
-            if (formData.userId === 'admin' && formData.pwd === 'admin') {
-                navigate('/manager/main');
-            } else {
-                login().then();
-                const { accessToken, refreshToken } = data.data.login;
-                setCookie('accessToken', accessToken, { path: '/' });
-                setCookie('refreshToken', refreshToken, { path: '/' });
-            }
-        } catch (error) {
-            console.error('login error:', error);
-        }
-    };
+            const response = await login();
+
+            const { accessToken, refreshToken } = response.data.login;
+            setCookie('accessToken', accessToken, { path: '/' });
+            setCookie('refreshToken', refreshToken, { path: '/' });
+        },
+        [login, navigate],
+    );
 
     return (
         <div>
