@@ -1,21 +1,24 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Item } from '@util/test/interface/Item';
+import { Item, ItemInterface } from '@util/test/interface/Item';
 import clsN from 'classnames';
 import Text from '@atoms/text/Text';
 import Swiper from '@molecules/swiper/Swiper';
 import { SwiperOptions } from 'swiper/types/swiper-options';
+import { EventInfo } from '@util/test/interface/Event';
 import styles from './styles/Recommand.module.scss';
 
 interface RecommendProps {
-    recommendItem: Item[];
+    recommendItem: Item[] | ItemInterface[];
+    onRecommendClick: (item: Item | ItemInterface | EventInfo) => void;
 }
 
 /**
  * @param recommendItem
+ * @param onRecommendClick
  * @constructor
  */
-const Recommend = ({ recommendItem }: RecommendProps) => {
+const Recommend = ({ recommendItem, onRecommendClick }: RecommendProps) => {
     /**
      * Swiper에 출력되는 item들의 값에서 image의 맨 처음만 리턴 해주는 함수
      */
@@ -51,7 +54,7 @@ const Recommend = ({ recommendItem }: RecommendProps) => {
         <Box className={clsN(styles['recommend-wrapper'])}>
             <Text className={clsN(styles['recommend-wrapper__title'])} text="추천 카테고리" />
             <Swiper
-                items={items}
+                itemImages={items}
                 className={clsN(styles['recommend-wrapper__category'])}
                 slideClsN={clsN(styles['recommend-wrapper__category-slide'])}
                 btnClsN={clsN(styles['recommend-wrapper__category-btn'])}
@@ -60,6 +63,8 @@ const Recommend = ({ recommendItem }: RecommendProps) => {
                 slidesPerView={4}
                 isLoop={false}
                 breakpoints={breakpoints}
+                items={recommendItem}
+                onClick={onRecommendClick}
             />
         </Box>
     );

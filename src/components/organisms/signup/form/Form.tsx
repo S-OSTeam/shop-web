@@ -1,6 +1,6 @@
 /* eslint-disable*/
 import React, { useState, useEffect } from 'react';
-
+import Modal from '@components/molecules/modal/Modal';
 import { Box, Divider, TextField } from '@mui/material';
 import clsN from 'classnames';
 import Button from '@components/atoms/button/Button';
@@ -37,6 +37,8 @@ const Form = ({ formInfo }: FormProps) => {
 
     const [authData, setAuthData] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [emailModalOpen, setEmailModalOpen] = useState(false);
+    const [authModalOpen, setAuthModalOpen] = useState(false);
 
     const { data: sendMail, refetch: sendMailRefetch } = useGraphQL({
         query: SEND_VERIFY_CODE_REQUEST,
@@ -55,7 +57,6 @@ const Form = ({ formInfo }: FormProps) => {
         type: 'mutation',
         request: {
             email: formData.email,
-            verifyCode: authData,
             verifyType: 'SIGNUP',
         },
         option: {
@@ -80,19 +81,17 @@ const Form = ({ formInfo }: FormProps) => {
     };
 
     const handleEmailSend = async () => {
-        // console.log(formData.email);
-        if (formData.email != '') {
+        setEmailModalOpen(true); // 이메일 모달을 위한 상태 사용
+        if (formData.email !== '') {
             sendMailRefetch().then();
-            console.log(sendMail);
         }
-        // refetch().then();
-        // console.log(data);
     };
     const handleAuthConfirm = () => {
         sendCheckRefetch().then(() => {
+            setAuthModalOpen(true);
             formInfo(formData);
         });
-        console.log(sendCheck);
+        // console.log(sendCheck);
     };
     const textFieldsData = [
         {
@@ -100,7 +99,7 @@ const Form = ({ formInfo }: FormProps) => {
             className: style['form-wrapper__id'],
             id: 'outlined-required',
             placeholder: '아이디',
-            inputData: 'userId', // userId 필드를 업데이트
+            inputData: 'userId',
         },
         {
             label: '비밀번호',
@@ -108,7 +107,7 @@ const Form = ({ formInfo }: FormProps) => {
             id: 'outlined-password-input',
             type: 'password',
             placeholder: '*******',
-            inputData: 'pwd', // pwd 필드를 업데이트
+            inputData: 'pwd',
         },
         {
             label: '비밀번호 확인',
@@ -116,7 +115,7 @@ const Form = ({ formInfo }: FormProps) => {
             id: 'outlined-password-input',
             type: 'password',
             placeholder: '*******',
-            inputData: 'confirmPwd', // confirmPwd 필드를 업데이트
+            inputData: 'confirmPwd',
         },
         {
             label: '이메일',
@@ -124,7 +123,7 @@ const Form = ({ formInfo }: FormProps) => {
             id: 'outlined-email-input',
             type: 'email',
             placeholder: 'userid@email.com',
-            inputData: 'email', // email 필드를 업데이트
+            inputData: 'email',
         },
     ];
 
@@ -153,6 +152,15 @@ const Form = ({ formInfo }: FormProps) => {
             <Button className={clsN(`${style['form-wrapper__email-authentication-btn']}`)} onClick={handleEmailSend}>
                 이메일 인증
             </Button>
+
+            <Modal open={emailModalOpen} onClose={() => setEmailModalOpen(false)}>
+                <Box className={clsN(`${style['form-wrapper__modal']}`)}>
+                    <h2>이메일 전송 완료</h2>
+                    <p>인증 이메일이 발송되었습니다. 받은 이메일을 확인하세요.</p>
+                    <Button onClick={() => setEmailModalOpen(false)}>닫기</Button>
+                </Box>
+            </Modal>
+
             <Divider className={clsN(`${style['form-wrapper__divider']}`)} orientation="horizontal" variant="middle" />
             <Box className={clsN(`${style['authentication-wrapper']}`)}>
                 <TextField
@@ -164,7 +172,7 @@ const Form = ({ formInfo }: FormProps) => {
                     }}
                     placeholder="0000"
                     inputProps={{
-                        style: { height: '1rem' }, // input 요소에만 적용
+                        style: { height: '1rem' },
                     }}
                     onChange={(e) => setAuthData(e.target.value)}
                 />
@@ -174,6 +182,13 @@ const Form = ({ formInfo }: FormProps) => {
                 <Button className={clsN(`${style['authentication-wrapper__btn']}`)} onClick={handleAuthConfirm}>
                     인증
                 </Button>
+
+                <Modal open={authModalOpen} onClose={() => setAuthModalOpen(false)}>
+                    <Box className={clsN(`${style['form-wrapper__modal']}`)}>
+                        <h2>인증이 완료되었습니다!</h2>
+                        <Button onClick={() => setAuthModalOpen(false)}>닫기</Button>
+                    </Box>
+                </Modal>
             </Box>
             <Divider className={clsN(`${style['form-wrapper__divider']}`)} orientation="horizontal" variant="middle" />
         </Box>

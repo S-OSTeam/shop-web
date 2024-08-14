@@ -27,6 +27,31 @@
     width: 70%;
     margin: 1rem;
   }
+
+  &__modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $white-color;
+    border: 0.5px solid #000;
+    padding: 0.5em;
+    width: 300px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+    text-align: center;
+  }
+
+  &__modal p {
+    margin: 0.5em 0;
+    font-size: 0.9em;
+    color: #333;
+  }
+
+  &__modal button {
+    margin-top: 1em;
+  }
 }
 
 .authentication-wrapper {
