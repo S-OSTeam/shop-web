@@ -24,6 +24,7 @@ const LoginOrganisms = () => {
         sns: 'NORMAL',
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, refetch: login } = useGraphQL({
         query: Login,
         type: 'mutation',
@@ -52,17 +53,12 @@ const LoginOrganisms = () => {
     const handleFormSubmit = useCallback(
         async (event: React.FormEvent) => {
             event.preventDefault();
-            console.log(data);
-            try {
-                const response = await login();
-                console.log('Login success :', response.data);
 
-                const { accessToken, refreshToken } = response.data.login;
-                setCookie('accessToken', accessToken, { path: '/' });
-                setCookie('refreshToken', refreshToken, { path: '/' });
-            } catch (error) {
-                console.error('login error:', error);
-            }
+            const response = await login();
+
+            const { accessToken, refreshToken } = response.data.login;
+            setCookie('accessToken', accessToken, { path: '/' });
+            setCookie('refreshToken', refreshToken, { path: '/' });
         },
         [login, navigate],
     );

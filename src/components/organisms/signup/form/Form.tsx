@@ -99,7 +99,7 @@ const Form = ({ formInfo }: FormProps) => {
             className: style['form-wrapper__id'],
             id: 'outlined-required',
             placeholder: '아이디',
-            inputData: 'userId', // userId 필드를 업데이트
+            inputData: 'userId',
         },
         {
             label: '비밀번호',
@@ -107,7 +107,7 @@ const Form = ({ formInfo }: FormProps) => {
             id: 'outlined-password-input',
             type: 'password',
             placeholder: '*******',
-            inputData: 'pwd', // pwd 필드를 업데이트
+            inputData: 'pwd',
         },
         {
             label: '비밀번호 확인',
@@ -115,7 +115,7 @@ const Form = ({ formInfo }: FormProps) => {
             id: 'outlined-password-input',
             type: 'password',
             placeholder: '*******',
-            inputData: 'confirmPwd', // confirmPwd 필드를 업데이트
+            inputData: 'confirmPwd',
         },
         {
             label: '이메일',
@@ -123,7 +123,7 @@ const Form = ({ formInfo }: FormProps) => {
             id: 'outlined-email-input',
             type: 'email',
             placeholder: 'userid@email.com',
-            inputData: 'email', // email 필드를 업데이트
+            inputData: 'email',
         },
     ];
 
@@ -156,7 +156,7 @@ const Form = ({ formInfo }: FormProps) => {
             <Modal open={emailModalOpen} onClose={() => setEmailModalOpen(false)}>
                 <Box className={clsN(`${style['form-wrapper__modal']}`)}>
                     <h2>이메일 전송 완료</h2>
-                    <p>인증 이메일이 발송되었습니다. 받은 편지함을 확인하세요.</p>
+                    <p>인증 이메일이 발송되었습니다. 받은 이메일을 확인하세요.</p>
                     <Button onClick={() => setEmailModalOpen(false)}>닫기</Button>
                 </Box>
             </Modal>
@@ -172,7 +172,7 @@ const Form = ({ formInfo }: FormProps) => {
                     }}
                     placeholder="0000"
                     inputProps={{
-                        style: { height: '1rem' }, // input 요소에만 적용
+                        style: { height: '1rem' },
                     }}
                     onChange={(e) => setAuthData(e.target.value)}
                 />
