@@ -1,15 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
 import Text from '@components/atoms/text/Text';
 import { Input } from '@components/atoms/input/Input';
 import SaveId from '@components/organisms/login/saveId/SaveId';
 import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-
 import useGraphQL from '@hooks/useGraphQL';
-import { setCookie } from '@util/CookieUtil';
 import { Login } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
@@ -24,8 +21,7 @@ const LoginOrganisms = () => {
         sns: 'NORMAL',
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { data, refetch: login } = useGraphQL({
+    const { refetch: login } = useGraphQL({
         query: Login,
         type: 'mutation',
         request: { ...formData },
@@ -53,12 +49,7 @@ const LoginOrganisms = () => {
     const handleFormSubmit = useCallback(
         async (event: React.FormEvent) => {
             event.preventDefault();
-
-            const response = await login();
-
-            const { accessToken, refreshToken } = response.data.login;
-            setCookie('accessToken', accessToken, { path: '/' });
-            setCookie('refreshToken', refreshToken, { path: '/' });
+            login();
         },
         [login, navigate],
     );
