@@ -3,16 +3,21 @@ import { ItemCategoryTreeResponse } from '@interface/category/Category';
 import { Box } from '@mui/material';
 import { ItemInterface } from '@util/test/interface/Item';
 import Popular from '@organisms/home/product/popular/Popular';
+import Text from '@atoms/text/Text';
 
 interface CategoryTemplateProps {
+    categoryTitle: string;
     categories: ItemCategoryTreeResponse[];
     items: ItemInterface[];
     onProductClick?: (item: ItemInterface) => void;
 }
 
-const CategoryTemplate = ({ categories, items, onProductClick }: CategoryTemplateProps) => {
+const CategoryTemplate = ({ categoryTitle, categories, items, onProductClick }: CategoryTemplateProps) => {
     return (
         <Box style={{ marginTop: 80 }}>
+            <Box>
+                <Text variant="subtitle1" text={categoryTitle} />
+            </Box>
             {categories ? (
                 <h1>
                     {categories.map((category) => (
