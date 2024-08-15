@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Item, ItemInterface } from '@util/test/interface/Item';
+import { ItemInterface } from '@util/test/interface/Item';
 import clsN from 'classnames';
 import Text from '@atoms/text/Text';
 import Swiper from '@molecules/swiper/Swiper';
@@ -9,8 +9,8 @@ import { EventInfo } from '@util/test/interface/Event';
 import styles from './styles/Recommand.module.scss';
 
 interface RecommendProps {
-    recommendItem: Item[] | ItemInterface[];
-    onRecommendClick: (item: Item | ItemInterface | EventInfo) => void;
+    recommendItem: ItemInterface[];
+    onRecommendClick: (item: ItemInterface | EventInfo) => void;
 }
 
 /**

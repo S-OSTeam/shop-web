@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import Image from '@atoms/source/image/Image';
 import PropTypes, { string } from 'prop-types';
 import clsN from 'classnames';
-import { Item, ItemInterface } from '@util/test/interface/Item';
+import { ItemInterface } from '@util/test/interface/Item';
 import styles from './styles/Masonry.module.scss';
 
 interface MasonryProps {
@@ -14,9 +14,9 @@ interface MasonryProps {
     spacing?: number;
     heights: number[];
     images: string[];
-    items: Item[] | ItemInterface[];
+    items: ItemInterface[];
     imgClsN?: string;
-    onClick?: (item: Item | ItemInterface) => void;
+    onClick?: (item: ItemInterface) => void;
 }
 
 const Masonry = ({ ...props }: MasonryProps) => {

@@ -38,7 +38,7 @@ export interface ItemInterface {
     imageUrls: string[];
     option: string[];
     productNumber: string;
-    deadline: Date;
+    deadline: string;
     originalWork: string;
     material: string;
     size: string;
