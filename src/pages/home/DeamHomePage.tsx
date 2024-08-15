@@ -16,6 +16,7 @@ const DeamHomePage = () => {
      * type 타입 : RECOMMEND(추천 카테고리) | SWIPER(홈 스와이퍼, 이벤트) */
     const onSwiperHandle = (item: ItemInterface | EventInfo, type: 'RECOMMEND' | 'SWIPER' = 'SWIPER') => {
         if ('id' in item) {
+            // TODO 암호화/복호화 추후에 변경 예정
             const idEncode = btoa(item.id.toString()).slice(0, -1);
             navigation(`${Path.event}?id=${idEncode}`, {
                 state: {
@@ -23,6 +24,7 @@ const DeamHomePage = () => {
                 },
             });
         } else if (type !== 'RECOMMEND') {
+            // TODO 암호화/복호화 추후에 변경 예정
             const idEncode = btoa(item.publicId.toString()).slice(0, -1);
             navigation(`${Path.product}?publicId=${idEncode}`, {
                 state: {
@@ -30,6 +32,7 @@ const DeamHomePage = () => {
                 },
             });
         } else {
+            // TODO 암호화/복호화 추후에 변경 예정
             const idEncode = btoa(item.publicId.toString()).slice(0, -1);
             navigation(`${Path.category}?categoryId=${idEncode}`, {
                 state: {
@@ -43,6 +46,7 @@ const DeamHomePage = () => {
      * 상세상품으로 가서 item 정보를 전달 해야되기 때문에 item을 인자로 받는다.
      * item 타입 : ItemInterface */
     const onPickHandle = (item: ItemInterface) => {
+        // TODO 암호화/복호화 추후에 변경 예정
         const encodedPublicId = btoa(item.publicId.toString()).slice(0, -1);
         navigation(`${Path.product}?publicId=${encodedPublicId}`, {
             state: {
@@ -55,6 +59,7 @@ const DeamHomePage = () => {
      * 상세상품으로 가서 item 정보를 전달 해야되기 때문에 item을 인자로 받는다.
      * item 타입 : ItemInterface */
     const onProductHandle = (item: ItemInterface) => {
+        // TODO 암호화/복호화 추후에 변경 예정
         const encodedPublicId = btoa(item.publicId.toString()).slice(0, -1);
         navigation(`${Path.product}?publicId=${encodedPublicId}`, {
             state: {
@@ -67,6 +72,7 @@ const DeamHomePage = () => {
      * 상품 리뷰로 가서 item 리뷰 정보를 전달 해야되기 때문에 review를 인자로 받는다.
      * review 타입 : ReviewResponse */
     const onReviewHandle = (review: ReviewResponse) => {
+        // TODO 암호화/복호화 추후에 변경 예정
         const encodeReviewId = btoa(review.reviewId.toString()).slice(0, -1);
         navigation(`${Path.review}?reviewId=${encodeReviewId}`, {
             state: {
