@@ -59,6 +59,7 @@ const NavMain = ({
         if (inquiryCategory && publicId === inquiryCategory.publicId) {
             goToSupport();
         } else {
+            // TODO 암호화/복호화 추후에 변경 예정
             const encodedPublicId = btoa(publicId.toString()).slice(0, -1);
             navigate(`${Path.category}?categoryId=${encodedPublicId}`, {
                 state: {
