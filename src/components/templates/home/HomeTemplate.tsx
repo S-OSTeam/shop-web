@@ -12,16 +12,15 @@ import { ReviewResponse } from '@util/test/data/ReviewResponse';
 import { ReviewResponse as Review } from '@interface/review/Review';
 import { itemResponse, swiperResponse } from '@util/test/data/ItemResponse';
 import { EventInfoResponse } from '@util/test/data/EventResponse';
-import { Item, ItemInterface } from '@util/test/interface/Item';
+import { ItemInterface } from '@util/test/interface/Item';
 import { EventInfo } from '@util/test/interface/Event';
 import styles from './styles/HomeTemplate.module.scss';
 
 interface HomeTemplateProps {
-    onHomeSwiperClick: (item: Item | ItemInterface | EventInfo) => void;
-    onRecommendClick: (item: Item | ItemInterface | EventInfo) => void;
-    onEventClick: (item: Item | ItemInterface | EventInfo) => void;
-    onPickClick: (item: Item | ItemInterface) => void;
-    onProductClick: (item: Item | ItemInterface) => void;
+    onSwiperClick: (item: ItemInterface | EventInfo) => void;
+    onRecommendClick: (item: ItemInterface | EventInfo) => void;
+    onPickClick: (item: ItemInterface) => void;
+    onProductClick: (item: ItemInterface) => void;
     onReviewClick: (review: Review) => void;
 }
 
@@ -53,10 +52,10 @@ const HomeTemplate = ({ ...props }: HomeTemplateProps) => {
 
     return (
         <Box className={clsN(styles.home)}>
-            <HomeSwiper onHomeSwiperClick={props.onHomeSwiperClick} swiperItem={swiperitems} />
+            <HomeSwiper onHomeSwiperClick={props.onSwiperClick} swiperItem={swiperitems} />
             <Box className={clsN(styles['home-product'])}>
                 <Recommend onRecommendClick={props.onRecommendClick} recommendItem={swiperitems} />
-                <Event eventItem={eventItems} onEventClick={props.onEventClick} />
+                <Event eventItem={eventItems} onEventClick={props.onSwiperClick} />
                 <Popular onProductClick={props.onProductClick} popularItems={items} content="월간 인기 상품" />
                 <Pick onClick={props.onPickClick} />
                 <Popular onProductClick={props.onProductClick} popularItems={items} content="신규 상품" />

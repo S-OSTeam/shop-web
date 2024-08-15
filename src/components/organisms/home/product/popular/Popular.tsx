@@ -10,13 +10,13 @@ import IconGroup from '@molecules/icon/IconGroup';
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { Item, ItemInterface } from '@interface/item/Item';
+import { ItemInterface } from '@util/test/interface/Item';
 import styles from './styles/Popular.module.scss';
 
 interface PopularProps {
-    popularItems: Item[] | ItemInterface[];
+    popularItems: ItemInterface[];
     content: string;
-    onProductClick?: (item: Item | ItemInterface) => void;
+    onProductClick?: (item: ItemInterface) => void;
 }
 
 /**

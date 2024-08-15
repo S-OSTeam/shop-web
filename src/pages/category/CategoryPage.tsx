@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useGraphQL from '@hooks/useGraphQL';
 import { SEARCH_ITEM } from '@api/apollo/gql/queries/ItemResponseQuery.gql';
 import Popular from '@organisms/home/product/popular/Popular';
-import { Item, ItemInterface } from '@util/test/interface/Item';
+import { ItemInterface } from '@util/test/interface/Item';
 
 const CategoryPage = () => {
     const navigation = useNavigate();
@@ -30,7 +30,7 @@ const CategoryPage = () => {
         }
     }, [itemData]);
 
-    const onProductHandle = (item: Item | ItemInterface) => {
+    const onProductHandle = (item: ItemInterface) => {
         const encodedPublicId = btoa(item.publicId.toString()).slice(0, -1);
         navigation(`/shop/product?publicId=${encodedPublicId}`, {
             state: {
