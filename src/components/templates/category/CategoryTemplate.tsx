@@ -7,9 +7,10 @@ import Popular from '@organisms/home/product/popular/Popular';
 interface CategoryTemplateProps {
     categories: ItemCategoryTreeResponse[];
     items: ItemInterface[];
+    onProductClick?: (item: ItemInterface) => void;
 }
 
-const CategoryTemplate = ({ categories, items }: CategoryTemplateProps) => {
+const CategoryTemplate = ({ categories, items, onProductClick }: CategoryTemplateProps) => {
     return (
         <Box style={{ marginTop: 80 }}>
             {categories ? (
@@ -19,9 +20,13 @@ const CategoryTemplate = ({ categories, items }: CategoryTemplateProps) => {
                     ))}
                 </h1>
             ) : undefined}
-            {items && <Popular popularItems={items} content="" />}
+            <Popular popularItems={items} content="" onProductClick={onProductClick} />
         </Box>
     );
+};
+
+CategoryTemplate.defaultProps = {
+    onProductClick: undefined,
 };
 
 export default CategoryTemplate;
