@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useGraphQL from '@hooks/useGraphQL';
 import { SEARCH_ITEM } from '@api/apollo/gql/queries/ItemResponseQuery.gql';
 import Popular from '@organisms/home/product/popular/Popular';
@@ -8,8 +8,8 @@ import { Item, ItemInterface } from '@util/test/interface/Item';
 
 const CategoryPage = () => {
     const navigation = useNavigate();
-    const [searchPararm] = useSearchParams();
-    const categoryId = searchPararm.get('categoryId');
+    const location = useLocation();
+    const categoryId = location.state.categoryId || {};
     const [itemList, setItemList] = React.useState<ItemInterface[]>();
 
     const { data: itemData, refetch: itemRefetch } = useGraphQL({
@@ -31,8 +31,8 @@ const CategoryPage = () => {
     }, [itemData]);
 
     const onProductHandle = (item: Item | ItemInterface) => {
-        console.log(item.publicId.toString());
-        navigation(`/shop/product?publicId=${item.publicId.toString()}`, {
+        const encodedPublicId = btoa(item.publicId.toString()).slice(0, -1);
+        navigation(`/shop/product?publicId=${encodedPublicId}`, {
             state: {
                 productItem: item,
             },

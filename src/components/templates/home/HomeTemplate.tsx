@@ -9,6 +9,7 @@ import Popular from '@organisms/home/product/popular/Popular';
 import Pick from '@organisms/home/product/pick/Pick';
 import ReviewList from '@organisms/home/Review/ReviewList';
 import { ReviewResponse } from '@util/test/data/ReviewResponse';
+import { ReviewResponse as Review } from '@interface/review/Review';
 import { itemResponse, swiperResponse } from '@util/test/data/ItemResponse';
 import { EventInfoResponse } from '@util/test/data/EventResponse';
 import { Item, ItemInterface } from '@util/test/interface/Item';
@@ -21,7 +22,7 @@ interface HomeTemplateProps {
     onEventClick: (item: Item | ItemInterface | EventInfo) => void;
     onPickClick: (item: Item | ItemInterface) => void;
     onProductClick: (item: Item | ItemInterface) => void;
-    onReviewClick: (id: string) => void;
+    onReviewClick: (review: Review) => void;
 }
 
 const HomeTemplate = ({ ...props }: HomeTemplateProps) => {
@@ -59,7 +60,7 @@ const HomeTemplate = ({ ...props }: HomeTemplateProps) => {
                 <Popular onProductClick={props.onProductClick} popularItems={items} content="월간 인기 상품" />
                 <Pick onClick={props.onPickClick} />
                 <Popular onProductClick={props.onProductClick} popularItems={items} content="신규 상품" />
-                <ReviewList reviewItems={reviews} />
+                <ReviewList reviewItems={reviews} onReviewClick={props.onReviewClick} />
                 {isMoreReview && (
                     <Box className={clsN(styles['review-more-container'])}>
                         <Button className={clsN(styles['review-more-btn'])} variant="text" onClick={loadMoreReviews}>

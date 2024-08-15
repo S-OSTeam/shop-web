@@ -47,11 +47,19 @@ const NavMain = ({
 
     const navigate = useNavigate();
 
+    // "문의" 카테고리 찾기
+    const inquiryCategory = categories.find((category) => category.title === '문의');
+
     const goToCategory = (publicId: string) => {
-        if (publicId === '01HX6ES9ND3E5YG71BR23BSVTY') {
+        if (inquiryCategory && publicId === inquiryCategory.publicId) {
             goToSupport();
         } else {
-            navigate(`/shop/category?categoryId=${publicId}`);
+            const encodedPublicId = btoa(publicId.toString()).slice(0, -1);
+            navigate(`/shop/category?categoryId=${encodedPublicId}`, {
+                state: {
+                    categoryId: publicId.toString(),
+                },
+            });
         }
     };
 

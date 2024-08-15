@@ -1,18 +1,19 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Review } from '@util/test/interface/Review';
 import Text from '@atoms/text/Text';
 import Card from '@molecules/card/Card';
 import Title from '@molecules/text/title/Title';
 import Button from '@atoms/button/Button';
 import clsN from 'classnames';
+import { ReviewResponse } from '@interface/review/Review';
 import styles from './styles/ReviewList.module.scss';
 
 interface ReviewListProps {
-    reviewItems: Review[];
+    reviewItems: ReviewResponse[];
+    onReviewClick: (review: ReviewResponse) => void;
 }
 
-const ReviewList = ({ reviewItems }: ReviewListProps) => {
+const ReviewList = ({ reviewItems, onReviewClick }: ReviewListProps) => {
     return (
         <Box className={clsN(styles['review-wrapper'])}>
             <Text className={clsN(styles['review-wrapper__title'])} text="최근 상품 리뷰" />
@@ -23,6 +24,7 @@ const ReviewList = ({ reviewItems }: ReviewListProps) => {
                         className={clsN(styles['review-wrapper__card'])}
                         imgClsN={clsN(styles['review-wrapper__card-media'])}
                         contentClsN={clsN(styles['review-wrapper__card-content'])}
+                        onClick={() => onReviewClick && onReviewClick(review)}
                     >
                         <Box className={clsN(styles['review-wrapper__review-info'])}>
                             <Title className={clsN(styles['review-wrapper__card-title'])} content={review.title} />
