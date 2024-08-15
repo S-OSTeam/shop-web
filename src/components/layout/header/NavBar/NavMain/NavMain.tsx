@@ -12,6 +12,7 @@ import LeftMenuBtn from '@components/layout/header/NavBar/listItem/leftMenuBtn/l
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { useNavigate } from 'react-router-dom';
 import { ItemCategoryTreeResponse } from '@interface/category/Category';
+import { Path } from '@util/Path';
 
 interface GnbMainProps {
     categories: ItemCategoryTreeResponse[];
@@ -50,12 +51,16 @@ const NavMain = ({
     // "문의" 카테고리 찾기
     const inquiryCategory = categories.find((category) => category.title === '문의');
 
+    /* 카테고리 이동하기 위해 카테고리에서 문의 카테고리를 제외한 나머지 카테고리는 카테고리 페이지로 이동한다.
+     * publicId 타입 : string
+     * encodePublicId는 base64를 통해서 publicId를 사용자에게 직접적으로 주소에 노출하지 않기 위해 해주었다.(추후에 암호화/복호화 예정)
+     */
     const goToCategory = (publicId: string) => {
         if (inquiryCategory && publicId === inquiryCategory.publicId) {
             goToSupport();
         } else {
             const encodedPublicId = btoa(publicId.toString()).slice(0, -1);
-            navigate(`/shop/category?categoryId=${encodedPublicId}`, {
+            navigate(`${Path.category}?categoryId=${encodedPublicId}`, {
                 state: {
                     categoryId: publicId.toString(),
                 },
@@ -65,15 +70,15 @@ const NavMain = ({
 
     const handleHomeClick = () => {
         console.log('Home button clicked'); // 디버깅을 위해 추가
-        navigate('/', { replace: true });
+        navigate(`${Path.home}`, { replace: true });
     };
 
     const goToLogin = () => {
-        navigate('/login', { replace: true });
+        navigate(`${Path.login}`, { replace: true });
     };
 
     const goToSupport = () => {
-        navigate('/support');
+        navigate(`${Path.support}`);
     };
 
     return (
