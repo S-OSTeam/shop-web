@@ -5,6 +5,7 @@ import { SEARCH_ITEM } from '@api/apollo/gql/queries/ItemResponseQuery.gql';
 import { Item, ItemInterface } from '@util/test/interface/Item';
 import { useNavigate } from 'react-router-dom';
 import { EventInfo } from '@util/test/interface/Event';
+import { ReviewResponse } from '@interface/review/Review';
 
 const DeamHomePage = () => {
     const [itemList, setItemList] = React.useState<ItemInterface[]>();
@@ -30,14 +31,15 @@ const DeamHomePage = () => {
 
     const onHomeSwiperHandle = (item: Item | ItemInterface | EventInfo) => {
         if ('id' in item) {
-            const idEncode = encodeURIComponent(item.id);
+            const idEncode = btoa(item.id.toString()).slice(0, -1);
             navigation(`/shop/event?id=${idEncode}`, {
                 state: {
                     productItem: item,
                 },
             });
         } else {
-            navigation(`/shop/product?publicId=${item.publicId}`, {
+            const idEncode = btoa(item.publicId.toString()).slice(0, -1);
+            navigation(`/shop/product?publicId=${idEncode}`, {
                 state: {
                     productItem: item,
                 },
@@ -47,15 +49,17 @@ const DeamHomePage = () => {
 
     const onRecommendHandle = (item: Item | ItemInterface | EventInfo) => {
         if ('id' in item) {
-            navigation(`/shop/event?id=${item.id}`, {
+            const idEncode = btoa(item.id.toString()).slice(0, -1);
+            navigation(`/shop/event?id=${idEncode}`, {
                 state: {
-                    productItem: item,
+                    categoryId: item.id.toString(),
                 },
             });
         } else {
-            navigation(`/shop/category?categoryId=${item.publicId}`, {
+            const idEncode = btoa(item.publicId.toString()).slice(0, -1);
+            navigation(`/shop/category?categoryId=${idEncode}`, {
                 state: {
-                    productItem: item,
+                    categoryId: item.publicId.toString(),
                 },
             });
         }
@@ -63,14 +67,15 @@ const DeamHomePage = () => {
 
     const onEventHandle = (item: Item | ItemInterface | EventInfo) => {
         if ('id' in item) {
-            const idEncode = encodeURIComponent(item.id);
+            const idEncode = btoa(item.id.toString()).slice(0, -1);
             navigation(`/shop/event?id=${idEncode}`, {
                 state: {
                     productItem: item,
                 },
             });
         } else {
-            navigation(`/shop/product?publicId=${item.publicId}`, {
+            const idEncode = btoa(item.publicId.toString()).slice(0, -1);
+            navigation(`/shop/product?publicId=${idEncode}`, {
                 state: {
                     productItem: item,
                 },
@@ -79,7 +84,8 @@ const DeamHomePage = () => {
     };
 
     const onPickHandle = (item: Item | ItemInterface) => {
-        navigation(`/shop/product?publicId=${item.publicId}`, {
+        const encodedPublicId = btoa(item.publicId.toString()).slice(0, -1);
+        navigation(`/shop/product?publicId=${encodedPublicId}`, {
             state: {
                 productItem: item,
             },
@@ -87,15 +93,21 @@ const DeamHomePage = () => {
     };
 
     const onProductHandle = (item: Item | ItemInterface) => {
-        navigation(`/shop/product?publicId=${item.publicId}`, {
+        const encodedPublicId = btoa(item.publicId.toString()).slice(0, -1);
+        navigation(`/shop/product?publicId=${encodedPublicId}`, {
             state: {
                 productItem: item,
             },
         });
     };
 
-    const onReviewHandle = (id: string) => {
-        console.log(id);
+    const onReviewHandle = (review: ReviewResponse) => {
+        const encodeReviewId = btoa(review.reviewId.toString()).slice(0, -1);
+        navigation(`/review?reviewId=${encodeReviewId}`, {
+            state: {
+                userReview: review,
+            },
+        });
     };
 
     return (
