@@ -11,7 +11,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
-import { Item, ItemInterface } from '@util/test/interface/Item';
+import { ItemInterface } from '@util/test/interface/Item';
 import { EventInfo } from '@util/test/interface/Event';
 import styles from './style/Swiper.module.scss';
 
@@ -33,15 +33,15 @@ interface CustomSwiperProps {
     delay?: number; // auto play 사용 시 delay
     breakpoints?: { [width: number]: SwiperOptions; [ratio: string]: SwiperOptions } | boolean;
     centeredSlides?: boolean;
-    onClick?: (item: Item | ItemInterface | EventInfo) => void;
-    items: Item[] | ItemInterface[] | EventInfo[];
+    onClick?: (item: ItemInterface | EventInfo) => void;
+    items: ItemInterface[] | EventInfo[];
 }
 
 const Swiper = ({ ...props }: CustomSwiperProps) => {
     const autoPlay = { delay: props.delay, disableOnInteraction: false };
 
     // 이미지 판별
-    const imageHandler = (item: Item | ItemInterface | EventInfo) => {
+    const imageHandler = (item: ItemInterface | EventInfo) => {
         if ('thumbnail' in item) {
             return item.thumbnail;
         }

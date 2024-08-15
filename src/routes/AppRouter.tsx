@@ -8,8 +8,8 @@ import SignUp from '@routes/signup/Signup';
 import Login from '@routes/login/Login';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import Category from '@routes/category/Category';
-import { AdminRouter } from './adminRouter/AdminRouter';
 import Review from '@routes/review/Review';
+import { AdminRouter } from './adminRouter/AdminRouter';
 
 export const AppRouter = () => {
     // React Router 가 제공하는 useLocation 훅을 사용해서 조건부 랜더링하기
