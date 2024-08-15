@@ -38,6 +38,7 @@ const Form = ({ formInfo }: FormProps) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [emailModalOpen, setEmailModalOpen] = useState(false);
     const [authModalOpen, setAuthModalOpen] = useState(false);
+    const [errorModalOpen, setErrorModalOpen] = useState(false);
 
     const [errors, setErrors] = useState({
         userId: '',
@@ -94,9 +95,9 @@ const Form = ({ formInfo }: FormProps) => {
     };
 
     const validateUserId = (userId: string) => {
-        const regex = /^[a-zA-Z0-9_]{4,20}$/; // 아이디는 4-20자의 알파벳, 숫자, 밑줄(_)로 구성
+        const regex = /^[a-zA-Z0-9_]{4,20}$/;
         if (!regex.test(userId)) {
-            setErrors((prev) => ({ ...prev, userId: '아이디는 4-20자의 영문, 숫자, 밑줄만 가능합니다.' }));
+            setErrors((prev) => ({ ...prev, userId: '아이디는 4-20자의 영문, 숫자가 가능합니다.' }));
             setValidity((prev) => ({ ...prev, userId: false }));
             return false;
         }
@@ -106,9 +107,12 @@ const Form = ({ formInfo }: FormProps) => {
     };
 
     const validatePassword = (pwd: string) => {
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/; // 최소 6자, 하나 이상의 문자 및 숫자 포함
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
         if (!regex.test(pwd)) {
-            setErrors((prev) => ({ ...prev, pwd: '비밀번호는 최소 6자이며, 문자와 숫자를 포함해야 합니다.' }));
+            setErrors((prev) => ({
+                ...prev,
+                pwd: '비밀번호는 최소 6자이며, 문자와 숫자, 특수문자를 포함해야 합니다.',
+            }));
             setValidity((prev) => ({ ...prev, pwd: false }));
             return false;
         }
@@ -144,6 +148,8 @@ const Form = ({ formInfo }: FormProps) => {
         if (validateEmail(formData.email)) {
             setEmailModalOpen(true); // 이메일 모달을 위한 상태 사용
             sendMailRefetch().then();
+        } else {
+            setErrorModalOpen(true); // 오류 모달 열기
         }
     };
 
@@ -158,6 +164,8 @@ const Form = ({ formInfo }: FormProps) => {
                 setAuthModalOpen(true);
                 formInfo(formData);
             });
+        } else {
+            setErrorModalOpen(true); // 오류 모달 열기
         }
     };
 
@@ -248,6 +256,13 @@ const Form = ({ formInfo }: FormProps) => {
                     <h2>이메일 전송 완료</h2>
                     <p>인증 이메일이 발송되었습니다. 받은 이메일을 확인하세요.</p>
                     <Button onClick={() => setEmailModalOpen(false)}>닫기</Button>
+                </Box>
+            </Modal>
+
+            <Modal open={errorModalOpen} onClose={() => setErrorModalOpen(false)}>
+                <Box className={clsN(`${style['form-wrapper__modal']}`)}>
+                    <h2>제출양식을 확인하고 다시 입력해주세요</h2>
+                    <Button onClick={() => setErrorModalOpen(false)}>닫기</Button>
                 </Box>
             </Modal>
 
