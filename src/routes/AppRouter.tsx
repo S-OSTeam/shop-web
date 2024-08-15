@@ -8,6 +8,7 @@ import SignUp from '@routes/signup/Signup';
 import Login from '@routes/login/Login';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import Category from '@routes/category/Category';
+import Review from '@routes/review/Review';
 import { AdminRouter } from './adminRouter/AdminRouter';
 
 export const AppRouter = () => {
@@ -28,12 +29,13 @@ export const AppRouter = () => {
             {headerProvider()}
             <Routes>
                 <Route path="/" element={<DeamHome />} />
-                <Route path="/shop/product" element={<Product />} />
-                <Route path="/support" element={<CustomerServicePage />} />
-                <Route path="/shop/category" element={<Category />} />
-                <Route path="/shop/event" element={<Event />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
+                <Route path="/shop/product" element={<Product />} />
+                <Route path="/shop/category" element={<Category />} />
+                <Route path="/shop/event" element={<Event />} />
+                <Route path="/review" element={<Review />} />
+                <Route path="/support" element={<CustomerServicePage />} />
 
                 {/* 모듈화된 관리자 페이지 라우터 렌더하기 */}
                 <Route path="/manager/*" element={<AdminRouter />} />

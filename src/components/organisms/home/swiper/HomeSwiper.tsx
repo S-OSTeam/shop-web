@@ -1,5 +1,5 @@
 import React from 'react';
-import { Item, ItemInterface } from '@util/test/interface/Item';
+import { ItemInterface } from '@util/test/interface/Item';
 import { Box } from '@mui/material';
 import Swiper from '@molecules/swiper/Swiper';
 import clsN from 'classnames';
@@ -9,8 +9,8 @@ import { EventInfo } from '@util/test/interface/Event';
 import styles from './styles/HomeSwiper.module.scss';
 
 interface HomeSwiperProps {
-    swiperItem: Item[] | ItemInterface[];
-    onHomeSwiperClick: (item: Item | ItemInterface | EventInfo) => void;
+    swiperItem: ItemInterface[];
+    onHomeSwiperClick: (item: ItemInterface | EventInfo) => void;
 }
 
 /**
