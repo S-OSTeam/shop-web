@@ -1,7 +1,7 @@
 /* eslint-disable*/
 import React, { useState, useEffect } from 'react';
 import Modal from '@components/molecules/modal/Modal';
-import { Box, Divider, TextField } from '@mui/material';
+import { Box, Divider, TextField, FormHelperText } from '@mui/material';
 import clsN from 'classnames';
 import Button from '@components/atoms/button/Button';
 import style from './style/style.module.scss';
@@ -34,11 +34,24 @@ const Form = ({ formInfo }: FormProps) => {
     });
 
     const [timeLeft, setTimeLeft] = useState(150);
-
     const [authData, setAuthData] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [emailModalOpen, setEmailModalOpen] = useState(false);
     const [authModalOpen, setAuthModalOpen] = useState(false);
+
+    const [errors, setErrors] = useState({
+        userId: '',
+        pwd: '',
+        confirmPwd: '',
+        email: '',
+    });
+
+    const [validity, setValidity] = useState({
+        userId: false,
+        pwd: false,
+        confirmPwd: false,
+        email: false,
+    });
 
     const { data: sendMail, refetch: sendMailRefetch } = useGraphQL({
         query: SEND_VERIFY_CODE_REQUEST,
@@ -80,19 +93,74 @@ const Form = ({ formInfo }: FormProps) => {
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
+    const validateUserId = (userId: string) => {
+        const regex = /^[a-zA-Z0-9_]{4,20}$/; // 아이디는 4-20자의 알파벳, 숫자, 밑줄(_)로 구성
+        if (!regex.test(userId)) {
+            setErrors((prev) => ({ ...prev, userId: '아이디는 4-20자의 영문, 숫자, 밑줄만 가능합니다.' }));
+            setValidity((prev) => ({ ...prev, userId: false }));
+            return false;
+        }
+        setErrors((prev) => ({ ...prev, userId: '' }));
+        setValidity((prev) => ({ ...prev, userId: true }));
+        return true;
+    };
+
+    const validatePassword = (pwd: string) => {
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/; // 최소 6자, 하나 이상의 문자 및 숫자 포함
+        if (!regex.test(pwd)) {
+            setErrors((prev) => ({ ...prev, pwd: '비밀번호는 최소 6자이며, 문자와 숫자를 포함해야 합니다.' }));
+            setValidity((prev) => ({ ...prev, pwd: false }));
+            return false;
+        }
+        setErrors((prev) => ({ ...prev, pwd: '' }));
+        setValidity((prev) => ({ ...prev, pwd: true }));
+        return true;
+    };
+
+    const validateConfirmPwd = (confirmPwd: string) => {
+        if (confirmPwd !== formData.pwd) {
+            setErrors((prev) => ({ ...prev, confirmPwd: '비밀번호가 일치하지 않습니다.' }));
+            setValidity((prev) => ({ ...prev, confirmPwd: false }));
+            return false;
+        }
+        setErrors((prev) => ({ ...prev, confirmPwd: '' }));
+        setValidity((prev) => ({ ...prev, confirmPwd: true }));
+        return true;
+    };
+
+    const validateEmail = (email: string) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 형식 확인
+        if (!regex.test(email)) {
+            setErrors((prev) => ({ ...prev, email: '유효한 이메일 주소를 입력해주세요.' }));
+            setValidity((prev) => ({ ...prev, email: false }));
+            return false;
+        }
+        setErrors((prev) => ({ ...prev, email: '' }));
+        setValidity((prev) => ({ ...prev, email: true }));
+        return true;
+    };
+
     const handleEmailSend = async () => {
-        setEmailModalOpen(true); // 이메일 모달을 위한 상태 사용
-        if (formData.email !== '') {
+        if (validateEmail(formData.email)) {
+            setEmailModalOpen(true); // 이메일 모달을 위한 상태 사용
             sendMailRefetch().then();
         }
     };
+
     const handleAuthConfirm = () => {
-        sendCheckRefetch().then(() => {
-            setAuthModalOpen(true);
-            formInfo(formData);
-        });
-        // console.log(sendCheck);
+        if (
+            validateUserId(formData.userId) &&
+            validatePassword(formData.pwd) &&
+            validateConfirmPwd(formData.confirmPwd) &&
+            validateEmail(formData.email)
+        ) {
+            sendCheckRefetch().then(() => {
+                setAuthModalOpen(true);
+                formInfo(formData);
+            });
+        }
     };
+
     const textFieldsData = [
         {
             label: '아이디',
@@ -100,6 +168,9 @@ const Form = ({ formInfo }: FormProps) => {
             id: 'outlined-required',
             placeholder: '아이디',
             inputData: 'userId',
+            validate: validateUserId,
+            error: errors.userId,
+            valid: validity.userId,
         },
         {
             label: '비밀번호',
@@ -108,6 +179,9 @@ const Form = ({ formInfo }: FormProps) => {
             type: 'password',
             placeholder: '*******',
             inputData: 'pwd',
+            validate: validatePassword,
+            error: errors.pwd,
+            valid: validity.pwd,
         },
         {
             label: '비밀번호 확인',
@@ -116,6 +190,9 @@ const Form = ({ formInfo }: FormProps) => {
             type: 'password',
             placeholder: '*******',
             inputData: 'confirmPwd',
+            validate: validateConfirmPwd,
+            error: errors.confirmPwd,
+            valid: validity.confirmPwd,
         },
         {
             label: '이메일',
@@ -124,29 +201,42 @@ const Form = ({ formInfo }: FormProps) => {
             type: 'email',
             placeholder: 'userid@email.com',
             inputData: 'email',
+            validate: validateEmail,
+            error: errors.email,
+            valid: validity.email,
         },
     ];
 
     return (
         <Box className={clsN(`${style['form-wrapper']}`)}>
             {textFieldsData.map((textField) => (
-                <TextField
-                    key={textField.id}
-                    label={textField.label}
-                    className={clsN(textField.className)}
-                    id={textField.id}
-                    type={textField.type}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    placeholder={textField.placeholder}
-                    onChange={(e) => {
-                        setFormData((prevFormData) => ({
-                            ...prevFormData,
-                            [textField.inputData]: e.target.value,
-                        }));
-                    }}
-                />
+                <Box className={clsN(`${style['form-wrapper__outer']}`)}>
+                    <TextField
+                        key={textField.id}
+                        label={textField.label}
+                        id={textField.id}
+                        className={clsN(textField.className)}
+                        type={textField.type}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        placeholder={textField.placeholder}
+                        error={!!textField.error && !textField.valid}
+                        onChange={(e) => {
+                            setFormData((prevFormData) => ({
+                                ...prevFormData,
+                                [textField.inputData]: e.target.value,
+                            }));
+                            textField.validate(e.target.value);
+                        }}
+                    />
+                    <FormHelperText
+                        error={!!textField.error && !textField.valid}
+                        style={{ color: textField.valid ? 'green' : 'red' }}
+                    >
+                        {textField.valid ? '유효한 입력입니다.' : textField.error}
+                    </FormHelperText>
+                </Box>
             ))}
 
             <Button className={clsN(`${style['form-wrapper__email-authentication-btn']}`)} onClick={handleEmailSend}>
