@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useGraphQL from '@hooks/useGraphQL';
 import { SEARCH_ITEM } from '@api/apollo/gql/queries/ItemResponseQuery.gql';
 import Popular from '@organisms/home/product/popular/Popular';
-import { ItemInterface } from '@util/test/interface/Item';
 import { Path } from '@util/Path';
+import { ItemInterface } from '@util/test/interface/Item';
 
 const CategoryPage = () => {
     const navigation = useNavigate();
