@@ -1,5 +1,5 @@
 /* eslint-disable*/
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Modal from '@components/molecules/modal/Modal';
 import { Box, Divider, TextField, FormHelperText } from '@mui/material';
 import clsN from 'classnames';
@@ -54,7 +54,7 @@ const Form = ({ formInfo }: FormProps) => {
         email: false,
     });
 
-    const { data: sendMail, refetch: sendMailRefetch } = useGraphQL({
+    const { refetch: sendMailRefetch } = useGraphQL({
         query: SEND_VERIFY_CODE_REQUEST,
         type: 'mutation',
         request: {
@@ -66,7 +66,7 @@ const Form = ({ formInfo }: FormProps) => {
         },
     });
 
-    const { data: sendCheck, refetch: sendCheckRefetch } = useGraphQL({
+    const { refetch: sendCheckRefetch } = useGraphQL({
         query: SEND_VERIFY_CODE_REQUEST,
         type: 'mutation',
         request: {
@@ -144,28 +144,29 @@ const Form = ({ formInfo }: FormProps) => {
         return true;
     };
 
-    const handleEmailSend = async () => {
+    const handleEmailSend = useCallback(async () => {
         if (validateEmail(formData.email)) {
-            setEmailModalOpen(true); // 이메일 모달을 위한 상태 사용
-            sendMailRefetch().then();
+            setEmailModalOpen(true);
+            await sendMailRefetch();
         } else {
-            setErrorModalOpen(true); // 오류 모달 열기
+            setErrorModalOpen(true);
         }
-    };
+    }, [formData.email, sendMailRefetch]);
 
     const handleAuthConfirm = () => {
         if (
             validateUserId(formData.userId) &&
             validatePassword(formData.pwd) &&
             validateConfirmPwd(formData.confirmPwd) &&
-            validateEmail(formData.email)
+            validateEmail(formData.email) &&
+            authData
         ) {
             sendCheckRefetch().then(() => {
                 setAuthModalOpen(true);
                 formInfo(formData);
             });
         } else {
-            setErrorModalOpen(true); // 오류 모달 열기
+            setErrorModalOpen(true);
         }
     };
 
