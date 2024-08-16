@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Divider } from '@mui/material';
-import { ReactComponent as Logo } from '@asset/image/logo/Logo.svg';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { KAKAO_LOGIN, NAVER_LOGIN } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import useGraphQL from '@hooks/useGraphQL';
@@ -13,7 +12,7 @@ import style from './style/style.module.scss';
 
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
-    const REDIRECT_URI = 'http://localhost:3000/login';
+    const REDIRECT_URI = '/login';
     const socialPlatforms = [
         { name: 'naver', text: '네이버 로그인' },
         { name: 'kakao', text: '카카오 로그인' },
@@ -23,7 +22,6 @@ const SocialLogin = () => {
     const STATE = 'false';
     const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-    console.log(NAVER_AUTH_URL);
 
     const { data: naverData, refetch: naverLogin } = useGraphQL({
         query: NAVER_LOGIN,
@@ -40,8 +38,6 @@ const SocialLogin = () => {
     });
 
     const handleNaverLogin = () => {
-        console.log('NaverLogin is clicked!');
-
         window.location.href = NAVER_AUTH_URL;
         const code = new URL(window.location.href).searchParams.get('code');
         const state = new URL(window.location.href).searchParams.get('state');
@@ -67,7 +63,6 @@ const SocialLogin = () => {
     };
 
     const handleKakaoLogin = () => {
-        console.log('KakaoLogin is clicked!');
         window.location.href = KAKAO_AUTH_URL;
         const code = new URL(window.location.href).searchParams.get('code');
         const state = new URL(window.location.href).searchParams.get('state');
@@ -114,9 +109,6 @@ const SocialLogin = () => {
             <Box className={clsN(`${style['social-login-wrapper']}`)}>
                 {isInMobile && (
                     <Box className={clsN(`${style['mobile-social-login-wrapper']}`)}>
-                        <Box className={clsN(`${style['mobile-social-login-wrapper']}`)}>
-                            <Logo className={clsN(`${style['mobile-social-login-logo']}`)} />
-                        </Box>
                         <Box className={clsN(`${style['mobile-social-login-wrapper__title']}`)}>
                             <Divider variant="middle" textAlign="center">
                                 간편 로그인

@@ -20,7 +20,7 @@ const SignUpTemplate = () => {
     const [value, setValue] = useState(false);
     const [checkBox, setCheckBox] = useState(false);
     const [authModalOpen, setAuthModalOpen] = useState(false);
-
+    const [errorModalOpen, setErrorModalOpen] = useState(false);
     const [nameError, setNameError] = useState('');
     const [birthDayError, setBirthDayError] = useState('');
 
@@ -151,13 +151,17 @@ const SignUpTemplate = () => {
                 setAuthModalOpen(true);
             });
         } else {
-            alert('입력한 정보를 확인해주세요.');
+            setErrorModalOpen(true);
         }
     };
 
     const handleModalClose = () => {
         setAuthModalOpen(false);
         navigate('/');
+    };
+
+    const handleErrorModalClose = () => {
+        setErrorModalOpen(false);
     };
 
     return (
@@ -333,6 +337,14 @@ const SignUpTemplate = () => {
                         <Box className={clsN(`${style['template-wrapper__modal']}`)}>
                             <h2>회원가입이 성공하였습니다!</h2>
                             <Button onClick={handleModalClose}>닫기</Button>
+                        </Box>
+                    </Modal>
+
+                    <Modal open={errorModalOpen} onClose={handleErrorModalClose}>
+                        <Box className={clsN(`${style['template-wrapper__modal']}`)}>
+                            <p>제출양식을 확인하고</p>
+                            <p>다시 입력해주세요</p>
+                            <Button onClick={handleErrorModalClose}>닫기</Button>
                         </Box>
                     </Modal>
                 </Box>
