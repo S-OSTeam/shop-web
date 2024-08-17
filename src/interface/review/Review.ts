@@ -1,8 +1,8 @@
-export interface Review {
+export interface ReviewResponse {
     reviewId: string;
     title: string;
     content: string;
-    monthReview: string;
+    parentPublicId: string;
     score: number;
     status: boolean;
     userId: string;

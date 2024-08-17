@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatDate } from '@util/FormatDate';
+import { formatDate } from '@util/common/FormatDate';
 import { Notification } from '@util/test/data/admin/notification/Notification';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
 import { Box, Divider, Stack } from '@mui/material';
