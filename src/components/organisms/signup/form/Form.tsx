@@ -262,7 +262,8 @@ const Form = ({ formInfo }: FormProps) => {
 
             <Modal open={errorModalOpen} onClose={() => setErrorModalOpen(false)}>
                 <Box className={clsN(`${style['form-wrapper__modal']}`)}>
-                    <h2>제출양식을 확인하고 다시 입력해주세요</h2>
+                    <p>제출양식을 확인하고</p>
+                    <p>다시 입력해주세요</p>
                     <Button onClick={() => setErrorModalOpen(false)}>닫기</Button>
                 </Box>
             </Modal>
