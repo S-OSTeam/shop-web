@@ -6,44 +6,9 @@
 }
 
 
-// 콘텐츠 클래스명
-.collapse {
-  box-sizing: border-box;
-  padding: 16px;
-  background-color: $background-lightgray;
-}
 
-// 상단 영역
-.primary-container {
-  padding-bottom: 4px;
-  // 헤더
-  &__header{
-    @include font-size(headline2);
-    @include font-weight(medium);
-  }
-}
 
-// 하단 영역
-.secondary-container {
-  padding-top: 16px;
-  // 날짜 영역
-  &__date{
-    // 등록일
-    &__upload{
 
-    }
-    // 수정일
-    &__fixed{
-
-    }
-
-  }
-  // 칩
-  &__chip{
-    margin-top: 16px;
-    width: fit-content;
-  }
-}
 
 // 테이블-root
 .table-root{

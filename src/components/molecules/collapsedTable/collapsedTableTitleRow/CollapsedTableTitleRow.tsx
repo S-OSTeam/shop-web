@@ -26,7 +26,7 @@ export const CollapsedTableTitleRow = ({ ...props }: CollapsedTableTitleRowProps
     /* TSX */
     // 아이콘 버튼 (collapseIn 에 따라 아이콘 변환)
     const iconProvider = (
-        <IconButton icon={props.collapseIn ? <ExpandMore /> : <ExpandLess />} onClick={props.onCollapse} />
+        <IconButton icon={props.collapseIn ? <ExpandLess /> : <ExpandMore />} onClick={props.onCollapse} />
     );
 
     /* 렌더 */

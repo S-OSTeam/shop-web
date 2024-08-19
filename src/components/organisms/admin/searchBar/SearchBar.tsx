@@ -33,6 +33,7 @@ interface BaseSearchBarProps<Opt> {
     showCategories?: boolean;
     // AutoComplete 내부 옵션 그룹 정렬 여부 default : false
     showOptionGroup?: boolean;
+    resetTrigger: boolean; // 리셋 트리거
 }
 /** 카테고리 적용 타입 */
 type WithCategories<Categories> = {
@@ -89,7 +90,7 @@ const SearchBar = <Opt, Group, Categories>({
     /* 렌더 */
     return (
         <Stack>
-            {showDateRange && <DateRange className={clsN()} pickerClsN={clsN()} />}
+            {showDateRange && <DateRange resetTrigger={props.resetTrigger} className={clsN()} pickerClsN={clsN()} />}
             {AutoInput}
         </Stack>
     );

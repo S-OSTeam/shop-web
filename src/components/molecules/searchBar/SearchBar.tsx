@@ -10,36 +10,36 @@ interface SearchBarProps {
     wrapperClsN?: string;
     inputClsN?: string;
     placeholder?: string;
-    onInput?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
+    inputVal: string | number;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     label?: React.ReactNode;
 }
 
-const SearchBar = (
-    {
-        wrapperClsN,
-        inputClsN,
-        placeholder,
-        onInput,
-        label
-    }: SearchBarProps,
-) => {
-
+const SearchBar = ({ wrapperClsN, inputClsN, placeholder, onChange, label, inputVal }: SearchBarProps) => {
     // 검색 키워드에 저장할 정보
     // const renderOption = (props: React.HTMLAttributes<HTMLElement>, option: Partial<any>) => {
     //     return <li {...props}>{option.co}</li>
     // }
 
+    /* 함수 */
+    // form 전송 이벤트 방지
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    };
+
     return (
         <Stack
-            component='form'
+            component="form"
             classes={{
                 root: clsN(wrapperClsN, styles.search),
             }}
+            onSubmit={handleSubmit}
         >
             <Input
                 className={clsN(inputClsN, styles.search__input)}
                 placeholder={placeholder}
-                onChange={onInput}
+                inputVal={inputVal}
+                onChange={onChange}
                 multiline={false}
                 size="small"
                 variant="outlined"
@@ -47,7 +47,7 @@ const SearchBar = (
                 label={label}
                 endAdornment={
                     <InputAdornment position="end">
-                        <Search/>
+                        <Search />
                     </InputAdornment>
                 }
                 fullWidth
@@ -60,6 +60,6 @@ SearchBar.defaultProps = {
     wrapperClsN: styles.wrapper,
     inputClsN: styles.wrapper__input,
     placeholder: undefined,
-    onInput: undefined
+    onChange: undefined,
 };
 export default SearchBar;

@@ -1,0 +1,10 @@
+@import "index";
+
+
+// Data Grid Root
+.data-grid{
+  overflow-x: scroll;
+  // toolBar Container
+  &__toolbar{
+  }
+}
