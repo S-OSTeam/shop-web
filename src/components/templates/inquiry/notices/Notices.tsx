@@ -1,24 +1,97 @@
+/* eslint-disable */
 import React from 'react';
 import { formatDate } from '@util/common/FormatDate';
-import { Notification } from '@util/test/data/admin/notification/Notification';
+import { Notification, NotificationProps } from '@util/test/data/admin/notification/Notification';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
-import { Box, Divider, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { FilteredSearch } from '@organisms/admin/filteredSearch/FilteredSearch';
 import { CollapsedListResult } from '@organisms/collapsedListResult/collapsedListResult';
 import Text from '@atoms/text/Text';
 import Chip from '@atoms/chip/Chip';
+import { CollapseForm } from '@molecules/admin/notice/collapseForm/CollapseForm';
+import { useRecoilState } from 'recoil';
+import { noticesFilterStateAtom, noticesFilterState } from '@recoil/atoms/admin/inquiry/notices/noticesFilterAtom';
 import clsN from 'classnames';
 import styles from './styles/Notices.module.scss';
+import { filteringNotices } from '@util/test/data/admin/notification/NoticeFilter';
 
 export const NoticesTemplate = () => {
     /* 상태 */
+    // 필터 리코일 상태
+    const [filterState, setFilterState] = useRecoilState(noticesFilterStateAtom);
+
+    // searchBar 상태
+    const [searchVal, setSearchVal] = React.useState('');
 
     // 페이지 상태
     const [tPage, setTPage] = React.useState(0);
     // 페이지에 노출할 행의 갯수 상태
     const [rowPerPage, setRowPerPage] = React.useState(10);
 
+    // 필터링된 타입 공지사항 상태값
+    const [filteredNtcItems, setFilteredNtcItems] = React.useState<NotificationProps[]>([]);
+    // 데이터 리셋 상태
+    const [resetDateRange, setResetDateRange] = React.useState(false);
+
+    // selectBtn 아이템들
+    const SelectBtnItems = [
+        {
+            value: '0',
+            text: '전체',
+        },
+        {
+            value: '1',
+            text: '공개',
+        },
+        {
+            value: '2',
+            text: '비공개',
+        },
+    ];
+
+    /*
+     * !!! : GQL 적용 해야됨
+     * 임시로 .ts 파일을 활용해 데이터 불러오기
+     */
+    const noticesStorage: NotificationProps[] = [];
+    // 해당 공지 데이터 저장 적용하기
+
     /* 함수 */
+
+    /* UssEffect */
+    React.useEffect(() => {
+        // 인자로 ts 공지사항 데이터와 필터속성을 필터링 함수에 활용
+        const filtered = filteringNotices(Notification, filterState);
+        // 필터링된 값 적용
+        setFilteredNtcItems(filtered);
+    }, [filterState]);
+
+    // 검색바 입력 이벤트
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setSearchVal(e.target.value);
+    };
+
+    // 검색필터 초기화 이벤트
+    const handelFilterReset = () => {
+        setFilterState(() => ({
+            startDate: undefined,
+            endDate: undefined,
+            category: 'all',
+            postStatus: '전체',
+            keyword: undefined,
+        }));
+        setSearchVal('');
+        setResetDateRange((prevState) => !prevState);
+    };
+    // 검색필터 적용 이벤트
+    const handleSearch = () => {
+        // 기존 필터 속성들을 유지하되 키워드 변경만 적용하기
+        setFilterState((prev) => ({
+            ...prev,
+            keyword: searchVal,
+        }));
+    };
+
     // 페이지 전환 이벤트
     const handleChangePage = (e: unknown, newPage: number) => {
         setTPage(newPage);
@@ -31,59 +104,10 @@ export const NoticesTemplate = () => {
         setTPage(0);
     };
 
-    // 본문 컴포넌트 생성
-    const productContext = (
-        _uid: string,
-        _title: string,
-        _uploader: string,
-        _uploadDate: Date,
-        _context: string,
-        _fixedDate?: Date,
-        _imgUrls?: string[],
-    ) => {
-        // 상단 영역
-        const sectionPrimary = (
-            <Stack key={_uid} className={clsN(styles['primary-container'])}>
-                <Text text={_title} className={clsN(styles['primary-container__header'])} />
-                <Text variant="subtitle2" text={`업로더 - ${_uploader}`} />
-                <Stack direction="row" className={clsN(styles['secondary-container__date'])}>
-                    <Text
-                        variant="caption"
-                        text={`등록일 - ${formatDate(_uploadDate)}`}
-                        className={clsN(styles['secondary-container__date__upload'])}
-                    />
-                    {_fixedDate && (
-                        <Text
-                            variant="caption"
-                            text={`수정일 - ${formatDate(_fixedDate)}`}
-                            className={clsN(styles['secondary-container__date__fixed'])}
-                        />
-                    )}
-                </Stack>
-            </Stack>
-        );
-
-        // 하단 영역
-        const sectionSecondary = (
-            <Stack className={clsN(styles['secondary-container'])}>
-                <Text text={_context} variant="body1" />
-                <Chip
-                    size="small"
-                    className={clsN(styles['secondary-container__chip'])}
-                    label={`${_imgUrls?.length}건의 이미지`}
-                />
-            </Stack>
-        );
-        return (
-            <Box key={_uid} className={clsN(styles.collapse)}>
-                {sectionPrimary}
-                <Divider />
-                {sectionSecondary}
-            </Box>
-        );
-    };
     // ts 유틸 데이터 tData 에 전달하기
-    const tDataConvert = Notification.slice(tPage * rowPerPage, tPage * rowPerPage + rowPerPage).map((item) => {
+    /* 규모가 너무 큰 렌더링 방식임 수정 고려중 */
+    // 필터링된 값을 잘라서 랜더
+    const tDataConvert = filteredNtcItems.slice(tPage * rowPerPage, tPage * rowPerPage + rowPerPage).map((item) => {
         const { uid, title, postState, uploader, uploadDate, fixDate, context, imageUrls } = item;
         // 수정한 내역이 있는지 체크
         const fixDateTemp = fixDate && <Text text={formatDate(fixDate)} className={clsN()} />;
@@ -97,7 +121,17 @@ export const NoticesTemplate = () => {
             fixDateTemp,
         ];
         // tableContext 영역
-        const tCollContext = productContext(uid, title, uploader, uploadDate, context, fixDate, imageUrls);
+        const tCollContext = (
+            <CollapseForm
+                uid={uid}
+                uploadDate={uploadDate}
+                uploader={uploader}
+                context={context}
+                title={title}
+                fixedDate={fixDate}
+                imgUrls={imageUrls}
+            />
+        );
         return { tRowTitle, tCollContext };
     });
     /* JSX 모듈 */
@@ -106,7 +140,14 @@ export const NoticesTemplate = () => {
     return (
         <Stack className={clsN(styles['notices-t'])}>
             {headline}
-            <FilteredSearch />
+            <FilteredSearch
+                searchVal={searchVal}
+                onSearch={handleSearchChange}
+                onBtnClear={handelFilterReset}
+                onBtnSearch={handleSearch}
+                selectBtnItems={SelectBtnItems}
+                resetTrigger={resetDateRange}
+            />
             <CollapsedListResult
                 classesList={{
                     root: styles['table-root'],

@@ -1,16 +1,21 @@
 import React from 'react';
-import { HeadingPaper } from '@organisms/admin/paper/heading/HeadingPaper';
 import { StackAdminLayout } from '@molecules/admin/layout/stack/StackAdminLayout';
 import clsN from 'classnames';
-import { Divider } from '@mui/material';
+import { Heading } from '@molecules/admin/layout/heading/Heading';
+import { ProdTable } from '@organisms/admin/page/prodmgt/prodTable/ProdTable';
+
 // import styles from './styles/Prodmgt.module.scss';
 
 export const ProdmgtTemplate = () => {
     return (
         <StackAdminLayout stackProps={{ spacing: 1 }}>
-            <HeadingPaper title="상품 조회" headingRootClsN={clsN()}>
-                <Divider />
-            </HeadingPaper>
+            <Heading
+                heading="상품 조회"
+                headingClsN={clsN()}
+                subtitle1="등록한 상품을 조회 및 관리하세요"
+                subtitle1ClsN={clsN()}
+            />
+            <ProdTable />
         </StackAdminLayout>
     );
 };

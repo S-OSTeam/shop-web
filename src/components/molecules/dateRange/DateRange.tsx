@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
-import { Stack } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DatePicker from '@atoms/datePicker/DatePicker';
@@ -15,8 +15,9 @@ import styles from './styles/DateRange.module.scss';
 interface DateRangeProps {
     className?: string; // 클래스명
     pickerClsN?: string; // 데이터 피커 클래스명
+    resetTrigger: boolean; // 리셋 트리거
 }
-const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
+const DateRange = ({ className, pickerClsN, resetTrigger }: DateRangeProps) => {
     /* 상태 */
     // 버튼 컨텍스트
     const [btnText, setBtnText] = React.useState('날짜범위');
@@ -135,6 +136,19 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
         // 아래 수행할 함수 실행
         setDatePicked((prevState) => !prevState);
     };
+    // 날짜 초기화 이벤트
+    const resetDateRange = () => {
+        setFromD(null);
+        setEndD(null);
+        setBtnText('날짜범위');
+        setIsOpen(false);
+        setDatePicked(false);
+        setDayRecoil((prevVal) => ({
+            ...prevVal,
+            startDate: undefined,
+            endDate: undefined,
+        }));
+    };
 
     /* JSX 컴포넌트 */
 
@@ -146,23 +160,25 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
     );
     // 받은 인자로 DatePicker 컴포넌트 반환
     const DatePickerRender = (
-        <Stack direction="row" alignItems="center">
-            <DatePicker
-                label={dateLabels[0]}
-                className={clsN(styles['date-range__picker'], pickerClsN)}
-                value={fromD}
-                onChange={(newValue) => {
-                    setFromD(newValue);
-                }}
-            />
-            <p className={clsN(styles['date-range__picker__separator'])} />
-            <DatePicker
-                label={dateLabels[1]}
-                className={clsN(styles['date-range__picker'], pickerClsN)}
-                value={endD}
-                onChange={(newValue) => setEndD(newValue)}
-            />
-        </Stack>
+        <Paper className={clsN(styles.background)} elevation={0}>
+            <Stack direction="row" alignItems="center" boxShadow="none" bgcolor="transparent">
+                <DatePicker
+                    label={dateLabels[0]}
+                    className={clsN(styles['date-range__picker'], pickerClsN)}
+                    value={fromD}
+                    onChange={(newValue) => {
+                        setFromD(newValue);
+                    }}
+                />
+                <p className={clsN(styles['date-range__picker__separator'])} />
+                <DatePicker
+                    label={dateLabels[1]}
+                    className={clsN(styles['date-range__picker'], pickerClsN)}
+                    value={endD}
+                    onChange={(newValue) => setEndD(newValue)}
+                />
+            </Stack>
+        </Paper>
     );
 
     // date picker 컴포넌트를 지역에 맞게 양식을 수정하고 배포
@@ -208,6 +224,12 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
         setDatePicked(false);
         console.log(`current day from : ${dayRecoil.startDate}, current day end ${dayRecoil.endDate}`);
     }, [datePicked]);
+
+    React.useEffect(() => {
+        if (resetTrigger) {
+            resetDateRange();
+        }
+    }, [resetTrigger, setDayRecoil]);
 
     return (
         <Stack className={clsN(styles['date-range-stack'])}>
