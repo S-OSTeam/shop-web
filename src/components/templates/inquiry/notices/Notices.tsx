@@ -3,14 +3,14 @@ import React from 'react';
 import { formatDate } from '@util/FormatDate';
 import { Notification, NotificationProps } from '@util/test/data/admin/notification/Notification';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
-import { Stack } from '@mui/material';
-import { FilteredSearch } from '@organisms/admin/filteredSearch/FilteredSearch';
+import { SelectChangeEvent, Stack } from '@mui/material';
+import { FilteredSearch, SelectMenuItemProps } from '@organisms/admin/filteredSearch/FilteredSearch';
 import { CollapsedListResult } from '@organisms/collapsedListResult/collapsedListResult';
 import Text from '@atoms/text/Text';
 import Chip from '@atoms/chip/Chip';
 import { CollapseForm } from '@molecules/admin/notice/collapseForm/CollapseForm';
 import { useRecoilState } from 'recoil';
-import { noticesFilterStateAtom, noticesFilterState } from '@recoil/atoms/admin/inquiry/notices/noticesFilterAtom';
+import { noticesFilterStateAtom } from '@recoil/atoms/admin/inquiry/notices/noticesFilterAtom';
 import clsN from 'classnames';
 import styles from './styles/Notices.module.scss';
 import { filteringNotices } from '@util/test/data/admin/notification/NoticeFilter';
@@ -28,7 +28,8 @@ export const NoticesTemplate = () => {
     // 데이터 리셋 상태
     const [resetDateRange, setResetDateRange] = React.useState(false);
     // selectBtn 아이템들, NoticeFilterAtom 에 맞춰 가져오기
-    const SelectBtnItems = [
+    // FilterSearch T 제너릭으로
+    const selectBtnItems = [
         {
             value: '0',
             text: 'all',
@@ -47,7 +48,39 @@ export const NoticesTemplate = () => {
     type EmptyNoticationProps = {};
     const noticesStorage: EmptyNoticationProps[] = [];
 
+    // selecteList PostStatus 리코일 상태
+    const [postStatus, setPostStatus] = useRecoilState(noticesFilterStateAtom);
+    const [selectState, setSelectState] = React.useState<SelectMenuItemProps>(selectBtnItems[0]);
+
+    React.useEffect(() => {
+        const startItem = selectBtnItems.find((item) => item.text === postStatus.postStatus);
+        if (startItem) {
+            setSelectState(startItem);
+        }
+    }, [postStatus.postStatus]);
+
     /* 함수 */
+
+    const handleSelectChange = (e: SelectChangeEvent) => {
+        const selectedVal = e.target.value;
+        const selectedData = selectBtnItems.find((item) => item.value === selectedVal);
+        if (selectedData) {
+            setSelectState(selectedData);
+            // recoil atom
+            setPostStatus((prev) => ({
+                ...prev,
+                postStatus: selectedData.text as 'all' | 'posted' | 'private',
+            }));
+        } else {
+            alert('value of Select is not same with e:Event');
+        }
+    };
+
+    // TData 슬라이스 함수
+    const sliceTData = (param: NotificationProps[], cutStart: number, cutEnd: number) => {
+        return param.slice(cutStart, cutEnd);
+    };
+
     // TODO : 검색 입력 이벤트 고려하기("useMemo", "callBack")
     const handleSearchChange = React.useCallback(
         // useCallback : [searchVal] 의존성 배열을 참조하면서 불필요한 렌더 방지함
@@ -94,44 +127,50 @@ export const NoticesTemplate = () => {
     /* JSX 모듈 */
     const headline = <Heading heading="공지사항 관리" subtitle1="고객들께 중요한 소식을 전해주세요" />;
     // ts 유틸 데이터 tData 에 전달하기
-    // TODO: 렌더링 규모가 너무 큰 방식임 수정 예정
-    const tDataConvert = filteredNtcItems.slice(tPage * rowPerPage, tPage * rowPerPage + rowPerPage).map((item) => {
-        const { uid, title, postState, uploader, uploadDate, fixDate, context, imageUrls } = item;
-        // 수정한 내역이 있는지 체크
-        const fixDateTemp = fixDate && <Text text={formatDate(fixDate)} className={clsN()} />;
 
-        // tableTitle 영역
-        const tRowTitle = [
-            <Text text={title} className={clsN()} />,
-            <Text text={uploader} className={clsN()} />,
-            <Chip size="small" label={postState} className={clsN()} />,
-            <Text text={formatDate(uploadDate)} className={clsN()} />,
-            fixDateTemp,
-        ];
-        // tableContext 영역
-        const tCollContext = (
-            <CollapseForm
-                uid={uid}
-                uploadDate={uploadDate}
-                uploader={uploader}
-                context={context}
-                title={title}
-                fixedDate={fixDate}
-                imgUrls={imageUrls}
-            />
-        );
-        return { tRowTitle, tCollContext };
-    });
+    // TODO: 렌더링 규모가 너무 큰 방식임 수정 예정
+    // 변환된 데이터 sliceTData 함수 활용
+    const tDataConvert = sliceTData(filteredNtcItems, tPage * rowPerPage, tPage * rowPerPage + rowPerPage).map(
+        (item) => {
+            const { uid, title, postState, uploader, uploadDate, fixDate, context, imageUrls } = item;
+            // 수정한 내역이 있는지 체크
+            const fixDateTemp = fixDate && <Text text={formatDate(fixDate)} className={clsN()} />;
+
+            // tableTitle 영역
+            const tRowTitle = [
+                <Text text={title} className={clsN()} />,
+                <Text text={uploader} className={clsN()} />,
+                <Chip size="small" label={postState} className={clsN()} />,
+                <Text text={formatDate(uploadDate)} className={clsN()} />,
+                fixDateTemp,
+            ];
+            // tableContext 영역
+            const tCollContext = (
+                <CollapseForm
+                    uid={uid}
+                    uploadDate={uploadDate}
+                    uploader={uploader}
+                    context={context}
+                    title={title}
+                    fixedDate={fixDate}
+                    imgUrls={imageUrls}
+                />
+            );
+            return { tRowTitle, tCollContext };
+        },
+    );
 
     return (
         <Stack className={clsN(styles['notices-t'])}>
             {headline}
             <FilteredSearch
+                selectValue={selectState.value.toString()}
                 searchVal={searchVal}
                 onSearch={handleSearchChange}
                 onBtnClear={handelFilterReset}
                 onBtnSearch={handleSearch}
-                selectBtnItems={SelectBtnItems}
+                selectBtnItems={selectBtnItems}
+                onSelectChange={handleSelectChange}
                 resetTrigger={resetDateRange}
             />
             <CollapsedListResult
