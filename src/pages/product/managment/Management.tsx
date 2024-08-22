@@ -1,11 +1,11 @@
 import React from 'react';
 import AdminTemplate from '@templates/admin/Admin';
-import { ProdmgtTemplate } from '@templates/product/prodmgt/Prodmgt';
+import { ProductManagerTagble } from '@templates/product/productManagerTagble/ProductManagerTagble';
 
 export const Management = () => {
     return (
         <AdminTemplate>
-            <ProdmgtTemplate />
+            <ProductManagerTagble />
         </AdminTemplate>
     );
 };

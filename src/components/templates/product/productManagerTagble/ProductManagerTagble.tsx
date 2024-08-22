@@ -4,9 +4,9 @@ import clsN from 'classnames';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
 import { ProdTable } from '@organisms/admin/page/prodmgt/prodTable/ProdTable';
 
-// import styles from './styles/Prodmgt.module.scss';
+// import styles from './styles/ProductManagerTagble.module.scss';
 
-export const ProdmgtTemplate = () => {
+export const ProductManagerTagble = () => {
     return (
         <StackAdminLayout stackProps={{ spacing: 1 }}>
             <Heading

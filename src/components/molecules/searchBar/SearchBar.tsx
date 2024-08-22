@@ -16,11 +16,6 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({ wrapperClsN, inputClsN, placeholder, onChange, label, inputVal }: SearchBarProps) => {
-    // 검색 키워드에 저장할 정보
-    // const renderOption = (props: React.HTMLAttributes<HTMLElement>, option: Partial<any>) => {
-    //     return <li {...props}>{option.co}</li>
-    // }
-
     /* 함수 */
     // form 전송 이벤트 방지
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

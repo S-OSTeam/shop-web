@@ -15,6 +15,10 @@ import TextField from '@mui/material/TextField';
  * @template FreeSolo 사용자 정의 값 입력 가능 여부 default : false
  * @template ChipComponent 선택된 값을 표시할 Chip 컴포넌트 타입
  */
+
+/* AutoComplete 의 속성 classes Typy 를 Partoal<> 를 활용하여 따로 분리 */
+export type PropOfAutoCompleteClasses = Partial<AutocompleteClasses>;
+
 interface AutoCompleteProps<
     Value,
     Multiple extends boolean | undefined,
@@ -22,7 +26,8 @@ interface AutoCompleteProps<
     FreeSolo extends boolean | undefined,
     ChipComponent extends React.ElementType = ChipTypeMap['defaultComponent'],
 > extends UseAutocompleteProps<Value, Multiple, DisableClearable, FreeSolo> {
-    classes?: Partial<AutocompleteClasses>;
+    // AutoCompleteClasses : Partial<AutocompleteClasses>
+    classes?: PropOfAutoCompleteClasses;
     // Chip 컴폰너트 요소
     ChipProps?: ChipProps<ChipComponent>;
     //

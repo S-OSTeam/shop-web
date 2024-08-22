@@ -9,26 +9,12 @@ import {
     TablePagination,
     TableRow,
 } from '@mui/material';
+import { CollapsedTableClasses } from '@interface/collapsedList/CollapsedList';
+import { TableDB } from '@interface/table/TableDB';
 import { CollapsedTableTitleRow } from '@molecules/collapsedTable/collapsedTableTitleRow/CollapsedTableTitleRow';
 import { CollapsedTableContext } from '@molecules/collapsedTable/collapsedTableContext/CollapsedTableContext';
 import clsN from 'classnames';
 import styles from './styles/collapsedListResult.module.scss';
-
-// 클래스 모음 인터페이스
-interface CollapsedTableClasses {
-    // root : paper
-    root?: string;
-    // table 콘테이너
-    tableContainer?: string;
-    // table 페이지네이션
-    pagination?: string;
-}
-
-// 테이블 내부 인터페이스
-interface TableDB {
-    tRowTitle: React.ReactNode[];
-    tCollContext: React.ReactNode;
-}
 
 // 테이블 페이지네이션 인터페이스
 interface PaginationProps {
