@@ -11,7 +11,7 @@ interface SearchBarProps {
     inputClsN?: string;
     placeholder?: string;
     inputVal: string | number;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     label?: React.ReactNode;
 }
 

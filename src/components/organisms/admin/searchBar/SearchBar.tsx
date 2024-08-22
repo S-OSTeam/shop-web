@@ -5,6 +5,7 @@ import { Stack } from '@mui/material';
 import DateRange from '@molecules/dateRange/DateRange';
 import clsN from 'classnames';
 import styles from './styles/SearchBar.module.scss';
+import Category from '@routes/category/Category';
 
 /** 제너릭을 통해 어떤 옵션인지 그리고 어떤 그룹타입인지 정해야함 */
 /**
@@ -36,35 +37,36 @@ interface BaseSearchBarProps<Opt> {
     resetTrigger: boolean; // 리셋 트리거
 }
 /** 카테고리 적용 타입 */
-type WithCategories<Categories> = {
+interface WithCategories<Categories> {
     // 카테고리 표시 여부
     showCategories: true;
     // 카테고리 목록들
     categories: Categories[];
-};
+}
 /** 카테고리 미적용 타입 */
-type WithoutCategories = {
+interface WithoutCategories {
     // 카테고리 표시 여부
     showCategories?: false;
     // 카테고리 목록들
     categories?: never;
-};
+}
 /** 옵션그룹 적용 타입 */
-type WithOptionGroup<Group> = {
+interface WithOptionGroup<Group> {
     // 옵션 그룹 표시 여부
     showOptionGroup: true;
     // 옵션그룹 목록
     optionGroup: Group;
-};
+}
 /** 옵션그룹 미적용 타입 */
-type WithoutOptionGroup = {
+interface WithoutOptionGroup {
     // 옵션 그룹 표시 여부
     showOptionGroup?: false;
     // 옵션그룹 목록
     optionGroup?: never;
-};
+}
 /** SearchBarProps 인터페이스
- *
+ * interface 의 장점인 선언 병합과 객체타입 정의 등등이 있지만 유니온 타입확장이 안됨
+ * 유니온 타입으로 확장할 수 없기 때문에 임시로 Type 로 선언
  * */
 type SearchBarProps<Opt, Group, Categories> = BaseSearchBarProps<Opt> &
     (WithCategories<Categories> | WithoutCategories) &

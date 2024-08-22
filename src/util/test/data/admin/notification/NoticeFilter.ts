@@ -17,11 +17,8 @@ export const filteringNotices = (noticeItems: NotificationProps[], ntcfilter: no
         // 카테고리 선택 : 아직 없음 검색필터에 구현하기
 
         // 등록 상태가 전체가 아니고 받은 인자의 값과 상태의 값이 일치하지 않으면 탈출
-        if (ntcfilter.postStatus !== '전체' && noticeItems.postState !== ntcfilter.postStatus) return false;
+        if (ntcfilter.postStatus !== 'all' && noticeItems.postState !== ntcfilter.postStatus) return false;
         // 키워드 검색바 필터
-        if (ntcfilter.keyword && !noticeItems.title.toLowerCase().includes(ntcfilter.keyword.toLowerCase()))
-            return false;
-
-        return true;
+        return !(ntcfilter.keyword && !noticeItems.title.toLowerCase().includes(ntcfilter.keyword.toLowerCase()));
     });
 };

@@ -77,9 +77,9 @@ export const CollapsedListResult = ({ ...props }: CollapsedManagerProps) => {
 
     // 고차 함수 방식으로 콜랩스 토글값 반전
     const toggleCollapse =
-        (_index: number) =>
+        (index: number) =>
         (arr: boolean[]): boolean[] =>
-            arr.map((_val, _idx) => (_idx === _index ? !_val : _val));
+            arr.map((val, idx) => (idx === index ? !val : val));
     // 속성을 통해 받은 본문 랜더 함수, 고차 함수로 첫번째 함수인자(인덱스) 두번째함수인자(배열)
     const setCollapseArray = (index: number) => {
         setCollList((prevState) => toggleCollapse(index)(prevState));
