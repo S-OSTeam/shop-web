@@ -20,7 +20,7 @@ interface FilteredSearchProps {
     // searchBar Value
     searchVal: string;
     // onSearch 이벤트 (검색바)
-    onSearch: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
     // onClear 이벤트 (버튼)
     onBtnClear: (e: React.MouseEvent<HTMLButtonElement>) => void;
     // onSearch 이벤트 (버튼)
@@ -58,7 +58,7 @@ export const FilteredSearch = ({
                 // 깊은복사
                 ...prev,
                 // 아톰 상태값 text 중 일치하는 값으로
-                postStatus: selectedData.text as '전체' | '공개' | '비공개',
+                postStatus: selectedData.text as 'all' | 'posted' | 'private',
             }));
         } else {
             console.log(`이벤트를 통해 받은 Value 가 존재하지 않음..!${selectedData}`);

@@ -9,7 +9,7 @@ export interface noticesFilterState {
     /// 유형
     category: 'all' | 'general' | 'event' | 'update' | 'emergency';
     /// 상태
-    postStatus: '전체' | '공개' | '비공개';
+    postStatus: 'all' | 'posted' | 'private';
     /// 키워드
     keyword?: string;
 }
@@ -20,7 +20,7 @@ export const noticesFilterStateAtom = atom<noticesFilterState>({
         startDate: undefined,
         endDate: undefined,
         category: 'all',
-        postStatus: '전체',
+        postStatus: 'all',
         keyword: undefined,
     },
 });

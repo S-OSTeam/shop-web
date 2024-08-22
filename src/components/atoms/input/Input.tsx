@@ -22,7 +22,7 @@ interface InputProps {
     // input 값
     inputVal: string | number;
     // onChange 이벤트 활성화 시 오브젝트 e 를 통한 작업 처리 => 반환 없음
-    onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     // 여러줄 여부
     multiline?: boolean | undefined;
     // form 컨트롤의 이름을 지정 주로 폼에 있는 내용을 서버에 보낼때 활용
