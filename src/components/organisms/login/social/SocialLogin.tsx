@@ -1,7 +1,8 @@
-import React from 'react';
+/* eslint-disable*/
+import React, { useEffect, useRef } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import { KAKAO_LOGIN, NAVER_LOGIN } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { KAKAO_LOGIN } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import useGraphQL from '@hooks/useGraphQL';
 import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
@@ -9,6 +10,13 @@ import ImgTextButton from '@components/molecules/button/imgTextButton/ImgTextBut
 import CustomIcon from '@components/atoms/source/icon/customIcon/CustomIcon';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
+import { useLocation } from 'react-router-dom';
+
+declare global {
+    interface Window {
+        naver: any;
+    }
+}
 
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
@@ -20,15 +28,7 @@ const SocialLogin = () => {
     ];
 
     const STATE = 'false';
-    const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
-    const { data: naverData, refetch: naverLogin } = useGraphQL({
-        query: NAVER_LOGIN,
-        type: 'mutation',
-        request: { STATE, code: '' },
-        option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
-    });
 
     const { data: kakaoData, refetch: kakaoLogin } = useGraphQL({
         query: KAKAO_LOGIN,
@@ -36,29 +36,42 @@ const SocialLogin = () => {
         request: { STATE, code: '' },
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
+    const naverRef = useRef<HTMLDivElement>(null);
+
+    const initNaverLogin = () => {
+        const naverLogin = new window.naver.LoginWithNaverId({
+            clientId: `${process.env.REACT_APP_NAVER_CLIENT_ID}`,
+            callbackUrl: 'http://localhost:3000/login',
+            isPopup: true,
+            loginButton: { color: 'green', type: 1, height: '45' },
+            callbackHandle: true,
+        });
+
+        naverLogin.init();
+    };
+
+    const userAccessToken = () => {
+        window.location.href.includes('access_token') && getToken();
+    };
+
+    const getToken = () => {
+        const token = window.location.href.split('=')[1].split('&')[0];
+        console.log(token);
+    };
+
+    useEffect(() => {
+        initNaverLogin();
+        userAccessToken();
+    }, []);
 
     const handleNaverLogin = () => {
-        window.location.href = NAVER_AUTH_URL;
-        const code = new URL(window.location.href).searchParams.get('code');
-        const state = new URL(window.location.href).searchParams.get('state');
-        if (code && state === STATE) {
-            console.log('Received Naver code:', code);
-            console.log('Received Naver state:', state);
-            console.log(naverData);
-            naverLogin({
-                variables: {
-                    request: {
-                        code,
-                        state,
-                    },
-                },
-            })
-                .then((response) => {
-                    console.log('Success:', response.data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+        if (naverRef.current) {
+            const loginButton = naverRef.current.querySelector('a#naverIdLogin_loginButton') as HTMLAnchorElement;
+            if (loginButton) {
+                loginButton.click();
+            } else {
+                console.error('Naver login button not found');
+            }
         }
     };
 
@@ -114,7 +127,10 @@ const SocialLogin = () => {
                                 간편 로그인
                             </Divider>
                         </Box>
+
                         <Box className={clsN(`${style['mobile-social-login-wrapper__social-wrapper']}`)}>
+                            <div ref={naverRef} id="naverIdLogin" style={{ display: 'none' }}></div>
+
                             {socialPlatforms.map((platform) => (
                                 <ImgTextButton
                                     key={platform.name}
@@ -150,7 +166,10 @@ const SocialLogin = () => {
                             className={clsN(`${style['social-login-wrapper__title']}`)}
                             align="center"
                         />
+
                         <Box className={clsN(`${style['social-login-wrapper__icon-wrapper']}`)}>
+                            <div ref={naverRef} id="naverIdLogin" style={{ display: 'none' }}></div>
+
                             {socialPlatforms.map((platform) => (
                                 <Button
                                     key={platform.name}
