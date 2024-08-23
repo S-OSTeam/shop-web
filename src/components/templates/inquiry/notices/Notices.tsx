@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
-import { formatDate } from '@util/FormatDate';
 import { Notification, NotificationProps } from '@util/test/data/admin/notification/Notification';
+import { formatDate } from '@util/common/FormatDate';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
 import { SelectChangeEvent, Stack } from '@mui/material';
 import { FilteredSearch, SelectMenuItemProps } from '@organisms/admin/filteredSearch/FilteredSearch';

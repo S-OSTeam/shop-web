@@ -4,12 +4,12 @@ import Text from '@atoms/text/Text';
 import Swiper from '@molecules/swiper/Swiper';
 import { EventInfo } from '@util/test/interface/Event';
 import clsN from 'classnames';
-import { Item, ItemInterface } from '@util/test/interface/Item';
+import { ItemInterface } from '@util/test/interface/Item';
 import styles from './styles/Event.module.scss';
 
 interface EventProps {
     eventItem: EventInfo[];
-    onEventClick: (item: Item | ItemInterface | EventInfo) => void;
+    onEventClick: (item: ItemInterface | EventInfo) => void;
 }
 const Event = ({ eventItem, onEventClick }: EventProps) => {
     const items = eventItem.map((item) => {
