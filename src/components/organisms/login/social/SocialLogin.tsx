@@ -1,5 +1,5 @@
 /* eslint-disable*/
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { KAKAO_LOGIN, NAVER_LOGIN } from '@api/apollo/gql/mutations/LoginMutation.gql';
@@ -8,9 +8,9 @@ import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
 import ImgTextButton from '@components/molecules/button/imgTextButton/ImgTextButton';
 import CustomIcon from '@components/atoms/source/icon/customIcon/CustomIcon';
+import { useLocation } from 'react-router-dom';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
-import { useLocation } from 'react-router-dom';
 
 declare global {
     interface Window {
@@ -45,45 +45,39 @@ const SocialLogin = () => {
     });
 
     const naverRef = useRef<HTMLDivElement>(null);
+    const [user, setUser] = useState(null);
+    const myNaverLogin = new window.naver.LoginWithNaverId({
+        clientId: `${process.env.REACT_APP_NAVER_CLIENT_ID}`,
+        callbackUrl: 'http://localhost:3000/login',
+        isPopup: false,
+        loginButton: { color: 'green', type: 1, height: '45' },
+        callbackHandle: true,
+    });
+    const getNaverUser = async () => {
+        await myNaverLogin.getLoginStatus((status: any) => {
+            console.log(`로그인?: ${status}`);
+            if (status) {
+                setUser({ ...myNaverLogin.user });
+                console.log(myNaverLogin);
+                console.log(myNaverLogin.user.name);
+                console.log(myNaverLogin.user.email);
+            }
+        });
+    };
 
     const initNaverLogin = () => {
-        const naverLogin = new window.naver.LoginWithNaverId({
-            clientId: `${process.env.REACT_APP_NAVER_CLIENT_ID}`,
-            callbackUrl: 'http://localhost:3000/login',
-            isPopup: false,
-            loginButton: { color: 'green', type: 1, height: '45' },
-            callbackHandle: true,
-        });
-        naverLogin.init();
+        myNaverLogin.init();
+        const code = new URLSearchParams(location.search);
+
+        console.log(code);
+        getNaverUser();
     };
 
-    const handleNaverCallback = () => {
-        console.log(location);
-        const code = new URLSearchParams(location.search).get('code');
-        const state = new URLSearchParams(location.search).get('state');
-        console.log(code);
-        console.log(state);
-        if (code && state) {
-            naverLogin({
-                variables: {
-                    request: {
-                        code,
-                        state,
-                    },
-                },
-            })
-                .then((response) => {
-                    console.log('Naver Login Success:', response.data);
-                })
-                .catch((error) => {
-                    console.error('Naver Login Error:', error);
-                });
-        }
-    };
+    const handleNaverCallback = () => {};
 
     useEffect(() => {
         initNaverLogin();
-        handleNaverCallback(); // 네이버 로그인 후 콜백 처리
+        handleNaverCallback();
     }, []);
 
     const handleNaverLogin = () => {
@@ -96,6 +90,14 @@ const SocialLogin = () => {
             }
         }
     };
+
+    const naverLogout = () => {
+        // localStorage.removeItem('com.naver.nid.access_token');
+        const accessToken = localStorage.getItem('com.naver.nid.access_token');
+        console.log(accessToken);
+        // window.location.reload();
+    };
+
     const REST_KEY = `${process.env.REACT_APP_KAKAO_CLIENT_KEY}`;
     const redirect_uri = 'http://localhost:3000/login';
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_KEY}&redirect_uri=${redirect_uri}&response_type=code`;
@@ -202,6 +204,9 @@ const SocialLogin = () => {
                                     />
                                 </Button>
                             ))}
+                        </Box>
+                        <Box>
+                            <Button onClick={naverLogout}>로그아웃</Button>
                         </Box>
                     </Box>
                 )}
