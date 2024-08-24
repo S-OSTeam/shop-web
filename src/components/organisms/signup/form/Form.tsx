@@ -6,7 +6,7 @@ import clsN from 'classnames';
 import Button from '@components/atoms/button/Button';
 import style from './style/style.module.scss';
 import useGraphQL from '@hooks/useGraphQL';
-import { SEND_VERIFY_CODE_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { CHECK_VERIFY_CODE_BY, SEND_VERIFY_CODE_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { FormDataInterface } from '@interface/FormDataInterface';
 
 interface FormProps {
@@ -67,10 +67,11 @@ const Form = ({ formInfo }: FormProps) => {
     });
 
     const { refetch: sendCheckRefetch } = useGraphQL({
-        query: SEND_VERIFY_CODE_REQUEST,
+        query: CHECK_VERIFY_CODE_BY,
         type: 'mutation',
         request: {
             email: formData.email,
+            verifyCode: formData.zipcode,
             verifyType: 'SIGNUP',
         },
         option: {
@@ -95,9 +96,9 @@ const Form = ({ formInfo }: FormProps) => {
     };
 
     const validateUserId = (userId: string) => {
-        const regex = /^[a-zA-Z0-9_]{4,20}$/;
+        const regex = /^[a-z]+[a-z0-9]{5,20}$/;
         if (!regex.test(userId)) {
-            setErrors((prev) => ({ ...prev, userId: '아이디는 4-20자의 영문, 숫자가 가능합니다.' }));
+            setErrors((prev) => ({ ...prev, userId: '아이디는 5-20자의 영문, 숫자가 가능합니다.' }));
             setValidity((prev) => ({ ...prev, userId: false }));
             return false;
         }
@@ -107,11 +108,11 @@ const Form = ({ formInfo }: FormProps) => {
     };
 
     const validatePassword = (pwd: string) => {
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\()\-_+=]).{8,20}$/;
         if (!regex.test(pwd)) {
             setErrors((prev) => ({
                 ...prev,
-                pwd: '비밀번호는 최소 6자이며, 문자와 숫자, 특수문자를 포함해야 합니다.',
+                pwd: '비밀번호는 8이상 20이하이며, 영문자와 숫자, 특수문자를 포함해야 합니다.',
             }));
             setValidity((prev) => ({ ...prev, pwd: false }));
             return false;
@@ -133,7 +134,8 @@ const Form = ({ formInfo }: FormProps) => {
     };
 
     const validateEmail = (email: string) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 형식 확인
+        const regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,}$/;
+
         if (!regex.test(email)) {
             setErrors((prev) => ({ ...prev, email: '유효한 이메일 주소를 입력해주세요.' }));
             setValidity((prev) => ({ ...prev, email: false }));
@@ -164,6 +166,7 @@ const Form = ({ formInfo }: FormProps) => {
             sendCheckRefetch().then(() => {
                 setAuthModalOpen(true);
                 formInfo(formData);
+                console.log(formData);
             });
         } else {
             setErrorModalOpen(true);
@@ -180,6 +183,7 @@ const Form = ({ formInfo }: FormProps) => {
             validate: validateUserId,
             error: errors.userId,
             valid: validity.userId,
+            maxLength: 20,
         },
         {
             label: '비밀번호',
@@ -191,6 +195,7 @@ const Form = ({ formInfo }: FormProps) => {
             validate: validatePassword,
             error: errors.pwd,
             valid: validity.pwd,
+            maxLength: 20,
         },
         {
             label: '비밀번호 확인',
@@ -202,6 +207,7 @@ const Form = ({ formInfo }: FormProps) => {
             validate: validateConfirmPwd,
             error: errors.confirmPwd,
             valid: validity.confirmPwd,
+            maxLength: 20,
         },
         {
             label: '이메일',
@@ -213,6 +219,7 @@ const Form = ({ formInfo }: FormProps) => {
             validate: validateEmail,
             error: errors.email,
             valid: validity.email,
+            maxLength: 30,
         },
     ];
 
@@ -231,12 +238,17 @@ const Form = ({ formInfo }: FormProps) => {
                         }}
                         placeholder={textField.placeholder}
                         error={!!textField.error && !textField.valid}
+                        inputProps={{
+                            maxLength: textField.maxLength,
+                        }}
                         onChange={(e) => {
-                            setFormData((prevFormData) => ({
-                                ...prevFormData,
-                                [textField.inputData]: e.target.value,
-                            }));
-                            textField.validate(e.target.value);
+                            if (e.target.value.length <= textField.maxLength) {
+                                setFormData((prevFormData) => ({
+                                    ...prevFormData,
+                                    [textField.inputData]: e.target.value,
+                                }));
+                                textField.validate(e.target.value);
+                            }
                         }}
                     />
                     <FormHelperText
@@ -277,12 +289,21 @@ const Form = ({ formInfo }: FormProps) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    placeholder="0000"
+                    placeholder="000000"
+                    value={formData.zipcode} // formData.zipcode를 value로 설정
                     inputProps={{
                         style: { height: '1rem' },
                     }}
-                    onChange={(e) => setAuthData(e.target.value)}
+                    onChange={(e) => {
+                        const newZipcode = e.target.value;
+                        setFormData((prevFormData) => ({
+                            ...prevFormData,
+                            zipcode: newZipcode, // formData.zipcode 업데이트
+                        }));
+                        setAuthData(newZipcode); // authData도 업데이트
+                    }}
                 />
+
                 {isAuthenticated && (
                     <Box className={clsN(`${style['authentication-wrapper__timer']}`)}> {renderTimer()}</Box>
                 )}

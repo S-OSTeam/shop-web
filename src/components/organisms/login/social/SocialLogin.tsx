@@ -21,7 +21,7 @@ declare global {
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
     const location = useLocation();
-    const REDIRECT_URI = '/login';
+
     const socialPlatforms = [
         { name: 'naver', text: '네이버 로그인' },
         { name: 'kakao', text: '카카오 로그인' },
@@ -54,7 +54,6 @@ const SocialLogin = () => {
             loginButton: { color: 'green', type: 1, height: '45' },
             callbackHandle: true,
         });
-
         naverLogin.init();
     };
 
