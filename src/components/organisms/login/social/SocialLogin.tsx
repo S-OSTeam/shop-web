@@ -1,6 +1,6 @@
-import React from 'react';
+/* eslint-disable*/
+import React, { useEffect, useRef } from 'react';
 import { Box, Divider } from '@mui/material';
-import { ReactComponent as Logo } from '@asset/image/logo/Logo.svg';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { KAKAO_LOGIN, NAVER_LOGIN } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import useGraphQL from '@hooks/useGraphQL';
@@ -10,10 +10,18 @@ import ImgTextButton from '@components/molecules/button/imgTextButton/ImgTextBut
 import CustomIcon from '@components/atoms/source/icon/customIcon/CustomIcon';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
+import { useLocation } from 'react-router-dom';
+
+declare global {
+    interface Window {
+        naver: any;
+    }
+}
 
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
-    const REDIRECT_URI = 'http://localhost:3000/login';
+    const location = useLocation();
+
     const socialPlatforms = [
         { name: 'naver', text: '네이버 로그인' },
         { name: 'kakao', text: '카카오 로그인' },
@@ -21,11 +29,8 @@ const SocialLogin = () => {
     ];
 
     const STATE = 'false';
-    const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
-    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-    console.log(NAVER_AUTH_URL);
 
-    const { data: naverData, refetch: naverLogin } = useGraphQL({
+    const { refetch: naverLogin } = useGraphQL({
         query: NAVER_LOGIN,
         type: 'mutation',
         request: { STATE, code: '' },
@@ -39,16 +44,26 @@ const SocialLogin = () => {
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
 
-    const handleNaverLogin = () => {
-        console.log('NaverLogin is clicked!');
+    const naverRef = useRef<HTMLDivElement>(null);
 
-        window.location.href = NAVER_AUTH_URL;
-        const code = new URL(window.location.href).searchParams.get('code');
-        const state = new URL(window.location.href).searchParams.get('state');
-        if (code && state === STATE) {
-            console.log('Received Naver code:', code);
-            console.log('Received Naver state:', state);
-            console.log(naverData);
+    const initNaverLogin = () => {
+        const naverLogin = new window.naver.LoginWithNaverId({
+            clientId: `${process.env.REACT_APP_NAVER_CLIENT_ID}`,
+            callbackUrl: 'http://localhost:3000/login',
+            isPopup: false,
+            loginButton: { color: 'green', type: 1, height: '45' },
+            callbackHandle: true,
+        });
+        naverLogin.init();
+    };
+
+    const handleNaverCallback = () => {
+        console.log(location);
+        const code = new URLSearchParams(location.search).get('code');
+        const state = new URLSearchParams(location.search).get('state');
+        console.log(code);
+        console.log(state);
+        if (code && state) {
             naverLogin({
                 variables: {
                     request: {
@@ -58,38 +73,51 @@ const SocialLogin = () => {
                 },
             })
                 .then((response) => {
-                    console.log('Success:', response.data);
+                    console.log('Naver Login Success:', response.data);
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    console.error('Naver Login Error:', error);
                 });
         }
     };
 
-    const handleKakaoLogin = () => {
-        console.log('KakaoLogin is clicked!');
-        window.location.href = KAKAO_AUTH_URL;
-        const code = new URL(window.location.href).searchParams.get('code');
-        const state = new URL(window.location.href).searchParams.get('state');
-        if (code && state === STATE) {
-            console.log('Received Naver code:', code);
-            console.log('Received Naver state:', state);
-            console.log(kakaoData);
-            kakaoLogin({
-                variables: {
-                    request: {
-                        code,
-                        state,
-                    },
-                },
-            })
-                .then((response) => {
-                    console.log('Success:', response.data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+    useEffect(() => {
+        initNaverLogin();
+        handleNaverCallback(); // 네이버 로그인 후 콜백 처리
+    }, []);
+
+    const handleNaverLogin = () => {
+        if (naverRef.current) {
+            const loginButton = naverRef.current.querySelector('a#naverIdLogin_loginButton') as HTMLAnchorElement;
+            if (loginButton) {
+                loginButton.click();
+            } else {
+                console.error('Naver login button not found');
+            }
         }
+    };
+    const REST_KEY = `${process.env.REACT_APP_KAKAO_CLIENT_KEY}`;
+    const redirect_uri = 'http://localhost:3000/login';
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_KEY}&redirect_uri=${redirect_uri}&response_type=code`;
+
+    const handleKakaoLogin = () => {
+        window.location.href = kakaoURL;
+        const code = new URL(window.location.href).searchParams.get('code');
+        console.log(code);
+        kakaoLogin({
+            variables: {
+                request: {
+                    code,
+                    state: true,
+                },
+            },
+        })
+            .then((response) => {
+                console.log('Kakao Login Success:', response.data);
+            })
+            .catch((error) => {
+                console.error('Kakao Login Error:', error);
+            });
     };
 
     const handleGoogleLogin = () => {
@@ -114,15 +142,15 @@ const SocialLogin = () => {
             <Box className={clsN(`${style['social-login-wrapper']}`)}>
                 {isInMobile && (
                     <Box className={clsN(`${style['mobile-social-login-wrapper']}`)}>
-                        <Box className={clsN(`${style['mobile-social-login-wrapper']}`)}>
-                            <Logo className={clsN(`${style['mobile-social-login-logo']}`)} />
-                        </Box>
                         <Box className={clsN(`${style['mobile-social-login-wrapper__title']}`)}>
                             <Divider variant="middle" textAlign="center">
                                 간편 로그인
                             </Divider>
                         </Box>
+
                         <Box className={clsN(`${style['mobile-social-login-wrapper__social-wrapper']}`)}>
+                            <div ref={naverRef} id="naverIdLogin" style={{ display: 'none' }}></div>
+
                             {socialPlatforms.map((platform) => (
                                 <ImgTextButton
                                     key={platform.name}
@@ -158,7 +186,10 @@ const SocialLogin = () => {
                             className={clsN(`${style['social-login-wrapper__title']}`)}
                             align="center"
                         />
+
                         <Box className={clsN(`${style['social-login-wrapper__icon-wrapper']}`)}>
+                            <div ref={naverRef} id="naverIdLogin" style={{ display: 'none' }}></div>
+
                             {socialPlatforms.map((platform) => (
                                 <Button
                                     key={platform.name}
