@@ -39,7 +39,8 @@ const Form = ({ formInfo }: FormProps) => {
     const [emailModalOpen, setEmailModalOpen] = useState(false);
     const [authModalOpen, setAuthModalOpen] = useState(false);
     const [errorModalOpen, setErrorModalOpen] = useState(false);
-
+    const [authErrorModalOpen, setAuthErrorModalOpen] = useState(false); // 인증 오류 모달 상태 추가
+    const [emptyCodeModalOpen, setEmptyCodeModalOpen] = useState(false); // 인증번호가 비어있을 때 사용할 Modal 상태 추가
     const [errors, setErrors] = useState({
         userId: '',
         pwd: '',
@@ -156,6 +157,11 @@ const Form = ({ formInfo }: FormProps) => {
     }, [formData.email, sendMailRefetch]);
 
     const handleAuthConfirm = () => {
+        if (!authData) {
+            setEmptyCodeModalOpen(true); // 인증번호가 비어있을 때 모달을 표시
+            return;
+        }
+
         if (
             validateUserId(formData.userId) &&
             validatePassword(formData.pwd) &&
@@ -163,11 +169,14 @@ const Form = ({ formInfo }: FormProps) => {
             validateEmail(formData.email) &&
             authData
         ) {
-            sendCheckRefetch().then(() => {
-                setAuthModalOpen(true);
-                formInfo(formData);
-                console.log(formData);
-            });
+            sendCheckRefetch()
+                .then(() => {
+                    setAuthModalOpen(true);
+                    formInfo(formData);
+                })
+                .catch(() => {
+                    setAuthErrorModalOpen(true);
+                });
         } else {
             setErrorModalOpen(true);
         }
@@ -226,9 +235,8 @@ const Form = ({ formInfo }: FormProps) => {
     return (
         <Box className={clsN(`${style['form-wrapper']}`)}>
             {textFieldsData.map((textField) => (
-                <Box className={clsN(`${style['form-wrapper__outer']}`)}>
+                <Box className={clsN(`${style['form-wrapper__outer']}`)} key={textField.id}>
                     <TextField
-                        key={textField.id}
                         label={textField.label}
                         id={textField.id}
                         className={clsN(textField.className)}
@@ -290,17 +298,18 @@ const Form = ({ formInfo }: FormProps) => {
                         shrink: true,
                     }}
                     placeholder="000000"
-                    value={formData.zipcode} // formData.zipcode를 value로 설정
+                    value={formData.zipcode}
                     inputProps={{
                         style: { height: '1rem' },
+                        maxLength: 6,
                     }}
                     onChange={(e) => {
                         const newZipcode = e.target.value;
                         setFormData((prevFormData) => ({
                             ...prevFormData,
-                            zipcode: newZipcode, // formData.zipcode 업데이트
+                            zipcode: newZipcode,
                         }));
-                        setAuthData(newZipcode); // authData도 업데이트
+                        setAuthData(newZipcode);
                     }}
                 />
 
@@ -315,6 +324,21 @@ const Form = ({ formInfo }: FormProps) => {
                     <Box className={clsN(`${style['form-wrapper__modal']}`)}>
                         <h2>인증이 완료되었습니다!</h2>
                         <Button onClick={() => setAuthModalOpen(false)}>닫기</Button>
+                    </Box>
+                </Modal>
+
+                <Modal open={authErrorModalOpen} onClose={() => setAuthErrorModalOpen(false)}>
+                    <Box className={clsN(`${style['form-wrapper__modal']}`)}>
+                        <h2>유효하지 않은 인증 코드입니다.</h2>
+                        <Button onClick={() => setAuthErrorModalOpen(false)}>닫기</Button>
+                    </Box>
+                </Modal>
+
+                {/* 인증번호 비어있을 때 표시할 Modal */}
+                <Modal open={emptyCodeModalOpen} onClose={() => setEmptyCodeModalOpen(false)}>
+                    <Box className={clsN(`${style['form-wrapper__modal']}`)}>
+                        <h2>인증번호를 입력해주세요.</h2>
+                        <Button onClick={() => setEmptyCodeModalOpen(false)}>닫기</Button>
                     </Box>
                 </Modal>
             </Box>

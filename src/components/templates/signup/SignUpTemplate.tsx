@@ -26,7 +26,7 @@ const SignUpTemplate = () => {
 
     const navigate = useNavigate();
 
-    const checkboxTexts = ['선택적 SNS 광고 동의 여부', '기타 고객정보 영리적 사용 등', '기타 등등'];
+    const checkboxTexts = ['SNS 광고에 대한  동의 ', '기타 고객정보 영리적 사용에 대한 동의'];
     const [signUpData, setSignUpData] = useState<FormDataInterface>({
         userId: '',
         pwd: '',
@@ -79,8 +79,13 @@ const SignUpTemplate = () => {
     }, [value, checkBox]);
 
     const validateName = (name: string) => {
+        const regex = /^[a-zA-Z가-힣]*$/;
         if (name.trim() === '') {
             setNameError('이름을 입력해주세요.');
+            return false;
+        }
+        if (!regex) {
+            setNameError('이름은 영어, 한글만 허용됩니다.');
             return false;
         }
         setNameError('');
@@ -121,13 +126,17 @@ const SignUpTemplate = () => {
     };
 
     const onNameHandle = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setName(event.target.value);
-        validateName(event.target.value);
+        if (event.target.value.length <= 50) {
+            setName(event.target.value);
+            validateName(event.target.value);
+        }
     };
 
     const onBirthHandle = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setBirthDay(event.target.value);
-        validateBirthDay(event.target.value);
+        if (event.target.value.length <= 20) {
+            setBirthDay(event.target.value);
+            validateBirthDay(event.target.value);
+        }
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -187,6 +196,9 @@ const SignUpTemplate = () => {
                             onChange={onNameHandle}
                             error={!!nameError}
                             helperText={nameError}
+                            inputProps={{
+                                maxLength: 50,
+                            }}
                         />
                         <TextField
                             label="생년월일"
@@ -199,6 +211,9 @@ const SignUpTemplate = () => {
                             onChange={onBirthHandle}
                             error={!!birthDayError}
                             helperText={birthDayError}
+                            inputProps={{
+                                maxLength: 20,
+                            }}
                         />
                     </Box>
                     <Box className={clsN(`${style['gender-wrapper']}`)}>
@@ -274,6 +289,9 @@ const SignUpTemplate = () => {
                             onChange={onNameHandle}
                             error={!!nameError}
                             helperText={nameError}
+                            inputProps={{
+                                maxLength: 50,
+                            }}
                         />
                         <TextField
                             label="생년월일"
@@ -286,6 +304,9 @@ const SignUpTemplate = () => {
                             onChange={onBirthHandle}
                             error={!!birthDayError}
                             helperText={birthDayError}
+                            inputProps={{
+                                maxLength: 20,
+                            }}
                         />
                     </Box>
                     <Box className={clsN(`${style['gender-wrapper']}`)}>
