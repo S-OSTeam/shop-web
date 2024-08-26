@@ -69,12 +69,12 @@ export const NavigateItem: NavigateITF[] = [
             {
                 id: 'QaList',
                 title: 'Q&A 관리',
-                ref: 'qa',
+                ref: 'qna',
             },
             {
                 id: 'Faqs',
                 title: 'FAQ 관리',
-                ref: 'fa',
+                ref: 'faq',
             },
             {
                 id: 'Notices',

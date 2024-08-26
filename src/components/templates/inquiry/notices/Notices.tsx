@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { Notification, NotificationProps } from '@util/test/data/admin/notification/Notification';
 import { formatDate } from '@util/common/FormatDate';
@@ -11,11 +10,15 @@ import Chip from '@atoms/chip/Chip';
 import { CollapseForm } from '@molecules/admin/notice/collapseForm/CollapseForm';
 import { useRecoilState } from 'recoil';
 import { noticesFilterStateAtom } from '@recoil/atoms/admin/inquiry/notices/noticesFilterAtom';
+import { filteringNotices } from '@util/test/data/admin/notification/NoticeFilter';
 import clsN from 'classnames';
 import styles from './styles/Notices.module.scss';
-import { filteringNotices } from '@util/test/data/admin/notification/NoticeFilter';
 
-export const NoticesTemplate = () => {
+interface NoticesTemplateProps {
+    className?: string; // root 클래스명
+}
+
+export const NoticesTemplate = ({ ...props }: NoticesTemplateProps) => {
     /* 상태 */
     // 필터 리코일 상태
     const [filterState, setFilterState] = useRecoilState(noticesFilterStateAtom);
@@ -45,8 +48,8 @@ export const NoticesTemplate = () => {
     ];
     // TODO : GQL 적용 해야됨, 임시로 .ts 파일을 활용해 데이터 불러오기
     // Empty 타입 객체
-    type EmptyNoticationProps = {};
-    const noticesStorage: EmptyNoticationProps[] = [];
+    // type EmptyNoticationProps = {};
+    // const noticesStorage: EmptyNoticationProps[] = [];
 
     // selecteList PostStatus 리코일 상태
     const [postStatus, setPostStatus] = useRecoilState(noticesFilterStateAtom);
@@ -161,7 +164,7 @@ export const NoticesTemplate = () => {
     );
 
     return (
-        <Stack className={clsN(styles['notices-t'])}>
+        <Stack className={clsN(styles['notices-t'], props.className)}>
             {headline}
             <FilteredSearch
                 selectValue={selectState.value.toString()}
