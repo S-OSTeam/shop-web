@@ -1,7 +1,7 @@
 import React from 'react';
 import { Stack } from '@mui/material';
 import Text from '@atoms/text/Text';
-import { formatDate } from '@util/FormatDate';
+import { formatDate } from '@util/common/FormatDate';
 import clsN from 'classnames';
 import styles from './styles/CollapseTitle.module.scss';
 
