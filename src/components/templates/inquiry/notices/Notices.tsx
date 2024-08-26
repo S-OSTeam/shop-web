@@ -1,26 +1,29 @@
-/* eslint-disable */
 import React from 'react';
 import { formatDate } from '@util/common/FormatDate';
 import { Notification, NotificationProps } from '@util/test/data/admin/notification/Notification';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
 import { SelectChangeEvent, Stack } from '@mui/material';
-import { FilteredSearch, SelectMenuItemProps } from '@organisms/admin/filteredSearch/FilteredSearch';
+import { FilteredSearch } from '@organisms/admin/filteredSearch/FilteredSearch';
 import { CollapsedListResult } from '@organisms/collapsedListResult/collapsedListResult';
 import Text from '@atoms/text/Text';
 import Chip from '@atoms/chip/Chip';
 import { CollapseForm } from '@molecules/admin/notice/collapseForm/CollapseForm';
 import { useRecoilState } from 'recoil';
 import { noticesFilterStateAtom } from '@recoil/atoms/admin/inquiry/notices/noticesFilterAtom';
+import { filteringNotices } from '@util/test/data/admin/notification/NoticeFilter';
+import { useSearchChange } from '@hooks/search/useSearchChange.hook';
+import { ButtonGroup } from '@util/test/interface/ButtonGroup';
+import { NotificationButtonGroup } from '@util/test/data/admin/buttonGroup/notification/notificationButtonGroup';
+import { useDebounce } from '@hooks/input/useDebounce.hook';
 import clsN from 'classnames';
 import styles from './styles/Notices.module.scss';
-import { filteringNotices } from '@util/test/data/admin/notification/NoticeFilter';
 
 export const NoticesTemplate = () => {
     /* 상태 */
+    // 커스텀 훅을 통한 상태관리 : 검색 입력
+    const { searchVal, handleChange, resetSearch } = useSearchChange();
     // 필터 리코일 상태
     const [filterState, setFilterState] = useRecoilState(noticesFilterStateAtom);
-    // searchBar 상태
-    const [searchVal, setSearchVal] = React.useState('');
     // 페이지 상태
     const [tPage, setTPage] = React.useState(0);
     // 페이지에 노출할 행의 갯수 상태
@@ -28,46 +31,27 @@ export const NoticesTemplate = () => {
     // 데이터 리셋 상태
     const [resetDateRange, setResetDateRange] = React.useState(false);
     // selectBtn 아이템들, NoticeFilterAtom 에 맞춰 가져오기
-    // FilterSearch T 제너릭으로
-    const selectBtnItems = [
-        {
-            value: '0',
-            text: 'all',
-        },
-        {
-            value: '1',
-            text: 'posted',
-        },
-        {
-            value: '2',
-            text: 'private',
-        },
-    ];
-    // TODO : GQL 적용 해야됨, 임시로 .ts 파일을 활용해 데이터 불러오기
-    // Empty 타입 객체
-    type EmptyNoticationProps = {};
-    const noticesStorage: EmptyNoticationProps[] = [];
+    const [selectBtnState, setSelectBtnState] = React.useState<ButtonGroup>(NotificationButtonGroup[0]);
+    // Debounced 입력 상태 : 2초 제한
+    const debounceSearchValue = useDebounce(searchVal, 200);
 
-    // selecteList PostStatus 리코일 상태
-    const [postStatus, setPostStatus] = useRecoilState(noticesFilterStateAtom);
-    const [selectState, setSelectState] = React.useState<SelectMenuItemProps>(selectBtnItems[0]);
-
+    // filterState.postStatus > 등록상태값을 의존성으로 체크하면서 상태 변화함
     React.useEffect(() => {
-        const startItem = selectBtnItems.find((item) => item.text === postStatus.postStatus);
+        const startItem = NotificationButtonGroup.find((item) => item.text === filterState.postStatus);
         if (startItem) {
-            setSelectState(startItem);
+            setSelectBtnState(startItem);
         }
-    }, [postStatus.postStatus]);
+    }, [filterState.postStatus]);
 
     /* 함수 */
-
+    // 버튼그룹 변경 이벤트 (selectButtonGroup)
     const handleSelectChange = (e: SelectChangeEvent) => {
         const selectedVal = e.target.value;
-        const selectedData = selectBtnItems.find((item) => item.value === selectedVal);
+        const selectedData = NotificationButtonGroup.find((item) => item.value === selectedVal);
         if (selectedData) {
-            setSelectState(selectedData);
-            // recoil atom
-            setPostStatus((prev) => ({
+            setSelectBtnState(selectedData);
+            // recoil atom 변경
+            setFilterState((prev) => ({
                 ...prev,
                 postStatus: selectedData.text as 'all' | 'posted' | 'private',
             }));
@@ -76,17 +60,11 @@ export const NoticesTemplate = () => {
         }
     };
 
-    // TData 슬라이스 함수
+    // TData 테이블 범위 추출 처리
     const sliceTData = (param: NotificationProps[], cutStart: number, cutEnd: number) => {
         return param.slice(cutStart, cutEnd);
     };
 
-    // TODO : 검색 입력 이벤트 고려하기("useMemo", "callBack")
-    const handleSearchChange = React.useCallback(
-        // useCallback : [searchVal] 의존성 배열을 참조하면서 불필요한 렌더 방지함
-        (e: React.ChangeEvent<HTMLInputElement>) => setSearchVal(e.target.value),
-        [searchVal],
-    );
     // 검색필터 초기화 이벤트
     const handelFilterReset = () => {
         setFilterState(() => ({
@@ -96,15 +74,16 @@ export const NoticesTemplate = () => {
             postStatus: 'all',
             keyword: undefined,
         }));
-        setSearchVal('');
+        resetSearch();
         setResetDateRange((prevState) => !prevState);
     };
-    // 검색필터 적용 이벤트
+    // 검색 submit 버튼 이벤트
     const handleSearch = () => {
         // 기존 필터 속성들을 유지하되 키워드 변경만 적용하기
         setFilterState((prev) => ({
             ...prev,
-            keyword: searchVal,
+            // 스패밍 방지 입력중인 searchVal 이 아닌 디바운스 상태값 적용
+            keyword: debounceSearchValue,
         }));
     };
     // 페이지 전환 이벤트
@@ -128,6 +107,7 @@ export const NoticesTemplate = () => {
     const headline = <Heading heading="공지사항 관리" subtitle1="고객들께 중요한 소식을 전해주세요" />;
     // ts 유틸 데이터 tData 에 전달하기
 
+    // TODO : GQL 적용 해야됨, 임시로 .ts 파일을 활용해 데이터 불러오기
     // TODO: 렌더링 규모가 너무 큰 방식임 수정 예정
     // 변환된 데이터 sliceTData 함수 활용
     const tDataConvert = sliceTData(filteredNtcItems, tPage * rowPerPage, tPage * rowPerPage + rowPerPage).map(
@@ -164,12 +144,12 @@ export const NoticesTemplate = () => {
         <Stack className={clsN(styles['notices-t'])}>
             {headline}
             <FilteredSearch
-                selectValue={selectState.value.toString()}
                 searchVal={searchVal}
-                onSearch={handleSearchChange}
+                onSearch={handleChange}
+                selectValue={selectBtnState.value.toString()}
+                selectBtnItems={NotificationButtonGroup}
                 onBtnClear={handelFilterReset}
                 onBtnSearch={handleSearch}
-                selectBtnItems={selectBtnItems}
                 onSelectChange={handleSelectChange}
                 resetTrigger={resetDateRange}
             />
