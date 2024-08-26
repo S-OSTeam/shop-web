@@ -41,7 +41,7 @@ const SignUpTemplate = () => {
         email: '',
         phone: '',
         receiveMail: true,
-        snsId: '',
+        snsCode: '',
         sns: 'NORMAL',
         userName: '',
     });
@@ -72,7 +72,7 @@ const SignUpTemplate = () => {
             email: signUpData.email,
             phone: '',
             receiveMail: checkBox,
-            snsId: signUpData.email,
+            snsCode: signUpData.email,
             sns: 'NORMAL',
             userName: name,
         });
@@ -119,7 +119,7 @@ const SignUpTemplate = () => {
             email: formData.email,
             phone: '',
             receiveMail: checkBox,
-            snsId: formData.email,
+            snsCode: formData.email,
             sns: 'NORMAL',
             userName: name,
         });

@@ -28,7 +28,7 @@ const Form = ({ formInfo }: FormProps) => {
         email: '',
         phone: '',
         receiveMail: true,
-        snsId: '',
+        snsCode: '',
         sns: 'NORMAL',
         userName: '',
     });
