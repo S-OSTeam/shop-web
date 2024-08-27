@@ -13,6 +13,10 @@ interface CollapseFormProps {
     context: string;
     fixedDate?: Date;
     imgUrls?: string[];
+    /* 관리 속성 */
+    // 수정하기 버튼 이벤트
+    // onClickEdit?: (e: React.ChangeEvent<HTMLButtonElement>)=>void;
+    //
 }
 export const CollapseForm = ({ ...props }: CollapseFormProps) => {
     return (
