@@ -5,8 +5,7 @@ import UserLoginPlace from '@molecules/userLoginPlace/UserLoginPlace';
 import clsN from 'classnames';
 import styles from './styles/MainNav.module.scss';
 
-
-interface MainNavProps{
+interface MainNavProps {
     // 클래스명
     className?: string;
     // 현재 라우터에 맞는 아이템
@@ -17,11 +16,7 @@ interface MainNavProps{
  *
  * @constructor
  */
-const MainNav = (
-    {
-        className
-    }:MainNavProps
-) => {
+const MainNav = ({ className }: MainNavProps) => {
     // 상태
 
     // 함수
@@ -29,14 +24,11 @@ const MainNav = (
     // 생성기
     // const linkGen
 
-    React.useEffect(()=>{
-
-    },[]);
-    return(
-        <Stack component='nav' className={clsN(className, styles.stack)} direction='row'>
-
-            <SearchBarAuto options={[{id:0, question: '', answer: ''}]}/>
-            <UserLoginPlace/>
+    React.useEffect(() => {}, []);
+    return (
+        <Stack component="nav" className={clsN(className, styles.stack)} direction="row">
+            <SearchBarAuto options={[{ id: 0, question: '', answer: '' }]} />
+            <UserLoginPlace />
         </Stack>
     );
 };

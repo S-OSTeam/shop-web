@@ -61,14 +61,16 @@ export const CollapsedListResult = ({ ...props }: CollapsedManagerProps) => {
     // 현재 리스트들의 공개 (on/off) 상태
     const [collList, setCollList] = React.useState<boolean[]>(() => Array(tableLength).fill(false));
 
-    // 고차 함수 방식으로 콜랩스 토글값 반전
-    const toggleCollapse =
-        (index: number) =>
-        (arr: boolean[]): boolean[] =>
-            arr.map((val, idx) => (idx === index ? !val : val));
+    // 콜랩스 토글값 반전(얕은 복사)
+    const toggleCollapse = (index: number, arr: boolean[]): boolean[] => {
+        // 얕은복사 특정 인덱스의 배열값 반전 처리
+        const data = [...arr];
+        data[index] = !data[index];
+        return data;
+    };
     // 속성을 통해 받은 본문 랜더 함수, 고차 함수로 첫번째 함수인자(인덱스) 두번째함수인자(배열)
     const setCollapseArray = (index: number) => {
-        setCollList((prevState) => toggleCollapse(index)(prevState));
+        setCollList((prevState) => toggleCollapse(index, prevState));
     };
 
     // 테이블 Head 영역 렌더
