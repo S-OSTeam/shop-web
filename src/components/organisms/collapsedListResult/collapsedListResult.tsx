@@ -62,16 +62,20 @@ export const CollapsedListResult = ({ ...props }: CollapsedManagerProps) => {
     const [collList, setCollList] = React.useState<boolean[]>(() => Array(tableLength).fill(false));
 
     // 콜랩스 토글값 반전(얕은 복사)
-    const toggleCollapse = (index: number, arr: boolean[]): boolean[] => {
-        // 얕은복사 특정 인덱스의 배열값 반전 처리
-        const data = [...arr];
-        data[index] = !data[index];
-        return data;
+    const toggleCollapse = (index: number) => {
+        setCollList((prevCollList) => {
+            // 깊은복사 상태값 원본을 temp 저장
+            const newCollState = [...prevCollList];
+            // 상태값 배열의 특정 인덱스에 위치한 값 반전처리
+            newCollState[index] = !newCollState[index];
+            // 특정 인덱스의 상태 배열값만 수정
+            return newCollState;
+        });
     };
 
     // 속성을 통해 받은 본문 열람 처리 이벤트
     const setCollapseArray = (index: number) => {
-        setCollList((prevState) => toggleCollapse(index, prevState));
+        toggleCollapse(index);
     };
 
     // 테이블 Head 영역 렌더

@@ -1,8 +1,6 @@
 /* eslint-disable */
 import React from 'react';
 import { Stack } from '@mui/material';
-import clsN from 'classnames';
-import styles from './styles/Faq.module.scss';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
 import { AutoComplete } from '@molecules/autoComplete/AutoComplete';
 
