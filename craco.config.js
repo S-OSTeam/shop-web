@@ -1,6 +1,52 @@
 const CracoAlias = require('craco-alias');
 
 module.exports = {
+    webpack: {
+        configure: (webpackConfig) => {
+            // 웹팩콘픽.모듈.규칙을 순회하면서 .svg 파일을 찾아 저장
+            const svgRule = webpackConfig.module.rules.find((rule) => rule.test && rule.test.test('.svg')) || {};
+            // 찾은 test 속성에서 .svg 파일만 정확히 찾도록 매치함
+            svgRule.exclude = /\.svg$/i; // SVG 파일을 기존 규칙에서 제외
+
+            // svg 로더
+            const svgLoader = {
+                test: /\.svg$/i,
+                issuer: /\.[jt]sx?$/,
+                use: [
+                    {
+                        loader: '@svgr/webpack',
+                        options: {
+                            throwIfNamespace: false,
+                            svgoConfig: {
+                                plugins: [
+                                    {
+                                        name: 'preset-default',
+                                        params: {
+                                            overrides: {
+                                                convertShapeToPath: false,
+                                                removeViewBox: false,
+                                            },
+                                        },
+                                    },
+                                    'prefixIds',
+                                    {
+                                        name: 'removeAttrs',
+                                        params: {
+                                            attrs: ['data-name', 'sketch:type'],
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                ],
+            };
+            // 웹팩 설정 rule 새 규칙 추가
+            webpackConfig.module.rules.push(svgLoader);
+
+            return webpackConfig;
+        },
+    },
     plugins: [
         {
             plugin: CracoAlias,
@@ -12,42 +58,4 @@ module.exports = {
         },
     ],
     devtool: process.env.NODE_ENV === 'production' ? false : 'eval-source-map',
-    webpack: {
-        configure: (webpackConfig) => {
-            // CKEditor 아이콘을 위한 규칙 (raw-loader 사용)
-            const ckeditorIconsRule = {
-                test: /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/,
-                use: ['raw-loader'],
-            };
-
-            // CKEditor SVG 파일을 위한 규칙 (네임스페이스가 있는 SVG 파일 포함)
-            const ckeditorSvgRule = {
-                test: /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.svg$/,
-                use: ['raw-loader'], // CKEditor의 모든 SVG 파일을 raw-loader로 처리
-            };
-
-            // 모든 다른 SVG 파일에 대한 규칙
-            const svgRule = {
-                test: /\.svg$/,
-                exclude: [
-                    /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/,
-                    /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.svg$/, // CKEditor 관련 SVG 파일 제외
-                ],
-                use: [
-                    {
-                        loader: '@svgr/webpack',
-                        options: {
-                            throwIfNamespace: false, // 네임스페이스 허용 옵션
-                        },
-                    },
-                    'file-loader',
-                ],
-            };
-
-            // CKEditor와 관련된 파일들을 맨 앞에 배치하여 우선 처리
-            webpackConfig.module.rules.unshift(ckeditorIconsRule, ckeditorSvgRule, svgRule);
-
-            return webpackConfig;
-        },
-    },
 };
