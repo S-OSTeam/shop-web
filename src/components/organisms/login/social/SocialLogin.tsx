@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import { KAKAO_LOGIN, NAVER_LOGIN } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { KAKAO_LOGIN, NAVER_LOGIN, SIGN_UP_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import useGraphQL from '@hooks/useGraphQL';
 import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
@@ -12,90 +12,55 @@ import { useLocation } from 'react-router-dom';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
-declare global {
-    interface Window {
-        naver: any;
-    }
-}
-
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
     const location = useLocation();
-
+    const [naverState, setNaverState] = useState('');
+    const [naverCode, setNaverCode] = useState('');
+    const naverRef = useRef<HTMLDivElement>(null);
     const socialPlatforms = [
         { name: 'naver', text: '네이버 로그인' },
         { name: 'kakao', text: '카카오 로그인' },
         { name: 'google', text: '구글 로그인' },
     ];
 
-    const STATE = 'false';
-
     const { refetch: naverLogin } = useGraphQL({
-        query: NAVER_LOGIN,
+        query: SIGN_UP_REQUEST,
         type: 'mutation',
-        request: { STATE, code: '' },
+        request: {
+            userId: '',
+            pwd: '',
+            confirmPwd: '',
+            zipcode: '',
+            address1: '',
+            email: '',
+            snsCode: naverCode,
+            sns: 'NAVER',
+            userName: '',
+        },
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
 
     const { data: kakaoData, refetch: kakaoLogin } = useGraphQL({
         query: KAKAO_LOGIN,
         type: 'mutation',
-        request: { STATE, code: '' },
+        request: { state: '', code: '' },
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
 
-    const naverRef = useRef<HTMLDivElement>(null);
-    const [user, setUser] = useState(null);
-    const myNaverLogin = new window.naver.LoginWithNaverId({
-        clientId: `${process.env.REACT_APP_NAVER_CLIENT_ID}`,
-        callbackUrl: 'http://localhost:3000/login',
-        isPopup: false,
-        loginButton: { color: 'green', type: 1, height: '45' },
-        callbackHandle: true,
-    });
-    const getNaverUser = async () => {
-        await myNaverLogin.getLoginStatus((status: any) => {
-            console.log(`로그인?: ${status}`);
-            if (status) {
-                setUser({ ...myNaverLogin.user });
-                console.log(myNaverLogin);
-                console.log(myNaverLogin.user.name);
-                console.log(myNaverLogin.user.email);
-            }
-        });
-    };
-
-    const initNaverLogin = () => {
-        myNaverLogin.init();
-        const code = new URLSearchParams(location.search);
-
-        console.log(code);
-        getNaverUser();
-    };
-
-    const handleNaverCallback = () => {};
+    const myNaverCodeURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent('http://localhost:3000/signup')}&state=${encodeURIComponent(process.env.REACT_APP_NAVER_STATE ?? '')}`;
 
     useEffect(() => {
-        initNaverLogin();
-        handleNaverCallback();
+        const snsCode = new URL(window.location.href).searchParams.get('code');
+
+        if (snsCode) {
+            setNaverCode(snsCode);
+        }
     }, []);
 
     const handleNaverLogin = () => {
-        if (naverRef.current) {
-            const loginButton = naverRef.current.querySelector('a#naverIdLogin_loginButton') as HTMLAnchorElement;
-            if (loginButton) {
-                loginButton.click();
-            } else {
-                console.error('Naver login button not found');
-            }
-        }
-    };
-
-    const naverLogout = () => {
-        // localStorage.removeItem('com.naver.nid.access_token');
-        const accessToken = localStorage.getItem('com.naver.nid.access_token');
-        console.log(accessToken);
-        // window.location.reload();
+        localStorage.setItem('state', Math.random().toString());
+        window.location.href = myNaverCodeURL;
     };
 
     const REST_KEY = `${process.env.REACT_APP_KAKAO_CLIENT_KEY}`;
@@ -204,9 +169,6 @@ const SocialLogin = () => {
                                     />
                                 </Button>
                             ))}
-                        </Box>
-                        <Box>
-                            <Button onClick={naverLogout}>로그아웃</Button>
                         </Box>
                     </Box>
                 )}

@@ -21,6 +21,8 @@ const LoginOrganisms = () => {
     const [formData, setFormData] = useState({
         pwd: '',
         userId: '',
+        email: '',
+        snsCode: '',
         sns: 'NORMAL',
     });
 

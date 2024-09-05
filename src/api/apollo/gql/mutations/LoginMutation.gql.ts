@@ -5,7 +5,11 @@ export const SIGN_UP = gql`
         signUp(request: $request)
     }
 `;
-
+export const SIGN_UP_REQUEST = gql`
+    mutation ($request: SignUpRequest!) {
+        signUp(request: $request)
+    }
+`;
 export const SEND_VERIFY_CODE_REQUEST = gql`
     mutation ($request: SendVerifyCodeRequest!) {
         sendVerifyCode(request: $request)
