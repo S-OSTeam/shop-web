@@ -2,21 +2,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import { KAKAO_LOGIN, NAVER_LOGIN, SIGN_UP_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { useLocation } from 'react-router-dom';
+import { SIGN_UP_REQUEST, LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import useGraphQL from '@hooks/useGraphQL';
 import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
 import ImgTextButton from '@components/molecules/button/imgTextButton/ImgTextButton';
 import CustomIcon from '@components/atoms/source/icon/customIcon/CustomIcon';
-import { useLocation } from 'react-router-dom';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
     const location = useLocation();
-    const [naverState, setNaverState] = useState('');
-    const [naverCode, setNaverCode] = useState('');
+    const [naverCode, setNaverCode] = useState<string | null>('');
     const naverRef = useRef<HTMLDivElement>(null);
     const socialPlatforms = [
         { name: 'naver', text: '네이버 로그인' },
@@ -25,6 +24,19 @@ const SocialLogin = () => {
     ];
 
     const { refetch: naverLogin } = useGraphQL({
+        query: LOGIN_REQUEST,
+        type: 'mutation',
+        request: {
+            pwd: '',
+            userId: '',
+            email: '',
+            snsCode: '',
+            sns: 'NAVER',
+        },
+        option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
+    });
+
+    const { refetch: naverSignUp } = useGraphQL({
         query: SIGN_UP_REQUEST,
         type: 'mutation',
         request: {
@@ -34,57 +46,40 @@ const SocialLogin = () => {
             zipcode: '',
             address1: '',
             email: '',
-            snsCode: naverCode,
             sns: 'NAVER',
             userName: '',
         },
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
 
-    const { data: kakaoData, refetch: kakaoLogin } = useGraphQL({
-        query: KAKAO_LOGIN,
-        type: 'mutation',
-        request: { state: '', code: '' },
-        option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
-    });
-
-    const myNaverCodeURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent('http://localhost:3000/signup')}&state=${encodeURIComponent(process.env.REACT_APP_NAVER_STATE ?? '')}`;
+    const myNaverCodeURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=http://localhost:3000/login&state=${process.env.REACT_APP_NAVER_STATE}`;
 
     useEffect(() => {
-        const snsCode = new URL(window.location.href).searchParams.get('code');
-
-        if (snsCode) {
-            setNaverCode(snsCode);
-        }
-    }, []);
+        const queryParams = new URLSearchParams(location.search);
+        const codeParam = queryParams.get('code');
+        setNaverCode(codeParam);
+    }, [location.search]);
 
     const handleNaverLogin = () => {
-        localStorage.setItem('state', Math.random().toString());
-        window.location.href = myNaverCodeURL;
+        const width = 500;
+        const height = 600;
+        const left = window.screenX + (window.innerWidth - width) / 2;
+        const top = window.screenY + (window.innerHeight - height) / 2;
+
+        const loginPopup = window.open(
+            myNaverCodeURL,
+            'Naver Login',
+            `width=${width},height=${height},left=${left},top=${top}`,
+        );
+        if (loginPopup && !loginPopup.closed) {
+            loginPopup.close();
+        }
+        document.location.href = 'http://naver.com';
+        console.log(loginPopup);
     };
 
-    const REST_KEY = `${process.env.REACT_APP_KAKAO_CLIENT_KEY}`;
-    const redirect_uri = 'http://localhost:3000/login';
-    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_KEY}&redirect_uri=${redirect_uri}&response_type=code`;
-
     const handleKakaoLogin = () => {
-        window.location.href = kakaoURL;
-        const code = new URL(window.location.href).searchParams.get('code');
-        console.log(code);
-        kakaoLogin({
-            variables: {
-                request: {
-                    code,
-                    state: true,
-                },
-            },
-        })
-            .then((response) => {
-                console.log('Kakao Login Success:', response.data);
-            })
-            .catch((error) => {
-                console.error('Kakao Login Error:', error);
-            });
+        console.log('KakaoLogin is clicked!');
     };
 
     const handleGoogleLogin = () => {

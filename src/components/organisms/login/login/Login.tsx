@@ -10,7 +10,7 @@ import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 
 import useGraphQL from '@hooks/useGraphQL';
 import { setCookie } from '@util/CookieUtil';
-import { Login } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
@@ -26,9 +26,8 @@ const LoginOrganisms = () => {
         sns: 'NORMAL',
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { data, refetch: login } = useGraphQL({
-        query: Login,
+    const { refetch: login } = useGraphQL({
+        query: LOGIN_REQUEST,
         type: 'mutation',
         request: { ...formData },
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
