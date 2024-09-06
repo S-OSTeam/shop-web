@@ -15,7 +15,7 @@ export const ALL_CATEGORY_TREE = gql`
 
 export const CATEGORY_TREE = gql`
     query ($request: String) {
-        findSubCategoriesTree(categoryId: $request) {
+        findSubItemCategoriesTree(categoryId: $request) {
             publicId
             title
             children {
