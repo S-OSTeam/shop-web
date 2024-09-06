@@ -41,12 +41,11 @@ const SignUpTemplate = () => {
         email: '',
         phone: '',
         receiveMail: true,
-        snsCode: '',
         sns: 'NORMAL',
         userName: '',
     });
 
-    const { data, refetch } = useGraphQL({
+    const { refetch } = useGraphQL({
         query: SIGN_UP,
         type: 'mutation',
         request: {
@@ -72,7 +71,6 @@ const SignUpTemplate = () => {
             email: signUpData.email,
             phone: '',
             receiveMail: checkBox,
-            snsCode: signUpData.email,
             sns: 'NORMAL',
             userName: name,
         });
@@ -103,8 +101,6 @@ const SignUpTemplate = () => {
     };
 
     const handleFormDataOnclick = (formData: FormDataInterface) => {
-        console.log(formData);
-        console.log(data);
         setSignUpData({
             userId: formData.userId,
             pwd: formData.pwd,
@@ -119,7 +115,6 @@ const SignUpTemplate = () => {
             email: formData.email,
             phone: '',
             receiveMail: checkBox,
-            snsCode: formData.email,
             sns: 'NORMAL',
             userName: name,
         });
