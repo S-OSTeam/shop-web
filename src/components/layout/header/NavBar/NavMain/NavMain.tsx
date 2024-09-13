@@ -13,6 +13,8 @@ import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { useNavigate } from 'react-router-dom';
 import { ItemCategoryTreeResponse } from '@interface/category/Category';
 import { Path } from '@util/Path';
+import categoryIdAtom from '@recoil/atoms/category/categoryIdAtom';
+import { useRecoilState } from 'recoil';
 
 interface GnbMainProps {
     categories: ItemCategoryTreeResponse[];
@@ -51,11 +53,15 @@ const NavMain = ({
     // "문의" 카테고리 찾기
     const inquiryCategory = categories.find((category) => category.title === '문의');
 
+    // 선택한 카테고리 id recoil로 상태 관리
+    const [categoryId, setCategoryId] = useRecoilState(categoryIdAtom);
+
     /* 카테고리 이동하기 위해 카테고리에서 문의 카테고리를 제외한 나머지 카테고리는 카테고리 페이지로 이동한다.
      * publicId 타입 : string
      * encodePublicId는 base64를 통해서 publicId를 사용자에게 직접적으로 주소에 노출하지 않기 위해 해주었다.(추후에 암호화/복호화 예정)
      */
     const goToCategory = (publicId: string) => {
+        setCategoryId(publicId);
         if (inquiryCategory && publicId === inquiryCategory.publicId) {
             goToSupport();
         } else {
