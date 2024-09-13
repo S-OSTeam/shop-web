@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import { AppBar, Box, Drawer as MuiDrawer } from '@mui/material';
 import clsN from 'classnames';
 import styles from '@components/layout/header/styles/Header.module.scss';
 import Drawer from '@components/layout/header/NavBar/listItem/drawer/Drawer';
 import NavMain from '@components/layout/header/NavBar/NavMain/NavMain';
-import { EmptyCategoryTreeResponse, ItemCategoryTreeResponse } from '@interface/category/Category';
 import useGraphQL from '@hooks/useGraphQL';
 import { ALL_CATEGORY_TREE } from '@api/apollo/gql/queries/ItemCategoryTreeResponseQuery.gql';
+import { useRecoilState } from 'recoil';
+import categoriesAtom from '@recoil/atoms/category/categoriesAtom';
 
 interface HeaderProps {
     /*
@@ -34,7 +35,7 @@ const Header = ({ window }: HeaderProps) => {
     // 윈도우 사이즈 감지될 경우 dom.body 의 사이즈 가져옴
     const container = window !== undefined ? () => window().document.body : undefined;
 
-    const [categories, setCategories] = useState<ItemCategoryTreeResponse[]>(EmptyCategoryTreeResponse);
+    const [categories, setCategories] = useRecoilState(categoriesAtom);
 
     const { data: itemCategory, refetch: categoryRefetch } = useGraphQL({
         query: ALL_CATEGORY_TREE,

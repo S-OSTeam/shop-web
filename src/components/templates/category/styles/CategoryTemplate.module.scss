@@ -1,0 +1,56 @@
+@import "./index";
+
+.category-wrapper{
+  flex: 1;
+  width: 100%;
+  margin-top: 65px;
+  margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & span{
+    font-family: "Pretendard Variable", sans-serif;
+  }
+
+  &__pagination{
+    margin-top: 20px;
+  }
+}
+
+// 360px ~ mini-mobile
+@include media-breakpoint-up(xs){
+  .category-wrapper{
+  }
+}
+
+// 480px ~ mobile
+@include media-breakpoint-up(sm){
+  .category-wrapper{
+  }
+}
+
+// 768px ~ tablet
+@include media-breakpoint-up(md){
+  .category-wrapper{
+  }
+}
+
+// 980px ~ laptop
+@include media-breakpoint-up(lg){
+  .category-wrapper{
+  }
+}
+
+// 1024 ~ pc
+@include media-breakpoint-up(xl){
+  .category-wrapper{
+  }
+}
+
+// 1400px
+@include media-breakpoint-up(xxl){
+  .category-wrapper{
+  }
+}

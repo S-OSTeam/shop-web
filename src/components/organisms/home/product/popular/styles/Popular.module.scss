@@ -1,9 +1,9 @@
 @import "./index";
 
-.popular-wrapper{
+.popular-wrapper {
   padding: 48px 24px 0 24px;
 
-  &__title{
+  &__title {
     font-size: 32px;
     color: #404040;
     font-family: 'Pretendard Variable', serif;
@@ -11,11 +11,33 @@
   }
 
   &__items{
-    margin-top: 8px;
     display: grid;
-    grid-template-columns: repeat(6, minmax(165px, auto)); // 5개의 그리드 컬럼으로 설정
     gap: 8px;
-    justify-content: center;
+    grid-template-columns: repeat(1, 1fr); // Default for small screens (1 card per row)
+
+    @include media-breakpoint-up(xs) {
+      grid-template-columns: repeat(2, 1fr); // 2 cards per row for extra small screens
+    }
+
+    @include media-breakpoint-up(sm) {
+      grid-template-columns: repeat(3, 1fr); // 3 cards per row for mobile screens
+    }
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(4, 1fr); // 4 cards per row for tablets
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(5, 1fr); // 5 cards per row for laptops
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: repeat(6, 1fr); // 6 cards per row for desktops
+    }
+
+    @include media-breakpoint-up(xxl) {
+      grid-template-columns: repeat(6, 1fr); // Max 6 cards per row for large screens
+    }
   }
 
   &__card{
@@ -64,10 +86,6 @@
     text-overflow: ellipsis;
   }
 
-  &__popular-info{
-
-  }
-
   &__card-info{
     margin-top: 4px;
     font-size: 10px;
@@ -85,34 +103,18 @@
     font-family: 'Pretendard Variable', serif;
     font-weight: 400;
   }
+}
 
-  &__card-review{
-    font-size: 8px;
+@include media-breakpoint-up(0) {
+  .popular-wrapper {
+    padding: 12px 16px 0 16px;
   }
 }
 
 // 360px ~ mini-mobile
-@include media-breakpoint-up(xs){
+@include media-breakpoint-up(xs) {
   .popular-wrapper {
     padding: 12px 16px 0 16px;
-
-    &__items{
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(165px, auto)); // 5개의 그리드 컬럼으로 설정
-      gap: 8px;
-      justify-content: center;
-    }
-
-    &__card{
-      width: 100%;
-      height: auto;
-      min-height: 275px;
-      padding: 0;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
   }
 }
 
@@ -120,24 +122,6 @@
 @include media-breakpoint-up(sm) {
   .popular-wrapper {
     padding: 12px 16px 0 16px;
-
-    &__items{
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(165px, auto)); // 5개의 그리드 컬럼으로 설정
-      gap: 8px;
-      justify-content: center;
-    }
-
-    &__card{
-      width: 100%;
-      height: auto;
-      min-height: 250px;
-      padding: 0;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
   }
 }
 
@@ -145,24 +129,6 @@
 @include media-breakpoint-up(md) {
   .popular-wrapper {
     padding: 40px 24px 0 24px;
-
-    &__items{
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(165px, auto)); // 5개의 그리드 컬럼으로 설정
-      gap: 8px;
-      justify-content: center;
-    }
-
-    &__card{
-      width: 100%;
-      height: auto;
-      min-height: 275px;
-      padding: 0;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
   }
 }
 
@@ -170,50 +136,19 @@
 @include media-breakpoint-up(lg) {
   .popular-wrapper {
     padding: 48px 24px 0 24px;
-
-    &__items{
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(165px, auto)); // 5개의 그리드 컬럼으로 설정
-      gap: 8px;
-      justify-content: center;
-    }
-
-    &__card{
-      width: 100%;
-      height: 100%;
-      min-height: 275px;
-      padding: 0;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
   }
 }
 
 // 1024 ~ pc
 @include media-breakpoint-up(xl) {
   .popular-wrapper{
-    &__items{
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: repeat(6, minmax(165px, auto)); // 5개의 그리드 컬럼으로 설정
-      gap: 8px;
-      justify-content: center;
-    }
-
-    &__card{
-      width: 100%;
-      height: auto;
-      min-height: 275px;
-      padding: 0;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
+    padding: 48px 24px 0 24px;
   }
 }
 
 // 1400px
 @include media-breakpoint-up(xxl) {
+  .popular-wrapper{
+    padding: 48px 24px 0 24px;
+  }
 }
