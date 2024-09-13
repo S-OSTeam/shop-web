@@ -12,16 +12,14 @@ interface CategoryTitleProps {
 }
 
 const CategoryTitle = ({ categoryTitle, categories, onCategoryClick }: CategoryTitleProps) => {
-    const filteredCategories = categories.slice(1);
-
     const colorTitle = (title: string) => title === categoryTitle.toString();
 
     return (
         <Box className={clsN(styles['category-title-wrapper'])}>
             <Text className={clsN(styles['category-title'])} variant="h3" text={categoryTitle} />
-            {filteredCategories.length > 0 ? (
+            {categories.length > 0 ? (
                 <Box className={clsN(styles['category-items'])}>
-                    {filteredCategories.map((category) => (
+                    {categories.map((category) => (
                         <Text
                             key={category.publicId}
                             className={clsN(styles['category-items__sub-title'], {

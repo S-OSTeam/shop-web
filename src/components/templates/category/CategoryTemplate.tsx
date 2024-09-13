@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ItemCategoryTreeResponse } from '@interface/category/Category';
 import { Box } from '@mui/material';
 import { ItemInterface } from '@util/test/interface/Item';
@@ -13,9 +13,10 @@ interface CategoryTemplateProps {
     categories: ItemCategoryTreeResponse[];
     items: ItemInterface[];
     onProductClick?: (item: ItemInterface) => void;
-    onPainginationChange: (changePage: number) => void;
+    onPainginationChange: (event: React.ChangeEvent<unknown>, value: number) => void;
     onCategoryClick: (categoryId: string) => void;
     totalCount: number;
+    page: number;
 }
 
 const CategoryTemplate = ({
@@ -26,24 +27,13 @@ const CategoryTemplate = ({
     onPainginationChange,
     onCategoryClick,
     totalCount,
+    page,
 }: CategoryTemplateProps) => {
-    const size: number = 10;
-    const [page, setPage] = useState<number>(1);
+    const size: number = 10; // 한 페이지에 보여줄 아이템 수
 
-    // page+1 값으로 변하면 index번호를 page관련 값을 이용해서 내용 바꿔주기
-    const onPaginationHandle = (event: React.ChangeEvent<unknown>, value: number) => {
-        if (event) setPage(value);
-    };
-
-    useEffect(() => {
-        onPainginationChange(page);
-    }, [page]);
-
+    // 페이지 수 계산: 올림을 사용해 정확한 페이지 수 계산
     const onTotalPageHandle = () => {
-        let pages = totalCount / size;
-        if (totalCount % size > 0) pages += 1;
-
-        return pages;
+        return Math.ceil(totalCount / size);
     };
 
     return (
@@ -55,7 +45,7 @@ const CategoryTemplate = ({
                     className={clsN(styles['category-wrapper__pagination'])}
                     count={onTotalPageHandle()}
                     page={page}
-                    onChange={onPaginationHandle}
+                    onChange={onPainginationChange}
                 />
             </Box>
         </Box>

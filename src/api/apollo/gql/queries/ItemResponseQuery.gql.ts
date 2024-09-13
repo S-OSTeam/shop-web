@@ -18,7 +18,7 @@ export const SEARCH_ITEM = gql`
                 reviewCnt
                 qnaCnt
                 status
-                sellerId
+                storeId
                 freeDelivery
                 imageUrls
                 option

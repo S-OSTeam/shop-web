@@ -1,34 +1,37 @@
+/* eslint-disable */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Box } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { EmptyCategoryTreeResponse, ItemCategoryTreeResponse, ItemSearchRequest } from '@interface/category/Category';
+import categoriesAtom from '@recoil/atoms/category/categoriesAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import categoryIdAtom from '@recoil/atoms/category/categoryIdAtom';
+import { useNavigate } from 'react-router-dom';
+import { ItemInterface } from '@util/test/interface/Item';
+import { Path } from '@util/Path';
 import useGraphQL from '@hooks/useGraphQL';
 import { SEARCH_ITEM } from '@api/apollo/gql/queries/ItemResponseQuery.gql';
-import { Path } from '@util/Path';
-import { ItemInterface } from '@util/test/interface/Item';
-import { EmptyCategoryTreeResponse, ItemCategoryTreeResponse, ItemSearchRequest } from '@interface/category/Category';
-import { CATEGORY_TREE, PARENT_CATEGORY } from '@api/apollo/gql/queries/ItemCategoryTreeResponseQuery.gql';
 import CategoryTemplate from '@templates/category/CategoryTemplate';
 
 const CategoryPage = () => {
     const navigation = useNavigate();
-    const location = useLocation();
 
-    const [categoryId, setCategoryId] = useState<string>(location.state.categoryId || {});
-    // 카테고리에 있는 item 정보를 조회하고 itemList에 데이터 상태를 관리한다.
-    const [itemList, setItemList] = useState<ItemInterface[]>();
-    // category 정보를 조회하고 categories에 데이터를 상태를 관리한다.
-    const [categories, setCategories] = useState<ItemCategoryTreeResponse[]>(EmptyCategoryTreeResponse);
-    // 선택 카테고리 타이틀 상태를 관리한다.
+    const [categoryId, setCategoryId] = useRecoilState(categoryIdAtom);
+    const totalCategories = useRecoilValue(categoriesAtom);
+    // 카테고리 타이틀의 상태를 관리하는 state
     const [title, setTitle] = useState<string>('');
-    // 메인 카테고리 id 상태를 관리 한다.
-    const [currentCategoryId, setCurrentCategoryId] = useState<string>(categoryId);
+    // 카테고리의 상태를 관리하는 state
+    const [categories, setCategories] = useState<ItemCategoryTreeResponse[]>(EmptyCategoryTreeResponse);
+    // 해당 카테고리의 목록 아이템의 상태를 관리하는 state
+    const [itemList, setItemList] = useState<ItemInterface[]>();
+    // 해당 카테고리의 목록 아이템의 총 갯수 상태를 관리하는 state
     const [totalCount, setTotalCount] = useState<number>(0);
+    const [page, setPage] = useState<number>(1);
 
     // pagination 처리를 위한 pageItem으로 pageSize와 pageNumber 변경 예정
     const [pageItem, setPageItem] = useState<ItemSearchRequest>({
         categoryPublicId: `${categoryId}`,
         pageSize: '10',
-        pageNumber: '1',
+        pageNumber: `${page}`,
     });
 
     // useGraphQL 커스텀 훅을 이용해서 item을 조회
@@ -38,28 +41,52 @@ const CategoryPage = () => {
         request: { ...pageItem },
     });
 
-    // useGraphQL 커스텀 훅을 이용해서 currentCategoryId를 필터링하여 카테고리 목록을 조회
-    const { data: categoryData, refetch: categoryRefetch } = useGraphQL({
-        query: CATEGORY_TREE,
-        type: 'query',
-        request: currentCategoryId,
-    });
+    // useCallback으로 filter라는 변수로 메모라이즈 시켜놓는다.
+    const filter = useCallback(() => {
+        // 선택한 카테고리의 부모 카테고리를 찾는다.
+        const parentCategory = findParentCategory(totalCategories, categoryId);
+        if (parentCategory) {
+            // 부모 카테고리를 상태에 저장한다.
+            setCategories(parentCategory);
+        }
+    }, [categoryId, totalCategories]);
 
-    // useGraphQL 커스텀 훅을 이용해서 currentCategoryId를 필터링하여 부모publicId를 조회
-    const { data: parentData, refetch: parentRefetch } = useGraphQL({
-        query: PARENT_CATEGORY,
-        type: 'query',
-        request: currentCategoryId,
-    });
+    /* findParentCategory로 filter와 연결되어 useCallback함수로 filter 함수의 값을 메모라이징 하여 filter의 값 즉, categoryId값이 변경이 되면 함수가 호출 되게끔 설계하였다.
+     * categories와 targetPublicId을 받아와 자식 카테고리가 없을 때는 부모 카테고리의 영향을 받는 필터링 함수를 만들었다. */
+    const findParentCategory = useCallback(
+        (categories: ItemCategoryTreeResponse[], targetPublicId: string): ItemCategoryTreeResponse[] | undefined => {
+            for (const category of categories) {
+                if (category.publicId === targetPublicId) {
+                    setTitle(category.title);
+                    // 자식 카테고리가 있으면 자식 카테고리 리턴한다.
+                    if (category.children && category.children.length > 0) {
+                        return category.children;
+                    }
+                    // 자식 카테고리가 없으면 부모 카테고리 리턴한다.
+                    return categories;
+                }
 
+                // 자식 카테고리들을 재귀적으로 탐색한다.
+                if (category.children && category.children.length > 0) {
+                    const result = findParentCategory(category.children, targetPublicId);
+                    if (result) {
+                        return result;
+                    }
+                }
+            }
+            return undefined; // 카테고리를 찾지 못한 경우 undefined 리턴한다.
+        },
+        [filter],
+    );
+
+    // filter 값이 변경 되면 객체화 된 filter 함수를 호출한다.
     useEffect(() => {
-        setCategoryId(location.state.categoryId || {});
-    }, [location]);
+        filter();
+    }, [filter]);
 
-    /* categoryId가 업데이트 되면 gql폴더에 있는 SEARCH_ITEM 쿼리 문을 커스텀 훅인 useGraphQL로 실행을 시켜서 item을 재조회 하도록 itemRefetch를 실행 시킨다.
-     * useMemo를 이용한 이유는 메모제이션 기법으로 기존의 categoryId를 기억하게 하여서 페이지네이션 될 때 마다 리 렌더링이 되는 것이 아닌 카테고리가 바뀔 때 리 렌더링 목적으로 사용하였다 */
-    useMemo(() => {
-        setCurrentCategoryId(categoryId);
+    /* categoryId가 값이 업데이트 되면 gql폴더에 있는 SEARCH_ITEM 쿼리 문을 커스텀 훅인 useGraphQL로 실행을 시켜서 item을 재조회 하도록 itemRefetch를 실행 시킨다.
+     * 카테고리가 바뀌게 될 때마다 page의 넘버를 1로 바꿔주면서 page를 초기화 시켜준다. */
+    useEffect(() => {
         if (categoryId) {
             setPageItem((prevPageItem) => ({
                 ...prevPageItem,
@@ -70,50 +97,14 @@ const CategoryPage = () => {
         }
     }, [categoryId]);
 
-    /* useEffect로 사용해도 무관하다 하지만 일관성 때문에 현재 페이지에서는 useMemo로 사용하였다. */
-    useMemo(() => {
+    /* gql로 Item 목록을 새로 조회할 때 마다 itemData에 값을 입력받고 itemData에 값이 존재한다면 searchItem.items에 값에 있는 아이템들을 itemList에 저장하고,
+     * searchItem.totalCount 값에 있는 데이터 값을 totalItemCnt에 저장한다. */
+    useEffect(() => {
         if (itemData) {
             setItemList(itemData.searchItem.items);
             setTotalCount(itemData.searchItem.totalCount);
         }
     }, [itemData]);
-
-    // 카테고리 목록을 갱신
-    useMemo(() => {
-        categoryRefetch();
-    }, [categoryRefetch]);
-
-    /* cateogryData와 parentRefetch를 의존성 배열에 추가하여 category 타이틀 들이 바뀔 떄마다 갱신해주고 만약 자식 타이틀이 없으면
-     * 부모publicId를 조회하는 GraphQL 로직을 refetch하여 부모 카테고리 타이틀들을 조회하도록 하였다. */
-    useMemo(() => {
-        if (categoryData) {
-            const children = categoryData.findSubItemCategoriesTree?.children ?? [];
-            if (children.length === 0) {
-                parentRefetch();
-            } else {
-                setCategories(children);
-            }
-        }
-    }, [categoryData, parentRefetch]);
-
-    useMemo(() => {
-        if (categories) {
-            const matchingCategory = categories.find(
-                (category: ItemCategoryTreeResponse) => category.publicId.toString() === categoryId.toString(),
-            );
-            if (matchingCategory) setTitle(matchingCategory.title);
-        }
-    }, [categories, categoryId]);
-
-    // 부모 카테고리의 ID로 currentCategoryId를 갱신
-    useMemo(() => {
-        if (parentData) {
-            const parent = parentData.findItemCategoryByPublicId.parentPublicId ?? '';
-            if (parent !== '' && parent !== currentCategoryId) {
-                setCurrentCategoryId(parent);
-            }
-        }
-    }, [parentData]);
 
     // useCallback으로 최적화하기
     const onProductHandle = useCallback(
@@ -126,20 +117,26 @@ const CategoryPage = () => {
         [navigation],
     );
 
-    const onPaginationHandle = useCallback(
-        (changePage: number) => {
-            setPageItem((prevPageItem) => ({
-                ...prevPageItem,
-                pageNumber: changePage.toString(),
-            }));
-            itemRefetch();
+    // 페이지네이션 처리
+    const handlePaginationChange = useCallback(
+        (event: React.ChangeEvent<unknown>, value: number) => {
+            if (event) setPage(value);
         },
-        [itemRefetch],
+        [page],
     );
 
+    useEffect(() => {
+        setPageItem((prev) => ({
+            ...prev,
+            pageNumber: page.toString(),
+        }));
+        itemRefetch();
+    }, [handlePaginationChange]);
+
+    // categoryId 상태를 변경한다.
     const onCategoryHandle = useCallback(
         (changeId: string) => {
-            setCategoryId(changeId); // categoryId 상태를 변경합니다.
+            setCategoryId(changeId);
         },
         [categoryId],
     );
@@ -152,9 +149,10 @@ const CategoryPage = () => {
                     categories={categories}
                     items={itemList}
                     onProductClick={onProductHandle}
-                    onPainginationChange={onPaginationHandle}
+                    onPainginationChange={handlePaginationChange}
                     onCategoryClick={onCategoryHandle}
                     totalCount={totalCount}
+                    page={page}
                 />
             )}
         </Box>

@@ -13,7 +13,7 @@ export interface Item {
     reviewCnt: number;
     qnaCnt: number;
     status: boolean;
-    sellerId: string;
+    storeId: string;
     freeDelivery: boolean;
     imageUrls: string[];
 }
@@ -33,7 +33,7 @@ export interface ItemInterface {
     reviewCnt: number;
     qnaCnt: number;
     status: boolean;
-    sellerId: string;
+    storeId: string;
     freeDelivery: boolean;
     imageUrls: string[];
     option: string[];
