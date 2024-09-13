@@ -79,7 +79,7 @@ const Popular = ({ popularItems, content, onProductClick }: PopularProps) => {
                         {tags()}
                         <Box className={clsN(styles['popular-wrapper__popular-info'])}>
                             <Title className={clsN(styles['popular-wrapper__card-title'])} content={item.title} />
-                            <Title className={clsN(styles['popular-wrapper__card-info'])} content={item.content} />
+                            <Title className={clsN(styles['popular-wrapper__card-info'])} content={item.summary} />
                         </Box>
                         <Box className={clsN(styles['popular-wrapper__popular-review'])}>
                             <TextGroup

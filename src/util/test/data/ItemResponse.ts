@@ -5,7 +5,27 @@ export const itemResponse: ItemInterface[] = [
         publicId: 1,
         categoryPublicId: 1,
         title: '[24년5월입고] 원피스 반다이 S.H.Figuarts 몽키.D.루피 오니가시마 습격ver (재판)',
-        content: '원피스 반다이 S.H.Figuarts 몽키.D.루피 오니가시마 습격ver (재판)',
+        content:
+            '<!DOCTYPE html>\n' +
+            '<html>\n' +
+            '<head>\n' +
+            '\t<meta charset="utf-8"/>\n' +
+            '\t<title>Kakao 지도 시작하기</title>\n' +
+            '</head>\n' +
+            '<body>\n' +
+            '\t<div id="map" style="width:500px;height:400px;"></div>\n' +
+            '\t<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bfa86daaf6784105ab4583d503ddcb60"></script>\n' +
+            '\t<script>\n' +
+            "\t\tvar container = document.getElementById('map');\n" +
+            '\t\tvar options = {\n' +
+            '\t\t\tcenter: new kakao.maps.LatLng(33.450701, 126.570667),\n' +
+            '\t\t\tlevel: 3\n' +
+            '\t\t};\n' +
+            '\n' +
+            '\t\tvar map = new kakao.maps.Map(container, options);\n' +
+            '\t</script>\n' +
+            '</body>\n' +
+            '</html>',
         summary: '원피스 반다이 S.H.Figuarts 몽키.D.루피 오니가시마 습격ver (재판)',
         price: 50000,
         sellCnt: 130,
@@ -18,7 +38,13 @@ export const itemResponse: ItemInterface[] = [
         status: false,
         storeId: '판매완료',
         freeDelivery: false,
-        imageUrls: ['https://m.comics-art.co.kr/web/product/big/202403/9cd6009b2de8a7e65396a810758d6a03.jpg'],
+        imageUrls: [
+            'https://m.comics-art.co.kr/web/product/big/202403/9cd6009b2de8a7e65396a810758d6a03.jpg',
+            'https://deamhome.synology.me/images//item/01J5AWM2D1Z87TTJ84GKK5BEY2.png',
+            'https://deamhome.synology.me/images//item/01J5AWN15CQDFT16P3ZHG8P3GR.png',
+            'https://deamhome.synology.me/images//item/01J5AWNN3AR145SB4B3K58BMN9.png',
+            'https://deamhome.synology.me/images//item/01J5AWP6MYZBSRVK25CTEBKK39.png',
+        ],
         option: ['Primary SelectBox', 'Secondary SelectBox'],
         productNumber: 'productNumberTest001',
         deadline: '2024-08-30T10:15:30Z',
