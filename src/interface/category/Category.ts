@@ -1,3 +1,11 @@
+export interface ItemSearchRequest {
+    pageNumber: string;
+    pageSize: string;
+    categoryPublicId?: string;
+    publicId?: string;
+    title?: string;
+}
+
 export interface ItemCategoryResponse {
     title: string;
     publicId: string;
