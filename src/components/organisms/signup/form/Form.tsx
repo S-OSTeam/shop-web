@@ -28,8 +28,7 @@ const Form = ({ formInfo }: FormProps) => {
         email: '',
         phone: '',
         receiveMail: true,
-        snsCode: '',
-        sns: 'NORMAL',
+        sns: 'NAVER',
         userName: '',
     });
 

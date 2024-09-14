@@ -7,7 +7,7 @@ import SaveId from '@components/organisms/login/saveId/SaveId';
 import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
 import useGraphQL from '@hooks/useGraphQL';
-import { Login } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
@@ -22,7 +22,7 @@ const LoginOrganisms = () => {
     });
 
     const { refetch: login } = useGraphQL({
-        query: Login,
+        query: LOGIN_REQUEST,
         type: 'mutation',
         request: { ...formData },
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
