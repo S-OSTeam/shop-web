@@ -39,6 +39,18 @@ const SocialLogin = () => {
         },
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
+    const { refetch: kakaoLogin } = useGraphQL({
+        query: LOGIN_REQUEST,
+        type: 'mutation',
+        request: {
+            pwd: '',
+            userId: '',
+            email: '',
+            snsCode: '',
+            sns: 'KAKAO',
+        },
+        option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
+    });
 
     const { refetch: naverSignUp } = useGraphQL({
         query: SIGN_UP_REQUEST,
@@ -56,7 +68,7 @@ const SocialLogin = () => {
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
 
-    const myNaverCodeURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=http://localhost:3000/login&state=${process.env.REACT_APP_NAVER_STATE}`;
+    const NaverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=http://localhost:3000/naver/redirect&state=${process.env.REACT_APP_NAVER_STATE}`;
 
     // 네이버 로그인 후 code를 받아서 상태에 저장
     // useEffect(() => {
@@ -69,12 +81,13 @@ const SocialLogin = () => {
     // }, [location.search, navigate]);
 
     const handleNaverLogin = () => {
-        const width = 500;
-        const height = 600;
-        const left = window.screenX + (window.innerWidth - width) / 2;
-        const top = window.screenY + (window.innerHeight - height) / 2;
-
-        window.open(myNaverCodeURL, 'Naver Login', `width=${width},height=${height},left=${left},top=${top}`);
+        // const width = 500;
+        // const height = 600;
+        // const left = window.screenX + (window.innerWidth - width) / 2;
+        // const top = window.screenY + (window.innerHeight - height) / 2;
+        //
+        // window.open(myNaverCodeURL, 'Naver Login', `width=${width},height=${height},left=${left},top=${top}`);
+        window.location.href = NaverURL;
     };
 
     // useEffect(() => {
