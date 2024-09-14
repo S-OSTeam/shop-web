@@ -1,8 +1,10 @@
-/* eslint-disable*/
+/* eslint-disable */
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { naverCodeState } from '@recoil/atoms/authAtom';
 import { SIGN_UP_REQUEST, LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import useGraphQL from '@hooks/useGraphQL';
 import Button from '@atoms/button/Button';
@@ -15,8 +17,10 @@ import style from './style/style.module.scss';
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
     const location = useLocation();
-    const [naverCode, setNaverCode] = useState<string | null>('');
+    const navigate = useNavigate(); // useNavigate 추가
+    const [naverCode, setNaverCode] = useRecoilState(naverCodeState); // Recoil 상태 사용
     const naverRef = useRef<HTMLDivElement>(null);
+
     const socialPlatforms = [
         { name: 'naver', text: '네이버 로그인' },
         { name: 'kakao', text: '카카오 로그인' },
@@ -54,11 +58,15 @@ const SocialLogin = () => {
 
     const myNaverCodeURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=http://localhost:3000/login&state=${process.env.REACT_APP_NAVER_STATE}`;
 
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-        const codeParam = queryParams.get('code');
-        setNaverCode(codeParam);
-    }, [location.search]);
+    // 네이버 로그인 후 code를 받아서 상태에 저장
+    // useEffect(() => {
+    //     const queryParams = new URLSearchParams(location.search);
+    //     const codeParam = queryParams.get('code');
+    //     if (codeParam) {
+    //         setNaverCode(codeParam);
+    //         navigate('/signup'); // signup 페이지로 이동
+    //     }
+    // }, [location.search, navigate]);
 
     const handleNaverLogin = () => {
         const width = 500;
@@ -66,20 +74,40 @@ const SocialLogin = () => {
         const left = window.screenX + (window.innerWidth - width) / 2;
         const top = window.screenY + (window.innerHeight - height) / 2;
 
-        const loginPopup = window.open(
-            myNaverCodeURL,
-            'Naver Login',
-            `width=${width},height=${height},left=${left},top=${top}`,
-        );
-        if (loginPopup && !loginPopup.closed) {
-            loginPopup.close();
-        }
-        document.location.href = 'http://naver.com';
-        console.log(loginPopup);
+        window.open(myNaverCodeURL, 'Naver Login', `width=${width},height=${height},left=${left},top=${top}`);
     };
 
+    // useEffect(() => {
+    //     const queryParams = new URLSearchParams(location.search);
+    //     const codeParam = queryParams.get('code');
+    //
+    //     if (codeParam && window.opener) {
+    //         window.opener.postMessage({ code: codeParam }, window.location.origin);
+    //         window.close();
+    //     }
+    //
+    //     const handleMessage = (event: MessageEvent) => {
+    //         if (event.origin === window.location.origin && event.data?.code) {
+    //             const receivedCode = event.data.code;
+    //             setNaverCode(receivedCode);
+    //             console.log('Received Naver Code:', receivedCode);
+    //             navigate(`/signup`);
+    //         }
+    //     };
+    //
+    //     window.addEventListener('message', handleMessage);
+    //
+    //     return () => {
+    //         window.removeEventListener('message', handleMessage);
+    //     };
+    // }, [location.search]);
+
+    // kakao
+    const K_REDIRECT_URI = `http://localhost:3000/kakao/redirect`;
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
     const handleKakaoLogin = () => {
         console.log('KakaoLogin is clicked!');
+        window.location.href = kakaoURL;
     };
 
     const handleGoogleLogin = () => {

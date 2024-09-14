@@ -9,6 +9,7 @@ import Login from '@routes/login/Login';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import Category from '@routes/category/Category';
 import Review from '@routes/review/Review';
+import KakaoRedirect from '@util/test/login/KakaoRedirect';
 import { AdminRouter } from './adminRouter/AdminRouter';
 
 export const AppRouter = () => {
@@ -30,6 +31,7 @@ export const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<DeamHome />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/kakao/redirect" element={<KakaoRedirect />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/shop/product" element={<Product />} />
                 <Route path="/shop/category" element={<Category />} />

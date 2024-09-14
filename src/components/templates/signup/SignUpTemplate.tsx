@@ -10,11 +10,15 @@ import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
 import Modal from '@molecules/modal/Modal';
 import useGraphQL from '@hooks/useGraphQL';
+import { useRecoilValue } from 'recoil';
+import { naverCodeState } from '@recoil/atoms/authAtom';
 import { SIGN_UP } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import style from './style/style.module.scss';
 
 const SignUpTemplate = () => {
     const isInMobile = useDomSizeCheckHook(768);
+    const naverCode = useRecoilValue(naverCodeState); // Recoil 상태에서 code 값 가져오기
+
     const [name, setName] = useState('');
     const [birthDay, setBirthDay] = useState('');
     const [value, setValue] = useState(false);
@@ -73,7 +77,8 @@ const SignUpTemplate = () => {
             sns: 'NORMAL',
             userName: name,
         });
-    }, [value, checkBox]);
+        console.log('Signup page received code:', naverCode);
+    }, [value, checkBox, naverCode]);
 
     const handleFormDataOnclick = (formData: FormDataInterface) => {
         console.log(formData);
