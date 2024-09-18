@@ -180,97 +180,169 @@ const Form = ({ formInfo }: FormProps) => {
             setErrorModalOpen(true);
         }
     };
-
-    const textFieldsData = [
-        {
-            label: '아이디',
-            className: style['form-wrapper__id'],
-            id: 'outlined-required',
-            placeholder: '아이디',
-            inputData: 'userId',
-            validate: validateUserId,
-            error: errors.userId,
-            valid: validity.userId,
-            maxLength: 20,
-        },
-        {
-            label: '비밀번호',
-            className: style['form-wrapper__pwd'],
-            id: 'outlined-password-input',
-            type: 'password',
-            placeholder: '*******',
-            inputData: 'pwd',
-            validate: validatePassword,
-            error: errors.pwd,
-            valid: validity.pwd,
-            maxLength: 20,
-        },
-        {
-            label: '비밀번호 확인',
-            className: style['form-wrapper__pwd-confirm'],
-            id: 'outlined-password-input',
-            type: 'password',
-            placeholder: '*******',
-            inputData: 'confirmPwd',
-            validate: validateConfirmPwd,
-            error: errors.confirmPwd,
-            valid: validity.confirmPwd,
-            maxLength: 20,
-        },
-        {
-            label: '이메일',
-            className: style['form-wrapper__email'],
-            id: 'outlined-email-input',
-            type: 'email',
-            placeholder: 'userid@email.com',
-            inputData: 'email',
-            validate: validateEmail,
-            error: errors.email,
-            valid: validity.email,
-            maxLength: 30,
-        },
-    ];
+    const handleDuplicateCheck = (field: 'userId' | 'email') => {
+        if (field === 'userId') {
+            // Call duplicate check for userId
+            // Example API call to check if userId is taken
+            console.log(`Checking duplicate for userId: ${formData.userId}`);
+        } else if (field === 'email') {
+            // Call duplicate check for email
+            // Example API call to check if email is taken
+            console.log(`Checking duplicate for email: ${formData.email}`);
+        }
+    };
 
     return (
         <Box className={clsN(`${style['form-wrapper']}`)}>
-            {textFieldsData.map((textField) => (
-                <Box className={clsN(`${style['form-wrapper__outer']}`)} key={textField.id}>
+            {/* 아이디 */}
+            <Box className={clsN(`${style['form-wrapper__outer']}`)}>
+                <Box className={clsN(`${style['form-wrapper__outer__display']}`)}>
                     <TextField
-                        label={textField.label}
-                        id={textField.id}
-                        className={clsN(textField.className)}
-                        type={textField.type}
+                        label="아이디"
+                        id="outlined-required"
+                        className={clsN(style['form-wrapper__id'])}
+                        placeholder="아이디"
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        placeholder={textField.placeholder}
-                        error={!!textField.error && !textField.valid}
+                        error={!!errors.userId && !validity.userId}
                         inputProps={{
-                            maxLength: textField.maxLength,
+                            maxLength: 20,
                         }}
                         onChange={(e) => {
-                            if (e.target.value.length <= textField.maxLength) {
+                            if (e.target.value.length <= 20) {
                                 setFormData((prevFormData) => ({
                                     ...prevFormData,
-                                    [textField.inputData]: e.target.value,
+                                    userId: e.target.value,
                                 }));
-                                textField.validate(e.target.value);
+                                validateUserId(e.target.value);
                             }
                         }}
                     />
-                    <FormHelperText
-                        error={!!textField.error && !textField.valid}
-                        style={{ color: textField.valid ? 'green' : 'red' }}
+                    <Button
+                        className={clsN(`${style['form-wrapper__outer__display__btn']}`)}
+                        onClick={() => handleDuplicateCheck('userId')}
                     >
-                        {textField.valid ? '유효한 입력입니다.' : textField.error}
-                    </FormHelperText>
+                        중복체크
+                    </Button>
                 </Box>
-            ))}
+                <FormHelperText
+                    error={!!errors.userId && !validity.userId}
+                    style={{ color: validity.userId ? 'green' : 'red' }}
+                >
+                    {validity.userId ? '유효한 입력입니다.' : errors.userId}
+                </FormHelperText>
+            </Box>
 
+            {/* 비밀번호 */}
+            <Box className={clsN(`${style['form-wrapper__outer']}`)}>
+                <TextField
+                    label="비밀번호"
+                    id="outlined-password-input"
+                    className={clsN(style['form-wrapper__pwd'])}
+                    type="password"
+                    placeholder="*******"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    error={!!errors.pwd && !validity.pwd}
+                    inputProps={{
+                        maxLength: 20,
+                    }}
+                    onChange={(e) => {
+                        if (e.target.value.length <= 20) {
+                            setFormData((prevFormData) => ({
+                                ...prevFormData,
+                                pwd: e.target.value,
+                            }));
+                            validatePassword(e.target.value);
+                        }
+                    }}
+                />
+                <FormHelperText error={!!errors.pwd && !validity.pwd} style={{ color: validity.pwd ? 'green' : 'red' }}>
+                    {validity.pwd ? '유효한 입력입니다.' : errors.pwd}
+                </FormHelperText>
+            </Box>
+
+            {/* 비밀번호 확인 */}
+            <Box className={clsN(`${style['form-wrapper__outer']}`)}>
+                <TextField
+                    label="비밀번호 확인"
+                    id="outlined-password-input-confirm"
+                    className={clsN(style['form-wrapper__pwd-confirm'])}
+                    type="password"
+                    placeholder="*******"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    error={!!errors.confirmPwd && !validity.confirmPwd}
+                    inputProps={{
+                        maxLength: 20,
+                    }}
+                    onChange={(e) => {
+                        if (e.target.value.length <= 20) {
+                            setFormData((prevFormData) => ({
+                                ...prevFormData,
+                                confirmPwd: e.target.value,
+                            }));
+                            validateConfirmPwd(e.target.value);
+                        }
+                    }}
+                />
+                <FormHelperText
+                    error={!!errors.confirmPwd && !validity.confirmPwd}
+                    style={{ color: validity.confirmPwd ? 'green' : 'red' }}
+                >
+                    {validity.confirmPwd ? '유효한 입력입니다.' : errors.confirmPwd}
+                </FormHelperText>
+            </Box>
+
+            {/* 이메일 */}
+            <Box className={clsN(`${style['form-wrapper__outer']}`)}>
+                <Box className={clsN(`${style['form-wrapper__outer__display']}`)}>
+                    <TextField
+                        label="이메일"
+                        id="outlined-email-input"
+                        className={clsN(style['form-wrapper__email'])}
+                        type="email"
+                        placeholder="userid@email.com"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        error={!!errors.email && !validity.email}
+                        inputProps={{
+                            maxLength: 30,
+                        }}
+                        onChange={(e) => {
+                            if (e.target.value.length <= 30) {
+                                setFormData((prevFormData) => ({
+                                    ...prevFormData,
+                                    email: e.target.value,
+                                }));
+                                validateEmail(e.target.value);
+                            }
+                        }}
+                    />
+                    <Button
+                        className={clsN(`${style['form-wrapper__outer__display__btn']}`)}
+                        onClick={() => handleDuplicateCheck('email')}
+                    >
+                        중복체크
+                    </Button>
+                </Box>
+            </Box>
+            <FormHelperText
+                error={!!errors.email && !validity.email}
+                style={{ color: validity.email ? 'green' : 'red' }}
+            >
+                {validity.email ? '유효한 입력입니다.' : errors.email}
+            </FormHelperText>
+            {/* 이메일 인증 버튼 */}
             <Button className={clsN(`${style['form-wrapper__email-authentication-btn']}`)} onClick={handleEmailSend}>
                 이메일 인증
             </Button>
 
+            {/* Modals */}
             <Modal open={emailModalOpen} onClose={() => setEmailModalOpen(false)}>
                 <Box className={clsN(`${style['form-wrapper__modal']}`)}>
                     <h2>이메일 전송 완료</h2>

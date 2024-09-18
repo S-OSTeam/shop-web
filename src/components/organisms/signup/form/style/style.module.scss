@@ -9,6 +9,21 @@
 
   &__outer{
     width: 70%;
+    &__display{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &__btn{
+        background-color: $primary-color;
+        color: $basic-font-color;
+        font-weight: bold;
+        width: 25%;
+        height: 3.3rem;
+        font-size: 20px;
+        margin-top: 0.3rem;
+        margin-left: 0.5rem;
+      }
+    }
   }
 
   &__id, &__pwd, &__email,&__pwd-confirm {
