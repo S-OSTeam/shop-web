@@ -6,7 +6,11 @@ import clsN from 'classnames';
 import Button from '@components/atoms/button/Button';
 import style from './style/style.module.scss';
 import useGraphQL from '@hooks/useGraphQL';
-import { CHECK_VERIFY_CODE_BY, SEND_VERIFY_CODE_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import {
+    CHECK_VERIFY_CODE_BY,
+    SEND_VERIFY_CODE_REQUEST,
+    CHECK_DUPLICATE_USER,
+} from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { FormDataInterface } from '@interface/FormDataInterface';
 
 interface FormProps {
@@ -52,6 +56,28 @@ const Form = ({ formInfo }: FormProps) => {
         pwd: false,
         confirmPwd: false,
         email: false,
+    });
+    const { refetch: duplicateIdCheck } = useGraphQL({
+        query: CHECK_DUPLICATE_USER,
+        type: 'mutation',
+        request: {
+            userId: formData.userId,
+            sns: 'NORMAL',
+        },
+        option: {
+            'Authorization-mac': '2C-6D-C1-87-E0-B5',
+        },
+    });
+    const { refetch: duplicateEmailCheck } = useGraphQL({
+        query: CHECK_DUPLICATE_USER,
+        type: 'mutation',
+        request: {
+            email: formData.email,
+            sns: 'NORMAL',
+        },
+        option: {
+            'Authorization-mac': '2C-6D-C1-87-E0-B5',
+        },
     });
 
     const { refetch: sendMailRefetch } = useGraphQL({
@@ -182,19 +208,18 @@ const Form = ({ formInfo }: FormProps) => {
     };
     const handleDuplicateCheck = (field: 'userId' | 'email') => {
         if (field === 'userId') {
-            // Call duplicate check for userId
-            // Example API call to check if userId is taken
-            console.log(`Checking duplicate for userId: ${formData.userId}`);
+            duplicateIdCheck().then((res) => {
+                console.log(res);
+            });
         } else if (field === 'email') {
-            // Call duplicate check for email
-            // Example API call to check if email is taken
-            console.log(`Checking duplicate for email: ${formData.email}`);
+            duplicateEmailCheck().then((res) => {
+                console.log(res);
+            });
         }
     };
 
     return (
         <Box className={clsN(`${style['form-wrapper']}`)}>
-            {/* 아이디 */}
             <Box className={clsN(`${style['form-wrapper__outer']}`)}>
                 <Box className={clsN(`${style['form-wrapper__outer__display']}`)}>
                     <TextField
@@ -233,8 +258,6 @@ const Form = ({ formInfo }: FormProps) => {
                     {validity.userId ? '유효한 입력입니다.' : errors.userId}
                 </FormHelperText>
             </Box>
-
-            {/* 비밀번호 */}
             <Box className={clsN(`${style['form-wrapper__outer']}`)}>
                 <TextField
                     label="비밀번호"
@@ -263,8 +286,6 @@ const Form = ({ formInfo }: FormProps) => {
                     {validity.pwd ? '유효한 입력입니다.' : errors.pwd}
                 </FormHelperText>
             </Box>
-
-            {/* 비밀번호 확인 */}
             <Box className={clsN(`${style['form-wrapper__outer']}`)}>
                 <TextField
                     label="비밀번호 확인"
@@ -337,12 +358,9 @@ const Form = ({ formInfo }: FormProps) => {
             >
                 {validity.email ? '유효한 입력입니다.' : errors.email}
             </FormHelperText>
-            {/* 이메일 인증 버튼 */}
             <Button className={clsN(`${style['form-wrapper__email-authentication-btn']}`)} onClick={handleEmailSend}>
                 이메일 인증
             </Button>
-
-            {/* Modals */}
             <Modal open={emailModalOpen} onClose={() => setEmailModalOpen(false)}>
                 <Box className={clsN(`${style['form-wrapper__modal']}`)}>
                     <h2>이메일 전송 완료</h2>
