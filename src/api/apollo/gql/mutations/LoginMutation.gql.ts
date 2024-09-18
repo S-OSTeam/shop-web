@@ -42,3 +42,9 @@ export const KAKAO_LOGIN = gql`
         }
     }
 `;
+
+export const CHECK_DUPLICATE_USER = gql`
+    mutation checkDuplicateUser($request: CheckDuplicateUserRequest!) {
+        checkDuplicateUser(request: $request)
+    }
+`;
