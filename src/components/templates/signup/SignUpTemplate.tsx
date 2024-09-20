@@ -20,10 +20,13 @@ const SignUpTemplate = () => {
     const [value, setValue] = useState(false);
     const [checkBox, setCheckBox] = useState(false);
     const [authModalOpen, setAuthModalOpen] = useState(false);
+    const [errorModalOpen, setErrorModalOpen] = useState(false);
+    const [nameError, setNameError] = useState('');
+    const [birthDayError, setBirthDayError] = useState('');
 
     const navigate = useNavigate();
 
-    const checkboxTexts = ['선택적 SNS 광고 동의 여부', '기타 고객정보 영리적 사용 등', '기타 등등'];
+    const checkboxTexts = ['SNS 광고에 대한  동의 ', '기타 고객정보 영리적 사용에 대한 동의'];
     const [signUpData, setSignUpData] = useState<FormDataInterface>({
         userId: '',
         pwd: '',
@@ -38,12 +41,11 @@ const SignUpTemplate = () => {
         email: '',
         phone: '',
         receiveMail: true,
-        snsId: '',
         sns: 'NORMAL',
         userName: '',
     });
 
-    const { data, refetch } = useGraphQL({
+    const { refetch } = useGraphQL({
         query: SIGN_UP,
         type: 'mutation',
         request: {
@@ -69,15 +71,36 @@ const SignUpTemplate = () => {
             email: signUpData.email,
             phone: '',
             receiveMail: checkBox,
-            snsId: signUpData.email,
             sns: 'NORMAL',
             userName: name,
         });
     }, [value, checkBox]);
 
+    const validateName = (name: string) => {
+        const regex = /^[a-zA-Z가-힣]*$/;
+        if (name.trim() === '') {
+            setNameError('이름을 입력해주세요.');
+            return false;
+        }
+        if (!regex) {
+            setNameError('이름은 영어, 한글만 허용됩니다.');
+            return false;
+        }
+        setNameError('');
+        return true;
+    };
+
+    const validateBirthDay = (birthDay: string) => {
+        const regex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!regex.test(birthDay)) {
+            setBirthDayError('생년월일을 올바른 형식으로 입력해주세요. (예: 1900-01-01)');
+            return false;
+        }
+        setBirthDayError('');
+        return true;
+    };
+
     const handleFormDataOnclick = (formData: FormDataInterface) => {
-        console.log(formData);
-        console.log(data);
         setSignUpData({
             userId: formData.userId,
             pwd: formData.pwd,
@@ -92,40 +115,57 @@ const SignUpTemplate = () => {
             email: formData.email,
             phone: '',
             receiveMail: checkBox,
-            snsId: formData.email,
             sns: 'NORMAL',
             userName: name,
         });
     };
 
     const onNameHandle = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setName(event.target.value);
+        if (event.target.value.length <= 50) {
+            setName(event.target.value);
+            validateName(event.target.value);
+        }
     };
 
     const onBirthHandle = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setBirthDay(event.target.value);
+        if (event.target.value.length <= 20) {
+            setBirthDay(event.target.value);
+            validateBirthDay(event.target.value);
+        }
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.value === '남성') {
             setValue(true);
-            console.log(value);
-        } else setValue(false);
+        } else {
+            setValue(false);
+        }
     };
 
     const handleCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCheckBox(e.target.checked);
-        console.log(e.target.checked);
     };
 
     const signUpHandler = () => {
-        refetch().then(() => {
-            setAuthModalOpen(true);
-        });
+        const isNameValid = validateName(name);
+        const isBirthDayValid = validateBirthDay(birthDay);
+
+        if (isNameValid && isBirthDayValid) {
+            refetch().then(() => {
+                setAuthModalOpen(true);
+            });
+        } else {
+            setErrorModalOpen(true);
+        }
     };
+
     const handleModalClose = () => {
         setAuthModalOpen(false);
         navigate('/');
+    };
+
+    const handleErrorModalClose = () => {
+        setErrorModalOpen(false);
     };
 
     return (
@@ -149,6 +189,11 @@ const SignUpTemplate = () => {
                             }}
                             placeholder="홍 길 동"
                             onChange={onNameHandle}
+                            error={!!nameError}
+                            helperText={nameError}
+                            inputProps={{
+                                maxLength: 50,
+                            }}
                         />
                         <TextField
                             label="생년월일"
@@ -159,6 +204,11 @@ const SignUpTemplate = () => {
                             }}
                             placeholder="1900-00-00"
                             onChange={onBirthHandle}
+                            error={!!birthDayError}
+                            helperText={birthDayError}
+                            inputProps={{
+                                maxLength: 20,
+                            }}
                         />
                     </Box>
                     <Box className={clsN(`${style['gender-wrapper']}`)}>
@@ -206,6 +256,12 @@ const SignUpTemplate = () => {
                             회원가입
                         </Button>
                     </Box>
+                    <Modal open={authModalOpen} onClose={handleModalClose}>
+                        <Box className={clsN(`${style['template-wrapper__modal']}`)}>
+                            <h2>회원가입이 성공하였습니다!</h2>
+                            <Button onClick={handleModalClose}>닫기</Button>
+                        </Box>
+                    </Modal>
                 </Box>
             ) : (
                 <Box className={clsN(`${style['pc-wrapper']}`)}>
@@ -226,6 +282,11 @@ const SignUpTemplate = () => {
                             }}
                             placeholder="홍 길 동"
                             onChange={onNameHandle}
+                            error={!!nameError}
+                            helperText={nameError}
+                            inputProps={{
+                                maxLength: 50,
+                            }}
                         />
                         <TextField
                             label="생년월일"
@@ -236,6 +297,11 @@ const SignUpTemplate = () => {
                             }}
                             placeholder="1900-00-00"
                             onChange={onBirthHandle}
+                            error={!!birthDayError}
+                            helperText={birthDayError}
+                            inputProps={{
+                                maxLength: 20,
+                            }}
                         />
                     </Box>
                     <Box className={clsN(`${style['gender-wrapper']}`)}>
@@ -253,7 +319,7 @@ const SignUpTemplate = () => {
                             >
                                 <Radio value="남성" aria-label="Male" />
                                 남성
-                                <Radio value="여성" aria-label="Female" defaultChecked={false} />
+                                <Radio value="여성" aria-label="Female" />
                                 여성
                             </RadioGroup>
                         </FormControl>
@@ -287,6 +353,14 @@ const SignUpTemplate = () => {
                         <Box className={clsN(`${style['template-wrapper__modal']}`)}>
                             <h2>회원가입이 성공하였습니다!</h2>
                             <Button onClick={handleModalClose}>닫기</Button>
+                        </Box>
+                    </Modal>
+
+                    <Modal open={errorModalOpen} onClose={handleErrorModalClose}>
+                        <Box className={clsN(`${style['template-wrapper__modal']}`)}>
+                            <p>제출양식을 확인하고</p>
+                            <p>다시 입력해주세요</p>
+                            <Button onClick={handleErrorModalClose}>닫기</Button>
                         </Box>
                     </Modal>
                 </Box>
