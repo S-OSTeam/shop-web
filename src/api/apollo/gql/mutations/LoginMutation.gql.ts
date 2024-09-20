@@ -48,3 +48,8 @@ export const CHECK_DUPLICATE_USER = gql`
         checkDuplicateUser(request: $request)
     }
 `;
+export const SIGN_UP_REQUEST = gql`
+    mutation ($request: SignUpRequest!) {
+        signUp(request: $request)
+    }
+`;
