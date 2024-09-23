@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Divider, FormControl, Radio, RadioGroup, TextField } from '@mui/material';
 import Form from '@components/organisms/signup/form/Form';
 import clsN from 'classnames';
@@ -25,6 +25,8 @@ const SignUpTemplate = () => {
     const [birthDayError, setBirthDayError] = useState('');
 
     const navigate = useNavigate();
+    const location = useLocation(); // 새로운 추가
+    const snsValue = location.state?.sns || 'NORMAL';
 
     const checkboxTexts = ['SNS 광고에 대한  동의 ', '기타 고객정보 영리적 사용에 대한 동의'];
     const [signUpData, setSignUpData] = useState<FormDataInterface>({
@@ -41,7 +43,7 @@ const SignUpTemplate = () => {
         email: '',
         phone: '',
         receiveMail: true,
-        sns: 'NORMAL',
+        sns: snsValue,
         userName: '',
     });
 
@@ -71,10 +73,10 @@ const SignUpTemplate = () => {
             email: signUpData.email,
             phone: '',
             receiveMail: checkBox,
-            sns: 'NORMAL',
+            sns: snsValue,
             userName: name,
         });
-    }, [value, checkBox]);
+    }, [value, checkBox, snsValue]);
 
     const validateName = (name: string) => {
         const regex = /^[a-zA-Z가-힣]*$/;
@@ -115,7 +117,7 @@ const SignUpTemplate = () => {
             email: formData.email,
             phone: '',
             receiveMail: checkBox,
-            sns: 'NORMAL',
+            sns: snsValue,
             userName: name,
         });
     };

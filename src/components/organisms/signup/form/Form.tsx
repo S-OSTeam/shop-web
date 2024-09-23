@@ -12,12 +12,16 @@ import {
     CHECK_DUPLICATE_USER,
 } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { FormDataInterface } from '@interface/FormDataInterface';
+import { useLocation } from 'react-router-dom';
 
 interface FormProps {
     formInfo: (formData: FormDataInterface) => void;
 }
 
 const Form = ({ formInfo }: FormProps) => {
+    const location = useLocation();
+    const snsValue = location.state?.sns || 'NORMAL';
+
     const [formData, setFormData] = useState<FormDataInterface>({
         userId: '',
         pwd: '',
@@ -32,7 +36,7 @@ const Form = ({ formInfo }: FormProps) => {
         email: '',
         phone: '',
         receiveMail: true,
-        sns: '',
+        sns: snsValue,
         userName: '',
     });
 
@@ -62,18 +66,19 @@ const Form = ({ formInfo }: FormProps) => {
         type: 'mutation',
         request: {
             userId: formData.userId,
-            sns: 'NORMAL',
+            sns: formData.sns || 'NORMAL', // sns 값을 formData에서 받아 동적으로 변경
         },
         option: {
             'Authorization-mac': '2C-6D-C1-87-E0-B5',
         },
     });
+
     const { refetch: duplicateEmailCheck } = useGraphQL({
         query: CHECK_DUPLICATE_USER,
         type: 'mutation',
         request: {
             email: formData.email,
-            sns: 'NORMAL',
+            sns: formData.sns || 'NORMAL', // sns 값을 formData에서 받아 동적으로 변경
         },
         option: {
             'Authorization-mac': '2C-6D-C1-87-E0-B5',
