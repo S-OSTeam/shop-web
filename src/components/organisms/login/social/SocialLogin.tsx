@@ -17,7 +17,7 @@ import style from './style/style.module.scss';
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
     const location = useLocation();
-    const navigate = useNavigate(); // useNavigate 추가
+    const navigate = useNavigate();
     const [naverCode, setNaverCode] = useRecoilState(naverCodeState); // Recoil 상태 사용
     const naverRef = useRef<HTMLDivElement>(null);
 
@@ -79,6 +79,7 @@ const SocialLogin = () => {
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
     const handleKakaoLogin = () => {
         console.log('KakaoLogin is clicked!');
+
         window.location.href = kakaoURL;
     };
 

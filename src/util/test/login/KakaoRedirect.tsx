@@ -68,8 +68,9 @@ const KakaoRedirect = () => {
 
     useEffect(() => {
         if (kakaoCode) {
-            // getToken();
+            // console.log(kakaoCode);
             KAKAO();
+            // getToken();
         }
     }, [kakaoCode]);
 
