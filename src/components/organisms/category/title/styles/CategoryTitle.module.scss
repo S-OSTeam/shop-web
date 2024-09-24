@@ -1,0 +1,35 @@
+@import "./index";
+
+.category-title-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-title{
+  margin-top: 40px;
+  font-family: 'Pretendard Variable', serif;
+  font-weight: 400;
+}
+
+.category-items {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__sub-title{
+    padding: 0 16px;
+    font-size: 18px;
+    font-family: 'Pretendard Variable', serif;
+    font-weight: 600;
+    cursor: pointer;
+    color: $gray-color;
+  }
+
+  &__color{
+    color: $primary-color
+  }
+}
