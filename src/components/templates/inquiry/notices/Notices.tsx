@@ -15,6 +15,7 @@ import { useSearchChange } from '@hooks/search/useSearchChange.hook';
 import { ButtonGroup } from '@util/test/interface/ButtonGroup';
 import { NotificationButtonGroup } from '@util/test/data/admin/buttonGroup/notification/notificationButtonGroup';
 import { useDebounce } from '@hooks/input/useDebounce.hook';
+import { TinyMCEditor } from '@molecules/tinyMCEditor/TinyMCEditor';
 import clsN from 'classnames';
 import styles from './styles/Notices.module.scss';
 
@@ -34,6 +35,8 @@ export const NoticesTemplate = () => {
     const [selectBtnState, setSelectBtnState] = React.useState<ButtonGroup>(NotificationButtonGroup[0]);
     // Debounced 입력 상태 : 2초 제한
     const debounceSearchValue = useDebounce(searchVal, 200);
+    // 에디터 상태
+    const [editorContent, setEditorContent] = React.useState<string>('');
 
     // filterState.postStatus > 등록상태값을 의존성으로 체크하면서 상태 변화함
     React.useEffect(() => {
@@ -97,6 +100,11 @@ export const NoticesTemplate = () => {
         // 페이지 초기화
         setTPage(0);
     };
+    // 에디터 입력 이벤트
+    const handleEditorChange = (newConetnt: string) => {
+        setEditorContent(newConetnt);
+    };
+
     // TODO : GQL 적용 해야됨, 임시로 .ts 파일을 활용해 데이터 불러오기
     // 필터링된 타입 공지사항 상태값
     const filteredNtcItems = React.useMemo(() => {
@@ -170,6 +178,11 @@ export const NoticesTemplate = () => {
                     onPageChange: handleChangePage,
                     onRowsPerPageChange: handleChangePerPage,
                 }}
+            />
+            <TinyMCEditor
+                initialValue="<p>welcome to Tiny 뭐시기</p>"
+                value={editorContent}
+                onChange={handleEditorChange}
             />
         </Stack>
     );
