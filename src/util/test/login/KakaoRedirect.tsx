@@ -6,11 +6,14 @@ import axios from 'axios';
 import useGraphQL from '@hooks/useGraphQL';
 import { LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { kakaoCodeState } from '@recoil/atoms/authAtom';
 
 const KakaoRedirect = () => {
     const navigate = useNavigate();
     const K_REDIRECT_URI = `http://localhost:3000/kakao/redirect`;
     const kakaoCode = new URL(window.location.href).searchParams.get('code');
+    const setKakaoCode = useSetRecoilState(kakaoCodeState);
     const APP_KEY = `${process.env.REACT_APP_KAKAO_CLIENT_KEY}`;
     const CLIENT_SECRET = `${process.env.REACT_APP_KAKAO_CLIENT_SECRET}`;
     const { refetch: kakoLogin } = useGraphQL({
@@ -67,6 +70,7 @@ const KakaoRedirect = () => {
     };
 
     useEffect(() => {
+        setKakaoCode(kakaoCode);
         if (kakaoCode) {
             // console.log(kakaoCode);
             KAKAO();

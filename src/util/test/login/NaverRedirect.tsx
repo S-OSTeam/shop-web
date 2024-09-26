@@ -3,9 +3,12 @@ import { Box } from '@mui/material';
 import useGraphQL from '@hooks/useGraphQL';
 import { LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { naverCodeState } from '@recoil/atoms/authAtom';
 
 const NaverRedirect = () => {
     const navigate = useNavigate();
+    const setNaverCode = useSetRecoilState(naverCodeState);
     const { refetch: naverLogin } = useGraphQL({
         query: LOGIN_REQUEST,
         type: 'mutation',
@@ -19,6 +22,7 @@ const NaverRedirect = () => {
     const naverCode = new URL(window.location.href).searchParams.get('code');
     console.log(naverCode);
     useEffect(() => {
+        setNaverCode(naverCode);
         if (naverCode) {
             naverLogin({
                 variables: {
