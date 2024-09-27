@@ -8,6 +8,7 @@ import { LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { kakaoCodeState } from '@recoil/atoms/authAtom';
+import { setCookie } from '@util/CookieUtil';
 
 const KakaoRedirect = () => {
     const navigate = useNavigate();
@@ -36,6 +37,8 @@ const KakaoRedirect = () => {
             },
         })
             .then((response) => {
+                setCookie('KakaoAccessToken', response.data.login.accessToken);
+                setCookie('KakaoRefreshToken', response.data.login.refreshToken);
                 console.log('로그인 성공:', response);
                 alert('카카오 로그인에 성공하였습니다!');
                 navigate('/');

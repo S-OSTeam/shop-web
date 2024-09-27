@@ -13,8 +13,6 @@ import {
 } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { FormDataInterface } from '@interface/FormDataInterface';
 import { useLocation } from 'react-router-dom';
-import { kakaoCodeState, naverCodeState } from '@recoil/atoms/authAtom';
-import { useRecoilValue } from 'recoil';
 
 interface FormProps {
     formInfo: (formData: FormDataInterface) => void;
@@ -23,10 +21,6 @@ interface FormProps {
 const Form = ({ formInfo }: FormProps) => {
     const location = useLocation();
     const snsValue = location.state?.sns || 'NORMAL';
-    const naverCode = useRecoilValue(naverCodeState);
-    const kakaoCode = useRecoilValue(kakaoCodeState);
-
-    const snsCode = snsValue === 'NAVER' ? naverCode : snsValue === 'KAKAO' ? kakaoCode : '';
 
     const [formData, setFormData] = useState<FormDataInterface>({
         userId: '',
@@ -73,7 +67,6 @@ const Form = ({ formInfo }: FormProps) => {
         request: {
             userId: formData.userId,
             sns: formData.sns || 'NORMAL', // sns 값을 formData에서 받아 동적으로 변경
-            snsCode: snsCode,
         },
         option: {
             'Authorization-mac': '2C-6D-C1-87-E0-B5',
@@ -86,7 +79,6 @@ const Form = ({ formInfo }: FormProps) => {
         request: {
             email: formData.email,
             sns: formData.sns || 'NORMAL', // sns 값을 formData에서 받아 동적으로 변경
-            snsCode: snsCode,
         },
         option: {
             'Authorization-mac': '2C-6D-C1-87-E0-B5',

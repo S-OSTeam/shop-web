@@ -10,6 +10,7 @@ import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
 import Modal from '@molecules/modal/Modal';
 import useGraphQL from '@hooks/useGraphQL';
+import { getCookie } from '@util/CookieUtil';
 import { SIGN_UP } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import style from './style/style.module.scss';
 
@@ -46,7 +47,7 @@ const SignUpTemplate = () => {
         sns: snsValue,
         userName: '',
     });
-
+    const snsToken = snsValue === 'NAVER' || snsValue === 'KAKAO' ? getCookie(`${snsValue}Token`) : '';
     const { refetch } = useGraphQL({
         query: SIGN_UP,
         type: 'mutation',
@@ -55,6 +56,7 @@ const SignUpTemplate = () => {
         },
         option: {
             'Authorization-mac': '2C-6D-C1-87-E0-B5',
+            ...(snsToken && { 'Authorization-SNS': snsToken }),
         },
     });
 

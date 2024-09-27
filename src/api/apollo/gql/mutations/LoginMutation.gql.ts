@@ -19,10 +19,7 @@ export const SEND_VERIFY_CODE_REQUEST = gql`
 
 export const LOGIN_REQUEST = gql`
     mutation LOGIN($request: LoginRequest!) {
-        login(request: $request) {
-            accessToken
-            refreshToken
-        }
+        login(request: $request)
     }
 `;
 export const NAVER_LOGIN = gql`

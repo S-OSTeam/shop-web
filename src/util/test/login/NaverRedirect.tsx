@@ -5,6 +5,7 @@ import { LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { naverCodeState } from '@recoil/atoms/authAtom';
+import { setCookie } from '@util/CookieUtil';
 
 const NaverRedirect = () => {
     const navigate = useNavigate();
@@ -33,6 +34,8 @@ const NaverRedirect = () => {
                 },
             })
                 .then((response) => {
+                    setCookie('NaverAccessToken', response.data.login.accessToken);
+                    setCookie('NaverRefreshToken', response.data.login.refreshToken);
                     console.log('로그인 성공:', response);
                     alert('네이버 로그인에 성공하였습니다!');
                     navigate('/');
@@ -40,8 +43,6 @@ const NaverRedirect = () => {
                 .catch(() => {
                     alert('회원가입 페이지로 이동합니다.');
                     navigate('/signup', { state: { sns: 'NAVER' } });
-                    // 여기다가 회원가입 페이지로 이동합니다!
-                    // 하고 일반회원가입 시키면됨
                 });
         } else {
             console.error('naverCode가 없습니다.');
