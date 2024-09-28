@@ -13,6 +13,7 @@ import ImgTextButton from '@components/molecules/button/imgTextButton/ImgTextBut
 import CustomIcon from '@components/atoms/source/icon/customIcon/CustomIcon';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
+import { getCookie } from '@util/CookieUtil';
 
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
@@ -71,7 +72,13 @@ const SocialLogin = () => {
     const NaverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=http://localhost:3000/naver/redirect&state=${process.env.REACT_APP_NAVER_STATE}`;
 
     const handleNaverLogin = () => {
-        window.location.href = NaverURL;
+        const existToken = getCookie('NaverAccessToken');
+        if (existToken) {
+            // 메인화면으로 이동
+            console.log(existToken);
+        } else {
+            window.location.href = NaverURL;
+        }
     };
 
     // kakao
