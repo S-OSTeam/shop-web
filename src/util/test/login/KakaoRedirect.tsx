@@ -25,6 +25,7 @@ const KakaoRedirect = () => {
         },
         option: {
             'Authorization-mac': '2C-6D-C1-87-E0-B5',
+            ...(kakaoAccessToken ? { 'Authorization-SNS': `${kakaoAccessToken}` } : {}),
         },
     });
     const kakaoCode = new URL(window.location.href).searchParams.get('code');

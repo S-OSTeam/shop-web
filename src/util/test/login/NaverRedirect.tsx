@@ -22,7 +22,7 @@ const NaverRedirect = () => {
         },
         option: {
             'Authorization-mac': '2C-6D-C1-87-E0-B5',
-            ...(naverAccessToken ? { 'Authorization-SNS': `Bearer ${naverAccessToken}` } : {}),
+            ...(naverAccessToken ? { 'Authorization-SNS': `${naverAccessToken}` } : {}),
         },
     });
 
@@ -56,6 +56,7 @@ const NaverRedirect = () => {
     }, [naverCode]);
 
     useEffect(() => {
+        console.log(naverAccessToken);
         if (naverAccessToken) {
             alert('회원가입 페이지로 이동합니다.');
             navigate('/signup', { state: { sns: 'NAVER' } });
