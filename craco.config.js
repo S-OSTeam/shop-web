@@ -1,7 +1,13 @@
+const { resolve } = require('node:path');
 const CracoAlias = require('craco-alias');
 
 module.exports = {
     webpack: {
+        resolve: {
+            alias: {
+                tinymce: resolve(__dirname, 'node_modules/tinymce'),
+            },
+        },
         configure: (webpackConfig) => {
             // 웹팩콘픽.모듈.규칙을 순회하면서 .svg 파일을 찾아 저장
             const svgRule = webpackConfig.module.rules.find((rule) => rule.test && rule.test.test('.svg')) || {};
