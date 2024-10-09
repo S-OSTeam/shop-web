@@ -1,0 +1,11 @@
+@import 'index';
+
+// 상단 영역 - Title
+.primary-container {
+  padding-bottom: 4px;
+  // 헤더
+  &__header{
+    @include font-size(headline2);
+    @include font-weight(medium);
+  }
+}

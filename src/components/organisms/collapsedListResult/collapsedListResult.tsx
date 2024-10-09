@@ -1,8 +1,6 @@
-/* eslint-disable */
 import React from 'react';
 import {
     Paper,
-    Stack,
     Table,
     TableBody,
     TableCell,
@@ -11,27 +9,12 @@ import {
     TablePagination,
     TableRow,
 } from '@mui/material';
-import clsN from 'classnames';
-import styles from './styles/collapsedListResult.module.scss';
-
+import { CollapsedTableClasses } from '@interface/collapsedList/CollapsedList';
+import { TableDB } from '@interface/table/TableDB';
 import { CollapsedTableTitleRow } from '@molecules/collapsedTable/collapsedTableTitleRow/CollapsedTableTitleRow';
 import { CollapsedTableContext } from '@molecules/collapsedTable/collapsedTableContext/CollapsedTableContext';
-
-// 클래스 모음 인터페이스
-interface CollapsedTableClasses {
-    // root : paper
-    root?: string;
-    // table 콘테이너
-    tableContainer?: string;
-    // table 페이지네이션
-    pagination?: string;
-}
-
-// 테이블 내부 인터페이스
-interface TableDB {
-    tRowTitle: React.ReactNode[];
-    tCollContext: React.ReactNode;
-}
+import clsN from 'classnames';
+import styles from './styles/collapsedListResult.module.scss';
 
 // 테이블 페이지네이션 인터페이스
 interface PaginationProps {
@@ -76,55 +59,50 @@ export const CollapsedListResult = ({ ...props }: CollapsedManagerProps) => {
     // 테이블 데이터 배열 길이만큼 상태 수 설정
     const tableLength = tableDB.length;
     // 현재 리스트들의 공개 (on/off) 상태
-    const [coll, setColl] = React.useState<boolean[]>(() => Array(tableLength).fill(false));
+    const [collList, setCollList] = React.useState<boolean[]>(() => Array(tableLength).fill(false));
 
-    /* 함수 */
-    // itemRender 에 쓰이는 인자를 string 으로 반환
-
-    // 인자로 받은 인덱스로 해당 콜랩스 toggle 상태 변경
-    const setCollArr = (index: number) => {
-        setColl((prevColl) => {
-            // 원본 복제
-            const prevTemp = [...prevColl];
-            // 복제본 중 특정 인덱스 값 반전처리
-            prevTemp[index] = !prevTemp[index];
-            // 복제본 반환 해당 블록이 끝나고 prevTemp 가 상태값 변경 인자로 사용
-            return prevTemp;
+    // 콜랩스 토글값 반전(얕은 복사)
+    const toggleCollapse = (index: number) => {
+        setCollList((prevCollList) => {
+            // 깊은복사 상태값 원본을 temp 저장
+            const newCollState = [...prevCollList];
+            // 상태값 배열의 특정 인덱스에 위치한 값 반전처리
+            newCollState[index] = !newCollState[index];
+            // 특정 인덱스의 상태 배열값만 수정
+            return newCollState;
         });
     };
 
-    // 속성을 통해 받은 본문 랜더 함수
+    // 속성을 통해 받은 본문 열람 처리 이벤트
+    const setCollapseArray = (index: number) => {
+        toggleCollapse(index);
+    };
 
     // 테이블 Head 영역 렌더
-    const tableHeaderRender = (_arr: string[]) => {
-        const tCells = _arr.map((_item) => (
-            <TableCell size="small" component="th" align="center" className={clsN(styles['table__head__cell'])}>
-                {_item}
+    const tableHeaderRender = (arr: string[]) => {
+        const tCells = arr.map((item) => (
+            <TableCell size="small" component="th" align="center" className={clsN(styles.table__head__cell)}>
+                {item}
             </TableCell>
         ));
         return (
-            <TableRow className={clsN(styles['table__head'])}>
-                <TableCell
-                    padding="checkbox"
-                    className={clsN(styles['table__head__cell'])}
-                    component="th"
-                    align="left"
-                />
+            <TableRow className={clsN(styles.table__head)}>
+                <TableCell padding="checkbox" className={clsN(styles.table__head__cell)} component="th" align="left" />
                 {tCells}
             </TableRow>
         );
     };
 
     // Title/CollRow 컴포넌트 랜더
-    const collapsedRowRender = (_tData: TableDB[]) => {
-        return _tData.map((_item, _index) => {
+    const collapsedRowRender = (tData: TableDB[]) => {
+        return tData.map((item, index) => {
             // 구조분해로 요소 분활
-            const { tRowTitle, tCollContext } = _item;
+            const { tRowTitle, tCollContext } = item;
             // 현재 인덱스 상태
-            const currentState = coll[_index];
+            const currentState = collList[index];
             // 상태 변화 함수
             const onCollapseChange = () => {
-                setCollArr(_index);
+                setCollapseArray(index);
             };
             // 제목 렌더
             const provideTitle = (
@@ -182,7 +160,5 @@ export const CollapsedListResult = ({ ...props }: CollapsedManagerProps) => {
 };
 
 CollapsedListResult.defaultProps = {
-    tablePageProps: {
-        rowsPerPageOptions: 10,
-    },
+    classesList: undefined,
 };

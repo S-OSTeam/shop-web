@@ -2,10 +2,12 @@
 
 // 실질적인 root
 .date-range-stack{
+  z-index: 50;
   position: relative;
-  max-width: 130px;
-  height: 40px;
+  height: 100%;
+  // 130px ~ 260px
   &__button{
+    position: relative;
     width: fit-content;
     height: 100%;
     text-wrap: nowrap;
@@ -21,11 +23,9 @@
 
 .date-range {
   visibility: hidden;
-  position: absolute;
-  top: calc(100% + 16px);
   padding: 8px;
   align-items: center;
-
+  position: absolute;
   &__picker {
     width: 180px;
     &:first-child {
@@ -46,6 +46,8 @@
   }
   &--open{
     visibility: visible;
+    position: absolute;
+    top: calc(100% + 8px);
   }
   // 확인 버튼
   &__btn-submit{
@@ -54,4 +56,9 @@
   &__btn-reset{
 
   }
+}
+
+.background{
+  box-shadow: none;
+
 }
