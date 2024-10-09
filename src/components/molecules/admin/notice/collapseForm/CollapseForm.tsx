@@ -16,12 +16,13 @@ interface CollapseFormProps {
     /* 관리 속성 */
     // 수정하기 버튼 이벤트
     // onClickEdit?: (e: React.ChangeEvent<HTMLButtonElement>)=>void;
-    //
+    onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 export const CollapseForm = ({ ...props }: CollapseFormProps) => {
     return (
         <Box key={props.uid} className={clsN(styles.collapse)}>
             <CollapseTitle
+                onClick={props.onClick}
                 uid={props.uid}
                 title={props.title}
                 uploader={props.uploader}

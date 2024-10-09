@@ -12,13 +12,46 @@
 
 // 테이블-root
 .table-root{
-  margin-top: 16px;
+  margin: 16px 0;
   // 테이블
   &__table{
 
   }
   // 페이지네이션
   &__pagination{
+  }
+}
+// Post 등록 버튼
+.post-button{
+  width: fit-content;
+}
+
+// 모달
+.modal{
+  &__button{
+    width: fit-content;
+    &-cancel{
+      background-color: white;
+      border-color: white;
+      color : $color-text-darkblue;
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.5);
+        color: white
+      }
+    }
+    &-save{
+
+    }
+    &-delete{
+      background-color: $background-warnning;
+      &:hover{
+        background-color: $background-warnning-hover;
+        color: white;
+      }
+    }
+    &-post{
+
+    }
   }
 }
 
