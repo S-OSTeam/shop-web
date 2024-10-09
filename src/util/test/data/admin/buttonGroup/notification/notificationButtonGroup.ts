@@ -1,16 +1,16 @@
-import { ButtonGroup } from '@util/test/interface/ButtonGroup';
+import { ButtonProps } from '@mui/material';
 
-export const NotificationButtonGroup: ButtonGroup[] = [
+export const NotificationButtonGroup: ButtonProps[] = [
     {
         value: '0',
-        text: 'all',
+        children: 'all',
     },
     {
         value: '1',
-        text: 'posted',
+        children: 'posted',
     },
     {
         value: '2',
-        text: 'private',
+        children: 'private',
     },
 ];

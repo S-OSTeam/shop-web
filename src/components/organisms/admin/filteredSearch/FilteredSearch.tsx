@@ -1,17 +1,14 @@
 /* eslint-disable */
 import React from 'react';
 import Button from '@atoms/button/Button';
-import { MenuItem, SelectChangeEvent, Stack } from '@mui/material';
+import { ButtonProps, MenuItem, SelectChangeEvent, Stack } from '@mui/material';
 import { SelectBox } from '@molecules/selectBox/SelectBox';
 import DateRange from '@molecules/dateRange/DateRange';
 import SearchBar from '@molecules/searchBar/SearchBar';
 import clsN from 'classnames';
 import styles from './styles/FilteredSearch.module.scss';
 
-export interface SelectMenuItemProps {
-    value: string;
-    text: string;
-}
+export interface SelectMenuItemProps extends ButtonProps {}
 
 interface FilteredSearchProps {
     // root 클래스명
@@ -31,7 +28,7 @@ interface FilteredSearchProps {
     // 리셋 트리거
     resetTrigger: boolean;
     // SelectVal
-    selectValue?: string;
+    selectValue?: ButtonProps['value'];
 }
 
 export const FilteredSearch = ({
@@ -49,7 +46,7 @@ export const FilteredSearch = ({
 
     // 메뉴 컴폰넌트 제공 함수
     const menuProvider = (_item: SelectMenuItemProps) => {
-        const menuText = _item.text;
+        const menuText = _item.children?.toString();
         return <MenuItem value={_item.value}>{menuText}</MenuItem>;
     };
     /* JSX */
