@@ -69,7 +69,7 @@ const SocialLogin = () => {
         option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
 
-    const NaverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=http://localhost:3000/naver/redirect&state=${process.env.REACT_APP_NAVER_STATE}`;
+    const NaverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=https://deamhome.synology.me/naver/redirect&state=${process.env.REACT_APP_NAVER_STATE}`;
 
     const handleNaverLogin = () => {
         const existToken = getCookie('NaverAccessToken');
@@ -82,7 +82,7 @@ const SocialLogin = () => {
     };
 
     // kakao
-    const K_REDIRECT_URI = `http://localhost:3000/kakao/redirect`;
+    const K_REDIRECT_URI = `https://deamhome.synology.me/kakao/redirect`;
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
     const handleKakaoLogin = () => {
         console.log('KakaoLogin is clicked!');

@@ -5,7 +5,8 @@ import { LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { naverCodeState } from '@recoil/atoms/authAtom';
-import { setCookie, getCookie } from '@util/CookieUtil';
+import { getCookie } from '@util/CookieUtil';
+import { ApolloError } from '@apollo/client';
 
 const NaverRedirect = () => {
     const navigate = useNavigate();
@@ -31,7 +32,6 @@ const NaverRedirect = () => {
 
     useEffect(() => {
         setNaverCode(naverCode);
-
         if (naverCode) {
             naverLogin({
                 variables: {
@@ -43,12 +43,16 @@ const NaverRedirect = () => {
             })
                 .then((response) => {
                     console.log('토큰 발급 성공:', response);
-                    setCookie('NaverAccessToken', response.data.login.accessToken);
-                    setCookie('NaverRefreshToken', response.data.login.refreshToken);
-                    setNaverAccessToken(getCookie('NaverAccessToken'));
                 })
-                .catch((error) => {
-                    console.error(error);
+                .catch((error: ApolloError) => {
+                    if (error.message === '가입되지 않은 회원입니다.') {
+                        alert('회원가입 페이지로 이동합니다.');
+
+                        navigate('/signup', { state: { sns: 'NAVER' } });
+                    } else {
+                        console.error('다른 오류 발생:', error.message);
+                    }
+                    setNaverAccessToken(getCookie('snsToken'));
                 });
         } else {
             console.error('naverCode가 없습니다.');

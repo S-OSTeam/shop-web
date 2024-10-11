@@ -47,7 +47,8 @@ const SignUpTemplate = () => {
         sns: snsValue,
         userName: '',
     });
-    const snsToken = snsValue === 'NAVER' || snsValue === 'KAKAO' ? getCookie(`${snsValue}Token`) : '';
+    const snsToken = snsValue === 'NAVER' || snsValue === 'KAKAO' ? getCookie('snsToken') : '';
+    console.log(snsToken);
     const { refetch } = useGraphQL({
         query: SIGN_UP,
         type: 'mutation',
