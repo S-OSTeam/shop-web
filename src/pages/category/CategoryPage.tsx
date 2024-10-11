@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Box } from '@mui/material';
 import { EmptyCategoryTreeResponse, ItemCategoryTreeResponse, ItemSearchRequest } from '@interface/category/Category';
 import categoriesAtom from '@recoil/atoms/category/categoriesAtom';
@@ -54,7 +54,6 @@ const CategoryPage = () => {
      * categories와 targetPublicId을 받아와 자식 카테고리가 없을 때는 부모 카테고리의 영향을 받는 필터링 함수를 만들었다. */
     const findParentCategory = useCallback(
         (categories: ItemCategoryTreeResponse[], targetPublicId: string): ItemCategoryTreeResponse[] | undefined => {
-            // eslint-disable-next-line no-restricted-syntax
             for (const category of categories) {
                 if (category.publicId === targetPublicId) {
                     setTitle(category.title);

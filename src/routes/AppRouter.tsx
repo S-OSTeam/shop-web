@@ -11,6 +11,7 @@ import Category from '@routes/category/Category';
 import Review from '@routes/review/Review';
 import KakaoRedirect from '@util/test/login/KakaoRedirect';
 import NaverRedirect from '@util/test/login/NaverRedirect';
+
 import { AdminRouter } from './adminRouter/AdminRouter';
 
 export const AppRouter = () => {
