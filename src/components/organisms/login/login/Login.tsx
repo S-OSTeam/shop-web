@@ -65,12 +65,14 @@ const LoginOrganisms = () => {
                     </Box>
                     <Box className={clsN(`${style['mobile-login-wrapper__input-wrapper']}`)}>
                         <Input
+                            inputVal={formData.userId}
                             className={clsN(`${style['mobile-login-wrapper__input-wrapper__input-id']}`)}
                             placeholder="아이디"
                             variant="standard"
                             onChange={handleInputChange}
                         />
                         <Input
+                            inputVal={formData.pwd}
                             className={clsN(`${style['mobile-login-wrapper__input-wrapper__input-pwd']}`)}
                             placeholder="비밀번호"
                             variant="standard"
@@ -104,12 +106,14 @@ const LoginOrganisms = () => {
                         align="center"
                     />
                     <Input
+                        inputVal={formData.userId}
                         className={clsN(`${style['login-wrapper__input-id']}`)}
                         placeholder="아이디"
                         variant="standard"
                         onChange={handleInputChange}
                     />
                     <Input
+                        inputVal={formData.pwd}
                         className={clsN(`${style['login-wrapper__input-pwd']}`)}
                         placeholder="비밀번호"
                         variant="standard"

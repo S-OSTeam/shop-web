@@ -9,7 +9,6 @@ interface InputProps {
     className?: string;
     // 아웃라인 클래스명
     outlineClsN?: string;
-
     // input 의 외형을 결정
     variant?: 'filled' | 'outlined' | 'standard';
     // 컴포넌트의 사이즈 small : 32px, medium: 40px?
@@ -20,8 +19,10 @@ interface InputProps {
     label?: React.ReactNode | undefined;
     // 문자나 이미지 등의 요소가 들어갈 자리에 임시로 채워놓는 내용물을 의미
     placeholder?: string | undefined;
+    // input 값
+    inputVal: string | number;
     // onChange 이벤트 활성화 시 오브젝트 e 를 통한 작업 처리 => 반환 없음
-    onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     // 여러줄 여부
     multiline?: boolean | undefined;
     // form 컨트롤의 이름을 지정 주로 폼에 있는 내용을 서버에 보낼때 활용
@@ -44,11 +45,12 @@ export const Input = ({
     name,
     outlineClsN,
     fullWidth,
-    type, // 새로운 속성 추가
-
+    type,
+    inputVal,
 }: InputProps) => {
     return (
         <TextField
+            value={inputVal}
             name={name}
             variant={variant}
             size={size}
@@ -67,7 +69,6 @@ export const Input = ({
             multiline={multiline}
             fullWidth={fullWidth}
             type={type} // TextField에 type 속성 전달
-
         />
     );
 };
