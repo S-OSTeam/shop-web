@@ -26,6 +26,9 @@ const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
             return useMutation(query, {
                 context: {
                     headers: { ...option },
+                    fetchOptions: {
+                        credentials: 'include',
+                    },
                 },
                 variables: {
                     request: { ...request },
