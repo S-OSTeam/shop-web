@@ -5,6 +5,11 @@ export const SIGN_UP = gql`
         signUp(request: $request)
     }
 `;
+export const CHECK_VERIFY_CODE_BY = gql`
+    mutation ($request: CheckVerifyCodeRequest!) {
+        checkVerifyCodeBy(request: $request)
+    }
+`;
 
 export const SEND_VERIFY_CODE_REQUEST = gql`
     mutation ($request: SendVerifyCodeRequest!) {
@@ -12,12 +17,9 @@ export const SEND_VERIFY_CODE_REQUEST = gql`
     }
 `;
 
-export const Login = gql`
+export const LOGIN_REQUEST = gql`
     mutation LOGIN($request: LoginRequest!) {
-        login(request: $request) {
-            accessToken
-            refreshToken
-        }
+        login(request: $request)
     }
 `;
 export const NAVER_LOGIN = gql`
@@ -35,5 +37,16 @@ export const KAKAO_LOGIN = gql`
             code
             state
         }
+    }
+`;
+
+export const CHECK_DUPLICATE_USER = gql`
+    mutation checkDuplicateUser($request: CheckDuplicateUserRequest!) {
+        checkDuplicateUser(request: $request)
+    }
+`;
+export const SIGN_UP_REQUEST = gql`
+    mutation ($request: SignUpRequest!) {
+        signUp(request: $request)
     }
 `;
