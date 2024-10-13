@@ -1,0 +1,12 @@
+@import "index";
+
+*{
+  box-sizing: border-box;
+}
+@mixin add-border($px){
+  border-radius: #{$px}px;
+}
+// 우측 컨텐츠 영역을 감싸고 있는 root 공간
+.main{
+  padding: 16px;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, InputLabel, Select, SelectChangeEvent } from '@mui/material';
+import { ButtonProps, FormControl, InputLabel, Select, SelectChangeEvent } from '@mui/material';
 import clsN from 'classnames';
 import styles from './styles/SelectBox.module.scss';
 
@@ -26,7 +26,7 @@ interface SelectBoxProps<T> {
     // 셀렉트 메뉴 클릭 이벤트
     handleMenuChange: (e: SelectChangeEvent) => void;
     // selectBox 에 선택된 값
-    value?: string;
+    value: ButtonProps['value'];
     // 접근성을 위한 레이블 ID
     labelId?: string;
     // 셀렉트의 ID
@@ -69,7 +69,7 @@ export const SelectBox = <T,>({
             <Select
                 labelId={labelId}
                 id={selectId}
-                value={value}
+                value={value?.toString()}
                 className={clsN(className, styles['select-form__select'])}
                 classes={{
                     root: clsN(styles['select-root']),
@@ -87,7 +87,6 @@ SelectBox.defaultProps = {
     labelClsN: styles['select-form__label'],
     className: styles['select-form__select'],
     inputLabel: undefined,
-    value: undefined,
     labelId: undefined,
     selectId: undefined,
 };

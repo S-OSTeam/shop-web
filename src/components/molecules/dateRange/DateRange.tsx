@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
-import { Stack } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DatePicker from '@atoms/datePicker/DatePicker';
@@ -15,8 +15,9 @@ import styles from './styles/DateRange.module.scss';
 interface DateRangeProps {
     className?: string; // 클래스명
     pickerClsN?: string; // 데이터 피커 클래스명
+    resetTrigger: boolean; // 리셋 트리거
 }
-const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
+const DateRange = ({ className, pickerClsN, resetTrigger }: DateRangeProps) => {
     /* 상태 */
     // 버튼 컨텍스트
     const [btnText, setBtnText] = React.useState('날짜범위');
@@ -38,29 +39,28 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
     const [dayRecoil, setDayRecoil] = useRecoilState(noticesFilterStateAtom);
 
     /* 함수 */
-
     // Dayjs 를 받아 YYYY.MM.DD 형태로 포맷하기
     const formatDayjs = (date: Dayjs | null) => {
         return date ? date.format('YYYY.MM.DD') : '';
     };
 
     // Dayjs 타입인 두 값을 비교하여 특정값 배출 (이후 switch 문으로 분기 처리하기)
-    const compareDate = (_date1: Dayjs | null, _date2: Dayjs | null): number | null => {
+    const compareDate = (date1: Dayjs | null, date2: Dayjs | null): number | null => {
         // 인자가 null 이 아닐 경우만
-        if (_date1 && _date2) {
-            if (_date1?.isBefore(_date2)) {
+        if (date1 && date2) {
+            if (date1?.isBefore(date2)) {
                 // 인자1 이 인자2 보다 작음 (-1)
                 return -1;
             }
-            if (_date1?.isAfter(_date2)) {
+            if (date1?.isAfter(date2)) {
                 // 인자1 이 인자2 보다 큼 (+1)
                 return 1;
             }
-            if (_date1?.isSame(_date2)) {
+            if (date1?.isSame(date2)) {
                 // 두 인자값이 같을 경우 (0)
                 return 0;
             }
-        } else if (_date1 == null && _date2 == null) {
+        } else if (date1 == null && date2 == null) {
             // 둘다 null 일 경우
             return null;
         }
@@ -71,10 +71,10 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
     // Dayjs 스왑 이벤트
     const fixDateState = (compare: number | null) => {
         switch (compare) {
-            case null:
-                break;
             case -1:
                 // 인자1 이 인자2 보다 작음
+                break;
+            case null:
                 break;
             case 0: {
                 // 종료일 찾기 // 인자중 하나라도 null 인 상황, 그 중 큰값은 endD 로 정하기 -1 까지 조회하도록 하기
@@ -112,18 +112,21 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
     // Dayjs 라이브러리를 Date 타입에 맞게 변환
 
     // 현재 날짜를 리코일에 갱신
-    const updateDateRecoil = () => {
-        // 시작일
-        const firstDate = fromD?.toDate();
-        // 종료일
-        const lastDate = endD?.toDate();
-        // 리코일 업데이트
-        setDayRecoil((formState) => ({
-            ...formState,
-            startDate: firstDate,
-            endDate: lastDate,
-        }));
-    };
+    // TODO : 리코일 혹은 상태 갱신할때 useMemo 활용하기
+    const updateDateRecoil = React.useMemo(() => {
+        return () => {
+            // 시작일
+            const firstDate = fromD?.toDate();
+            // 종료일
+            const lastDate = endD?.toDate();
+            // 리코일 업데이트
+            setDayRecoil((formState) => ({
+                ...formState,
+                startDate: firstDate,
+                endDate: lastDate,
+            }));
+        };
+    }, [fromD, endD, setDayRecoil]);
 
     // 날짜 범위 컴포넌트 열기
     const handleDateOpen = () => {
@@ -134,6 +137,19 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
         console.log('DateSubmit!!!');
         // 아래 수행할 함수 실행
         setDatePicked((prevState) => !prevState);
+    };
+    // 날짜 초기화 이벤트
+    const resetDateRange = () => {
+        setFromD(null);
+        setEndD(null);
+        setBtnText('날짜범위');
+        setIsOpen(false);
+        setDatePicked(false);
+        setDayRecoil((prevVal) => ({
+            ...prevVal,
+            startDate: undefined,
+            endDate: undefined,
+        }));
     };
 
     /* JSX 컴포넌트 */
@@ -146,23 +162,25 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
     );
     // 받은 인자로 DatePicker 컴포넌트 반환
     const DatePickerRender = (
-        <Stack direction="row" alignItems="center">
-            <DatePicker
-                label={dateLabels[0]}
-                className={clsN(styles['date-range__picker'], pickerClsN)}
-                value={fromD}
-                onChange={(newValue) => {
-                    setFromD(newValue);
-                }}
-            />
-            <p className={clsN(styles['date-range__picker__separator'])} />
-            <DatePicker
-                label={dateLabels[1]}
-                className={clsN(styles['date-range__picker'], pickerClsN)}
-                value={endD}
-                onChange={(newValue) => setEndD(newValue)}
-            />
-        </Stack>
+        <Paper className={clsN(styles.background)} elevation={0}>
+            <Stack direction="row" alignItems="center" boxShadow="none" bgcolor="transparent">
+                <DatePicker
+                    label={dateLabels[0]}
+                    className={clsN(styles['date-range__picker'], pickerClsN)}
+                    value={fromD}
+                    onChange={(newValue) => {
+                        setFromD(newValue);
+                    }}
+                />
+                <p className={clsN(styles['date-range__picker__separator'])} />
+                <DatePicker
+                    label={dateLabels[1]}
+                    className={clsN(styles['date-range__picker'], pickerClsN)}
+                    value={endD}
+                    onChange={(newValue) => setEndD(newValue)}
+                />
+            </Stack>
+        </Paper>
     );
 
     // date picker 컴포넌트를 지역에 맞게 양식을 수정하고 배포
@@ -208,6 +226,12 @@ const DateRange = ({ className, pickerClsN }: DateRangeProps) => {
         setDatePicked(false);
         console.log(`current day from : ${dayRecoil.startDate}, current day end ${dayRecoil.endDate}`);
     }, [datePicked]);
+
+    React.useEffect(() => {
+        if (resetTrigger) {
+            resetDateRange();
+        }
+    }, [resetTrigger, setDayRecoil]);
 
     return (
         <Stack className={clsN(styles['date-range-stack'])}>
