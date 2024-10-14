@@ -13,12 +13,19 @@ interface CollapseTitleProps {
     uploadDate: Date;
     fixedDate?: Date;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    popoverProps: {
+        popstate: boolean;
+        onClose: () => void;
+    };
 }
 
 export const CollapseTitle = ({ ...props }: CollapseTitleProps) => {
+    const { popoverProps } = props;
     return (
         <Stack key={props.uid} className={clsN(styles['primary-container'])}>
             <TRowTitleArea
+                popstate={popoverProps.popstate}
+                onClose={popoverProps.onClose}
                 uid={props.uid}
                 title={props.title}
                 onClick={props.onClick}

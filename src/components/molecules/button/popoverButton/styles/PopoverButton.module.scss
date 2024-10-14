@@ -1,0 +1,15 @@
+@import 'index';
+
+// root
+.root{
+  position: relative;
+
+  // button
+  &__button{
+    position: relative;
+  }
+  // popover
+  &__popover{
+
+  }
+}

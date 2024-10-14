@@ -19,11 +19,22 @@ interface CollapseFormProps {
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 export const CollapseForm = ({ ...props }: CollapseFormProps) => {
+    /*
+     * React.useState 의 경우 컴포넌트가 많을시 성능이 하향되지만 한번 테스트해봄
+     * */
+    // 상태
+    const [popState, setPopState] = React.useState<boolean>(false);
+
+    const handleSetClose = () => {
+        setPopState(false);
+    };
+
     return (
         <Box key={props.uid} className={clsN(styles.collapse)}>
             <CollapseTitle
-                onClick={props.onClick}
+                popoverProps={{ popstate: popState, onClose: handleSetClose }}
                 uid={props.uid}
+                onClick={props.onClick}
                 title={props.title}
                 uploader={props.uploader}
                 uploadDate={props.uploadDate}

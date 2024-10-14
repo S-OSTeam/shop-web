@@ -3,7 +3,7 @@ import React from 'react';
 import { formatDate } from '@util/common/FormatDate';
 import { Notification, NotificationProps } from '@util/test/data/admin/notification/Notification';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
-import { ButtonProps, SelectChangeEvent, Stack } from '@mui/material';
+import { Box, ButtonProps, SelectChangeEvent, Stack } from '@mui/material';
 import { FilteredSearch } from '@organisms/admin/filteredSearch/FilteredSearch';
 import { CollapsedListResult } from '@organisms/collapsedListResult/collapsedListResult';
 import Text from '@atoms/text/Text';
@@ -21,9 +21,25 @@ import { ModalEditor } from '@organisms/admin/modalEditor/ModalEditor';
 import { TRowTitleArea } from '@molecules/admin/notice/collapseForm/tRowTitle/TRowTitle';
 import Button from '@atoms/button/Button';
 import { pcickedCollapsedButton, pickedPostButton } from '@util/common/admin/data/button/buttonItems';
+import { PopOver } from '@atoms/popover/PopOver';
+import { PopoverButton } from '@molecules/button/popoverButton/PopoverButton';
 
 export const NoticesTemplate = () => {
     /* 상태 */
+    const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+    const [popState, setPopState] = React.useState<{ [key: string]: boolean }>({});
+    const onPopChange = (uid: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
+        setPopState((prevState) => ({
+            ...prevState,
+            [uid]: !prevState[uid],
+        }));
+        setAnchorEl(e.currentTarget);
+    };
+    const onPopBackClick = () => {
+        setPopState({});
+        setAnchorEl(null);
+    };
+
     // 커스텀 훅을 통한 상태관리 : 검색 입력
     const { searchVal, handleChange, resetSearch } = useSearchChange();
     // 필터 리코일 상태
@@ -48,6 +64,9 @@ export const NoticesTemplate = () => {
     const [currentUid, setCurrentUid] = React.useState<string>('');
     // 모달 활성화 이전에 버튼 입력 상황
     const [clickAction, setClickAction] = React.useState<'post' | 'edit' | undefined>(undefined);
+
+    // *선택적 현재 리스트들의 제목 옆 popover 상태
+    const [popoverList, setPopoverList] = React.useState<boolean>(false);
 
     // filterState.postStatus > 등록상태값을 의존성으로 체크하면서 상태 변화함
     React.useEffect(() => {
@@ -111,6 +130,9 @@ export const NoticesTemplate = () => {
         // 페이지 초기화
         setTPage(0);
     };
+
+    // 제목 MoreVert 아이콘 클릭 이벤트
+
     // 에디터 입력 이벤트
     const handleEditorChange = (newConetnt: string) => {
         setEditorContent(newConetnt);
@@ -229,14 +251,19 @@ export const NoticesTemplate = () => {
             // tableTitle 영역
             const tRowTitle = [
                 <TRowTitleArea
+                    popstate={popState[Number(uid)] || false}
+                    key={uid}
                     uid={uid}
+                    title={title}
                     tRowClassNames={{
                         titleClsN: '',
                         IconClsN: '',
                         stackClsN: '',
                     }}
-                    title={title}
-                    onClick={() => handleEditClick(uid)}
+                    onClick={onPopChange(uid)}
+                    onClose={onPopBackClick}
+                    innerContent={'conform or not'}
+                    /* onClick={() => handleEditClick(uid)} */
                 />,
                 <Text text={uploader} className={clsN()} />,
                 <Chip size="small" label={postState} className={clsN()} />,

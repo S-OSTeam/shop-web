@@ -1,1 +1,9 @@
 @import 'index';
+
+
+// popoverButton Root
+.popover-button{
+  &__icon{
+    font-size: 12px;
+  }
+}
