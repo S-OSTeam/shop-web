@@ -1,9 +1,9 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useCallback } from 'react';
 import { formatDate } from '@util/common/FormatDate';
 import { Notification, NotificationProps } from '@util/test/data/admin/notification/Notification';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
-import { Box, ButtonProps, SelectChangeEvent, Stack } from '@mui/material';
+import { Box, ButtonProps, IconButton, SelectChangeEvent, Stack } from '@mui/material';
 import { FilteredSearch } from '@organisms/admin/filteredSearch/FilteredSearch';
 import { CollapsedListResult } from '@organisms/collapsedListResult/collapsedListResult';
 import Text from '@atoms/text/Text';
@@ -14,7 +14,7 @@ import { noticesFilterStateAtom } from '@recoil/atoms/admin/inquiry/notices/noti
 import { filteringNotices } from '@util/test/data/admin/notification/NoticeFilter';
 import { useSearchChange } from '@hooks/search/useSearchChange.hook';
 import { NotificationButtonGroup } from '@util/test/data/admin/buttonGroup/notification/notificationButtonGroup';
-import { useDebounce } from '@hooks/input/useDebounce.hook';
+// import { useDebounce } from '@hooks/input/useDebounce.hook';
 import clsN from 'classnames';
 import styles from './styles/Notices.module.scss';
 import { ModalEditor } from '@organisms/admin/modalEditor/ModalEditor';
@@ -23,6 +23,8 @@ import Button from '@atoms/button/Button';
 import { pcickedCollapsedButton, pickedPostButton } from '@util/common/admin/data/button/buttonItems';
 import { PopOver } from '@atoms/popover/PopOver';
 import { PopoverButton } from '@molecules/button/popoverButton/PopoverButton';
+import { ButtonGroup } from '@molecules/button/buttonGroup/ButtonGroup';
+import { Cancel } from '@mui/icons-material';
 
 export const NoticesTemplate = () => {
     /* 상태 */
@@ -53,8 +55,10 @@ export const NoticesTemplate = () => {
     // selectBtn 아이템들, NoticeFilterAtom 에 맞춰 가져오기
     const [selectBtnState, setSelectBtnState] = React.useState<ButtonProps>(NotificationButtonGroup[0]);
     // Debounced 입력 상태 : 2초 제한
-    const debounceSearchValue = useDebounce(searchVal, 200);
-    // 에디터 상태
+    // const debounceSearchValue = useDebounce(searchVal, 200);
+    // 에디터 제목 상태
+    const [editorTitle, setEditorTitle] = React.useState<string>('');
+    // 에디터 컨텐츠 상태
     const [editorContent, setEditorContent] = React.useState<string>('');
     // 에디터 ref
     const editorRef = React.useRef(null);
@@ -116,7 +120,7 @@ export const NoticesTemplate = () => {
         setFilterState((prev) => ({
             ...prev,
             // 스패밍 방지 입력중인 searchVal 이 아닌 디바운스 상태값 적용
-            keyword: debounceSearchValue,
+            // keyword: debounceSearchValue,
         }));
     };
     // 페이지 전환 이벤트
@@ -131,12 +135,15 @@ export const NoticesTemplate = () => {
         setTPage(0);
     };
 
-    // 제목 MoreVert 아이콘 클릭 이벤트
+    // 에디터 제목 입력란 이벤트
+    const handleTitleChange = useCallback((newTitle: string) => {
+        setEditorTitle(newTitle);
+    }, []);
 
     // 에디터 입력 이벤트
-    const handleEditorChange = (newConetnt: string) => {
-        setEditorContent(newConetnt);
-    };
+    const handleEditorChange = React.useCallback((newContent: string) => {
+        setEditorContent(newContent);
+    }, []);
     // 에디터 활성화 : 모달 상태변경
     const handleModalChange = (e: Event, reason: 'backdropClick' | 'escapeKeyDown') => {
         if (reason == 'backdropClick') {
@@ -262,8 +269,24 @@ export const NoticesTemplate = () => {
                     }}
                     onClick={onPopChange(uid)}
                     onClose={onPopBackClick}
-                    innerContent={'conform or not'}
-                    /* onClick={() => handleEditClick(uid)} */
+                    innerContent={
+                        <ButtonGroup
+                            wrapperClsN={clsN(styles.popover)}
+                            buttons={[
+                                <Button
+                                    className={clsN(styles['popover__button-edit'])}
+                                    onClick={() => {
+                                        handleEditClick(uid);
+                                    }}
+                                >
+                                    Edit
+                                </Button>,
+                                <IconButton className={clsN(styles['popover__button-cancel'])} onClick={onPopBackClick}>
+                                    <Cancel />
+                                </IconButton>,
+                            ]}
+                        />
+                    } /* popover 컨텐츠 */
                 />,
                 <Text text={uploader} className={clsN()} />,
                 <Chip size="small" label={postState} className={clsN()} />,
@@ -322,8 +345,12 @@ export const NoticesTemplate = () => {
                 Post
             </Button>
             <ModalEditor
+                requireTitle
+                title={editorTitle}
+                onTitleChange={handleTitleChange}
                 editorRef={editorRef}
                 initialValue={editorContent}
+                onEditorChange={handleEditorChange}
                 open={modalState}
                 onClose={handleModalChange}
                 buttonItems={buttonItemProvider(clickAction)}

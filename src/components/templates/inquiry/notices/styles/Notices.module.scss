@@ -55,6 +55,18 @@
   }
 }
 
+.popover{
+  padding: 8px 16px;
+  &__button{
+    &-edit{
+      margin-right: 8px;
+    }
+    &-cancel{
+
+    }
+  }
+}
+
 @include media-breakpoint-up(xxs){
 
 }

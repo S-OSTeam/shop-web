@@ -1,0 +1,17 @@
+@import "index";
+
+.paper{
+  height: 100%;
+  &__input{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 24px;
+    &-title{
+    }
+  }
+  &__editor{
+    width: 72%;
+  }
+  &__button-group{
+  }
+}

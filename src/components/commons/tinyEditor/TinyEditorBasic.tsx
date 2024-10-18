@@ -1,25 +1,41 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { Editor } from '@tinymce/tinymce-react';
+import { debounce } from '@mui/material';
 
 interface TinyEditorBasicProps {
     editorRef: React.MutableRefObject<TinyMCEEditor | null>;
     initialValue?: string;
     onChange: (content: string) => void;
+    onEditorInit?: (editor: TinyMCEEditor) => void; // 에디터 초기값 세팅 이벤트
 }
 
-export const TinyEditorBasic = ({ editorRef, initialValue, onChange }: TinyEditorBasicProps) => {
-    const editorParam = editorRef;
+const TinyEditorBasicComponent = ({ editorRef, initialValue, onChange, onEditorInit }: TinyEditorBasicProps) => {
+    // 디바운스 변경 이벤트
+    const debounceOnChange = React.useMemo(
+        () =>
+            debounce((content: string) => {
+                onChange?.(content);
+            }, 300),
+        [onChange],
+    );
+    // 에디터입력이벤트
+    const handleEditorChange = useCallback(
+        (content: string) => {
+            debounceOnChange(content);
+        },
+        [debounceOnChange],
+    );
     return (
         <Editor
             apiKey="2ytbg9c286hwtryfv7iu4rvn04njqcp774sxz01zja5bwmjo"
             onInit={(evt, editor) => {
-                editorParam.current = editor;
+                if (onEditorInit) {
+                    onEditorInit(editor);
+                }
             }}
             initialValue={initialValue}
-            onEditorChange={(content) => {
-                onChange?.(content);
-            }}
+            onEditorChange={handleEditorChange}
             init={{
                 height: 500,
                 menubar: false,
@@ -93,3 +109,5 @@ export const TinyEditorBasic = ({ editorRef, initialValue, onChange }: TinyEdito
         />
     );
 };
+
+export const TinyEditorBasic = React.memo(TinyEditorBasicComponent);

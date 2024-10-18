@@ -1,5 +1,5 @@
 import React from 'react';
-import TextField from '@mui/material/TextField';
+import TextField, { TextFieldProps } from '@mui/material/TextField';
 import clsN from 'classnames';
 import styles from './style/Input.module.scss';
 
@@ -20,9 +20,9 @@ interface InputProps {
     // 문자나 이미지 등의 요소가 들어갈 자리에 임시로 채워놓는 내용물을 의미
     placeholder?: string | undefined;
     // input 값
-    inputVal: string | number;
+    inputVal: unknown | undefined;
     // onChange 이벤트 활성화 시 오브젝트 e 를 통한 작업 처리 => 반환 없음
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: TextFieldProps['onChange'];
     // 여러줄 여부
     multiline?: boolean | undefined;
     // form 컨트롤의 이름을 지정 주로 폼에 있는 내용을 서버에 보낼때 활용
@@ -31,6 +31,8 @@ interface InputProps {
     fullWidth?: boolean | undefined;
     // 새로운 type 속성 추가
     type?: React.InputHTMLAttributes<unknown>['type'];
+    // ref
+    ref?: TextFieldProps['ref'];
 }
 
 export const Input = ({
@@ -47,9 +49,11 @@ export const Input = ({
     fullWidth,
     type,
     inputVal,
+    ref,
 }: InputProps) => {
     return (
         <TextField
+            ref={ref}
             value={inputVal}
             name={name}
             variant={variant}
@@ -74,14 +78,13 @@ export const Input = ({
 };
 
 Input.defaultProps = {
-    className: styles[''],
-    outlineClsN: styles[''],
+    className: styles['root-input'],
+    outlineClsN: styles['notched-outline'],
     variant: 'filled',
     size: 'medium',
     endAdornment: undefined,
     label: undefined,
     placeholder: undefined,
-    onChange: undefined,
     multiline: undefined,
     name: undefined,
     fullWidth: undefined,
