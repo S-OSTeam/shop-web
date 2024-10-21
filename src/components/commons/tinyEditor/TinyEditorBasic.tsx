@@ -1,69 +1,31 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { Editor } from '@tinymce/tinymce-react';
-import { debounce } from '@mui/material';
+import { plugins, toolbar } from '@util/tinyMCE/tinyEditorPlugins.init';
 
 interface TinyEditorBasicProps {
-    editorRef: React.MutableRefObject<TinyMCEEditor | null>;
     initialValue?: string;
-    onChange: (content: string) => void;
-    onEditorInit?: (editor: TinyMCEEditor) => void; // 에디터 초기값 세팅 이벤트
+    onEditorChange: (content: string, editor: TinyMCEEditor) => void;
 }
 
-const TinyEditorBasicComponent = ({ editorRef, initialValue, onChange, onEditorInit }: TinyEditorBasicProps) => {
-    // 디바운스 변경 이벤트
-    const debounceOnChange = React.useMemo(
-        () =>
-            debounce((content: string) => {
-                onChange?.(content);
-            }, 300),
-        [onChange],
-    );
-    // 에디터입력이벤트
-    const handleEditorChange = useCallback(
-        (content: string) => {
-            debounceOnChange(content);
-        },
-        [debounceOnChange],
-    );
+export const TinyEditorBasicComponent = ({ initialValue, onEditorChange }: TinyEditorBasicProps) => {
+    // 에디터 레퍼런스
+    const editorRef = React.useRef<TinyMCEEditor | null>(null);
+    // 에디터 초기 실행 이벤트
+    const handleEditorInit = (_: unknown, editor: TinyMCEEditor) => {
+        editorRef.current = editor;
+    };
+
     return (
         <Editor
             apiKey="2ytbg9c286hwtryfv7iu4rvn04njqcp774sxz01zja5bwmjo"
-            onInit={(evt, editor) => {
-                if (onEditorInit) {
-                    onEditorInit(editor);
-                }
-            }}
+            onInit={handleEditorInit}
             initialValue={initialValue}
-            onEditorChange={handleEditorChange}
             init={{
                 height: 500,
                 menubar: false,
-                plugins: [
-                    'advlist',
-                    'autolink',
-                    'lists',
-                    'link',
-                    'image',
-                    'charmap',
-                    'preview',
-                    'anchor',
-                    'searchreplace',
-                    'visualblocks',
-                    'code',
-                    'fullscreen',
-                    'insertdatetime',
-                    'media',
-                    'table',
-                    'code',
-                    'help',
-                    'wordcount',
-                ],
-                toolbar:
-                    'undo redo | blocks | ' +
-                    'bold italic forecolor | alignleft aligncenter ' +
-                    'alignright alignjustify | bullist numlist outdent indent | link image ' +
-                    'removeformat | help',
+                plugins: [...plugins],
+                toolbar: [...toolbar],
                 automatic_uploads: true, // 드래그앤 드롭 설정
                 /*
                  URL of our upload hander
@@ -106,8 +68,7 @@ const TinyEditorBasicComponent = ({ editorRef, initialValue, onChange, onEditorI
                 },
                 content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
             }}
+            onEditorChange={onEditorChange}
         />
     );
 };
-
-export const TinyEditorBasic = React.memo(TinyEditorBasicComponent);

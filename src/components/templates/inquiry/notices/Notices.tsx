@@ -1,9 +1,9 @@
 /* eslint-disable */
-import React, { useCallback } from 'react';
+import React from 'react';
 import { formatDate } from '@util/common/FormatDate';
 import { Notification, NotificationProps } from '@util/test/data/admin/notification/Notification';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
-import { Box, ButtonProps, IconButton, SelectChangeEvent, Stack } from '@mui/material';
+import { ButtonProps, IconButton, SelectChangeEvent, Stack } from '@mui/material';
 import { FilteredSearch } from '@organisms/admin/filteredSearch/FilteredSearch';
 import { CollapsedListResult } from '@organisms/collapsedListResult/collapsedListResult';
 import Text from '@atoms/text/Text';
@@ -15,16 +15,14 @@ import { filteringNotices } from '@util/test/data/admin/notification/NoticeFilte
 import { useSearchChange } from '@hooks/search/useSearchChange.hook';
 import { NotificationButtonGroup } from '@util/test/data/admin/buttonGroup/notification/notificationButtonGroup';
 // import { useDebounce } from '@hooks/input/useDebounce.hook';
-import clsN from 'classnames';
-import styles from './styles/Notices.module.scss';
 import { ModalEditor } from '@organisms/admin/modalEditor/ModalEditor';
 import { TRowTitleArea } from '@molecules/admin/notice/collapseForm/tRowTitle/TRowTitle';
 import Button from '@atoms/button/Button';
 import { pcickedCollapsedButton, pickedPostButton } from '@util/common/admin/data/button/buttonItems';
-import { PopOver } from '@atoms/popover/PopOver';
-import { PopoverButton } from '@molecules/button/popoverButton/PopoverButton';
 import { ButtonGroup } from '@molecules/button/buttonGroup/ButtonGroup';
 import { Cancel } from '@mui/icons-material';
+import clsN from 'classnames';
+import styles from './styles/Notices.module.scss';
 
 export const NoticesTemplate = () => {
     /* 상태 */
@@ -58,19 +56,13 @@ export const NoticesTemplate = () => {
     // const debounceSearchValue = useDebounce(searchVal, 200);
     // 에디터 제목 상태
     const [editorTitle, setEditorTitle] = React.useState<string>('');
-    // 에디터 컨텐츠 상태
-    const [editorContent, setEditorContent] = React.useState<string>('');
-    // 에디터 ref
-    const editorRef = React.useRef(null);
+
     // 모달 상태
     const [modalState, setModalState] = React.useState<boolean>(false);
     // 현재 선택된 uid 값
     const [currentUid, setCurrentUid] = React.useState<string>('');
     // 모달 활성화 이전에 버튼 입력 상황
     const [clickAction, setClickAction] = React.useState<'post' | 'edit' | undefined>(undefined);
-
-    // *선택적 현재 리스트들의 제목 옆 popover 상태
-    const [popoverList, setPopoverList] = React.useState<boolean>(false);
 
     // filterState.postStatus > 등록상태값을 의존성으로 체크하면서 상태 변화함
     React.useEffect(() => {
@@ -136,14 +128,10 @@ export const NoticesTemplate = () => {
     };
 
     // 에디터 제목 입력란 이벤트
-    const handleTitleChange = useCallback((newTitle: string) => {
-        setEditorTitle(newTitle);
+    const handleTitleChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setEditorTitle(e.target.value);
     }, []);
 
-    // 에디터 입력 이벤트
-    const handleEditorChange = React.useCallback((newContent: string) => {
-        setEditorContent(newContent);
-    }, []);
     // 에디터 활성화 : 모달 상태변경
     const handleModalChange = (e: Event, reason: 'backdropClick' | 'escapeKeyDown') => {
         if (reason == 'backdropClick') {
@@ -190,7 +178,7 @@ export const NoticesTemplate = () => {
     // 분기별 버튼요소 설정
     const buttonItemProvider = (action: 'post' | 'edit' | undefined): ButtonProps[] => {
         const appendClsN = 'modal__button-';
-        if (action == 'edit') {
+        if (action === 'edit') {
             return pcickedCollapsedButton.map((button) => ({
                 ...button,
                 onClick:
@@ -215,16 +203,18 @@ export const NoticesTemplate = () => {
                               : undefined,
             }));
         }
-        if (action == 'post') {
+        if (action === 'post') {
             return pickedPostButton.map((button) => ({
                 ...button,
                 onClick:
+                    // eslint-disable-next-line no-nested-ternary
                     button['aria-label'] === 'cancel'
                         ? handleCancel
                         : button['aria-label'] === 'post'
                           ? handlePost
                           : undefined,
                 className:
+                    // eslint-disable-next-line no-nested-ternary
                     button['aria-label'] === 'cancel'
                         ? styles[`${appendClsN}cancel`]
                         : button['aria-label'] === 'post'
@@ -348,9 +338,7 @@ export const NoticesTemplate = () => {
                 requireTitle
                 title={editorTitle}
                 onTitleChange={handleTitleChange}
-                editorRef={editorRef}
-                initialValue={editorContent}
-                onEditorChange={handleEditorChange}
+                initialValue="write here!"
                 open={modalState}
                 onClose={handleModalChange}
                 buttonItems={buttonItemProvider(clickAction)}
