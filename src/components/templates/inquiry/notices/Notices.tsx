@@ -1,7 +1,8 @@
 /* eslint-disable */
 import React from 'react';
 import { formatDate } from '@util/common/FormatDate';
-import { Notification, NotificationProps } from '@util/test/data/admin/notification/Notification';
+import { Notification } from '@util/test/data/admin/notification/Notification';
+import { NotificationProps } from '@interface/inquiry/inquiryStateInterface';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
 import { ButtonProps, IconButton, SelectChangeEvent, Stack } from '@mui/material';
 import { FilteredSearch } from '@organisms/admin/filteredSearch/FilteredSearch';
@@ -26,20 +27,10 @@ import styles from './styles/Notices.module.scss';
 
 export const NoticesTemplate = () => {
     /* 상태 */
+    // 요소 앵커 상태
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+    //
     const [popState, setPopState] = React.useState<{ [key: string]: boolean }>({});
-    const onPopChange = (uid: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
-        setPopState((prevState) => ({
-            ...prevState,
-            [uid]: !prevState[uid],
-        }));
-        setAnchorEl(e.currentTarget);
-    };
-    const onPopBackClick = () => {
-        setPopState({});
-        setAnchorEl(null);
-    };
-
     // 커스텀 훅을 통한 상태관리 : 검색 입력
     const { searchVal, handleChange, resetSearch } = useSearchChange();
     // 필터 리코일 상태
@@ -52,10 +43,6 @@ export const NoticesTemplate = () => {
     const [resetDateRange, setResetDateRange] = React.useState(false);
     // selectBtn 아이템들, NoticeFilterAtom 에 맞춰 가져오기
     const [selectBtnState, setSelectBtnState] = React.useState<ButtonProps>(NotificationButtonGroup[0]);
-    // Debounced 입력 상태 : 2초 제한
-    // const debounceSearchValue = useDebounce(searchVal, 200);
-    // 에디터 제목 상태
-    const [editorTitle, setEditorTitle] = React.useState<string>('');
 
     // 모달 상태
     const [modalState, setModalState] = React.useState<boolean>(false);
@@ -126,14 +113,24 @@ export const NoticesTemplate = () => {
         // 페이지 초기화
         setTPage(0);
     };
-
-    // 에디터 제목 입력란 이벤트
-    const handleTitleChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setEditorTitle(e.target.value);
-    }, []);
+    // popover 컴포넌트 활성화 이벤트
+    const onPopChange = (uid: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
+        setPopState((prevState) => ({
+            ...prevState,
+            [uid]: !prevState[uid],
+        }));
+        setAnchorEl(e.currentTarget);
+        // 해당 클릭을 통해 uid 를 가져옴
+        // 리코일로 현재 값 갱신하기
+    };
+    // popover 컴포넌트 비활성화 이벤트
+    const onPopBackClick = () => {
+        setPopState({});
+        setAnchorEl(null);
+    };
 
     // 에디터 활성화 : 모달 상태변경
-    const handleModalChange = (e: Event, reason: 'backdropClick' | 'escapeKeyDown') => {
+    const handleModalChange = (_: Event, reason: 'backdropClick' | 'escapeKeyDown') => {
         if (reason == 'backdropClick') {
             // 뒷배경 클릭일 경우 활성화 유지
             setModalState(true);
@@ -146,7 +143,20 @@ export const NoticesTemplate = () => {
 
     const getUidFromButton = (uid: string) => {};
 
-    // 콜랩스 제목 혹은 컨텐츠 제목 버튼을 통한 에디터 활성화 :
+    // popover 과 modal 상태 비활성화 이벤트
+    const handleEndModal = () => {
+        onPopBackClick(); // popover 상태 끄기
+        setModalState(false); // 모달 취소
+    };
+
+    // * 콜랩스 제목 혹은 컨텐츠 제목 버튼을 통한 에디터 활성화 :
+    // Post 버튼 이벤트
+    const handlePostClick = () => {
+        setClickAction('post'); // 클릭 이벤트 post 상태로 설정
+        setModalState(true); // 모달 활성화
+    };
+
+    // Edit 버튼 이벤트
     const handleEditClick = (uid: string) => {
         setClickAction('edit'); // 클릭 이벤트 edit 상태로 설정
         setModalState(true); // 모달 활성화
@@ -154,25 +164,43 @@ export const NoticesTemplate = () => {
         // gql 실행
         // 불러오기 로딩 아이콘 애니메이션 스켈레톤
     };
-    // Post 버튼 이벤트
-    const handlePostClick = () => {
-        setClickAction('post'); // 클릭 이벤트 post 상태로 설정
-        setModalState(true); // 모달 활성화
-    };
 
     // buttonItems 들의 이벤트 (커스텀 훅으로 고민하기)
     const handleCancel = () => {
-        // 취소
-        setModalState(false); // 모달 취소
+        // 작성 취소 이벤트
+        if (confirm('이전까지 작성한 글은 사라집니다. 확실합니까?')) {
+            // 이전에 작성한 글 초기화 하기
+            handleEndModal(); // 모달과 popover 종료
+        }
     };
     const handleSave = () => {
-        // 갱신
+        // 문서 갱신 완료 이벤트
+        if (confirm('Save this article?')) {
+            // 리코일로 ModalEditor 에 있는 내용을 콜백으로 저장
+            // 리코일에 있는 정보를 갱신할 uid 를 찾아 해당 내용으로 치환
+
+            // 완료 후
+            handleEndModal(); // 모달과 popover 종료
+        }
     };
     const handleDelete = () => {
-        // 삭제
+        // 삭제 이벤트
+        if (confirm('Delete current article?')) {
+            // 해당 uid 를 검색해 삭제
+
+            // 완료 후
+            handleEndModal(); // 혹은 해당 이벤트가 아닌 페이지 새로고침
+        }
     };
     const handlePost = () => {
         // 등록
+        // 이전에 작성된 제목과 내용을 리코일 불러오기
+        if (confirm('Post new article?')) {
+            // 신규 글 등록
+
+            // 완료 후
+            handleEndModal(); // 혹은 해당 이벤트가 아닌 페이지 새로고침
+        }
     };
 
     // 분기별 버튼요소 설정
@@ -336,9 +364,7 @@ export const NoticesTemplate = () => {
             </Button>
             <ModalEditor
                 requireTitle
-                title={editorTitle}
-                onTitleChange={handleTitleChange}
-                initialValue="write here!"
+                mode={clickAction}
                 open={modalState}
                 onClose={handleModalChange}
                 buttonItems={buttonItemProvider(clickAction)}

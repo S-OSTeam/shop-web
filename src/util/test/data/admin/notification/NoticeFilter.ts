@@ -1,5 +1,5 @@
-import { NotificationProps } from '@util/test/data/admin/notification/Notification';
 import { noticesFilterState } from '@recoil/atoms/admin/inquiry/notices/noticesFilterAtom';
+import { NotificationProps } from '@interface/inquiry/inquiryStateInterface';
 
 /**
  *

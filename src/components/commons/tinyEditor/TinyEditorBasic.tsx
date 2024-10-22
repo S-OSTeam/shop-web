@@ -5,22 +5,31 @@ import { plugins, toolbar } from '@util/tinyMCE/tinyEditorPlugins.init';
 
 interface TinyEditorBasicProps {
     initialValue?: string;
+    value?: string; // 에디터 입력값
     onEditorChange: (content: string, editor: TinyMCEEditor) => void;
 }
 
-export const TinyEditorBasicComponent = ({ initialValue, onEditorChange }: TinyEditorBasicProps) => {
+export const TinyEditorBasicComponent = React.memo(({ initialValue, value, onEditorChange }: TinyEditorBasicProps) => {
     // 에디터 레퍼런스
     const editorRef = React.useRef<TinyMCEEditor | null>(null);
+    // 에디터가 처음 마운트되었는지 초기화 체크
+    const [initialized, setInitialized] = React.useState(false);
+
     // 에디터 초기 실행 이벤트
     const handleEditorInit = (_: unknown, editor: TinyMCEEditor) => {
         editorRef.current = editor;
+        setInitialized(true); // 에디터 준비완료 설정
     };
+
+    // 에디터 콘텐츠 초기값 설정
+    // 최초로 렌더할 경우 initialValue 을 사용 그리고 마운트됬다면 초기화를 했으므로 props.value
+    const currentValue = initialized ? value : initialValue;
 
     return (
         <Editor
             apiKey="2ytbg9c286hwtryfv7iu4rvn04njqcp774sxz01zja5bwmjo"
             onInit={handleEditorInit}
-            initialValue={initialValue}
+            value={currentValue}
             init={{
                 height: 500,
                 menubar: false,
@@ -71,4 +80,4 @@ export const TinyEditorBasicComponent = ({ initialValue, onEditorChange }: TinyE
             onEditorChange={onEditorChange}
         />
     );
-};
+});
