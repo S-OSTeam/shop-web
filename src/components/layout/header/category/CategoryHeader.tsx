@@ -17,9 +17,10 @@ import { ItemCategoryTreeResponse } from '@interface/category/Category';
 interface CategoryHeaderProps {
     onClick: (publicId: string) => void;
     categories: ItemCategoryTreeResponse[];
+    testCategoryId: string;
 }
 
-const CategoryHeader = ({ onClick, categories }: CategoryHeaderProps) => {
+const CategoryHeader = ({ onClick, categories, testCategoryId }: CategoryHeaderProps) => {
     // Menu Bar 마다 불리언 상태로 관리
     const [toggleState, setToggleState] = React.useState<boolean[]>([]);
     // 토글 이벤트 param(idx: 클릭한 인덱스)
@@ -62,48 +63,50 @@ const CategoryHeader = ({ onClick, categories }: CategoryHeaderProps) => {
         };
 
         return (
-            <ClickAwayListener onClickAway={handleClickAway} key={item.publicId}>
-                <MuiListItem
-                    key={item.publicId}
-                    className={clsN(`${styles['list-wrapper__parent-category']}`)}
-                    onKeyDown={undefined}
-                >
-                    <ListItemButton
-                        className={styles['list-wrapper__parent-category__btn']}
-                        onMouseOver={handleMouseOver}
-                        onMouseOut={handleMouseOff}
-                        onTouchStart={onTouch}
-                        onClick={() => onClick(item.publicId)}
+            testCategoryId != item.publicId && (
+                <ClickAwayListener onClickAway={handleClickAway} key={item.publicId}>
+                    <MuiListItem
+                        key={item.publicId}
+                        className={clsN(`${styles['list-wrapper__parent-category']}`)}
+                        onKeyDown={undefined}
                     >
-                        <ListItemText
-                            primary={item.title}
-                            className={styles['list-wrapper__parent-category__btn__title']}
-                        />
-                        {currentState ? (
-                            <ExpandLess className={styles['list-wrapper__parent-category__btn__icon']} />
-                        ) : (
-                            <ExpandMore className={styles['list-wrapper__parent-category__btn__icon']} />
-                        )}
-                        <Collapse
-                            in={currentState}
-                            timeout="auto"
-                            unmountOnExit
-                            className={styles['list-wrapper__parent-category__btn__collapse']}
+                        <ListItemButton
+                            className={styles['list-wrapper__parent-category__btn']}
+                            onMouseOver={handleMouseOver}
+                            onMouseOut={handleMouseOff}
+                            onTouchStart={onTouch}
+                            onClick={() => onClick(item.publicId)}
                         >
-                            <List disablePadding>
-                                <ListItem
-                                    className={`${styles['list-items-wrapper']}`}
-                                    items={item.children}
-                                    onClick={(publicId, e) => {
-                                        onClick(publicId);
-                                        e.stopPropagation(); // 부모 이벤트 전파 방지
-                                    }}
-                                />
-                            </List>
-                        </Collapse>
-                    </ListItemButton>
-                </MuiListItem>
-            </ClickAwayListener>
+                            <ListItemText
+                                primary={item.title}
+                                className={styles['list-wrapper__parent-category__btn__title']}
+                            />
+                            {currentState ? (
+                                <ExpandLess className={styles['list-wrapper__parent-category__btn__icon']} />
+                            ) : (
+                                <ExpandMore className={styles['list-wrapper__parent-category__btn__icon']} />
+                            )}
+                            <Collapse
+                                in={currentState}
+                                timeout="auto"
+                                unmountOnExit
+                                className={styles['list-wrapper__parent-category__btn__collapse']}
+                            >
+                                <List disablePadding>
+                                    <ListItem
+                                        className={`${styles['list-items-wrapper']}`}
+                                        items={item.children}
+                                        onClick={(publicId, e) => {
+                                            onClick(publicId);
+                                            e.stopPropagation(); // 부모 이벤트 전파 방지
+                                        }}
+                                    />
+                                </List>
+                            </Collapse>
+                        </ListItemButton>
+                    </MuiListItem>
+                </ClickAwayListener>
+            )
         );
     });
     return <List className={clsN(`${styles['list-wrapper']}`)}>{renderListItems}</List>;

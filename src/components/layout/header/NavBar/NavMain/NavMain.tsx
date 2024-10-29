@@ -53,6 +53,9 @@ const NavMain = ({
     // "문의" 카테고리 찾기
     const inquiryCategory = categories.find((category) => category.title === '문의');
 
+    // "테스트" 카테고리 찾기
+    const testCategory = categories.find((category) => category.title === '테스트');
+
     // 선택한 카테고리 id recoil로 상태 관리
     const [categoryId, setCategoryId] = useRecoilState(categoryIdAtom);
 
@@ -111,7 +114,11 @@ const NavMain = ({
                 onClick={handleHomeClick}
             />
             {isInTablet ? null : (
-                <CategoryHeader categories={categories} onClick={(publicId) => goToCategory(publicId)} />
+                <CategoryHeader
+                    categories={categories}
+                    onClick={(publicId) => goToCategory(publicId)}
+                    testCategoryId={testCategory?.publicId!!}
+                />
             )}
             <RightMenu
                 navBarRightClsN={navBarRightClsN}

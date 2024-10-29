@@ -22,6 +22,7 @@ export const LOGIN_REQUEST = gql`
         login(request: $request)
     }
 `;
+
 export const NAVER_LOGIN = gql`
     mutation NaverLogin($request: NaverRequest!) {
         naverLogin(request: $request) {
