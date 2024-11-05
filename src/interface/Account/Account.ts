@@ -4,6 +4,9 @@ export interface AccountResponse {
     birthday: string;
     zipcode: string;
     address1: string;
+    address2: string;
+    address3: string;
+    address4: string;
     email: string;
     receiveMail: string;
     snsId: string;
@@ -18,6 +21,9 @@ export const EmptyAccountResponse: AccountResponse = {
     birthday: '',
     zipcode: '',
     address1: '',
+    address2: '',
+    address3: '',
+    address4: '',
     email: '',
     receiveMail: '',
     snsId: '',

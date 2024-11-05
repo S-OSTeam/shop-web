@@ -15,3 +15,21 @@ export interface FormDataInterface {
     sns: string;
     userName: string;
 }
+
+export const EmptyFormDataInterface = {
+    userId: '',
+    pwd: '',
+    confirmPwd: '',
+    sex: false,
+    birthday: new Date(),
+    zipcode: '',
+    address1: '',
+    address2: '',
+    address3: '',
+    address4: '',
+    email: '',
+    phone: '',
+    receiveMail: true,
+    sns: 'NORMAL',
+    userName: '',
+};

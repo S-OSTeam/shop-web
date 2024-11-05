@@ -1,12 +1,8 @@
 /* eslint-disable */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { Box, Divider } from '@mui/material';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { naverCodeState } from '@recoil/atoms/authAtom';
-import { SIGN_UP_REQUEST, LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
-import useGraphQL from '@hooks/useGraphQL';
+import { useNavigate } from 'react-router-dom';
 import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
 import ImgTextButton from '@components/molecules/button/imgTextButton/ImgTextButton';
@@ -17,93 +13,35 @@ import { getCookie } from '@util/CookieUtil';
 
 const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
-    const location = useLocation();
-    const navigate = useNavigate();
-    const [naverCode, setNaverCode] = useRecoilState(naverCodeState); // Recoil 상태 사용
     const naverRef = useRef<HTMLDivElement>(null);
 
-    const socialPlatforms = [
+    const naverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=https://localhost:3000/naver/redirect&state=${process.env.REACT_APP_NAVER_STATE}`;
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_CLIENT_REDIRECT}&response_type=code`;
+
+    const socialPlatforms: { name: 'naver' | 'kakao' | 'google'; text: string }[] = [
         { name: 'naver', text: '네이버 로그인' },
         { name: 'kakao', text: '카카오 로그인' },
         { name: 'google', text: '구글 로그인' },
     ];
 
-    const { refetch: naverLogin } = useGraphQL({
-        query: LOGIN_REQUEST,
-        type: 'mutation',
-        request: {
-            pwd: '',
-            userId: '',
-            email: '',
-            snsCode: '',
-            sns: 'NAVER',
-        },
-        option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
-    });
-    const { refetch: kakaoLogin } = useGraphQL({
-        query: LOGIN_REQUEST,
-        type: 'mutation',
-        request: {
-            pwd: '',
-            userId: '',
-            email: '',
-            snsCode: '',
-            sns: 'KAKAO',
-        },
-        option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
-    });
-
-    const { refetch: naverSignUp } = useGraphQL({
-        query: SIGN_UP_REQUEST,
-        type: 'mutation',
-        request: {
-            userId: '',
-            pwd: '',
-            confirmPwd: '',
-            zipcode: '',
-            address1: '',
-            email: '',
-            sns: 'NAVER',
-            userName: '',
-        },
-        option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
-    });
-
-    const NaverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=https://deamhome.synology.me/naver/redirect&state=${process.env.REACT_APP_NAVER_STATE}`;
-
-    const handleNaverLogin = () => {
-        const existToken = getCookie('NaverAccessToken');
+    const handleSocialLogin = (platformName: 'naver' | 'kakao' | 'google') => {
+        const existToken = getCookie('Authorization');
         if (existToken) {
-            // 메인화면으로 이동
             console.log(existToken);
         } else {
-            window.location.href = NaverURL;
-        }
-    };
-
-    // kakao
-    const K_REDIRECT_URI = `https://deamhome.synology.me/kakao/redirect`;
-    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
-    const handleKakaoLogin = () => {
-        console.log('KakaoLogin is clicked!');
-
-        window.location.href = kakaoURL;
-    };
-
-    const handleGoogleLogin = () => {
-        console.log('GoogleLogin is clicked!');
-    };
-
-    const getPlatformHandler = (platformName: string) => {
-        switch (platformName) {
-            case 'naver':
-                return handleNaverLogin;
-            case 'kakao':
-                return handleKakaoLogin;
-            case 'google':
-                return handleGoogleLogin;
-            default:
-                return undefined;
+            switch (platformName) {
+                case 'naver': {
+                    window.location.href = naverURL;
+                    return undefined;
+                }
+                case 'kakao':
+                    window.location.href = kakaoURL;
+                    return undefined;
+                case 'google':
+                    return console.log('click google');
+                default:
+                    return undefined;
+            }
         }
     };
 
@@ -141,7 +79,7 @@ const SocialLogin = () => {
                                         />
                                     }
                                     text={platform.text}
-                                    onClick={getPlatformHandler(platform.name)}
+                                    onClick={() => handleSocialLogin && handleSocialLogin(platform.name)}
                                 />
                             ))}
                         </Box>
@@ -164,7 +102,7 @@ const SocialLogin = () => {
                                 <Button
                                     key={platform.name}
                                     className={clsN(style.btn)}
-                                    onClick={getPlatformHandler(platform.name)}
+                                    onClick={() => handleSocialLogin && handleSocialLogin(platform.name)}
                                 >
                                     <CustomIcon
                                         name={platform.name}
