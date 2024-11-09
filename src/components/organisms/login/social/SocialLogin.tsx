@@ -15,7 +15,7 @@ const SocialLogin = () => {
     const isInMobile = useDomSizeCheckHook(768);
     const naverRef = useRef<HTMLDivElement>(null);
 
-    const naverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=https://localhost:3000/naver/redirect&state=${process.env.REACT_APP_NAVER_STATE}`;
+    const naverURL = `https://nid.naver.com/oauth2.0/authorize?client_id=${process.env.REACT_APP_NAVER_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_NAVER_CLIENT_REDIRECT}&state=${process.env.REACT_APP_NAVER_STATE}`;
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_CLIENT_REDIRECT}&response_type=code`;
 
     const socialPlatforms: { name: 'naver' | 'kakao' | 'google'; text: string }[] = [
