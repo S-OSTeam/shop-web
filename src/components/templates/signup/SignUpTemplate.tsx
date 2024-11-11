@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Divider, FormControl, Radio, RadioGroup, TextField } from '@mui/material';
 import Form from '@components/organisms/signup/form/Form';
 import clsN from 'classnames';
-import { FormDataInterface } from '@interface/FormDataInterface';
+import { EmptyFormDataInterface, FormDataInterface } from '@interface/FormDataInterface';
 import CheckboxWithText from '@molecules/checkbox/checkboxWithText/CheckboxWithText';
 import Button from '@atoms/button/Button';
 import Text from '@components/atoms/text/Text';
@@ -30,25 +30,9 @@ const SignUpTemplate = () => {
     const snsValue = location.state?.sns || 'NORMAL';
 
     const checkboxTexts = ['SNS 광고에 대한  동의 ', '기타 고객정보 영리적 사용에 대한 동의'];
-    const [signUpData, setSignUpData] = useState<FormDataInterface>({
-        userId: '',
-        pwd: '',
-        confirmPwd: '',
-        sex: false,
-        birthday: new Date(),
-        zipcode: '',
-        address1: '',
-        address2: '',
-        address3: '',
-        address4: '',
-        email: '',
-        phone: '',
-        receiveMail: true,
-        sns: snsValue,
-        userName: '',
-    });
+    const [signUpData, setSignUpData] = useState<FormDataInterface>({ ...EmptyFormDataInterface, sns: snsValue });
     const snsToken = snsValue === 'NAVER' || snsValue === 'KAKAO' ? getCookie('snsToken') : '';
-    console.log(snsToken);
+
     const { refetch } = useGraphQL({
         query: SIGN_UP,
         type: 'mutation',

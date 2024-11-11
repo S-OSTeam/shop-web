@@ -1,30 +1,25 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Box, Divider } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import Text from '@components/atoms/text/Text';
 import { Input } from '@components/atoms/input/Input';
 import SaveId from '@components/organisms/login/saveId/SaveId';
 import Button from '@components/atoms/button/Button';
 import { useDomSizeCheckHook } from '@hooks/useDomSizeCheck.hook';
-import useGraphQL from '@hooks/useGraphQL';
-import { LOGIN_REQUEST } from '@api/apollo/gql/mutations/LoginMutation.gql';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
-const LoginOrganisms = () => {
+interface LoginOrganismsProps {
+    handleFormSubmit: (item: { pwd: string; userId: string; sns: string }) => void;
+    handleSignUp: () => void;
+}
+
+const LoginOrganisms = ({ handleFormSubmit, handleSignUp }: LoginOrganismsProps) => {
     const isInMobile = useDomSizeCheckHook(768);
-    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         pwd: '',
         userId: '',
         sns: 'NORMAL',
-    });
-
-    const { refetch: login } = useGraphQL({
-        query: LOGIN_REQUEST,
-        type: 'mutation',
-        request: { ...formData },
     });
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -40,24 +35,6 @@ const LoginOrganisms = () => {
             pwd: event.target.value.toString(),
         });
     };
-
-    const handleSignUp = () => {
-        navigate('/signup');
-    };
-
-    const handleFormSubmit = useCallback(
-        async (event: React.FormEvent) => {
-            event.preventDefault();
-            try {
-                login();
-                alert('로그인 완료');
-                navigate('/');
-            } catch (error) {
-                alert(error);
-            }
-        },
-        [login, navigate],
-    );
 
     return (
         <div>
@@ -96,7 +73,7 @@ const LoginOrganisms = () => {
                         <Button
                             className={clsN(`${style['mobile-login-wrapper__btn-wrapper__login-btn']}`)}
                             variant="outlined"
-                            onClick={handleFormSubmit}
+                            onClick={() => handleFormSubmit && handleFormSubmit(formData)}
                         >
                             로그인
                         </Button>
@@ -129,7 +106,7 @@ const LoginOrganisms = () => {
                     <Button
                         className={clsN(`${style['login-wrapper__login-btn']}`)}
                         aria-label="Button label"
-                        onClick={handleFormSubmit}
+                        onClick={() => handleFormSubmit && handleFormSubmit(formData)}
                     >
                         로그인
                     </Button>

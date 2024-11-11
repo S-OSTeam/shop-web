@@ -9,8 +9,7 @@ import Login from '@routes/login/Login';
 import CustomerServicePage from '@pages/cs/CustomerServicePage';
 import Category from '@routes/category/Category';
 import Review from '@routes/review/Review';
-import KakaoRedirect from '@util/test/login/KakaoRedirect';
-import NaverRedirect from '@util/test/login/NaverRedirect';
+import SocialRedirect from '@util/social/SocialRedirect';
 import ShoppingPage from '@pages/shopping/ShoppingPage';
 
 import { AdminRouter } from './adminRouter/AdminRouter';
@@ -34,8 +33,8 @@ export const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<DeamHome />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/kakao/redirect" element={<KakaoRedirect />} />
-                <Route path="/naver/redirect" element={<NaverRedirect />} />
+                <Route path="/kakao/redirect" element={<SocialRedirect social="kakao" />} />
+                <Route path="/naver/redirect" element={<SocialRedirect social="naver" />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/shop/product" element={<Product />} />
                 <Route path="/shop/category" element={<Category />} />

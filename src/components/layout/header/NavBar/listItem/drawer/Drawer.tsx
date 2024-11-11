@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { Box, Divider, TypographyProps } from '@mui/material';
 import Text from '@atoms/text/Text';
@@ -24,6 +25,9 @@ const Drawer = ({ categories, wrapperClsN, mobHeaderClsN, onClick, variant, menu
         navigate(`/shop/category?categoryId=${categoryId}`);
     };
 
+    // "테스트" 카테고리 찾기
+    const testCategory = categories.find((category) => category.title === '테스트');
+
     return (
         <Box component="nav" className={clsN(`${styles['drawer-wrapper']}`, wrapperClsN)}>
             <Text
@@ -33,7 +37,11 @@ const Drawer = ({ categories, wrapperClsN, mobHeaderClsN, onClick, variant, menu
                 className={clsN(`${styles['drawer-wrapper__mobile-header']}`, mobHeaderClsN)}
             />
             <Divider />
-            <CategoryHeader categories={categories} onClick={(title) => goToCategory(title)} />
+            <CategoryHeader
+                categories={categories}
+                onClick={(title) => goToCategory(title)}
+                testCategoryId={testCategory?.publicId!!}
+            />
         </Box>
     );
 };
