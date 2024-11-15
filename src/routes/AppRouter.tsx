@@ -11,7 +11,6 @@ import Category from '@routes/category/Category';
 import Review from '@routes/review/Review';
 import SocialRedirect from '@util/social/SocialRedirect';
 import ShoppingPage from '@pages/shopping/ShoppingPage';
-
 import { AdminRouter } from './adminRouter/AdminRouter';
 
 export const AppRouter = () => {
