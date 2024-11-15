@@ -10,9 +10,11 @@ interface CheckboxProps extends MuiCheckboxProps {
     checkedIcon?: React.ReactNode;
     icon?: React.ReactNode;
     className?: string;
+    checked?: boolean;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CheckBox = ({ name, checkedIcon, icon, className, defaultChecked }: CheckboxProps) => {
+const CheckBox = ({ name, checkedIcon, icon, className, defaultChecked, checked, onChange }: CheckboxProps) => {
     /* eslint-disable-next-line react/jsx-props-no-spreading */
     return (
         <MuiCheckBox
@@ -21,6 +23,8 @@ const CheckBox = ({ name, checkedIcon, icon, className, defaultChecked }: Checkb
             checkedIcon={checkedIcon}
             icon={icon}
             defaultChecked={defaultChecked}
+            checked={checked}
+            onChange={onChange}
         />
     );
 };
@@ -31,6 +35,8 @@ CheckBox.propTypes = {
     checkedIcon: PropTypes.node,
     icon: PropTypes.node,
     className: PropTypes.string,
+    checked: PropTypes.bool,
+    onChange: PropTypes.func,
 };
 // default
 CheckBox.defaultProps = {
