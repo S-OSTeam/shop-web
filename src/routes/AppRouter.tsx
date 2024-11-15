@@ -11,6 +11,7 @@ import Category from '@routes/category/Category';
 import Review from '@routes/review/Review';
 import KakaoRedirect from '@util/test/login/KakaoRedirect';
 import NaverRedirect from '@util/test/login/NaverRedirect';
+import ShoppingPage from '@pages/shopping/ShoppingPage';
 
 import { AdminRouter } from './adminRouter/AdminRouter';
 
@@ -41,7 +42,7 @@ export const AppRouter = () => {
                 <Route path="/shop/event" element={<Event />} />
                 <Route path="/review" element={<Review />} />
                 <Route path="/support" element={<CustomerServicePage />} />
-
+                <Route path="/cart" element={<ShoppingPage />} />
                 {/* 모듈화된 관리자 페이지 라우터 렌더하기 */}
                 <Route path="/manager/*" element={<AdminRouter />} />
             </Routes>

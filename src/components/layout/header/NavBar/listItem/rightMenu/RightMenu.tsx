@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Grid, Tooltip } from '@mui/material';
 import IconButton from '@molecules/button/iconButton/IconButton';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
@@ -19,10 +20,11 @@ interface HeaderMenuProps {
 
 const RightMenu = ({ navBarRightClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) => {
     const title = ['즐겨찾기', '관심상품', '장바구니'];
+    const navigate = useNavigate();
     const iconProvider = [
         <BookmarksIcon className={clsN(styles['stack-menu__icon'], iconClsN)} />,
         <FavoriteBorderIcon className={clsN(styles['stack-menu__icon'], iconClsN)} />,
-        <ShoppingCartIcon className={clsN(styles['stack-menu__icon'], iconClsN)} />,
+        <ShoppingCartIcon className={clsN(styles['stack-menu__icon'], iconClsN)} onClick={() => navigate('/cart')} />,
     ];
     const gridItemProvider = title.map((item, idx) => {
         return (
@@ -30,7 +32,10 @@ const RightMenu = ({ navBarRightClsN, icnBtnClsN, iconClsN }: HeaderMenuProps) =
                 <Tooltip title={item}>
                     {/* div 를 감싸야 ToolTip hover 기능 작동 */}
                     <div>
-                        <IconButton className={clsN(styles['stack-menu__icon-btn'], icnBtnClsN)} icon={iconProvider[idx]} />
+                        <IconButton
+                            className={clsN(styles['stack-menu__icon-btn'], icnBtnClsN)}
+                            icon={iconProvider[idx]}
+                        />
                     </div>
                 </Tooltip>
             </Grid>
