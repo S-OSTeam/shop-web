@@ -23,8 +23,8 @@ export const useDomSizeCheckHook = (activateMenuWidth: number) => {
     /**
      * 리코일 이벤트가 발생할 때 리액트가 상태변경을 확인할 수 있도록 useEffect 활용하는 방식으로 수정
      */
-    useEffect(()=>{
+    useEffect(() => {
         setIsMobile(currentDom);
-    },[currentDom, setIsMobile]);
+    }, [currentDom, setIsMobile]);
     return isMobile;
 };

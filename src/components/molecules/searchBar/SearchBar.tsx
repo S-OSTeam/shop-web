@@ -16,6 +16,8 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({ wrapperClsN, inputClsN, placeholder, onChange, label, inputVal }: SearchBarProps) => {
+    // 상태 관리
+
     /* 함수 */
     // form 전송 이벤트 방지
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

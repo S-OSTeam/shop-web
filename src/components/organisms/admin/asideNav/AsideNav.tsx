@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, List } from '@mui/material';
+import { Box, Drawer, List } from '@mui/material';
+import { useRecoilState } from 'recoil';
+import { drawerAdminNavAtom } from '@recoil/atoms/admin/drawer/drawerAdminNavAtom';
 import clsN from 'classnames';
 import styles from './styles/AsideNav.module.scss';
 
@@ -20,35 +22,32 @@ interface AsideNavProps<T> {
     hoverClsN?: string;
 }
 
-export const AsideNav = <T, >(
-    {
-        className,
-        listWrapperClsN,
-        items,
-        itemFactor,
-        hoverClsN
-    }: AsideNavProps<T>,
-) => {
+export const AsideNav = <T,>({ className, listWrapperClsN, items, itemFactor, hoverClsN }: AsideNavProps<T>) => {
+    /* TODO GQL 로 라우트할 아이템 받고 렌더하기 */
+
+    const [drawState, setDrawState] = useRecoilState(drawerAdminNavAtom); // 메뉴 펼치기 상태
+
     // 상수 처리
     const ItemTemp = items.map((item: T, idx: number) => {
         // 제너릭 타입 받아서 처리
         return itemFactor(item, idx);
     });
     return (
-        <Box component='nav' className={clsN(className, styles.nav)}>
-            <p className={clsN(styles.nav__logo)}>
-                <span>
-                    DeamHome
-                </span>
-            </p>
-            <List component='div' className={clsN(listWrapperClsN, styles.nav__ul)}>
-                {ItemTemp}
-                <div className={clsN(styles.hover, hoverClsN)}/>
-            </List>
-        </Box>);
+        <Drawer open={drawState} onClose={() => setDrawState(false)}>
+            <Box component="nav" className={clsN(className, styles.nav)}>
+                <h1 className={clsN(styles.nav__logo)}>
+                    <span>DeamHome</span>
+                </h1>
+                <List component="div" className={clsN(listWrapperClsN, styles.nav__ul)}>
+                    {ItemTemp}
+                    <div className={clsN(styles.hover, hoverClsN)} />
+                </List>
+            </Box>
+        </Drawer>
+    );
 };
 AsideNav.defaultProps = {
     className: styles.nav,
     listWrapperClsN: styles.nav__ul,
-    hoverClsN : styles.hover,
-}
+    hoverClsN: styles.hover,
+};

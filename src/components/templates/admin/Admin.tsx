@@ -56,7 +56,7 @@ const AdminTemplate = ({ children }: AdminTemplateProps) => {
             />
             <Stack className={clsN(styles.section)}>
                 <MainNav />
-                {children}
+                <Box className={clsN(styles.content)}>{children}</Box>
             </Stack>
         </Box>
     );

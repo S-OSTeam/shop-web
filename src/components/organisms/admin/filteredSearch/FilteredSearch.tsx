@@ -7,6 +7,7 @@ import DateRange from '@molecules/dateRange/DateRange';
 import SearchBar from '@molecules/searchBar/SearchBar';
 import clsN from 'classnames';
 import styles from './styles/FilteredSearch.module.scss';
+import dayjs from 'dayjs';
 
 export interface SelectMenuItemProps extends ButtonProps {}
 
@@ -54,13 +55,17 @@ export const FilteredSearch = ({
     // 날짜조회 컴포넌트
     const DateRangeCont = (
         <DateRange
+            defaultText="등록날짜"
+            onDateChange={() => {}}
+            onReset={() => {}}
+            endDate={dayjs()}
+            fromDate={dayjs()}
             className={clsN(styles['filter-root__button'], styles['filter-root__button__date'], styles['date-range'])}
             pickerClsN={clsN(
                 styles['filter-root__button'],
                 styles['filter-root__button__date'],
                 styles['date-range__picker'],
             )}
-            resetTrigger={resetTrigger}
         />
     );
     // 초기화 버튼 컴포넌트

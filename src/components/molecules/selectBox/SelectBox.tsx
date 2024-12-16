@@ -57,7 +57,7 @@ export const SelectBox = <T,>({
     /* JSX 컴포넌트 */
     // inputLabel 컴포넌트
     const iptLabel = (
-        <InputLabel id={labelId} className={clsN(labelClsN, styles['select-form__label'])}>
+        <InputLabel id={labelId} className={clsN(labelClsN, styles['select-form__label'])} shrink>
             {inputLabel}
         </InputLabel>
     );
@@ -75,6 +75,8 @@ export const SelectBox = <T,>({
                     root: clsN(styles['select-root']),
                 }}
                 onChange={handleMenuChange}
+                notched
+                label={inputLabel}
             >
                 {menuMapping}
             </Select>

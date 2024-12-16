@@ -24,3 +24,8 @@ export const noticesFilterStateAtom = atom<noticesFilterState>({
         keyword: undefined,
     },
 });
+
+export const eventIdAtom = atom<string>({
+    key: 'eventId',
+    default: '',
+});

@@ -1,4 +1,5 @@
 import React from 'react';
+import { TextFieldClasses } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import { DatePicker as MuiDatePicker, DatePickerProps as MuiDatePickerProps } from '@mui/x-date-pickers';
 import clsN from 'classnames';
@@ -17,8 +18,10 @@ const DatePicker = <TData extends Dayjs>({
     value,
     onChange,
     slotProps,
+    classes,
 }: MuiDatePickerProps<TData> & {
     className?: string;
+    classes?: Partial<TextFieldClasses>;
     label?: React.ReactNode;
 }): React.ReactElement => {
     /* 렌더 */
@@ -29,7 +32,8 @@ const DatePicker = <TData extends Dayjs>({
                 textField: {
                     size: 'small',
                     classes: {
-                        root: clsN(className, styles['date-root']),
+                        ...classes,
+                        root: clsN(className, styles['date-root'], classes?.root),
                     },
                     inputProps: {
                         className: clsN(styles['date-root__input']),

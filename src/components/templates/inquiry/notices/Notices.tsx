@@ -14,7 +14,6 @@ import { noticesFilterStateAtom } from '@recoil/atoms/admin/inquiry/notices/noti
 import { filteringNotices } from '@util/test/data/admin/notification/NoticeFilter';
 import { useSearchChange } from '@hooks/search/useSearchChange.hook';
 import { NotificationButtonGroup } from '@util/test/data/admin/buttonGroup/notification/notificationButtonGroup';
-// import { useDebounce } from '@hooks/input/useDebounce.hook';
 import { ModalEditor } from '@organisms/admin/modalEditor/ModalEditor';
 import { TRowTitleArea } from '@molecules/admin/notice/collapseForm/tRowTitle/TRowTitle';
 import Button from '@atoms/button/Button';
@@ -232,7 +231,7 @@ export const NoticesTemplate = () => {
         return filteringNotices(Notification, filterState);
     }, [filterState]);
     /* JSX 모듈 */
-    const headline = <Heading heading="공지사항 관리" subtitle1="고객들께 중요한 소식을 전해주세요" />;
+    const Headline = <Heading heading="공지사항 관리" subtitle1="고객들께 중요한 소식을 전해주세요" />;
     // ts 유틸 데이터 tData 에 전달하기
 
     // TODO : GQL 적용 해야됨, 임시로 .ts 파일을 활용해 데이터 불러오기
@@ -302,7 +301,7 @@ export const NoticesTemplate = () => {
 
     return (
         <Stack className={clsN(styles['notices-t'])}>
-            {headline}
+            {Headline}
             <FilteredSearch
                 searchVal={searchVal}
                 onSearch={handleChange}

@@ -1,243 +1,215 @@
+/* eslint-disable */
 import React from 'react';
 import { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
-import { Paper, Stack } from '@mui/material';
+import { Box, FormControl, InputLabel, Paper, Popover, Stack } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DatePicker from '@atoms/datePicker/DatePicker';
 import Button from '@atoms/button/Button';
 import { ArrowDropDown, ArrowDropUp, CalendarMonth } from '@mui/icons-material';
-import { useRecoilState } from 'recoil';
-import { noticesFilterStateAtom } from '@recoil/atoms/admin/inquiry/notices/noticesFilterAtom';
+import { formatDayjs, swapDateCheck } from '@util/dayjs/DayJsUtill';
 import clsN from 'classnames';
 import styles from './styles/DateRange.module.scss';
 
 interface DateRangeProps {
     className?: string; // 클래스명
+    rootClsN?: string; // root 클래스명
     pickerClsN?: string; // 데이터 피커 클래스명
-    resetTrigger: boolean; // 리셋 트리거
+    fromDate: Dayjs | null; // 시작일
+    endDate: Dayjs | null; // 종료일
+    onDateChange: (startDate: Date | undefined, endDate: Date | undefined) => void;
+    onReset: () => void; // 리셋 이벤트
+    defaultText: string; // 기본버튼 내용
+    inputLabel?: string;
+    inputLabelId?: string;
 }
-const DateRange = ({ className, pickerClsN, resetTrigger }: DateRangeProps) => {
+const DateRange = ({
+    className,
+    rootClsN,
+    pickerClsN,
+    fromDate,
+    endDate,
+    onDateChange,
+    onReset,
+    defaultText,
+    inputLabel,
+    inputLabelId,
+}: DateRangeProps) => {
     /* 상태 */
-    // 버튼 컨텍스트
-    const [btnText, setBtnText] = React.useState('날짜범위');
-
+    const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null); // 현제 포커스된 앵커
     // 캘린더 시작일, 종료일
-    const [fromD, setFromD] = React.useState<Dayjs | null>(null);
-    const [endD, setEndD] = React.useState<Dayjs | null>(null);
+    const [fromDateState, setFromDateState] = React.useState<Dayjs | null>(fromDate);
+    const [endDateState, setEndDateState] = React.useState<Dayjs | null>(endDate);
 
-    // 버튼 토글 상태
-    const [isOpen, setIsOpen] = React.useState<boolean>(false);
+    const [buttonText, setButtonText] = React.useState<string>(defaultText);
 
-    // submit 신호 상태
-    const [datePicked, setDatePicked] = React.useState(false);
+    React.useEffect(() => {
+        setFromDateState(fromDate);
+        setEndDateState(endDate);
+        if (!fromDate && !endDate) {
+            setButtonText(defaultText);
+        }
+    }, [fromDate, endDate, defaultText]); // 상태 동기화
 
     // 부터 ~ 까지에 쓰이는 레이블
     const dateLabels = ['from', 'to'];
 
-    // 리코일 날짜설정
-    const [dayRecoil, setDayRecoil] = useRecoilState(noticesFilterStateAtom);
+    // 앵커된 요소 존재시 open == true
+    const open = Boolean(anchorEl);
 
     /* 함수 */
-    // Dayjs 를 받아 YYYY.MM.DD 형태로 포맷하기
-    const formatDayjs = (date: Dayjs | null) => {
-        return date ? date.format('YYYY.MM.DD') : '';
+    // popover 활성화 이벤트
+    const handlePopoverClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(e.currentTarget); // e 를 통해 선택된 버튼 요소에 앵커 설정
+    };
+    // popover 비활성화 이벤트
+    const handlePopoverOff = () => {
+        setAnchorEl(null); // 앵커값 null
     };
 
-    // Dayjs 타입인 두 값을 비교하여 특정값 배출 (이후 switch 문으로 분기 처리하기)
-    const compareDate = (date1: Dayjs | null, date2: Dayjs | null): number | null => {
-        // 인자가 null 이 아닐 경우만
-        if (date1 && date2) {
-            if (date1?.isBefore(date2)) {
-                // 인자1 이 인자2 보다 작음 (-1)
-                return -1;
-            }
-            if (date1?.isAfter(date2)) {
-                // 인자1 이 인자2 보다 큼 (+1)
-                return 1;
-            }
-            if (date1?.isSame(date2)) {
-                // 두 인자값이 같을 경우 (0)
-                return 0;
-            }
-        } else if (date1 == null && date2 == null) {
-            // 둘다 null 일 경우
-            return null;
+    // 날짜 변경 이벤트
+    const handleDateChange = (newFromDate: Dayjs | null, newEndDate: Dayjs | null) => {
+        const [neatedFromDate, neatedEndDate] = swapDateCheck(newFromDate, newEndDate);
+        setFromDateState(neatedFromDate);
+        setEndDateState(neatedEndDate);
+    };
+
+    // 날짜 변경 이벤트 : 시작기준
+    const handleStartDateChange = (newValue: Dayjs | null) => {
+        handleDateChange(newValue, endDateState);
+    };
+    const handleEndDateChange = (newValue: Dayjs | null) => {
+        handleDateChange(fromDateState, newValue);
+    };
+    // 날짜 변경 이벤트 : 종료기준
+
+    const dateContextChange = () => {
+        if (!fromDateState || !endDateState) {
+            // 둘중하나 null 일 경우
+            setButtonText(defaultText);
+            return;
         }
-        // 인자중 하나라도 null 일 경우 (0)
-        return 0;
+        setButtonText(`${formatDayjs(fromDateState)} ~ ${formatDayjs(endDateState)}`);
     };
 
-    // Dayjs 스왑 이벤트
-    const fixDateState = (compare: number | null) => {
-        switch (compare) {
-            case -1:
-                // 인자1 이 인자2 보다 작음
-                break;
-            case null:
-                break;
-            case 0: {
-                // 종료일 찾기 // 인자중 하나라도 null 인 상황, 그 중 큰값은 endD 로 정하기 -1 까지 조회하도록 하기
-                const tempEndDate = fromD?.isAfter(endD) ? fromD : endD;
-                // 널 병합 연산자 (??) 를 사용해서 undefined 발생할 경우 방지하기
-                const tempStartDate = tempEndDate?.subtract(1, 'day') ?? null;
-                // 상태 갱신
-                setFromD(tempStartDate);
-                setEndD(tempEndDate);
-                break;
-            }
-            case 1: {
-                // 인자1 이 인자2 보다 큼
-                const tempLastDate = fromD;
-                setFromD(endD);
-                setEndD(tempLastDate);
-                break;
-            }
-            default:
-                break;
-        }
-    };
-
-    // 버튼 내용 분기에 따라 번경하기
-    const setButtonContext = () => {
-        // submit true 일 때 아래 분기 실행
-        const startDate = formatDayjs(fromD);
-        const endDate = formatDayjs(endD);
-
-        // 상태값 변경
-        setBtnText(`${startDate} ~ ${endDate}`);
-        // 아톰 내용 변경
-    };
-
-    // Dayjs 라이브러리를 Date 타입에 맞게 변환
-
-    // 현재 날짜를 리코일에 갱신
-    // TODO : 리코일 혹은 상태 갱신할때 useMemo 활용하기
-    const updateDateRecoil = React.useMemo(() => {
-        return () => {
-            // 시작일
-            const firstDate = fromD?.toDate();
-            // 종료일
-            const lastDate = endD?.toDate();
-            // 리코일 업데이트
-            setDayRecoil((formState) => ({
-                ...formState,
-                startDate: firstDate,
-                endDate: lastDate,
-            }));
-        };
-    }, [fromD, endD, setDayRecoil]);
-
-    // 날짜 범위 컴포넌트 열기
-    const handleDateOpen = () => {
-        setIsOpen(!isOpen);
-    };
     // 날짜 데이터 확정 이벤트
     const handleDateSubmit = () => {
-        console.log('DateSubmit!!!');
-        // 아래 수행할 함수 실행
-        setDatePicked((prevState) => !prevState);
+        onDateChange(fromDateState?.toDate(), endDateState?.toDate());
+        dateContextChange();
+        handlePopoverOff(); // popover 이벤트 종료
     };
     // 날짜 초기화 이벤트
     const resetDateRange = () => {
-        setFromD(null);
-        setEndD(null);
-        setBtnText('날짜범위');
-        setIsOpen(false);
-        setDatePicked(false);
-        setDayRecoil((prevVal) => ({
-            ...prevVal,
-            startDate: undefined,
-            endDate: undefined,
-        }));
+        setFromDateState(null);
+        setEndDateState(null);
+        setButtonText(defaultText);
+        onDateChange(undefined, undefined);
+        onReset();
     };
 
     /* JSX 컴포넌트 */
 
     // submit 버튼
     const dateSubmitBtn = (
-        <Button className={clsN(styles['date-range__btn-submit'])} onClick={handleDateSubmit}>
-            확인
+        <Button
+            className={clsN(styles['date-range__button'], styles['date-range__button-submit'])}
+            onClick={handleDateSubmit}
+            variant="contained"
+        >
+            Done
+        </Button>
+    );
+    // reset 버튼
+    const dateResetIconButton = (
+        <Button
+            className={clsN(styles['date-range__button'], styles['date-range__button-clear'])}
+            onClick={resetDateRange}
+            variant="outlined"
+        >
+            Clear
         </Button>
     );
     // 받은 인자로 DatePicker 컴포넌트 반환
     const DatePickerRender = (
         <Paper className={clsN(styles.background)} elevation={0}>
-            <Stack direction="row" alignItems="center" boxShadow="none" bgcolor="transparent">
+            <Stack
+                direction="row"
+                alignItems="center"
+                boxShadow="none"
+                bgcolor="transparent"
+                className={clsN(styles['date-picker-wrapper'])}
+            >
                 <DatePicker
                     label={dateLabels[0]}
-                    className={clsN(styles['date-range__picker'], pickerClsN)}
-                    value={fromD}
-                    onChange={(newValue) => {
-                        setFromD(newValue);
+                    className={clsN(styles['date-picker-wrapper__picker'], pickerClsN)}
+                    value={fromDateState}
+                    onChange={handleStartDateChange}
+                    classes={{
+                        root: styles[''],
                     }}
                 />
-                <p className={clsN(styles['date-range__picker__separator'])} />
+                <p className={clsN(styles['date-picker-wrapper__seperator'])} />
                 <DatePicker
                     label={dateLabels[1]}
-                    className={clsN(styles['date-range__picker'], pickerClsN)}
-                    value={endD}
-                    onChange={(newValue) => setEndD(newValue)}
+                    className={clsN(styles['date-picker-wrapper__picker'], pickerClsN)}
+                    value={endDateState}
+                    onChange={handleEndDateChange}
                 />
             </Stack>
         </Paper>
     );
 
     // date picker 컴포넌트를 지역에 맞게 양식을 수정하고 배포
-    const DatePickerProvider = (
-        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ko">
-            <Stack
-                className={clsN(isOpen ? styles['date-range--open'] : styles['date-range'], className)}
-                direction="row"
-                boxShadow={3}
-            >
-                {DatePickerRender}
-                {dateSubmitBtn}
-            </Stack>
-        </LocalizationProvider>
+    const DatePickerPopover = (
+        <Popover
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handlePopoverOff}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+            }}
+            className={clsN(styles.popover)}
+            classes={{
+                paper: styles.popover__paper,
+            }}
+        >
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ko">
+                <Stack className={clsN(styles['date-range'], className)} direction="row" boxShadow={3}>
+                    {DatePickerRender}
+                    <Stack gap={1} direction="row" className={clsN(styles['date-range__confirm'])}>
+                        {dateResetIconButton}
+                        {dateSubmitBtn}
+                    </Stack>
+                </Stack>
+            </LocalizationProvider>
+        </Popover>
     );
     // 날짜조회 드롭다운 버튼 컴포넌트
     const DateRangeBtn = (
         <Button
-            className={clsN({
-                [styles['date-range-stack__button']]: true,
-                [styles['date-range-stack__button--on']]: isOpen,
-                [styles['date-range-stack__button--off']]: !isOpen,
-            })}
+            id={inputLabelId}
+            className={clsN(styles['date-range-stack__button'])}
             startIcon={<CalendarMonth />}
-            endIcon={isOpen ? <ArrowDropUp /> : <ArrowDropDown />}
-            onClick={handleDateOpen}
+            endIcon={open ? <ArrowDropUp /> : <ArrowDropDown />}
+            onClick={handlePopoverClick}
             size="medium"
         >
-            {btnText}
+            {buttonText}
         </Button>
     );
 
-    React.useEffect(() => {
-        const result = compareDate(fromD, endD);
-        if (result == null) {
-            setBtnText('날짜범위');
-        } else {
-            fixDateState(result);
-            setButtonContext();
-            updateDateRecoil();
-        }
-        setIsOpen(false);
-        setDatePicked(false);
-        console.log(`current day from : ${dayRecoil.startDate}, current day end ${dayRecoil.endDate}`);
-    }, [datePicked]);
-
-    React.useEffect(() => {
-        if (resetTrigger) {
-            resetDateRange();
-        }
-    }, [resetTrigger, setDayRecoil]);
-
     return (
-        <Stack className={clsN(styles['date-range-stack'])}>
-            {DateRangeBtn}
-            {DatePickerProvider}
-        </Stack>
+        <Box className={clsN(styles['date-range-stack'], rootClsN)} gap={1}>
+            <FormControl variant="standard" className={clsN(styles['date-range-stack__label'])}>
+                <InputLabel shrink htmlFor={inputLabelId}>
+                    {inputLabel}
+                </InputLabel>
+                {DateRangeBtn}
+            </FormControl>
+            {DatePickerPopover}
+        </Box>
     );
 };
 DateRange.defaultProps = {
