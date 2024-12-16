@@ -1,0 +1,10 @@
+@import "../../../../index.css";
+
+.table{
+  &__head{
+    &__cell{
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}

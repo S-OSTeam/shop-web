@@ -1,4 +1,6 @@
 /* 헤더 높이 전역변수 정하기 */
+@import "index";
+
 .nav{
   box-sizing: border-box;
   &__logo{
@@ -20,5 +22,37 @@
 }
 // 애니메이션
 .hover{
+
+}
+
+// 300px ~
+@include media-breakpoint-up(xxs) {
+
+}
+
+// 360px ~
+@include media-breakpoint-up(xs) {
+
+}
+
+// 480px ~
+@include media-breakpoint-up(sm) {
+
+}
+
+// 768px ~
+@include media-breakpoint-up(md) {
+
+}
+// 980px
+@include media-breakpoint-up(lg){
+
+}
+// 1080px
+@include media-breakpoint-up(xl){
+
+}
+// 1400px
+@include media-breakpoint-up(xxl){
 
 }

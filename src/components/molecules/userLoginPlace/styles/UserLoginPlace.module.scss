@@ -1,6 +1,17 @@
 @import "index";
 
 .stack{
+  width: 100%;
+  &__icon{
+    color:white;
+  }
+  &__drawer{
+    box-sizing: border-box;
+    margin-right: auto;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.09);
+    aspect-ratio: 1/1;
+  }
   &__notify{
 
   }

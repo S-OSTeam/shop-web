@@ -9,13 +9,15 @@
   max-height: inherit;
   padding: 0;
   height: 40px;
+  min-width: 88px;
 }
 
 // form Root
 .select-from{
   // label
   &__label{
-
+    background-color: white;
+    padding: 0 4px;
   }
   // select box
   &__select{

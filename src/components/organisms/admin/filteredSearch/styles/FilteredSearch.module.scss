@@ -4,8 +4,14 @@
 .filter-root{
   z-index: 50;
   width: 100%;
-  height: 40px;
-  //
+  margin-bottom: 16px;
+  gap: 12px;
+  &__field{ // searchbar, selectbox1...,2 stack
+    gap: 12px;
+    & > :first-child{
+      flex-grow: 1;
+    }
+  }
   &__button{
     margin-left: auto;
     text-wrap: nowrap;
@@ -13,23 +19,20 @@
       text-wrap: nowrap;
     }
     &__clear{
-      background-color: rgba(0,0,0,0);
-      border-color: $background-dimgray;
-      color: $color-text-dimgray;
       &:hover{
-        background-color: $background-dimgray;
-        color: $color-text-white;
-        border-color: $background-dimgray;
       }
     }
     &__search{
-      margin-left: 4px;
-      background-color: $background-primary;
-      color: $color-text-white;
       &:hover{
-        background-color: $background-hover;
       }
     }
+  }
+}
+
+// dateRange Wrapper 영역
+.date-range-box{
+  display: flex;
+  &__calender{
   }
 }
 
@@ -39,7 +42,225 @@
   padding: 16px;
   border-radius: 4px;
   background-color: white;
-  width: fit-content;
   &__picker{
+  }
+}
+// TODO : 관리자 검색 버튼 스타일 수정
+// submitButton area
+.submit{
+  padding-top: 12px;
+  flex-direction: column;
+  gap: 8px;
+  &__button{ // 버튼
+    &-clear{ // 취소
+      &:hover{
+      }
+    }
+    &-search{ // 검색
+      &:active{
+
+      }
+      &:hover{
+
+      }
+    }
+  }
+}
+
+// 300px ~
+@include media-breakpoint-up(xxs) {
+  .filter-root{
+    &__field{ // searchbar, selectbox1...,2 stack
+
+    }
+    &__button{
+      &__date{
+      }
+      &__clear{
+        &:hover{
+        }
+      }
+      &__search{
+        margin-left: 0;
+        &:hover{
+        }
+      }
+    }
+  }
+  // dateRange Wrapper 영역
+  .date-range-box{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .date-range{
+    &__picker{
+      width: fit-content;
+    }
+  }
+  // submitButton area
+  .submit{
+    &__button{ // 버튼
+      &-clear{ // 취소
+        &:hover{
+        }
+      }
+      &-search{ // 검색
+        &:active{
+
+        }
+        &:hover{
+
+        }
+      }
+    }
+  }
+}
+
+
+// 360px ~
+@include media-breakpoint-up(xs) {
+  .filter-root{
+    &__button{
+      &__date{
+      }
+      &__clear{
+        &:hover{
+        }
+      }
+      &__search{
+        margin-left: 0;
+        &:hover{
+        }
+      }
+    }
+  }
+  // submitButton area
+  .submit{
+    &__button{ // 버튼
+      &-clear{ // 취소
+        &:hover{
+        }
+      }
+      &-search{ // 검색
+        &:active{
+
+        }
+        &:hover{
+
+        }
+      }
+    }
+  }
+}
+
+// 480px ~
+@include media-breakpoint-up(sm) {
+  .filter-root{
+
+    &__button{
+      &__date{
+      }
+      &__clear{
+        &:hover{
+        }
+      }
+      &__search{
+        &:hover{
+        }
+      }
+    }
+  }
+}
+
+// 768px ~
+@include media-breakpoint-up(md) {
+  .filter-root{
+
+    &__field{ // searchbar, selectbox1...,2 stack
+      flex-direction: row;
+      & > :first-child{
+        flex-grow: inherit;
+      }
+      &__form{
+
+      }
+    }
+    &__button{
+      &__date{
+      }
+      &__clear{
+        &:hover{
+        }
+      }
+      &__search{
+        &:hover{
+        }
+      }
+    }
+  }
+  // dateRange Wrapper 영역
+  .date-range-box{
+    flex-direction: row;
+    &__picker{
+
+    }
+    &__calender{
+    }
+  }
+  .submit{
+    flex-direction: row;
+  }
+
+}
+// 980px
+@include media-breakpoint-up(lg){
+  .filter-root{
+    &__button{
+      &__date{
+      }
+      &__clear{
+        &:hover{
+        }
+      }
+      &__search{
+        &:hover{
+        }
+      }
+    }
+  }
+}
+// 1080px
+@include media-breakpoint-up(xl){
+  .filter-root{
+    &__button{
+      &__date{
+      }
+      &__clear{
+        &:hover{
+        }
+      }
+      &__search{
+        &:hover{
+        }
+      }
+    }
+  }
+}
+// 1400px
+@include media-breakpoint-up(xxl){
+  .filter-root{
+    &__button{
+      &__date{
+      }
+      &__clear{
+        &:hover{
+        }
+      }
+      &__search{
+        &:hover{
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,17 @@
+@import "index";
+
+.paper{
+  padding: 16px;
+  &__heading{
+    padding: 0;
+  }
+  &__title{
+    @include font-size(headline2);
+  }
+
+}
+
+// for minimum-phone
+@include media-breakpoint-up(xxs){
+
+}

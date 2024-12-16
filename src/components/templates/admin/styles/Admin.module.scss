@@ -156,6 +156,15 @@
   height: 100vh;
 }
 
+/* 컨텐츠 블럭 */
+.content{
+  box-sizing: border-box;
+  padding: 16px;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
 /* child-padding */
 .child-padding{
   padding:16px;

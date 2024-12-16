@@ -1,0 +1,10 @@
+@import "../../../../../index.css";
+
+.table-row{
+  &__cell{
+    &:last-of-type{
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}

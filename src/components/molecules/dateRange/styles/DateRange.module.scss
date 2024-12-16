@@ -2,63 +2,145 @@
 
 // 실질적인 root
 .date-range-stack{
-  z-index: 50;
-  position: relative;
-  height: 100%;
-  // 130px ~ 260px
+
+  &__label{
+    padding-top: 20px;
+    width: 100%;
+  }
   &__button{
-    position: relative;
-    width: fit-content;
-    height: 100%;
     text-wrap: nowrap;
     text-overflow: ellipsis;
-    &--on{
 
-    }
-    &--off{
-
-    }
   }
 }
 
 .date-range {
-  visibility: hidden;
   padding: 8px;
   align-items: center;
-  position: absolute;
   &__picker {
-    width: 180px;
+    flex-grow: 1;
     &:first-child {
       //margin-right: 8px;
     }
     &:last-child {
       //margin-left: 8px;
     }
-    // 구분선
-    &__separator{
-      display: block;
-      margin: 0 8px;
-      width: 8px;
-      height: 1px;
-      background-color: $background-dimgray;
-      border-radius: 2px;
-    }
+
   }
-  &--open{
-    visibility: visible;
-    position: absolute;
-    top: calc(100% + 8px);
+  &__confirm{ // stack root
+    width: 100%;
   }
   // 확인 버튼
-  &__btn-submit{
-    margin-left: 8px;
+  &__button{
+    &-clear{
+
+    }
+    &-submit {
+
+    }
   }
-  &__btn-reset{
+}
+.background{
+  width: 100%;
+}
+.date-picker-wrapper{
+  width: 100%;
+  :global(.MuiFormControl-root){ // global 선택자를 통해 일치하는 클래스 명에 접속
+    width: 100%;
+  }
+  &__picker{
+  }
+  &__seperator{
+    display: block;
+    margin: 0 8px;
+    width: 8px;
+    height: 1px;
+    background-color: $background-dimgray;
+    border-radius: 2px;
+  }
+}
+.popover{
+  width: 100%;
+
+  &__paper{
+    width: 100%;
+  }
+}
+// 300px~
+@include media-breakpoint-up(xxs)  {
+  .date-range{
+    &__confirm{ // stack root
+      width: 100%;
+      padding: 0 4px;
+    }
+    // 확인 버튼
+    &__button{
+      flex-grow: 1;
+      &-clear{
+
+      }
+      &-submit {
+
+      }
+    }
+  }
+  .background{
+  }
+  .date-range{
+    flex-direction: column;
+    gap: 16px;
+  }
+  .date-picker-wrapper{ // 달력 컴포넌트 감싸는 영역
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 4px 0;
+    &__picker{
+      flex-grow: 1;
+      margin: inherit;
+      width: fit-content;
+    }
+    &__seperator{
+      flex-grow: 1;
+    }
+  }
+  .popover{ // popover 컴포넌트
+    width: 100%;
 
   }
 }
-
-.background{
-  box-shadow: none;
+// 768px ~ 테블릿
+@include media-breakpoint-up(md)  {
+  .popover{
+    width: inherit;
+    &__paper{
+      width: inherit;
+    }
+  }
+  .date-picker-wrapper{
+    width: inherit;
+    padding:0;
+    flex-direction: row;
+    gap: 0;
+    :global(.MuiFormControl-root){ // global 선택자를 통해 일치하는 클래스 명에 접속
+      width: 200px;
+    }
+    &__picker{
+      width: 200px;
+    }
+    &__seperator{;
+    }
+  }
+  .date-range{
+    flex-direction: row;
+    &__confirm{ // stack root
+      width: inherit;
+      padding: 0 4px;
+    }
+    // 확인 버튼
+    &__button{
+      flex-grow: inherit;
+    }
+  }
 
 }

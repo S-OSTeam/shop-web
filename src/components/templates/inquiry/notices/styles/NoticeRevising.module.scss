@@ -1,0 +1,47 @@
+@import "index";
+
+// root - 공지사항
+.notices-t {
+}
+
+
+// 헤딩 타이틀
+.headline{
+  &__subline{ // 부제목
+
+  }
+}
+
+// 300px ~
+@include media-breakpoint-up(xxs)  {
+  // 헤딩 타이틀
+  .headline{
+    &__subline{ // 부제목
+      padding-top: 4px;
+    }
+  }
+}
+
+// 360px ~
+@include media-breakpoint-up(xs){
+
+}
+// 480px ~
+@include media-breakpoint-up(sm){
+
+}
+// 768px ~
+@include media-breakpoint-up(md) {
+}
+// 980px
+@include media-breakpoint-up(lg){
+
+}
+// 1080px
+@include media-breakpoint-up(xl){
+
+}
+// 1400px
+@include media-breakpoint-up(xxl){
+
+}
