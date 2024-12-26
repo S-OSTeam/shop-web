@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import CartTable from '@organisms/shopping/list/CartTable';
 import Calculation from '@organisms/shopping/calculate/Calculation';
 import { Stack } from '@mui/material';
+import tmp from '@asset/image/icons/NaverIcon.svg';
 
 interface CartItem {
     id: string;
+    img: string;
     name: string;
     price: number;
     quantity: number;
@@ -15,15 +17,9 @@ const Shopping = () => {
     const [items, setItems] = useState<CartItem[]>([
         {
             id: '1',
+            img: tmp,
             name: '아무튼 이를 준나 긴 애니 피규어 준나줄나줄나줄길',
             price: 200000,
-            quantity: 1,
-            checked: false,
-        },
-        {
-            id: '2',
-            name: '으악os가 너무 싫어요 싫어싫어ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ',
-            price: 400000,
             quantity: 1,
             checked: false,
         },

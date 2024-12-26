@@ -25,3 +25,12 @@ export const EmptyCategoryTreeResponse: ItemCategoryTreeResponse[] = [
         children: [],
     },
 ];
+export interface CartResponse {
+    title: string;
+    content: string;
+    price: number;
+    image: string;
+    itemId: string;
+    cnt: number;
+    check: boolean;
+}

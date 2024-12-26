@@ -11,6 +11,8 @@ import {
     useMediaQuery,
     Container,
 } from '@mui/material';
+import Image from '@atoms/source/image/Image';
+
 import CheckBox from '@atoms/checkBox/CheckBox';
 import QuantityControlButton from '@molecules/button/quantityButton/quantityControlButton';
 import Button from '@atoms/button/Button';
@@ -20,6 +22,7 @@ import styles from './styles/CartTabel.module.scss';
 interface CartTableProps {
     items: Array<{
         id: string;
+        img: string;
         name: string;
         price: number;
         quantity: number;
@@ -34,7 +37,7 @@ interface CartTableProps {
 
 const CartTable = ({ items, selectAll, onSelectAll, onItemCheck, onQuantityChange, onCouponClick }: CartTableProps) => {
     const theme = useTheme();
-
+    console.log(items);
     const isMobile = useMediaQuery(theme.breakpoints.down(768));
 
     const handleSelectAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,11 +58,16 @@ const CartTable = ({ items, selectAll, onSelectAll, onItemCheck, onQuantityChang
                             <TableCell padding="checkbox" className={styles.checkboxCell}>
                                 <CheckBox name="select-all" checked={selectAll} onChange={handleSelectAllChange} />
                             </TableCell>
-                            <TableCell className={styles.productNameColumn}>상품명</TableCell>
+                            <TableCell align="center" className={styles.productImgCell}>
+                                이미지
+                            </TableCell>
+                            <TableCell align="center" className={styles.productNameColumn}>
+                                상품명
+                            </TableCell>
                             <TableCell align="center" className={styles.quantityColumn}>
                                 수량
                             </TableCell>
-                            <TableCell align="right" className={styles.priceColumn}>
+                            <TableCell align="center" className={styles.priceColumn}>
                                 가격
                             </TableCell>
                             <TableCell align="center" className={styles.couponColumn}>
@@ -83,6 +91,9 @@ const CartTable = ({ items, selectAll, onSelectAll, onItemCheck, onQuantityChang
                                             checked={item.checked}
                                             onChange={(e) => onItemCheck(item.id, e.target.checked)}
                                         />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Image imgPath={item.img} />
                                     </TableCell>
                                     <TableCell className={styles.productNameCell}>{item.name}</TableCell>
                                     <TableCell align="center">
