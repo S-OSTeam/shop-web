@@ -25,7 +25,6 @@ const LoginOrganisms = () => {
         query: LOGIN_REQUEST,
         type: 'mutation',
         request: { ...formData },
-        option: { 'Authorization-mac': '2C-6D-C1-87-E0-B5' },
     });
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -49,9 +48,13 @@ const LoginOrganisms = () => {
     const handleFormSubmit = useCallback(
         async (event: React.FormEvent) => {
             event.preventDefault();
-            login();
-            alert('로그인 완료');
-            navigate('/');
+            try {
+                login();
+                alert('로그인 완료');
+                navigate('/');
+            } catch (error) {
+                alert(error);
+            }
         },
         [login, navigate],
     );
