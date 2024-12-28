@@ -50,6 +50,8 @@ const LoginOrganisms = () => {
         async (event: React.FormEvent) => {
             event.preventDefault();
             login();
+            alert('로그인 완료');
+            navigate('/');
         },
         [login, navigate],
     );
