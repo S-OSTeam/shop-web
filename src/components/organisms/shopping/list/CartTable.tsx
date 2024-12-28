@@ -37,7 +37,7 @@ interface CartTableProps {
 
 const CartTable = ({ items, selectAll, onSelectAll, onItemCheck, onQuantityChange, onCouponClick }: CartTableProps) => {
     const theme = useTheme();
-    console.log(items);
+
     const isMobile = useMediaQuery(theme.breakpoints.down(768));
 
     const handleSelectAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,18 +92,20 @@ const CartTable = ({ items, selectAll, onSelectAll, onItemCheck, onQuantityChang
                                             onChange={(e) => onItemCheck(item.id, e.target.checked)}
                                         />
                                     </TableCell>
-                                    <TableCell>
-                                        <Image imgPath={item.img} />
+                                    <TableCell className={styles.productImg}>
+                                        <Image imgPath={item.img} className={styles.productImg} />
                                     </TableCell>
                                     <TableCell className={styles.productNameCell}>{item.name}</TableCell>
-                                    <TableCell align="center">
+                                    <TableCell align="center" data-label="수량">
                                         <QuantityControlButton
                                             quantity={item.quantity}
                                             onIncrease={() => onQuantityChange(item.id, item.quantity + 1)}
                                             onDecrease={() => onQuantityChange(item.id, item.quantity - 1)}
                                         />
                                     </TableCell>
-                                    <TableCell align="right">{item.price.toLocaleString()}원</TableCell>
+                                    <TableCell align="center" data-label="가격">
+                                        {item.price.toLocaleString()}원
+                                    </TableCell>
                                     <TableCell align="center">
                                         <Button
                                             variant="outlined"

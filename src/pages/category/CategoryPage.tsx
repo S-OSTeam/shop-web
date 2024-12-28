@@ -110,6 +110,7 @@ const CategoryPage = () => {
     const onProductHandle = useCallback(
         (item: ItemInterface) => {
             const encodedPublicId = btoa(item.publicId.toString()).slice(0, -1);
+
             navigation(`${Path.product}?publicId=${encodedPublicId}`, {
                 state: { productItem: item },
             });
