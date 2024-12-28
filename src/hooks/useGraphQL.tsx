@@ -39,7 +39,11 @@ const useGraphQL = <T,>({ query, request, type, option }: graphQLProps<T>) => {
         return useLazyQuery(query, {
             context: {
                 headers: { ...option },
+                fetchOptions: {
+                    credentials: 'include',
+                },
             },
+            fetchPolicy: 'network-only',
             variables: {
                 request: { ...request },
             },
