@@ -8,13 +8,22 @@ import styles from './styles/ModalEditor.module.scss';
 
 interface ModalEditorProps {
     /* 제목 입력란 혹은 카테고리가 필요할 수 있음 */
-    requireTitle?: boolean; // 제목 입력란 여부
-    title?: string; // 제목 입력란 여부
-    onTitleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // 제목 입력 이벤트
-    initialValue?: string; // 에디터 시작 컨텐츠
-    open: boolean; // 모달 상태
-    onClose: (event: Event, reason: 'backdropClick' | 'escapeKeyDown') => void; // 모달 종료 이벤트
-    buttonItems: ButtonProps[]; // 버튼 요소
+    // 제목 입력란 여부
+    requireTitle?: boolean;
+    // 제목 입력란 여부
+    title?: string;
+    // 제목 입력 이벤트
+    onTitleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    // 에디터 시작 컨텐츠
+    initialValue?: string;
+    // 모달 상태
+    open: boolean;
+    // 모달 종료 이벤트
+    onClose: (event: Event, reason: 'backdropClick' | 'escapeKeyDown') => void;
+    // 버튼 요소
+    buttonItems: ButtonProps[];
+    // 저장 이벤트 : 콜백 함수
+    onSave?: (content: string) => void;
 }
 
 export const ModalEditor = ({ ...props }: ModalEditorProps) => {
@@ -29,8 +38,16 @@ export const ModalEditor = ({ ...props }: ModalEditorProps) => {
     // 에디터 입력 이벤트
     const handleEditorChange = React.useCallback((content: string) => {
         setEditorContent(content);
-        console.log(editorContent);
     }, []);
+
+    // Save 이벤트
+    const handleSave = () => {
+        if (props.onSave) {
+            // 해당 함수 존재할 경우
+            props.onSave(editorContent); // 콜백 호출
+        }
+    };
+
     // 제목 상태 입력 이벤트가 느려서 메모이제이션 활용하기
     const titleArea = props.requireTitle && (
         <Box className={clsN(styles.paper__input)}>
@@ -47,6 +64,20 @@ export const ModalEditor = ({ ...props }: ModalEditorProps) => {
             />
         </Box>
     );
+
+    // save 버튼 JSX
+    const buttonItems = props.buttonItems.map((button) => {
+        // props.buttonItems <ButtonProps>[] 속성을 매핑하면서 특정 이름을 가진 속성의 함수를 수정
+        if (button.name === 'save') {
+            // 버튼 속성 이름이 save 일 경우
+            return {
+                ...button,
+                onClick: handleSave, // 콜백함수 추가
+            };
+        }
+        return button;
+    });
+
     // 렌더
     return (
         <Modal open={props.open} onClose={props.onClose}>
@@ -54,7 +85,7 @@ export const ModalEditor = ({ ...props }: ModalEditorProps) => {
                 <Box className={clsN(styles.paper__editor)}>
                     {titleArea}
                     <TinyEditorBasicComponent initialValue={props.initialValue} onEditorChange={handleEditorChange} />
-                    <ButtonGroup rootPaperClsN={clsN(styles['paper__button-group'])} buttonItems={props.buttonItems} />
+                    <ButtonGroup rootPaperClsN={clsN(styles['paper__button-group'])} buttonItems={buttonItems} />
                 </Box>
             </Stack>
         </Modal>
