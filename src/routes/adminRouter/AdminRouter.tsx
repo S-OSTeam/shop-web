@@ -5,6 +5,7 @@ import Dashboard from '@pages/manager/dashboard/Dashboard';
 import { Notices } from '@pages/manager/inquiry/notices/Notices';
 import { AdminFaq } from '@pages/manager/inquiry/faq/Faq';
 import { Management } from '@pages/product/managment/Management';
+import { ProductRegister } from '@pages/product/register/ProductRegister';
 
 // 관리자 페이지 모듈화
 export const AdminRouter = () => {
@@ -15,6 +16,7 @@ export const AdminRouter = () => {
             <Route path="faq" element={<AdminFaq />} />
             <Route path="notices" element={<Notices />} />
             <Route path="prodmgt" element={<Management />} />
+            <Route path="prodpost" element={<ProductRegister />} />
         </Routes>
     );
 };
