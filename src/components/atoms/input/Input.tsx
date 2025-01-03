@@ -33,6 +33,7 @@ interface InputProps {
     type?: React.InputHTMLAttributes<unknown>['type'];
     // ref
     ref?: TextFieldProps['ref'];
+    required?: TextFieldProps['required'];
 }
 
 export const Input = ({
@@ -50,6 +51,7 @@ export const Input = ({
     type,
     inputVal,
     ref,
+    required,
 }: InputProps) => {
     return (
         <TextField
@@ -73,6 +75,7 @@ export const Input = ({
             multiline={multiline}
             fullWidth={fullWidth}
             type={type} // TextField에 type 속성 전달
+            required={required}
         />
     );
 };
