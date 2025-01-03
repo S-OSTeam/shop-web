@@ -1,0 +1,15 @@
+@import "index";
+
+.template{
+  &__headline{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    &__heading{
+      text-align: center;
+    }
+    &__subtitle{
+      text-align: center;
+    }
+  }
+}

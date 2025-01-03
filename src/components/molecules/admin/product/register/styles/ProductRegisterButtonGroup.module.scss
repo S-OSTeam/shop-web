@@ -1,0 +1,61 @@
+@import "index";
+
+.product-register{
+  padding: 0 20%;
+  &__button{
+    width: 100%;
+    aspect-ratio: 1/1;
+    gap: 12px;
+    background-color: $background-navy;
+    border-radius: 4px;
+    // 호버 및 클릭 스타일
+    &:hover{
+      background-color: rgb(38, 61, 100);
+    }
+    &__icon{
+      @include font-size(headline1);
+
+    }
+    &__label{
+      @include font-size(subtitle1);
+    }
+    &__icon, &__label{
+      color: $color-text-white;
+    }
+  }
+}
+
+// 300px ~
+@include media-breakpoint-up(xxs)  {
+
+}
+
+// 360px ~
+@include media-breakpoint-up(xs)  {
+
+}
+
+// 480px ~
+@include media-breakpoint-up(sm)  {
+
+}
+
+// 760px ~
+@include media-breakpoint-up(md)  {
+
+}
+
+// 980px ~
+@include media-breakpoint-up(lg)  {
+
+}
+
+// 1080px ~
+@include media-breakpoint-up(xl)  {
+
+}
+
+// 1400px ~
+@include media-breakpoint-up(xxl)  {
+
+}

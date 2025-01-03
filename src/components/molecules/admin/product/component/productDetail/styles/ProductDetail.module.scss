@@ -1,0 +1,45 @@
+@import "index";
+
+.text{
+  padding: 26px 0 16px;
+  text-align: center;
+  @include font-size(headline2);
+}
+.button{
+  @include font-size(headline3);
+  width: 200px;
+}
+// 300px ~
+@include media-breakpoint-up(xxs)  {
+
+}
+
+// 360px ~
+@include media-breakpoint-up(xs)  {
+
+}
+
+// 480px ~
+@include media-breakpoint-up(sm)  {
+
+}
+
+// 760px ~
+@include media-breakpoint-up(md)  {
+
+}
+
+// 980px ~
+@include media-breakpoint-up(lg)  {
+
+}
+
+// 1080px ~
+@include media-breakpoint-up(xl)  {
+
+}
+
+// 1400px ~
+@include media-breakpoint-up(xxl)  {
+
+}

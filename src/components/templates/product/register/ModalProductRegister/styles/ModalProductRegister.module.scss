@@ -1,0 +1,22 @@
+@import './index';
+
+.modal{
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  &-box{
+    padding: 40px;
+    width: 100%;
+    overflow-y: scroll;
+    &__content{
+      padding: 24px;
+    }
+  }
+}
+
+.component-headline{
+  @include font-size(headline1)
+}
+.section-headline{
+  @include font-size(headline2)
+}
