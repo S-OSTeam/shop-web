@@ -26,10 +26,10 @@ const Form = ({ formInfo }: FormProps) => {
 
     const {
         register,
-        handleSubmit,
         watch,
         formState: { errors },
     } = useForm({
+        mode: 'onChange',
         defaultValues: {
             userId: '',
             pwd: '',
@@ -42,8 +42,6 @@ const Form = ({ formInfo }: FormProps) => {
     const watchPassword = watch('pwd');
     const watchZipcode = watch('zipcode');
     const watchEmail = watch('email');
-    const confirmPwdValue = watch('confirmPwd');
-    const passwordError = confirmPwdValue !== watchPassword ? '비밀번호가 일치하지 않습니다.' : '';
     const [timeLeft, setTimeLeft] = useState(0);
     const [emailModalOpen, setEmailModalOpen] = useState(false);
     const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -86,6 +84,9 @@ const Form = ({ formInfo }: FormProps) => {
             'Authorization-mac': '2C-6D-C1-87-E0-B5',
         },
     });
+    useEffect(() => {
+        console.log('Errors:', errors);
+    }, [errors]);
 
     useEffect(() => {
         let timer: number;
@@ -145,12 +146,16 @@ const Form = ({ formInfo }: FormProps) => {
                         InputLabelProps={{
                             shrink: true,
                         }}
+                        inputProps={{
+                            maxLength: 20,
+                        }}
                         {...register('userId', {
                             required: '아이디는 필수 입력 항목입니다.',
                             pattern: {
                                 value: /^[a-z]+[a-z0-9]{5,20}$/,
                                 message: '아이디는 5-20자의 영문, 숫자가 가능합니다.',
                             },
+                            validate: (value) => value.length <= 20 || '아이디는 최대 20자까지 입력 가능합니다.',
                         })}
                         error={!!errors.userId}
                         helperText={errors.userId?.message}
@@ -170,6 +175,9 @@ const Form = ({ formInfo }: FormProps) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    inputProps={{
+                        maxLength: 20,
+                    }}
                     {...register('pwd', {
                         required: '비밀번호는 필수 입력 항목입니다.',
                         pattern: {
@@ -188,6 +196,9 @@ const Form = ({ formInfo }: FormProps) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    inputProps={{
+                        maxLength: 20,
+                    }}
                     {...register('confirmPwd', {
                         required: '비밀번호 확인은 필수 입력 항목입니다.',
                         validate: (value) => value === watchPassword || '비밀번호가 일치하지 않습니다.',
@@ -202,6 +213,9 @@ const Form = ({ formInfo }: FormProps) => {
                         type="email"
                         InputLabelProps={{
                             shrink: true,
+                        }}
+                        inputProps={{
+                            maxLength: 50,
                         }}
                         {...register('email', {
                             required: '이메일은 필수 입력 항목입니다.',
@@ -220,10 +234,13 @@ const Form = ({ formInfo }: FormProps) => {
                 <Divider className={clsN(`${style['form-wrapper__divider']}`)}></Divider>
                 <Box className={clsN(`${style['form-wrapper__outer__display']}`)}>
                     <TextField
-                        className={clsN(`${style['form-wrapper__email']}`)}
+                        className={clsN(`${style['form-wrapper__id']}`)}
                         label="인증번호"
                         InputLabelProps={{
                             shrink: true,
+                        }}
+                        inputProps={{
+                            maxLength: 6,
                         }}
                         {...register('zipcode', {
                             required: '인증번호를 입력해주세요.',
