@@ -1,89 +1,44 @@
 /* eslint-disable*/
 import React, { useState, useEffect } from 'react';
+// import { useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import Modal from '@components/molecules/modal/Modal';
-import { Box, Divider, TextField } from '@mui/material';
-import clsN from 'classnames';
-import Button from '@components/atoms/button/Button';
-import style from './style/style.module.scss';
-import useGraphQL from '@hooks/useGraphQL';
-import { InputAdornment } from '@mui/material';
-import {
-    CHECK_VERIFY_CODE_BY,
-    SEND_VERIFY_CODE_REQUEST,
-    CHECK_DUPLICATE_USER,
-} from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { useRecoilState } from 'recoil';
+import { signUpState } from '@recoil/atoms/signup/signupAtom';
+import { useSignUpMutation } from '@hooks/signup/useSignUpMutation';
+import Modal from '@molecules/modal/Modal';
 import { FormDataInterface } from '@interface/FormDataInterface';
-import { useLocation } from 'react-router-dom';
+import Button from '@atoms/button/Button';
+import { Box, Divider, TextField, InputAdornment } from '@mui/material';
+import clsN from 'classnames';
+import style from './style/style.module.scss';
 
 interface FormProps {
     formInfo: (formData: FormDataInterface) => void;
 }
 
-const Form = ({ formInfo }: FormProps) => {
-    const location = useLocation();
-    const snsValue = location.state?.sns || 'NORMAL';
+const AccountInfoForm = ({ formInfo }: FormProps) => {
+    // const location = useLocation();
+    // const snsValue = location.state?.sns || 'NORMAL';
+    const [signUpData, setSignUpData] = useRecoilState(signUpState);
+    const { checkDuplicateUser, sendEmailVerification, checkEmailVerification } = useSignUpMutation();
 
     const {
         register,
         watch,
+        setValue,
         formState: { errors },
     } = useForm({
         mode: 'onChange',
-        defaultValues: {
-            userId: '',
-            pwd: '',
-            confirmPwd: '',
-            email: '',
-            zipcode: '',
-        },
+        defaultValues: signUpData,
     });
 
     const watchPassword = watch('pwd');
-    const watchZipcode = watch('zipcode');
-    const watchEmail = watch('email');
     const [timeLeft, setTimeLeft] = useState(0);
     const [emailModalOpen, setEmailModalOpen] = useState(false);
     const [authModalOpen, setAuthModalOpen] = useState(false);
     const [authErrorModalOpen, setAuthErrorModalOpen] = useState(false);
     const [emptyCodeModalOpen, setEmptyCodeModalOpen] = useState(false);
 
-    const { refetch: sendMailRefetch } = useGraphQL({
-        query: SEND_VERIFY_CODE_REQUEST,
-        type: 'mutation',
-        request: {
-            email: watchEmail,
-            verifyType: 'SIGNUP',
-        },
-        option: {
-            'Authorization-mac': '2C-6D-C1-87-E0-B5',
-        },
-    });
-
-    const { refetch: sendCheckRefetch } = useGraphQL({
-        query: CHECK_VERIFY_CODE_BY,
-        type: 'mutation',
-        request: {
-            email: watchEmail,
-            verifyCode: watchZipcode,
-            verifyType: 'SIGNUP',
-        },
-        option: {
-            'Authorization-mac': '2C-6D-C1-87-E0-B5',
-        },
-    });
-
-    const { refetch: checkDuplicateId } = useGraphQL({
-        query: CHECK_DUPLICATE_USER,
-        type: 'mutation',
-        request: {
-            userId: watch('userId'),
-            sns: snsValue,
-        },
-        option: {
-            'Authorization-mac': '2C-6D-C1-87-E0-B5',
-        },
-    });
     useEffect(() => {
         console.log('Errors:', errors);
     }, [errors]);
@@ -96,9 +51,9 @@ const Form = ({ formInfo }: FormProps) => {
         return () => clearTimeout(timer);
     }, [timeLeft]);
 
-    const onSubmit = async (data: any) => {
+    const handleCheckEmail = async (data: any) => {
         try {
-            await sendCheckRefetch({ variables: { email: data.email, verifyCode: data.zipcode } });
+            await checkEmailVerification();
             setAuthModalOpen(true);
             setTimeLeft(0);
             formInfo(data);
@@ -109,17 +64,16 @@ const Form = ({ formInfo }: FormProps) => {
 
     const handleEmailSend = async () => {
         try {
-            await sendMailRefetch();
-            setEmailModalOpen(true);
-            setTimeLeft(270);
+            await sendEmailVerification();
+            alert('인증 이메일이 전송되었습니다.');
         } catch (error) {
-            setAuthErrorModalOpen(true);
+            alert('이메일 전송 실패.');
         }
     };
 
     const handleDuplicateCheck = async () => {
         try {
-            const response = await checkDuplicateId();
+            const response = await checkDuplicateUser();
             if (response.data) {
                 alert('아이디 사용 가능');
             } else {
@@ -135,27 +89,29 @@ const Form = ({ formInfo }: FormProps) => {
         const seconds = timeLeft % 60;
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
+    /** ✅ 입력 데이터가 변경될 때 Recoil 상태 업데이트 */
+    const handleInputChange = (field: keyof typeof signUpData) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setSignUpData((prev) => ({ ...prev, [field]: value }));
+        setValue(field as keyof FormDataInterface, value, { shouldValidate: true, shouldDirty: true });
+    };
 
     return (
         <Box className={clsN(`${style['form-wrapper']}`)}>
             <Box className={clsN(`${style['form-wrapper__outer']}`)}>
                 <Box className={clsN(`${style['form-wrapper__outer__display']}`)}>
                     <TextField
-                        className={clsN(`${style['form-wrapper__id']}`)}
                         label="아이디"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        inputProps={{
-                            maxLength: 20,
-                        }}
+                        className={clsN(`${style['form-wrapper__id']}`)}
+                        InputLabelProps={{ shrink: true }}
+                        inputProps={{ maxLength: 20 }}
                         {...register('userId', {
                             required: '아이디는 필수 입력 항목입니다.',
                             pattern: {
                                 value: /^[a-z]+[a-z0-9]{5,20}$/,
                                 message: '아이디는 5-20자의 영문, 숫자가 가능합니다.',
                             },
-                            validate: (value) => value.length <= 20 || '아이디는 최대 20자까지 입력 가능합니다.',
+                            onChange: handleInputChange('userId'),
                         })}
                         error={!!errors.userId}
                         helperText={errors.userId?.message}
@@ -184,6 +140,7 @@ const Form = ({ formInfo }: FormProps) => {
                             value: /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\()\\-_+=]).{8,20}$/,
                             message: '비밀번호는 8-20자이며, 영문자, 숫자, 특수문자를 포함해야 합니다.',
                         },
+                        onChange: handleInputChange('pwd'),
                     })}
                     error={!!errors.pwd}
                     helperText={errors.pwd?.message}
@@ -202,6 +159,7 @@ const Form = ({ formInfo }: FormProps) => {
                     {...register('confirmPwd', {
                         required: '비밀번호 확인은 필수 입력 항목입니다.',
                         validate: (value) => value === watchPassword || '비밀번호가 일치하지 않습니다.',
+                        onChange: handleInputChange('confirmPwd'),
                     })}
                     error={!!errors.confirmPwd}
                     helperText={errors.confirmPwd?.message}
@@ -223,6 +181,7 @@ const Form = ({ formInfo }: FormProps) => {
                                 value: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,}$/,
                                 message: '유효한 이메일 주소를 입력해주세요.',
                             },
+                            onChange: handleInputChange('email'),
                         })}
                         error={!!errors.email}
                         helperText={errors.email?.message}
@@ -244,6 +203,7 @@ const Form = ({ formInfo }: FormProps) => {
                         }}
                         {...register('zipcode', {
                             required: '인증번호를 입력해주세요.',
+                            onChange: handleInputChange('zipcode'),
                         })}
                         error={!!errors.zipcode}
                         helperText={errors.zipcode?.message}
@@ -256,7 +216,10 @@ const Form = ({ formInfo }: FormProps) => {
                                 ) : null,
                         }}
                     />
-                    <Button onClick={onSubmit} className={clsN(`${style['form-wrapper__outer__display__btn']}`)}>
+                    <Button
+                        onClick={handleCheckEmail}
+                        className={clsN(`${style['form-wrapper__outer__display__btn']}`)}
+                    >
                         인증
                     </Button>
                 </Box>
@@ -298,4 +261,4 @@ const Form = ({ formInfo }: FormProps) => {
     );
 };
 
-export default Form;
+export default AccountInfoForm;
