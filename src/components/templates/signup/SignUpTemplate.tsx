@@ -65,7 +65,7 @@ const SignUpTemplate = () => {
     };
 
     return (
-        <Box>
+        <Box className={clsN(style['template-wrapper'])}>
             <Text text="회원가입" variant="subtitle1" align="center" />
 
             <AccountInfoForm formInfo={handleAccountInfo} />

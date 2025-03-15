@@ -23,53 +23,55 @@ const UserInfoForm = ({ onSubmit }: UserInfoFormProps) => {
 
     return (
         <Box component="form" onSubmit={handleSubmit(onSubmit)} className={clsN(`${style['authentication-wrapper']}`)}>
-            <Controller
-                name="name"
-                control={control}
-                rules={{
-                    required: '이름을 입력해주세요.',
-                    pattern: {
-                        value: /^[a-zA-Z가-힣]*$/,
-                        message: '이름은 영어, 한글만 허용됩니다.',
-                    },
-                }}
-                render={({ field }) => (
-                    <TextField
-                        {...field}
-                        label="성 함"
-                        className={clsN(`${style['authentication-wrapper__name']}`)}
-                        InputLabelProps={{ shrink: true }}
-                        placeholder="홍 길 동"
-                        error={!!errors.name}
-                        helperText={errors.name?.message}
-                        inputProps={{ maxLength: 50 }}
-                    />
-                )}
-            />
+            <Box className={clsN(`${style['authentication-wrapper__box']}`)}>
+                <Controller
+                    name="name"
+                    control={control}
+                    rules={{
+                        required: '이름을 입력해주세요.',
+                        pattern: {
+                            value: /^[a-zA-Z가-힣]*$/,
+                            message: '이름은 영어, 한글만 허용됩니다.',
+                        },
+                    }}
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            label="성 함"
+                            className={clsN(`${style['authentication-wrapper__name']}`)}
+                            InputLabelProps={{ shrink: true }}
+                            placeholder="홍 길 동"
+                            error={!!errors.name}
+                            helperText={errors.name?.message}
+                            inputProps={{ maxLength: 50 }}
+                        />
+                    )}
+                />
 
-            <Controller
-                name="birthDay"
-                control={control}
-                rules={{
-                    required: '생년월일을 입력해주세요.',
-                    pattern: {
-                        value: /^\d{4}-\d{2}-\d{2}$/,
-                        message: '생년월일을 올바른 형식으로 입력해주세요. (예: 1900-01-01)',
-                    },
-                }}
-                render={({ field }) => (
-                    <TextField
-                        {...field}
-                        label="생년월일"
-                        className={clsN(`${style['authentication-wrapper__birth']}`)}
-                        InputLabelProps={{ shrink: true }}
-                        placeholder="1900-01-01"
-                        error={!!errors.birthDay}
-                        helperText={errors.birthDay?.message}
-                        inputProps={{ maxLength: 10 }}
-                    />
-                )}
-            />
+                <Controller
+                    name="birthDay"
+                    control={control}
+                    rules={{
+                        required: '생년월일을 입력해주세요.',
+                        pattern: {
+                            value: /^\d{4}-\d{2}-\d{2}$/,
+                            message: '생년월일을 올바른 형식으로 입력해주세요. (예: 1900-01-01)',
+                        },
+                    }}
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            label="생년월일"
+                            className={clsN(`${style['authentication-wrapper__birth']}`)}
+                            InputLabelProps={{ shrink: true }}
+                            placeholder="1900-01-01"
+                            error={!!errors.birthDay}
+                            helperText={errors.birthDay?.message}
+                            inputProps={{ maxLength: 10 }}
+                        />
+                    )}
+                />
+            </Box>
 
             <Box className={clsN(`${style['gender-wrapper']}`)}>
                 <Divider className={clsN(`${style['gender-wrapper__divider']}`)} variant="middle" textAlign="left">
