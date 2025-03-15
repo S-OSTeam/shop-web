@@ -14,6 +14,11 @@
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  margin-top: 7rem;
+  &__title{
+    font-size: $title-font-size-S;
+    font-weight: bold;
+  }
   &__modal{
     position: absolute;
     top: 50%;
@@ -28,20 +33,27 @@
     z-index: 1000;
     text-align: center;
   }
-
-  &__btn{
+  &__btn-wrapper{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
     width: 70%;
-    height: 3rem;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: $primary-color;
-    color: $basic-font-color;
-    font-weight: bold;
-    font-size: $title-font-size-S;
-    margin-bottom: 3rem;
-
+    align-items: center;
+    &__btn{
+      width: 70%;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $primary-color;
+      color: $basic-font-color;
+      font-weight: bold;
+      font-size: $title-font-size-S;
+      margin-bottom: 3rem;
+    }
   }
+
 }
 .authentication-wrapper{
   display: flex;

@@ -66,14 +66,21 @@ const SignUpTemplate = () => {
 
     return (
         <Box className={clsN(style['template-wrapper'])}>
-            <Text text="회원가입" variant="subtitle1" align="center" />
+            <Text
+                className={clsN(style['template-wrapper__title'])}
+                text="회원가입"
+                variant="subtitle1"
+                align="center"
+            />
 
             <AccountInfoForm formInfo={handleAccountInfo} />
             <UserInfoForm onSubmit={handleUserInfo} />
             <AgreementList onChange={setCheckBox} />
 
-            <Box className={clsN(`${style['btn-wrapper']}`)}>
-                <Button onClick={signUpHandler}>회원가입</Button>
+            <Box className={clsN(`${style['template-wrapper__btn-wrapper']}`)}>
+                <Button className={clsN(`${style['template-wrapper__btn-wrapper__btn']}`)} onClick={signUpHandler}>
+                    회원가입
+                </Button>
             </Box>
 
             {/* 회원가입 성공 모달 */}
