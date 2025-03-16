@@ -33,6 +33,9 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
     });
 
     const watchPassword = watch('pwd');
+    const watchUserId = watch('userId');
+    const watchEmail = watch('email');
+    const watchZipcode = watch('zipcode');
     const [timeLeft, setTimeLeft] = useState(0);
     const [emailModalOpen, setEmailModalOpen] = useState(false);
     const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -119,6 +122,7 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                     <Button
                         onClick={handleDuplicateCheck}
                         className={clsN(`${style['form-wrapper__outer__display__btn']}`)}
+                        disabled={!!errors.userId || !watchUserId}
                     >
                         중복체크
                     </Button>
@@ -186,7 +190,11 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                         error={!!errors.email}
                         helperText={errors.email?.message}
                     />
-                    <Button onClick={handleEmailSend} className={clsN(`${style['form-wrapper__outer__display__btn']}`)}>
+                    <Button
+                        onClick={handleEmailSend}
+                        className={clsN(`${style['form-wrapper__outer__display__btn']}`)}
+                        disabled={!!errors.email || !watchEmail}
+                    >
                         전송
                     </Button>
                 </Box>
@@ -219,6 +227,7 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                     <Button
                         onClick={handleCheckEmail}
                         className={clsN(`${style['form-wrapper__outer__display__btn']}`)}
+                        disabled={!!errors.zipcode || !watchZipcode}
                     >
                         인증
                     </Button>
