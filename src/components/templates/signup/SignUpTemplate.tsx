@@ -64,8 +64,27 @@ const SignUpTemplate = () => {
     };
 
     const signUpHandler = () => {
-        console.log(signUpData);
-        refetch()
+        if (signUpData.birthday) {
+            try {
+                setSignUpData((prev) => ({
+                    ...prev,
+                    birthday: new Date(signUpData.birthday).toISOString(),
+                }));
+            } catch (error) {
+                console.error('생년월일 형식이 잘못되었습니다:', error);
+                setErrorModalOpen(true);
+                return;
+            }
+        }
+
+        console.log('요청 데이터:', signUpData);
+
+        // variables를 통해 데이터 전달
+        refetch({
+            variables: {
+                input: signUpData,
+            },
+        })
             .then(() => setAuthModalOpen(true))
             .catch(() => setErrorModalOpen(true));
     };

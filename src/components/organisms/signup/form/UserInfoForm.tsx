@@ -3,7 +3,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { Box, Divider, FormControl, Radio, RadioGroup, TextField } from '@mui/material';
 import { useRecoilState } from 'recoil';
 import { signupValidationState } from '@recoil/atoms/signup/signupValidationAtom';
-import { signUpState } from '@recoil/atoms/signup/signupAtom';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
@@ -12,7 +11,6 @@ interface UserInfoFormProps {
 }
 
 const UserInfoForm = ({ onSubmit }: UserInfoFormProps) => {
-    const [signUpData, setSignUpData] = useRecoilState(signUpState);
     const [signUpValidationState, setSignUpValidationState] = useRecoilState(signupValidationState);
     const {
         control,
@@ -30,14 +28,15 @@ const UserInfoForm = ({ onSubmit }: UserInfoFormProps) => {
     const watchFields = watch(); // 모든 필드 값 실시간 감지
     useEffect(() => {
         console.log(signUpValidationState);
-        console.log(signUpData);
-        setSignUpData((prev) => ({
-            ...prev,
-            userName: watchFields.name,
-            birthday: watchFields.birthDay, // 변환 없이 문자열 그대로 저장
-            sex: watchFields.sex === true, // 문자열 → boolean 변환
-        }));
 
+        if (watchFields.name && watchFields.birthDay) {
+            // Only trigger when we have valid data
+            onSubmit({
+                name: watchFields.name,
+                birthDay: watchFields.birthDay,
+                sex: watchFields.sex === true,
+            });
+        }
         // 유효성 검사 반영
         setSignUpValidationState((prev) => ({
             ...prev,
