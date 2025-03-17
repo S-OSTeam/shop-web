@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import AccountInfoForm from '@organisms/signup/form/AccountInfoForm';
 import AgreementList from '@organisms/signup/List/AgreementList';
 import UserInfoForm from '@organisms/signup/form/UserInfoForm';
 import clsN from 'classnames';
-import { EmptyFormDataInterface, FormDataInterface } from '@interface/FormDataInterface';
 import Button from '@atoms/button/Button';
 import Text from '@atoms/text/Text';
 import Modal from '@molecules/modal/Modal';
 import useGraphQL from '@hooks/useGraphQL';
 import { getCookie } from '@util/CookieUtil';
 import { SIGN_UP } from '@api/apollo/gql/mutations/LoginMutation.gql';
+import { signUpState } from '@recoil/atoms/signup/signupAtom';
+import { signupValidationState } from '@recoil/atoms/signup/signupValidationAtom';
 import style from './style/style.module.scss';
 
 const SignUpTemplate = () => {
@@ -20,10 +22,14 @@ const SignUpTemplate = () => {
     const snsValue = location.state?.sns || 'NORMAL';
     const snsToken = snsValue === 'NAVER' || snsValue === 'KAKAO' ? getCookie('snsToken') : '';
 
-    const [signUpData, setSignUpData] = useState<FormDataInterface>({ ...EmptyFormDataInterface, sns: snsValue });
-    const [checkBox, setCheckBox] = useState(false);
+    const [signUpData, setSignUpData] = useRecoilState(signUpState);
+
     const [authModalOpen, setAuthModalOpen] = useState(false);
     const [errorModalOpen, setErrorModalOpen] = useState(false);
+
+    const validationState = useRecoilValue(signupValidationState);
+    const isButtonEnabled =
+        validationState.isAccountValid && validationState.isUserValid && validationState.isAgreementChecked;
 
     const { refetch } = useGraphQL({
         query: SIGN_UP,
@@ -43,22 +49,22 @@ const SignUpTemplate = () => {
         phone: string;
         receiveMail: boolean;
     }) => {
-        console.log('handleAccountInfoClicked!!');
         console.log(accountData);
     };
 
     const handleUserInfo = (data: { name: string; birthDay: string; sex: boolean }) => {
-        const updatedFormData: FormDataInterface = {
-            ...signUpData, // 기존 데이터 유지
+        const formattedBirthday = new Date(data.birthDay).toISOString();
+        console.log(formattedBirthday);
+        setSignUpData((prev) => ({
+            ...prev,
             userName: data.name,
-            birthday: new Date(data.birthDay),
+            birthday: formattedBirthday,
             sex: data.sex,
-            receiveMail: checkBox,
-        };
-        setSignUpData(updatedFormData);
+        }));
     };
 
     const signUpHandler = () => {
+        console.log(signUpData);
         refetch()
             .then(() => setAuthModalOpen(true))
             .catch(() => setErrorModalOpen(true));
@@ -73,12 +79,20 @@ const SignUpTemplate = () => {
                 align="center"
             />
 
+            {/* ✅ AccountInfoForm에서 validation 상태를 부모로 전달 */}
             <AccountInfoForm formInfo={handleAccountInfo} />
+
+            {/* ✅ UserInfoForm에서 validation 상태를 부모로 전달 */}
             <UserInfoForm onSubmit={handleUserInfo} />
-            <AgreementList onChange={setCheckBox} />
+
+            <AgreementList onChange={(checked) => setSignUpData((prev) => ({ ...prev, receiveMail: checked }))} />
 
             <Box className={clsN(`${style['template-wrapper__btn-wrapper']}`)}>
-                <Button className={clsN(`${style['template-wrapper__btn-wrapper__btn']}`)} onClick={signUpHandler}>
+                <Button
+                    className={clsN(`${style['template-wrapper__btn-wrapper__btn']}`)}
+                    onClick={signUpHandler}
+                    disabled={!isButtonEnabled}
+                >
                     회원가입
                 </Button>
             </Box>

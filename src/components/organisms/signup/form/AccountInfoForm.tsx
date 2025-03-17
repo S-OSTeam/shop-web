@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { signUpState } from '@recoil/atoms/signup/signupAtom';
+import { signupValidationState } from '@recoil/atoms/signup/signupValidationAtom';
 import { useSignUpMutation } from '@hooks/signup/useSignUpMutation';
 import Modal from '@molecules/modal/Modal';
-import { FormDataInterface } from '@interface/FormDataInterface';
+import { FormDataInterface } from '@interface/signup/FormDataInterface';
 import Button from '@atoms/button/Button';
 import { Box, Divider, TextField, InputAdornment } from '@mui/material';
 import clsN from 'classnames';
@@ -26,7 +27,7 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
         register,
         watch,
         setValue,
-        formState: { errors },
+        formState: { errors, isValid },
     } = useForm({
         mode: 'onChange',
         defaultValues: signUpData,
@@ -41,10 +42,16 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
     const [authModalOpen, setAuthModalOpen] = useState(false);
     const [authErrorModalOpen, setAuthErrorModalOpen] = useState(false);
     const [emptyCodeModalOpen, setEmptyCodeModalOpen] = useState(false);
+    const [signUpValidationState, setSignUpValidationState] = useRecoilState(signupValidationState);
 
     useEffect(() => {
-        console.log('Errors:', errors);
-    }, [errors]);
+        setSignUpValidationState((prev) => ({
+            ...prev,
+            isAccountValid: isValid,
+        }));
+
+        console.log(signUpValidationState);
+    }, [isValid, setSignUpValidationState]);
 
     useEffect(() => {
         let timer: number;

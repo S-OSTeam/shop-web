@@ -12,9 +12,10 @@ import { getCookie } from '@util/CookieUtil';
 export const useSignUpMutation = () => {
     const signUpData = useRecoilValue(signUpState);
     const setSignUpData = useSetRecoilState(signUpState);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const agreement = useRecoilValue(agreementState);
-    console.log(agreement);
-    console.log(signUpData);
+    // console.log(agreement);
+    // console.log(signUpData);
     const snsToken = signUpData.sns === 'NAVER' || signUpData.sns === 'KAKAO' ? getCookie('snsToken') : '';
 
     const { refetch: signUpMutation } = useGraphQL({

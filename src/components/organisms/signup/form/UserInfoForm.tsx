@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Box, Divider, FormControl, Radio, RadioGroup, TextField } from '@mui/material';
+import { useRecoilState } from 'recoil';
+import { signupValidationState } from '@recoil/atoms/signup/signupValidationAtom';
+import { signUpState } from '@recoil/atoms/signup/signupAtom';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
@@ -9,18 +12,38 @@ interface UserInfoFormProps {
 }
 
 const UserInfoForm = ({ onSubmit }: UserInfoFormProps) => {
+    const [signUpData, setSignUpData] = useRecoilState(signUpState);
+    const [signUpValidationState, setSignUpValidationState] = useRecoilState(signupValidationState);
     const {
         control,
         handleSubmit,
-        formState: { errors },
+        watch,
+        formState: { errors, isValid },
     } = useForm({
         defaultValues: {
             name: '',
             birthDay: '',
             sex: true,
         },
+        mode: 'onChange',
     });
+    const watchFields = watch(); // 모든 필드 값 실시간 감지
+    useEffect(() => {
+        console.log(signUpValidationState);
+        console.log(signUpData);
+        setSignUpData((prev) => ({
+            ...prev,
+            userName: watchFields.name,
+            birthday: watchFields.birthDay, // 변환 없이 문자열 그대로 저장
+            sex: watchFields.sex === true, // 문자열 → boolean 변환
+        }));
 
+        // 유효성 검사 반영
+        setSignUpValidationState((prev) => ({
+            ...prev,
+            isUserValid: isValid && !!watchFields.name && !!watchFields.birthDay, // 입력 여부 확인
+        }));
+    }, [watchFields.name, watchFields.birthDay, watchFields.sex, isValid]);
     return (
         <Box component="form" onSubmit={handleSubmit(onSubmit)} className={clsN(`${style['authentication-wrapper']}`)}>
             <Box className={clsN(`${style['authentication-wrapper__box']}`)}>
