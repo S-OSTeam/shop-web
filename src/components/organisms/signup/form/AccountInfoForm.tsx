@@ -32,16 +32,20 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
         mode: 'onChange',
         defaultValues: signUpData,
     });
-
+    const [modalState, setModalState] = useState({
+        emailSent: false,
+        emailFailed: false,
+        authSuccess: false,
+        authFailed: false,
+        duplicateCheckSuccess: false,
+        duplicateCheckFailed: false,
+        emptyZipcode: false,
+    });
     const watchPassword = watch('pwd');
     const watchUserId = watch('userId');
     const watchEmail = watch('email');
     const watchZipcode = watch('zipcode');
     const [timeLeft, setTimeLeft] = useState(0);
-    const [emailModalOpen, setEmailModalOpen] = useState(false);
-    const [authModalOpen, setAuthModalOpen] = useState(false);
-    const [authErrorModalOpen, setAuthErrorModalOpen] = useState(false);
-    const [emptyCodeModalOpen, setEmptyCodeModalOpen] = useState(false);
     const [signUpValidationState, setSignUpValidationState] = useRecoilState(signupValidationState);
 
     useEffect(() => {
@@ -64,36 +68,41 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
     const handleCheckEmail = async (data: any) => {
         try {
             await checkEmailVerification();
-            setAuthModalOpen(true);
+            setModalState({ ...modalState, authSuccess: true });
             setTimeLeft(0);
             formInfo(data);
         } catch (error) {
-            setAuthErrorModalOpen(true);
+            setModalState({ ...modalState, authFailed: true });
         }
     };
 
     const handleEmailSend = async () => {
         try {
             await sendEmailVerification();
-            alert('인증 이메일이 전송되었습니다.');
+            setModalState({ ...modalState, emailSent: true });
         } catch (error) {
-            alert('이메일 전송 실패.');
+            setModalState({ ...modalState, emailFailed: true });
         }
     };
 
     const handleDuplicateCheck = async () => {
         try {
             const response = await checkDuplicateUser();
-            if (response.data) {
-                alert('아이디 사용 가능');
+            console.log(response);
+
+            if (response.data.checkDuplicateUser === false) {
+                console.log('아이디 사용 가능');
+                setModalState((prev) => ({ ...prev, duplicateCheckSuccess: true }));
             } else {
-                alert('아이디가 이미 존재합니다.');
+                setModalState((prev) => ({ ...prev, duplicateCheckFailed: true }));
             }
         } catch (error) {
-            alert('중복 체크 중 오류가 발생했습니다.');
+            setModalState((prev) => ({ ...prev, duplicateCheckFailed: true }));
         }
     };
-
+    useEffect(() => {
+        console.log('모달 상태 변경됨:', modalState);
+    }, [modalState]);
     const renderTimer = () => {
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
@@ -242,37 +251,45 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                 <Divider className={clsN(`${style['form-wrapper__divider']}`)}></Divider>
             </Box>
 
+            {/* ✅ 모달들 추가 */}
             <Modal
-                open={emailModalOpen}
-                onClose={() => setEmailModalOpen(false)}
+                open={modalState.emailSent}
+                onClose={() => setModalState({ ...modalState, emailSent: false })}
                 title="이메일 전송 완료"
-                body={<p>인증 이메일이 발송되었습니다. 이메일을 확인해주세요.</p>}
-                footer={<Button onClick={() => setEmailModalOpen(false)}>닫기</Button>}
-            />
+            >
+                <p>인증 이메일이 발송되었습니다.</p>
+            </Modal>
 
             <Modal
-                open={authModalOpen}
-                onClose={() => setAuthModalOpen(false)}
+                open={modalState.emailFailed}
+                onClose={() => setModalState({ ...modalState, emailFailed: false })}
+                title="이메일 전송 실패"
+            >
+                <p>이메일 전송에 실패했습니다. 다시 시도해주세요.</p>
+            </Modal>
+
+            <Modal
+                open={modalState.authSuccess}
+                onClose={() => setModalState({ ...modalState, authSuccess: false })}
                 title="인증 완료"
-                body={<p>인증이 성공적으로 완료되었습니다!</p>}
-                footer={<Button onClick={() => setAuthModalOpen(false)}>확인</Button>}
-            />
+            >
+                <p>이메일 인증이 성공적으로 완료되었습니다!</p>
+            </Modal>
 
             <Modal
-                open={authErrorModalOpen}
-                onClose={() => setAuthErrorModalOpen(false)}
+                open={modalState.authFailed}
+                onClose={() => setModalState({ ...modalState, authFailed: false })}
                 title="인증 실패"
-                body={<p>인증에 실패했습니다. 다시 시도해주세요.</p>}
-                footer={<Button onClick={() => setAuthErrorModalOpen(false)}>닫기</Button>}
-            />
-
+            >
+                <p>이메일 인증에 실패했습니다. 다시 시도해주세요.</p>
+            </Modal>
             <Modal
-                open={emptyCodeModalOpen}
-                onClose={() => setEmptyCodeModalOpen(false)}
-                title="인증번호 입력 필요"
-                body={<p>인증번호를 입력해주세요.</p>}
-                footer={<Button onClick={() => setEmptyCodeModalOpen(false)}>닫기</Button>}
-            />
+                open={modalState.duplicateCheckSuccess}
+                onClose={() => setModalState((prev) => ({ ...prev, duplicateCheckSuccess: false }))}
+                title="아이디 사용 가능"
+            >
+                <p>해당 아이디를 사용할 수 있습니다.</p>
+            </Modal>
         </Box>
     );
 };
