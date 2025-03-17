@@ -1,6 +1,5 @@
 /* eslint-disable*/
 import React, { useState, useEffect } from 'react';
-// import { useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { signUpState } from '@recoil/atoms/signup/signupAtom';
@@ -18,8 +17,6 @@ interface FormProps {
 }
 
 const AccountInfoForm = ({ formInfo }: FormProps) => {
-    // const location = useLocation();
-    // const snsValue = location.state?.sns || 'NORMAL';
     const [signUpData, setSignUpData] = useRecoilState(signUpState);
     const { checkDuplicateUser, sendEmailVerification, checkEmailVerification } = useSignUpMutation();
 
@@ -69,7 +66,6 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
         try {
             await checkEmailVerification();
             setModalState({ ...modalState, authSuccess: true });
-            setTimeLeft(0);
             formInfo(data);
         } catch (error) {
             setModalState({ ...modalState, authFailed: true });
@@ -79,19 +75,18 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
     const handleEmailSend = async () => {
         try {
             await sendEmailVerification();
-            setModalState({ ...modalState, emailSent: true });
+            setModalState((prev) => ({ ...prev, emailSent: true }));
+            setTimeLeft(180);
         } catch (error) {
-            setModalState({ ...modalState, emailFailed: true });
+            setModalState((prev) => ({ ...prev, emailFailed: true }));
         }
     };
 
     const handleDuplicateCheck = async () => {
         try {
             const response = await checkDuplicateUser();
-            console.log(response);
 
             if (response.data.checkDuplicateUser === false) {
-                console.log('아이디 사용 가능');
                 setModalState((prev) => ({ ...prev, duplicateCheckSuccess: true }));
             } else {
                 setModalState((prev) => ({ ...prev, duplicateCheckFailed: true }));
@@ -101,14 +96,17 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
         }
     };
     useEffect(() => {
-        console.log('모달 상태 변경됨:', modalState);
-    }, [modalState]);
+        if (timeLeft > 0) {
+            const timer = window.setTimeout(() => setTimeLeft((prev) => prev - 1), 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [timeLeft]);
     const renderTimer = () => {
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
-    /** ✅ 입력 데이터가 변경될 때 Recoil 상태 업데이트 */
+
     const handleInputChange = (field: keyof typeof signUpData) => (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setSignUpData((prev) => ({ ...prev, [field]: value }));
@@ -232,12 +230,11 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                         error={!!errors.zipcode}
                         helperText={errors.zipcode?.message}
                         InputProps={{
-                            endAdornment:
-                                timeLeft > 0 ? (
-                                    <InputAdornment position="end">
-                                        <span>{renderTimer()}</span>
-                                    </InputAdornment>
-                                ) : null,
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    {timeLeft > 0 ? <span>{renderTimer()}</span> : null}
+                                </InputAdornment>
+                            ),
                         }}
                     />
                     <Button
@@ -251,7 +248,6 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                 <Divider className={clsN(`${style['form-wrapper__divider']}`)}></Divider>
             </Box>
 
-            {/* ✅ 모달들 추가 */}
             <Modal
                 open={modalState.emailSent}
                 onClose={() => setModalState({ ...modalState, emailSent: false })}

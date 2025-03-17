@@ -54,7 +54,6 @@ const SignUpTemplate = () => {
 
     const handleUserInfo = (data: { name: string; birthDay: string; sex: boolean }) => {
         const formattedBirthday = new Date(data.birthDay).toISOString();
-        console.log(formattedBirthday);
         setSignUpData((prev) => ({
             ...prev,
             userName: data.name,
@@ -71,7 +70,6 @@ const SignUpTemplate = () => {
                     birthday: new Date(signUpData.birthday).toISOString(),
                 }));
             } catch (error) {
-                console.error('생년월일 형식이 잘못되었습니다:', error);
                 setErrorModalOpen(true);
                 return;
             }
@@ -79,7 +77,6 @@ const SignUpTemplate = () => {
 
         console.log('요청 데이터:', signUpData);
 
-        // variables를 통해 데이터 전달
         refetch({
             variables: {
                 input: signUpData,
@@ -98,10 +95,8 @@ const SignUpTemplate = () => {
                 align="center"
             />
 
-            {/* ✅ AccountInfoForm에서 validation 상태를 부모로 전달 */}
             <AccountInfoForm formInfo={handleAccountInfo} />
 
-            {/* ✅ UserInfoForm에서 validation 상태를 부모로 전달 */}
             <UserInfoForm onSubmit={handleUserInfo} />
 
             <AgreementList onChange={(checked) => setSignUpData((prev) => ({ ...prev, receiveMail: checked }))} />
@@ -116,13 +111,11 @@ const SignUpTemplate = () => {
                 </Button>
             </Box>
 
-            {/* 회원가입 성공 모달 */}
             <Modal open={authModalOpen} onClose={() => navigate('/')} title="회원가입 성공">
                 <p>회원가입이 완료되었습니다.</p>
                 <Button onClick={() => navigate('/')}>닫기</Button>
             </Modal>
 
-            {/* 회원가입 실패 모달 */}
             <Modal open={errorModalOpen} onClose={() => setErrorModalOpen(false)} title="회원가입 실패">
                 <p>제출양식을 확인하고 다시 입력해주세요.</p>
                 <Button onClick={() => setErrorModalOpen(false)}>닫기</Button>
