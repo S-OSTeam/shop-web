@@ -7,7 +7,7 @@ import clsN from 'classnames';
 import style from './style/style.module.scss';
 
 interface AgreementListProps {
-    onChange: (checked: boolean) => void; // ✅ onChange props 추가
+    onChange: (checked: boolean) => void;
 }
 
 const AgreementList = ({ onChange }: AgreementListProps) => {
@@ -15,7 +15,6 @@ const AgreementList = ({ onChange }: AgreementListProps) => {
 
     const checkboxTexts = ['SNS 광고에 대한 동의', '기타 고객정보 영리적 사용에 대한 동의'];
 
-    // ✅ 체크박스 변경 핸들러
     const handleCheckBox = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const updatedCheckedState = [...validationState.checkedAgreements];
         updatedCheckedState[index] = e.target.checked;
@@ -28,7 +27,7 @@ const AgreementList = ({ onChange }: AgreementListProps) => {
             isAgreementChecked: isAllChecked,
         }));
 
-        onChange(isAllChecked); // ✅ 부모 컴포넌트로 상태 전달
+        onChange(isAllChecked);
     };
 
     return (
