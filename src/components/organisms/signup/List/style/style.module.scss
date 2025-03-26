@@ -19,3 +19,9 @@
     align-self: flex-start; /* 개별 체크박스가 왼쪽 정렬되도록 설정 */
   }
 }
+@media screen and (max-width: 768px) {
+
+  .agreements-wrapper {
+    font-size: 1rem;
+  }
+}

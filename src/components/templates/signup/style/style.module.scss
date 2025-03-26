@@ -116,11 +116,17 @@
   }
 }
 .pc-wrapper{
-  max-width: 768px;// 임시로 지정한 max-width값
-  margin: 0 auto; // 이거 넣어줘야 됨
+  max-width: 768px;
+  margin: 0 auto;
 
   &__title{
     font-size: $title-font-size-S;
     font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .template-wrapper__btn-wrapper__btn {
+    font-size: 1rem;
   }
 }
