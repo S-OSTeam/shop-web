@@ -65,6 +65,7 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
     const handleCheckEmail = async (data: any) => {
         try {
             await checkEmailVerification();
+            setTimeLeft(0);
             setModalState({ ...modalState, authSuccess: true });
             formInfo(data);
         } catch (error) {
@@ -75,6 +76,7 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
     const handleEmailSend = async () => {
         try {
             await sendEmailVerification();
+
             setModalState((prev) => ({ ...prev, emailSent: true }));
             setTimeLeft(180);
         } catch (error) {
@@ -95,12 +97,7 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
             setModalState((prev) => ({ ...prev, duplicateCheckFailed: true }));
         }
     };
-    useEffect(() => {
-        if (timeLeft > 0) {
-            const timer = window.setTimeout(() => setTimeLeft((prev) => prev - 1), 1000);
-            return () => clearTimeout(timer);
-        }
-    }, [timeLeft]);
+
     const renderTimer = () => {
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
