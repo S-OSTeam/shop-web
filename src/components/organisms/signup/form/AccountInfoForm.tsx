@@ -1,16 +1,19 @@
 /* eslint-disable*/
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { signUpState } from '@recoil/atoms/signup/signupAtom';
 import { signupValidationState } from '@recoil/atoms/signup/signupValidationAtom';
 import { useSignUpMutation } from '@hooks/signup/useSignUpMutation';
 import Modal from '@molecules/modal/Modal';
+import { SignUpInitInterface } from '@interface/signup/SignUpInitInterface';
+import { initialModalState } from '@util/signup/initialModalState';
 import { FormDataInterface } from '@interface/signup/FormDataInterface';
 import Button from '@atoms/button/Button';
 import { Box, Divider, TextField, InputAdornment } from '@mui/material';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
+import { EMAIL_REGEX, ID_REGEX, PWD_REGEX } from '@util/constants/regex';
 
 interface FormProps {
     formInfo: (formData: FormDataInterface) => void;
@@ -29,37 +32,31 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
         mode: 'onChange',
         defaultValues: signUpData,
     });
-    const [modalState, setModalState] = useState({
-        emailSent: false,
-        emailFailed: false,
-        authSuccess: false,
-        authFailed: false,
-        duplicateCheckSuccess: false,
-        duplicateCheckFailed: false,
-        emptyZipcode: false,
-    });
+    const [modalState, setModalState] = useState<SignUpInitInterface>(initialModalState);
     const watchPassword = watch('pwd');
     const watchUserId = watch('userId');
     const watchEmail = watch('email');
     const watchZipcode = watch('zipcode');
     const [timeLeft, setTimeLeft] = useState(0);
-    const [signUpValidationState, setSignUpValidationState] = useRecoilState(signupValidationState);
+    const setSignUpValidationState = useSetRecoilState(signupValidationState);
 
     useEffect(() => {
         setSignUpValidationState((prev) => ({
             ...prev,
             isAccountValid: isValid,
         }));
-
-        console.log(signUpValidationState);
     }, [isValid, setSignUpValidationState]);
 
     useEffect(() => {
-        let timer: number;
+        let timer: ReturnType<typeof setTimeout> | null = null;
         if (timeLeft > 0) {
-            timer = window.setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+            timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
         }
-        return () => clearTimeout(timer);
+        return () => {
+            if (timer !== null) {
+                clearTimeout(timer);
+            }
+        };
     }, [timeLeft]);
 
     const handleCheckEmail = async (data: any) => {
@@ -122,7 +119,7 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                         {...register('userId', {
                             required: '아이디는 필수 입력 항목입니다.',
                             pattern: {
-                                value: /^[a-z]+[a-z0-9]{5,20}$/,
+                                value: ID_REGEX,
                                 message: '아이디는 5-20자의 영문, 숫자가 가능합니다.',
                             },
                             onChange: handleInputChange('userId'),
@@ -152,7 +149,7 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                     {...register('pwd', {
                         required: '비밀번호는 필수 입력 항목입니다.',
                         pattern: {
-                            value: /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\()\\-_+=]).{8,20}$/,
+                            value: PWD_REGEX,
                             message: '비밀번호는 8-20자이며, 영문자, 숫자, 특수문자를 포함해야 합니다.',
                         },
                         onChange: handleInputChange('pwd'),
@@ -193,7 +190,7 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                         {...register('email', {
                             required: '이메일은 필수 입력 항목입니다.',
                             pattern: {
-                                value: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,}$/,
+                                value: EMAIL_REGEX,
                                 message: '유효한 이메일 주소를 입력해주세요.',
                             },
                             onChange: handleInputChange('email'),
