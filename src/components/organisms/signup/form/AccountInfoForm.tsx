@@ -14,6 +14,7 @@ import { Box, Divider, TextField, InputAdornment } from '@mui/material';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 import { EMAIL_REGEX, ID_REGEX, PWD_REGEX } from '@util/constants/regex';
+import { textFieldDefaults, textFieldMaxLength } from '@util/signup/textFieldDefaults';
 
 interface FormProps {
     formInfo: (formData: FormDataInterface) => void;
@@ -114,8 +115,8 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                     <TextField
                         label="아이디"
                         className={clsN(`${style['form-wrapper__id']}`)}
-                        InputLabelProps={{ shrink: true }}
-                        inputProps={{ maxLength: 20 }}
+                        {...textFieldDefaults}
+                        inputProps={{ ...textFieldMaxLength.userId }}
                         {...register('userId', {
                             required: '아이디는 필수 입력 항목입니다.',
                             pattern: {
@@ -140,12 +141,8 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                     className={clsN(`${style['form-wrapper__pwd']}`)}
                     label="비밀번호"
                     type="password"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    inputProps={{
-                        maxLength: 20,
-                    }}
+                    {...textFieldDefaults}
+                    inputProps={{ ...textFieldMaxLength.pwd }}
                     {...register('pwd', {
                         required: '비밀번호는 필수 입력 항목입니다.',
                         pattern: {
@@ -162,12 +159,8 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                     className={clsN(`${style['form-wrapper__pwd']}`)}
                     label="비밀번호 확인"
                     type="password"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    inputProps={{
-                        maxLength: 20,
-                    }}
+                    {...textFieldDefaults}
+                    inputProps={{ ...textFieldMaxLength.pwd }}
                     {...register('confirmPwd', {
                         required: '비밀번호 확인은 필수 입력 항목입니다.',
                         validate: (value) => value === watchPassword || '비밀번호가 일치하지 않습니다.',
@@ -181,12 +174,8 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                         className={clsN(`${style['form-wrapper__email']}`)}
                         label="이메일"
                         type="email"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        inputProps={{
-                            maxLength: 50,
-                        }}
+                        {...textFieldDefaults}
+                        inputProps={{ ...textFieldMaxLength.email }}
                         {...register('email', {
                             required: '이메일은 필수 입력 항목입니다.',
                             pattern: {
@@ -211,12 +200,8 @@ const AccountInfoForm = ({ formInfo }: FormProps) => {
                     <TextField
                         className={clsN(`${style['form-wrapper__id']}`)}
                         label="인증번호"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        inputProps={{
-                            maxLength: 6,
-                        }}
+                        {...textFieldDefaults}
+                        inputProps={{ ...textFieldMaxLength.zipcode }}
                         {...register('zipcode', {
                             required: '인증번호를 입력해주세요.',
                             onChange: handleInputChange('zipcode'),
