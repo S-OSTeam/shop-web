@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import { signupValidationState } from '@recoil/atoms/signup/signupValidationAtom';
 import { Box, Divider } from '@mui/material';
 import CheckboxWithText from '@molecules/checkbox/checkboxWithText/CheckboxWithText';
+import { checkboxTexts } from '@util/test/data/signup/AgreementData';
 import clsN from 'classnames';
 import style from './style/style.module.scss';
 
@@ -12,8 +13,6 @@ interface AgreementListProps {
 
 const AgreementList = ({ onChange }: AgreementListProps) => {
     const [validationState, setValidationState] = useRecoilState(signupValidationState);
-
-    const checkboxTexts = ['SNS 광고에 대한 동의', '기타 고객정보 영리적 사용에 대한 동의'];
 
     const handleCheckBox = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const updatedCheckedState = [...validationState.checkedAgreements];
