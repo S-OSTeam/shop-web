@@ -1,0 +1,11 @@
+@import "./index";
+
+.sortable-item{
+  padding: 4px;
+  background-color: inherit;
+  border: $border-default-color 1px;
+  border-radius: 4px;
+  &--is-active{
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+}
