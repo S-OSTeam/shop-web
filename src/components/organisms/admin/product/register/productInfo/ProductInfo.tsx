@@ -5,14 +5,11 @@ import { Heading } from '@molecules/admin/layout/heading/Heading';
 import { Input } from '@atoms/input/Input';
 import { useRecoilState } from 'recoil';
 import { productRegisterAtom } from '@recoil/atoms/admin/product/register/ProductRegisterAtom';
+import { ProductLayerInterface } from '@interface/layer/ProductLayerInterface';
 import clsN from 'classnames';
 import styles from './styles/ProductInfo.module.scss';
 
-interface ProductInfoProps {
-    className?: string;
-    parentHeadlineCleN?: string; // 현재 컴포넌트 제목 클래스명
-    sectionHeadlineClsN?: string; // 입력란 설명 제목 클래스명
-}
+interface ProductInfoProps extends ProductLayerInterface {}
 
 export const ProductInfo = ({ className, parentHeadlineCleN, sectionHeadlineClsN }: ProductInfoProps) => {
     /* 상태 */
