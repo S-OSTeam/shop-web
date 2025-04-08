@@ -3,12 +3,9 @@ import React from 'react';
 import clsN from 'classnames';
 import { Divider, Paper } from '@mui/material';
 import { Heading } from '@molecules/admin/layout/heading/Heading';
+import { ProductLayerInterface } from '@interface/layer/ProductLayerInterface';
 
-interface ProductCategoryProps {
-    className?: string;
-    parentHeadlineCleN?: string;
-    sectionHeadlineClsN?: string;
-}
+interface ProductCategoryProps extends ProductLayerInterface {}
 
 export const ProductCategoryRegister = ({
     className,
