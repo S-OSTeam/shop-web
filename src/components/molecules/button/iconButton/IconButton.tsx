@@ -19,10 +19,5 @@ const IconButton = ({ className, iconClsN, icon, fontSize, onClick }: IconBtnPro
         </MuiIconButton>
     );
 };
-IconButton.defaultProps = {
-    className: `${style.btnIcon}`,
-    iconClsN: `${style.icon}`,
-    fontSize: 'inherit',
-    onClick: undefined,
-};
+
 export default IconButton;
