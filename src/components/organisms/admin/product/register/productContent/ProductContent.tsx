@@ -8,14 +8,11 @@ import { productRegisterAtom } from '@recoil/atoms/admin/product/register/Produc
 import { ModalEditor } from '@organisms/admin/modalEditor/ModalEditor';
 import product from '@routes/product/Product';
 import { ProductDetail } from '@molecules/admin/product/component/productDetail/ProductDetail';
+import { ProductLayerInterface } from '@interface/layer/ProductLayerInterface';
 
 // TODO : 에디터의 내용을 미리볼 수 있게 하기
 
-interface ProductContentProps {
-    className?: string;
-    parentHeadlineCleN?: string;
-    sectionHeadlineClsN?: string;
-}
+interface ProductContentProps extends ProductLayerInterface {}
 export const ProductContent = ({ className, parentHeadlineCleN, sectionHeadlineClsN }: ProductContentProps) => {
     // 상품 정보 전역 상태 사용, 그리고 컨텐츠 데이터 미리 로딩하기
     const [productData, setProductData] = useRecoilState(productRegisterAtom);
