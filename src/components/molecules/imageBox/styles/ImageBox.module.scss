@@ -1,0 +1,26 @@
+@import "./index";
+
+.imagebox{
+  aspect-ratio: 1/1;
+  box-sizing: border-box;
+  border: 1px solid $border-default-color;
+  border-radius: 4px;
+  &__img{
+    &-invisible{
+      @include alt-hidden;
+    }
+  }
+  &__bar{
+    background-color: inherit;
+    &__title{
+
+    }
+  }
+  &__button{
+    &--svg{
+      // transparent setup
+      filter: brightness(200%) contrast(150%);
+      color: transparentize($background-dimgray, 0.4);
+    }
+  }
+}
