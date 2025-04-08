@@ -49,7 +49,7 @@ export interface ProductRegiterItemResponse {
     // 무료배송 여부
     freeDelivery: boolean;
     // 상품 이미지 url 목록
-    imageUrls?: [string];
+    imageUrls?: string[];
     // 옵션 품목
     option?: [string];
     // 상품번호
