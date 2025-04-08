@@ -214,6 +214,9 @@ $naver-background : #03C75A;
 $kakao-background : #FEE500;
 $google-background: #F2F2F2;
 
+// mui default border color
+$border-default-color : rgba(0,0,0,0.12);
+
 :root {
   --breakpoint-desktop: #{$breakpoint-desktop};
   --breakpoint-tablet: #{$breakpoint-tablet};
