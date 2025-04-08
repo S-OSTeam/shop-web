@@ -1,0 +1,57 @@
+@import "./index";
+
+.dndpaper{
+  width: 100%;
+}
+
+.sortablewrapper{
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  padding-bottom: 16px;
+}
+
+.sortablebox{
+  width: 116px;
+  border-radius: 4px;
+
+}
+
+.imagebox{
+  animation-iteration-count: inherit;
+
+  &-jiggle{
+  animation-delay: -.75s;
+  animation-duration: .25s;
+    animation-name: jiggle1;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transform-origin: 30% 5%;
+  }
+  &__img{
+
+  }
+  &__bar{
+      display: block;
+    &__title{
+      display: none;
+    }
+  }
+
+}
+.extra-imagebox{
+  &__bar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: all;
+    position: relative;
+  }
+  &__input{
+
+  }
+}
+
+.toggle-button{
+
+}
