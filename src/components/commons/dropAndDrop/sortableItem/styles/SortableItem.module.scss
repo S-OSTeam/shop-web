@@ -1,0 +1,14 @@
+@import "./index";
+
+.box{
+  will-change: transform;
+  transition: transform 200ms ease;
+
+  // when dragging
+  &.dragging{
+
+  }
+  &.disabled{
+
+  }
+}
