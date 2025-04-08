@@ -1,0 +1,21 @@
+@keyframes jiggle1 {
+  0%{
+    transform: rotate(-1deg);
+    animation-timing-function: ease-in;
+  }
+  50%{
+    transform: rotate(1.5deg);
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes jiggle2 {
+  0%{
+    transform: rotate(1deg);
+    animation-timing-function: ease-in;
+  }
+  50%{
+    transform: rotate(-1.5deg);
+    animation-timing-function: ease-out;
+  }
+}
