@@ -1,0 +1,13 @@
+@import "./index";
+
+// 대표이미지 설명란
+.context{
+  white-space: pre-line;
+}
+
+// backdrop
+.backdrop{
+  &__image{
+      max-width: 50%;
+  }
+}
