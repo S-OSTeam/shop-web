@@ -1,0 +1,8 @@
+@import "./index";
+
+.droppable{
+  &--is-over{
+    background-color: green;
+    color: green;
+  }
+}
