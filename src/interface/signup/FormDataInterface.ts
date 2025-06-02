@@ -3,7 +3,7 @@ export interface FormDataInterface {
     pwd: string;
     confirmPwd: string;
     sex: boolean;
-    birthday: Date;
+    birthday: string;
     zipcode: string;
     address1: string;
     address2: string;
@@ -21,7 +21,7 @@ export const EmptyFormDataInterface = {
     pwd: '',
     confirmPwd: '',
     sex: false,
-    birthday: new Date(),
+    birthday: '',
     zipcode: '',
     address1: '',
     address2: '',

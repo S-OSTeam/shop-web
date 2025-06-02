@@ -1,0 +1,27 @@
+@import "index";
+.agreements-wrapper{
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  &__divider{
+    width: 70%;
+  }
+  &__checkbox-wrapper{
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  &__checkbox {
+    align-self: flex-start; /* 개별 체크박스가 왼쪽 정렬되도록 설정 */
+  }
+}
+@media screen and (max-width: 768px) {
+
+  .agreements-wrapper {
+    font-size: 1rem;
+  }
+}
