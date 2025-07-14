@@ -13,6 +13,16 @@ export const ALL_CATEGORY_TREE = gql`
     }
 `;
 
+export const FIND_ITEM_CATEGORY_BY_PUBLICID = gql`
+    query ($request: String) {
+        findItemCategoryByPublicId(publicId: $request) {
+            title
+            publicId
+            parentPublicId
+        }
+    }
+`;
+
 export const CATEGORY_TREE = gql`
     query ($request: String) {
         findSubItemCategoriesTree(categoryId: $request) {

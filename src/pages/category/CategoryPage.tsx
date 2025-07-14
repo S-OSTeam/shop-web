@@ -109,6 +109,7 @@ const CategoryPage = () => {
     // useCallback으로 최적화하기
     const onProductHandle = useCallback(
         (item: ItemInterface) => {
+            setCategoryId(item.categoryPublicId.toString());
             const encodedPublicId = btoa(item.publicId.toString()).slice(0, -1);
             navigation(`${Path.product}?publicId=${encodedPublicId}`, {
                 state: { productItem: item },
